@@ -44,5 +44,8 @@ dependencies {
   compile "com.github.rjeschke:txtmark:0.13"
   compile('junit:junit:4.12')
   compile('com.google.guava:guava:18.0')
+  compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+  compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
+
   testCompile "io.vertx:vertx-unit:3.4.2"
 }

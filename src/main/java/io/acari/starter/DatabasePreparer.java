@@ -1,8 +1,11 @@
 package io.acari.starter;
 
 import io.vertx.core.Future;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DatabasePreparer {
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabasePreparer.class);
   private static final String SQL_CREATE_PAGES_TABLE = "create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)";
   private static final String SQL_GET_PAGE = "select Id, Content from Pages where Name = ?";
   private static final String SQL_CREATE_PAGE = "insert into Pages values (NULL, ?, ?)";
