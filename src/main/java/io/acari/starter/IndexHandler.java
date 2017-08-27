@@ -4,6 +4,7 @@ import com.google.common.net.MediaType;
 import com.google.inject.Inject;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;
@@ -25,6 +26,15 @@ public class IndexHandler implements Handler<RoutingContext> {
   }
 
   public void handle(RoutingContext routingContext) {
+    final Handler<AsyncResult<Buffer>> templateResultHandler = bufferAsyncResult -> {
+      if (bufferAsyncResult.succeeded()) {
+        routingContext.response().putHeader("Content-Type", MediaType.HTML_UTF_8.type());
+        routingContext.response().end(bufferAsyncResult.result());
+      } else {
+        broken(routingContext, bufferAsyncResult);
+      }
+    };
+
     database.executeQuery(ar -> {
       if (ar.succeeded()) {
         SQLConnection sqlConnection = ar.result();
@@ -40,23 +50,26 @@ public class IndexHandler implements Handler<RoutingContext> {
 
             routingContext.put("title", "Wiki Home");
             routingContext.put("pages", pages);
-            templateEngine.render(routingContext, "templates", "/index.ftl",
-              bufferAsyncResult -> {
-                if (bufferAsyncResult.succeeded()) {
-                  routingContext.response().putHeader("Content-Type", MediaType.HTML_UTF_8.type());
-                  routingContext.response().end(bufferAsyncResult.result());
-                } else {
-                  broken(routingContext, bufferAsyncResult);
-                }
-              });
+            String templateFileName = "/index.ftl";
+            renderTemplate(routingContext, templateResultHandler, templateFileName);
           } else {
-            broken(routingContext, resultSetAsyncResult);
+            brokenTemplate(routingContext, resultSetAsyncResult, templateResultHandler);
           }
         });
       } else {
-        broken(routingContext, ar);
+        brokenTemplate(routingContext, ar, templateResultHandler);
       }
     });
+  }
+
+  private void renderTemplate(RoutingContext routingContext, Handler<AsyncResult<Buffer>> asyncResultHandler, String templateFileName) {
+    templateEngine.render(routingContext, "templates", templateFileName, asyncResultHandler);
+  }
+
+  private <T> void brokenTemplate(RoutingContext routingContext, AsyncResult<T> asyncResult, Handler<AsyncResult<Buffer>> asyncResultHandler) {
+    LOGGER.warn("Things Borked ->", asyncResult.cause());
+    routingContext.response().setStatusCode(500);
+    renderTemplate(routingContext, asyncResultHandler, "/error.ftl");
   }
 
   private <T> void broken(RoutingContext routingContext, AsyncResult<T> asyncResult) {
