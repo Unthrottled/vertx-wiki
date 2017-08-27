@@ -23,7 +23,7 @@ public class Steve extends AbstractVerticle {
   @Override
   public void start(Future<Void> startupGuy) {
     LOGGER.info("STARTING!");
-    databasePreparer.prepare()
+    databasePreparer.prepare(vertx)
       .compose(v-> httpSeverStarter.start())
       .setHandler(startupGuy.completer());
   }
