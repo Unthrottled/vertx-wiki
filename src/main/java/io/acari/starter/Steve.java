@@ -7,23 +7,23 @@ import org.slf4j.LoggerFactory;
 
 public class Steve extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(Steve.class);
-  private final DatabasePreparer databasePreparer;
+  private final DatabaseManager databaseManager;
   private final HttpSeverStarter httpSeverStarter;
 
-  public Steve(DatabasePreparer databasePreparer, HttpSeverStarter httpSeverStarter) {
-    this.databasePreparer = databasePreparer;
+  public Steve(DatabaseManager databaseManager, HttpSeverStarter httpSeverStarter) {
+    this.databaseManager = databaseManager;
     this.httpSeverStarter = httpSeverStarter;
   }
 
   public Steve() {
-    databasePreparer = new DatabasePreparer();
+    databaseManager = new DatabaseManager();
     httpSeverStarter = new HttpSeverStarter();
   }
 
   @Override
   public void start(Future<Void> startupGuy) {
     LOGGER.info("STARTING!");
-    databasePreparer.prepare(vertx)
+    databaseManager.prepare(vertx)
       .compose(v-> httpSeverStarter.start(vertx))
       .setHandler(startupGuy.completer());
   }

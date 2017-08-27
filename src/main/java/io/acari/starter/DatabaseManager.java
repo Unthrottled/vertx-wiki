@@ -6,12 +6,13 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DatabasePreparer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabasePreparer.class);
+public class DatabaseManager {
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseManager.class);
   private static final String SQL_CREATE_PAGES_TABLE = "create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)";
   private static final String SQL_GET_PAGE = "select Id, Content from Pages where Name = ?";
   private static final String SQL_CREATE_PAGE = "insert into Pages values (NULL, ?, ?)";
@@ -26,6 +27,10 @@ public class DatabasePreparer {
     jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     jdbcClient.getConnection(sqlConnectionHandler(future));
     return future;
+  }
+
+  public SQLClient executeQuery(Handler<AsyncResult<SQLConnection>> asyncResultHandler){
+    return jdbcClient.getConnection(asyncResultHandler);
   }
 
   private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {

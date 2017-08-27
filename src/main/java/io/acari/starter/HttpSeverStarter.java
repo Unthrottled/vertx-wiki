@@ -40,11 +40,7 @@ public class HttpSeverStarter {
   }
 
   private void pageDeleteHandler(RoutingContext routingContext) {
-    LOGGER.info("INCOMING REQUEST!!!");
-      routingContext.response()
-        .setStatusCode(200)
-        .write("Butts!\n")
-        .end();
+
   }
 
   private void pageCreateHandler(RoutingContext routingContext) {
@@ -60,7 +56,10 @@ public class HttpSeverStarter {
   }
 
   private void indexHandler(RoutingContext routingContext) {
-
+    LOGGER.info("INCOMING REQUEST!!!");
+    routingContext.response()
+      .setStatusCode(200)
+      .end("Butts!\n");
   }
 
 }
