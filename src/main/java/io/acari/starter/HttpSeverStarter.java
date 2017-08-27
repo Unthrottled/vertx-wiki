@@ -32,7 +32,7 @@ public class HttpSeverStarter implements Server {
 
     vertx.createHttpServer()
       .requestHandler(router::accept)
-      .listen(6666, httpServerAsyncResult -> {
+      .listen(8989, httpServerAsyncResult -> {
         HttpServer result = httpServerAsyncResult.result();
         if (httpServerAsyncResult.succeeded()) {
           LOGGER.info("Server listening on port " + result.actualPort());

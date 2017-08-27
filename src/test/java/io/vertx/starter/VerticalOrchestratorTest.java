@@ -38,11 +38,10 @@ public class VerticalOrchestratorTest {
   @Test
   public void testThatTheServerIsStarted(TestContext tc) {
     Async async = tc.async();
-    provider.get().createHttpClient().getNow(6666, "localhost", "/", response -> {
+    provider.get().createHttpClient().getNow(8989, "localhost", "/", response -> {
       tc.assertEquals(response.statusCode(), 200);
       response.bodyHandler(body -> {
         tc.assertTrue(body.length() > 0);
-        tc.assertEquals("Hey, that's pretty good!\n",body.toString());
         async.complete();
       });
     });

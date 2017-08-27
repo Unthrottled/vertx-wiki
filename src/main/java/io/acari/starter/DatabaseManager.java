@@ -1,5 +1,6 @@
 package io.acari.starter;
 
+import com.google.inject.Singleton;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -11,14 +12,11 @@ import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.acari.starter.Queries.SQL_CREATE_PAGES_TABLE;
+
+@Singleton
 public class DatabaseManager implements Database {
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseManager.class);
-  private static final String SQL_CREATE_PAGES_TABLE = "create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)";
-  private static final String SQL_GET_PAGE = "select Id, Content from Pages where Name = ?";
-  private static final String SQL_CREATE_PAGE = "insert into Pages values (NULL, ?, ?)";
-  private static final String SQL_SAVE_PAGE = "update Pages set Content = ? where Id = ?";
-  private static final String SQL_ALL_PAGES = "select Name from Pages";
-  private static final String SQL_DELETE_PAGE = "delete from Pages where Id = ?";
 
   private JDBCClient jdbcClient;
 
@@ -29,7 +27,7 @@ public class DatabaseManager implements Database {
     return future;
   }
 
-  public SQLClient executeQuery(Handler<AsyncResult<SQLConnection>> asyncResultHandler){
+  public SQLClient executeQuery(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {
     return jdbcClient.getConnection(asyncResultHandler);
   }
 
