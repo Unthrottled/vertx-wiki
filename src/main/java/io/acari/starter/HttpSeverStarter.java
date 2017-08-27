@@ -9,7 +9,7 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpSeverStarter {
+public class HttpSeverStarter implements Server {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpSeverStarter.class);
 
   public Future<Void> start(Vertx vertx) {
