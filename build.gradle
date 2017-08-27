@@ -22,7 +22,7 @@ repositories {
 }
 
 
-mainClassName = 'io.acari.starter.MainVerticle'
+mainClassName = 'io.vertx.core.Launcher'
 
 shadowJar {
   classifier = 'fat'

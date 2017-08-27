@@ -1,6 +1,6 @@
 package io.vertx.starter;
 
-import io.acari.starter.MainVerticle;
+import io.acari.starter.Steve;
 import io.vertx.core.Vertx;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -11,14 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(VertxUnitRunner.class)
-public class MainVerticleTest {
+public class SteveTest {
 
   private Vertx vertx;
 
   @Before
   public void setUp(TestContext tc) {
     vertx = Vertx.vertx();
-    vertx.deployVerticle(MainVerticle.class.getName(), tc.asyncAssertSuccess());
+    vertx.deployVerticle(Steve.class.getName(), tc.asyncAssertSuccess());
   }
 
   @After
