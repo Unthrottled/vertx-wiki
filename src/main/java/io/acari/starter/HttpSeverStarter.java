@@ -13,10 +13,12 @@ import org.slf4j.LoggerFactory;
 public class HttpSeverStarter implements Server {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpSeverStarter.class);
   private final IndexHandler indexHandler;
+  private final ErrorHandler errorHandler;
 
   @Inject
-  public HttpSeverStarter(IndexHandler indexHandler) {
+  public HttpSeverStarter(IndexHandler indexHandler, ErrorHandler errorHandler) {
     this.indexHandler = indexHandler;
+    this.errorHandler = errorHandler;
   }
 
 
@@ -24,6 +26,7 @@ public class HttpSeverStarter implements Server {
     Future<Void> future = Future.future();
     Router router = Router.router(vertx);
     router.get("/").handler(indexHandler);
+    router.get("/error").handler(errorHandler);
     router.get("/wiki/:page").handler(this::pageRenderHandler);
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(this::pageUpdateHandler);

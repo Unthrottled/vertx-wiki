@@ -14,3 +14,4 @@ buildNumber.properties
 .gradle
 build/
 db/
+.vertx/

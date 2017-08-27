@@ -8,6 +8,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.templ.FreeMarkerTemplateEngine;
+import io.vertx.ext.web.templ.TemplateEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +19,14 @@ public class IndexHandler implements Handler<RoutingContext> {
   private static final Logger LOGGER = LoggerFactory.getLogger(IndexHandler.class);
 
   private final Database database;
-  private final FreeMarkerTemplateEngine templateEngine = FreeMarkerTemplateEngine.create();
+  private final TemplateEngine templateEngine;
+  private final ErrorHandler errorHandler;
 
   @Inject
-  public IndexHandler(Database database) {
+  public IndexHandler(Database database, TemplateEngine templateEngine, ErrorHandler errorHandler) {
     this.database = database;
+    this.templateEngine = templateEngine;
+    this.errorHandler = errorHandler;
   }
 
   public void handle(RoutingContext routingContext) {
@@ -31,7 +35,7 @@ public class IndexHandler implements Handler<RoutingContext> {
         routingContext.response().putHeader("Content-Type", MediaType.HTML_UTF_8.type());
         routingContext.response().end(bufferAsyncResult.result());
       } else {
-        broken(routingContext, bufferAsyncResult);
+        errorHandler.broken(routingContext, bufferAsyncResult);
       }
     };
 
@@ -51,31 +55,14 @@ public class IndexHandler implements Handler<RoutingContext> {
             routingContext.put("title", "Wiki Home");
             routingContext.put("pages", pages);
             String templateFileName = "/index.ftl";
-            renderTemplate(routingContext, templateResultHandler, templateFileName);
+            errorHandler.renderTemplate(routingContext, templateResultHandler, templateFileName);
           } else {
-            brokenTemplate(routingContext, resultSetAsyncResult, templateResultHandler);
+            errorHandler.brokenTemplate(routingContext, resultSetAsyncResult, templateResultHandler);
           }
         });
       } else {
-        brokenTemplate(routingContext, ar, templateResultHandler);
+        errorHandler.brokenTemplate(routingContext, ar, templateResultHandler);
       }
     });
-  }
-
-  private void renderTemplate(RoutingContext routingContext, Handler<AsyncResult<Buffer>> asyncResultHandler, String templateFileName) {
-    templateEngine.render(routingContext, "templates", templateFileName, asyncResultHandler);
-  }
-
-  private <T> void brokenTemplate(RoutingContext routingContext, AsyncResult<T> asyncResult, Handler<AsyncResult<Buffer>> asyncResultHandler) {
-    LOGGER.warn("Things Borked ->", asyncResult.cause());
-    routingContext.response().setStatusCode(500);
-    renderTemplate(routingContext, asyncResultHandler, "/error.ftl");
-  }
-
-  private <T> void broken(RoutingContext routingContext, AsyncResult<T> asyncResult) {
-    LOGGER.warn("Things Borked ->", asyncResult.cause());
-    routingContext.response()
-      .setStatusCode(500)
-      .end("¯\\_(ツ)_/¯\n");
   }
 }
