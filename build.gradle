@@ -1,0 +1,43 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+repositories {
+  mavenLocal()
+  jcenter()
+  maven {
+    url "https://oss.sonatype.org/content/repositories/iovertx-3684/"
+  }
+  mavenCentral()
+}
+
+
+mainClassName = 'io.acari.starter.MainVerticle'
+
+shadowJar {
+  classifier = 'fat'
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.0'
+}
+
+dependencies {
+  compile "io.vertx:vertx-core:3.4.2"
+  compile('junit:junit:4.12')
+  compile('com.google.guava:guava:18.0')
+  testCompile "io.vertx:vertx-unit:3.4.2"
+}

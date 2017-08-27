@@ -1,63 +1,28 @@
-= Vert.x Maven Starter
+= Vert.x 3.1 Simplest Gradle project
 
-This project is a template to start your own Vert.x project using Apache Maven.
+This project shows a very simple hello world Vert.x 3.1 project using Gradle, which has a simple HTTP server which
+simply returns "Hello World!" to every request.
 
-== Prerequisites
+In this example Vert.x is used embedded. I.e. we use the Vert.x APIs directly in our own classes rather than deploying
+the code in verticles.
 
-* Apache Maven
-* JDK 8+
+You can run or debug the example in your IDE by just right clicking the main class and run as.. or debug as...
 
-== Getting started
+The build.gradle uses the Gradle shadowJar plugin to assemble the application and all it's dependencies into a single "fat" jar.
 
-Create your project with:
+To build the "fat jar"
 
-[source]
-----
-git clone https://github.com/vert-x3/vertx-maven-starter.git PROJECT_NAME
-----
+    ./gradlew shadowJar
 
-Replace `PROJECT_NAME` with the name of your project.
+Because the application plugin is being used, you may directly run the application:
 
-On Linux and MacOSx (or Windows with `bash`), if you want to go faster and generate an already configured project run:
+    ./gradlew run
 
-[source]
-----
-curl http://vertx.io/assets/starter-scripts/create-vertx-project-maven.sh -o vertx-create-maven-project.sh; bash vertx-create-maven-project.sh
-----
+You may also run the fat jar as a standalone runnable jar:
 
-== Running the project
+    java -jar build/libs/gradle-simplest-3.4.2-fat.jar
 
-Once you have retrieved the project, you can check that everything works with:
+(You can take that jar and run it anywhere there is a Java 8+ JDK. It contains all the dependencies it needs so you
+don't need to install Vert.x on the target machine).
 
-[source]
-----
-mvn test exec:java
-----
-
-The command compiles the project and runs the tests, then  it launches the application, so you can check by yourself. Open your browser to http://localhost:8080. You should see a _Hello World_ message.
-
-== Anatomy of the project
-
-The project contains:
-
-* a `pom.xml` file
-* a _main_ verticle file (src/main/java/io/vertx/starter/MainVerticle.java)
-* an unit test (src/main/test/io/vertx/starter/MainVerticleTest.java)
-
-== Start to hack
-
-1. Delete the `.git` directory
-2. Open the `pom.xml` file and customize the `groupId`, `artifactId` and `version`. You can also change the `main.verticle` property to use your own package name and verticle class.
-3. Run `redeploy.sh` (or `redeploy.bat` on Windows) and the project recompiles while editing.
-
-NOTE: the `redeploy` script are also configurable
-
-== Building the project
-
-To build the project, just use:
-
-----
-mvn clean package
-----
-
-It generates a _fat-jar_ in the `target` directory.
+Now point your browser at http://localhost:8080
