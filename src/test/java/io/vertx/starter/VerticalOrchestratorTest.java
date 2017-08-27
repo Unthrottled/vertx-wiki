@@ -42,7 +42,7 @@ public class VerticalOrchestratorTest {
       tc.assertEquals(response.statusCode(), 200);
       response.bodyHandler(body -> {
         tc.assertTrue(body.length() > 0);
-        tc.assertEquals("Butts!\n",body.toString());
+        tc.assertEquals("Hey, that's pretty good!\n",body.toString());
         async.complete();
       });
     });

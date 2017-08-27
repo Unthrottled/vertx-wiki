@@ -1,5 +1,6 @@
 package io.acari.starter;
 
+import com.google.inject.Inject;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
@@ -11,11 +12,18 @@ import org.slf4j.LoggerFactory;
 
 public class HttpSeverStarter implements Server {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpSeverStarter.class);
+  private final IndexHandler indexHandler;
+
+  @Inject
+  public HttpSeverStarter(IndexHandler indexHandler) {
+    this.indexHandler = indexHandler;
+  }
+
 
   public Future<Void> start(Vertx vertx) {
     Future<Void> future = Future.future();
     Router router = Router.router(vertx);
-    router.get("/").handler(this::indexHandler);
+    router.get("/").handler(indexHandler);
     router.get("/wiki/:page").handler(this::pageRenderHandler);
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(this::pageUpdateHandler);
@@ -53,13 +61,6 @@ public class HttpSeverStarter implements Server {
 
   private void pageRenderHandler(RoutingContext routingContext) {
 
-  }
-
-  private void indexHandler(RoutingContext routingContext) {
-    LOGGER.info("INCOMING REQUEST!!!");
-    routingContext.response()
-      .setStatusCode(200)
-      .end("Butts!\n");
   }
 
 }
