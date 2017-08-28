@@ -10,14 +10,14 @@ import io.vertx.ext.web.handler.BodyHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpSeverStarter implements Server {
-  private static final Logger LOGGER = LoggerFactory.getLogger(HttpSeverStarter.class);
+public class HttpServerStarter implements Server {
+  private static final Logger LOGGER = LoggerFactory.getLogger(HttpServerStarter.class);
   private final IndexHandler indexHandler;
   private final ErrorHandler errorHandler;
   private final PageHandler pageHandler;
 
   @Inject
-  public HttpSeverStarter(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler) {
+  public HttpServerStarter(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
