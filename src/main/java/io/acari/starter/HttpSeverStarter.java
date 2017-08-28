@@ -14,11 +14,13 @@ public class HttpSeverStarter implements Server {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpSeverStarter.class);
   private final IndexHandler indexHandler;
   private final ErrorHandler errorHandler;
+  private final PageHandler pageHandler;
 
   @Inject
-  public HttpSeverStarter(IndexHandler indexHandler, ErrorHandler errorHandler) {
+  public HttpSeverStarter(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
+    this.pageHandler = pageHandler;
   }
 
 
@@ -27,7 +29,7 @@ public class HttpSeverStarter implements Server {
     Router router = Router.router(vertx);
     router.get("/").handler(indexHandler);
     router.get("/error").handler(errorHandler);
-    router.get("/wiki/:page").handler(this::pageRenderHandler);
+    router.get("/wiki/:page").handler(pageHandler);
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(this::pageUpdateHandler);
     router.post("/create").handler(this::pageCreateHandler);
@@ -59,10 +61,6 @@ public class HttpSeverStarter implements Server {
   }
 
   private void pageUpdateHandler(RoutingContext routingContext) {
-
-  }
-
-  private void pageRenderHandler(RoutingContext routingContext) {
 
   }
 
