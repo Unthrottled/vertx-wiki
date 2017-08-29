@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
-import java.util.Optional;
 
 public class PageHandler implements Handler<RoutingContext> {
   private static final Logger LOGGER = LoggerFactory.getLogger(PageHandler.class);
@@ -34,50 +33,46 @@ public class PageHandler implements Handler<RoutingContext> {
 
   @Override
   public void handle(RoutingContext routingContext) {
-    Optional<String> pageOptional = Optional.ofNullable(routingContext.request().getParam("page"));
-    if (pageOptional.isPresent()) {
-      database.executeQuery(connectionResult -> {
-        if (connectionResult.succeeded()) {
-          try (SQLConnection connection = connectionResult.result()) {
-            connection.queryStreamWithParams(Queries.SQL_GET_PAGE,
-              new JsonArray().add(pageOptional.get()),
-              queryResults -> {
-                if (queryResults.succeeded()) {
-                  SQLRowStream sqlRowStream = queryResults.result();
-                  sqlRowStream.handler(tuple -> {
-                    Integer id = tuple.getInteger(0);
-                    String content = tuple.getString(1);
-                    routingContext.put("id", id);
-                    routingContext.put("rawContent", content);
-                    routingContext.put("newPage", Boolean.FALSE.toString());
-                    sqlRowStream.close();
-                  }).close(v -> {
-                    LOGGER.info("Page Fetch Complete!");
-                    routingContext.put("title", pageOptional.get());
-                    Optional<Object> newPage = Optional.ofNullable(routingContext.get("newPage"));
-                    if (!newPage.isPresent()) {
-                      fillEmptyPage(routingContext);
-                    }
-                    String rawContent = routingContext.<Object>get("rawContent").toString();
-                    routingContext.put("content", Processor.process(rawContent));
-                    routingContext.put("timestamp", Instant.now().toString());
-                    templateRenderer.render(routingContext, "/page.ftl");
+    ChainableOptional.ofNullable(routingContext.request().getParam("page")).ifPresent(pago -> database.executeQuery(connectionResult -> {
+      if (connectionResult.succeeded()) {
+        try (SQLConnection connection = connectionResult.result()) {
+          connection.queryStreamWithParams(Queries.SQL_GET_PAGE,
+            new JsonArray().add(pago),
+            queryResults -> {
+              if (queryResults.succeeded()) {
+                SQLRowStream sqlRowStream = queryResults.result();
+                sqlRowStream.handler(tuple -> {
+                  Integer id = tuple.getInteger(0);
+                  String content = tuple.getString(1);
+                  routingContext.put("id", id);
+                  routingContext.put("rawContent", content);
+                  routingContext.put("newPage", Boolean.FALSE.toString());
+                  sqlRowStream.close();
+                }).close(v -> {
+                  LOGGER.info("Page Fetch Complete!");
+                  routingContext.put("title", pago);
+                  ChainableOptional.ofNullable(routingContext.get("newPage"))
+                    .ifNotPresent(() -> fillEmptyPage(routingContext));
+                  String rawContent = routingContext.<Object>get("rawContent").toString();
+                  routingContext.put("content", Processor.process(rawContent));
+                  routingContext.put("timestamp", Instant.now().toString());
+                  templateRenderer.render(routingContext, "/page.ftl");
 
-                  });
-                } else {
-                  errorHandler.handle(routingContext, queryResults);
-                }
-              });
-          }
-        } else {
-          errorHandler.handle(routingContext, connectionResult);
+                });
+              } else {
+                errorHandler.handle(routingContext, queryResults);
+              }
+            });
         }
-      });
-    } else {
+      } else {
+        errorHandler.handle(routingContext, connectionResult);
+      }
+    })).ifNotPresent(() -> {
       routingContext.response()
         .setStatusCode(400)
         .end("No Path Provided, bruv.");
-    }
+    });
+
   }
 
   private void fillEmptyPage(RoutingContext routingContext) {
