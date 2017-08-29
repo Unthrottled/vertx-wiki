@@ -23,7 +23,7 @@ public class ErrorHandler implements Handler<RoutingContext> {
     brokenTemplate(routingContext);
   }
 
-  public <T> void brokenTemplate(RoutingContext routingContext, AsyncResult<T> asyncResult) {
+  public <T> void handle(RoutingContext routingContext, AsyncResult<T> asyncResult) {
     LOGGER.warn("Things Borked ->", asyncResult.cause());
     brokenTemplate(routingContext);
   }

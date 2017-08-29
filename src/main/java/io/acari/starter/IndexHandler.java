@@ -44,11 +44,11 @@ public class IndexHandler implements Handler<RoutingContext> {
             String templateFileName = "/index.ftl";
             templateRenderer.render(routingContext, templateFileName);
           } else {
-            errorHandler.handle(routingContext);
+            errorHandler.handle(routingContext, resultSetAsyncResult);
           }
         });
       } else {
-        errorHandler.handle(routingContext);
+        errorHandler.handle(routingContext, ar);
       }
     });
   }
