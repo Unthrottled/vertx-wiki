@@ -9,20 +9,20 @@ import org.slf4j.LoggerFactory;
 public class VerticalOrchestrator {
   private static final Logger LOGGER = LoggerFactory.getLogger(VerticalOrchestrator.class);
   private final Database database;
-  private final HttpServerStarter httpServerStarter;
+  private final HttpServer httpServer;
   private final Vertx vertx;
 
   @Inject
-  public VerticalOrchestrator(Database database, HttpServerStarter httpServerStarter, Vertx vertx) {
+  public VerticalOrchestrator(Database database, HttpServer httpServer, Vertx vertx) {
     this.database = database;
-    this.httpServerStarter = httpServerStarter;
+    this.httpServer = httpServer;
     this.vertx = vertx;
   }
 
   public void start(Future<Void> startupGuy) {
     LOGGER.info("STARTING!");
     database.prepare(vertx)
-      .compose(v-> httpServerStarter.start(vertx))
+      .compose(v-> httpServer.start(vertx))
       .setHandler(startupGuy.completer());
   }
 

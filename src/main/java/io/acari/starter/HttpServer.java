@@ -3,21 +3,20 @@ package io.acari.starter;
 import com.google.inject.Inject;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpServerStarter implements Server {
-  private static final Logger LOGGER = LoggerFactory.getLogger(HttpServerStarter.class);
+public class HttpServer implements Server {
+  private static final Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
   private final IndexHandler indexHandler;
   private final ErrorHandler errorHandler;
   private final PageHandler pageHandler;
 
   @Inject
-  public HttpServerStarter(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler) {
+  public HttpServer(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -38,7 +37,7 @@ public class HttpServerStarter implements Server {
     vertx.createHttpServer()
       .requestHandler(router::accept)
       .listen(8989, httpServerAsyncResult -> {
-        HttpServer result = httpServerAsyncResult.result();
+        io.vertx.core.http.HttpServer result = httpServerAsyncResult.result();
         if (httpServerAsyncResult.succeeded()) {
           LOGGER.info("Server listening on port " + result.actualPort());
           future.complete();

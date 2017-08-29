@@ -11,7 +11,7 @@ public class VertxModule extends AbstractModule {
   protected void configure() {
     //add configuration logic here
     bind(Database.class).to(DatabaseManager.class);
-    bind(Server.class).to(HttpServerStarter.class);
+    bind(Server.class).to(HttpServer.class);
     bind(Vertx.class).toProvider(VertxProvider.class);
     bind(TemplateEngine.class).toProvider(TemplateEngineProvider.class);
   }
