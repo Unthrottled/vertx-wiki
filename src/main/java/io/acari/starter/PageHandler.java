@@ -52,7 +52,7 @@ public class PageHandler implements Handler<RoutingContext> {
                   LOGGER.info("Page Fetch Complete!");
                   routingContext.put("title", pago);
                   ChainableOptional.ofNullable(routingContext.get("newPage"))
-                    .ifNotPresent(() -> fillEmptyPage(routingContext));
+                    .orElseDo(() -> fillEmptyPage(routingContext));
                   String rawContent = routingContext.<Object>get("rawContent").toString();
                   routingContext.put("content", Processor.process(rawContent));
                   routingContext.put("timestamp", Instant.now().toString());
@@ -67,11 +67,9 @@ public class PageHandler implements Handler<RoutingContext> {
       } else {
         errorHandler.handle(routingContext, connectionResult);
       }
-    })).ifNotPresent(() -> {
-      routingContext.response()
-        .setStatusCode(400)
-        .end("No Path Provided, bruv.");
-    });
+    })).orElseDo(() -> routingContext.response()
+      .setStatusCode(400)
+      .end("No Path Provided, bruv."));
 
   }
 
