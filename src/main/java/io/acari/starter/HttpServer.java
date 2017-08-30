@@ -15,13 +15,15 @@ public class HttpServer implements Server {
   private final ErrorHandler errorHandler;
   private final PageHandler pageHandler;
   private final CreationHandler creationHandler;
+  private final SaveHandler saveHandler;
 
   @Inject
-  public HttpServer(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler, CreationHandler creationHandler) {
+  public HttpServer(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler, CreationHandler creationHandler, SaveHandler saveHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
     this.creationHandler = creationHandler;
+    this.saveHandler = saveHandler;
   }
 
 
@@ -32,7 +34,7 @@ public class HttpServer implements Server {
     router.get("/error").handler(errorHandler);
     router.get("/wiki/:page").handler(pageHandler);
     router.post().handler(BodyHandler.create());
-    router.post("/save").handler(this::pageUpdateHandler);
+    router.post("/save").handler(saveHandler);
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(this::pageDeleteHandler);
 
@@ -54,10 +56,6 @@ public class HttpServer implements Server {
   }
 
   private void pageDeleteHandler(RoutingContext routingContext) {
-
-  }
-
-  private void pageUpdateHandler(RoutingContext routingContext) {
 
   }
 
