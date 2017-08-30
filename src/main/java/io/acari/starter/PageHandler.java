@@ -35,35 +35,35 @@ public class PageHandler implements Handler<RoutingContext> {
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("page")).ifPresent(pago -> database.executeQuery(connectionResult -> {
       if (connectionResult.succeeded()) {
-        try (SQLConnection connection = connectionResult.result()) {
-          connection.queryStreamWithParams(Queries.SQL_GET_PAGE,
-            new JsonArray().add(pago),
-            queryResults -> {
-              if (queryResults.succeeded()) {
-                SQLRowStream sqlRowStream = queryResults.result();
-                sqlRowStream.handler(tuple -> {
-                  Integer id = tuple.getInteger(0);
-                  String content = tuple.getString(1);
-                  routingContext.put("id", id);
-                  routingContext.put("rawContent", content);
-                  routingContext.put("newPage", Boolean.FALSE.toString());
-                  sqlRowStream.close();
-                }).close(v -> {
-                  LOGGER.info("Page Fetch Complete!");
+        SQLConnection connection = connectionResult.result();
+        connection.queryStreamWithParams(Queries.SQL_GET_PAGE,
+          new JsonArray().add(pago),
+          queryResults -> {
+            if (queryResults.succeeded()) {
+              SQLRowStream sqlRowStream = queryResults.result();
+              sqlRowStream.handler(tuple -> {
+                Integer id = tuple.getInteger(0);
+                String content = tuple.getString(1);
+                routingContext.put("id", id);
+                routingContext.put("rawContent", content);
+                routingContext.put("newPage", Boolean.FALSE.toString());
+                sqlRowStream.close();
+              }).exceptionHandler(throwable -> LOGGER.warn("Things Broken in Page Handler ->"))
+                .close(v -> {
                   routingContext.put("title", pago);
                   ChainableOptional.ofNullable(routingContext.get("newPage"))
                     .orElseDo(() -> fillEmptyPage(routingContext));
                   String rawContent = routingContext.<Object>get("rawContent").toString();
                   routingContext.put("content", Processor.process(rawContent));
                   routingContext.put("timestamp", Instant.now().toString());
+                  connection.close();
                   templateRenderer.render(routingContext, "/page.ftl");
 
                 });
-              } else {
-                errorHandler.handle(routingContext, queryResults);
-              }
-            });
-        }
+            } else {
+              errorHandler.handle(routingContext, queryResults);
+            }
+          });
       } else {
         errorHandler.handle(routingContext, connectionResult);
       }
