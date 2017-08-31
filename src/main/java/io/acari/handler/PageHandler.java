@@ -1,7 +1,11 @@
-package io.acari;
+package io.acari.handler;
 
 import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;
+import io.acari.core.Database;
+import io.acari.core.Queries;
+import io.acari.core.TemplateRenderer;
+import io.acari.util.ChainableOptional;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.sql.ResultSet;

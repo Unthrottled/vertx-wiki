@@ -1,4 +1,4 @@
-package io.acari;
+package io.acari.core;
 
 public interface Queries {
   String SQL_CREATE_PAGES_TABLE = "create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)";

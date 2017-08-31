@@ -1,4 +1,4 @@
-package io.acari;
+package io.acari.core;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;

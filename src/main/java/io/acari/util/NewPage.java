@@ -1,4 +1,4 @@
-package io.acari;
+package io.acari.util;
 
 import io.vertx.core.json.JsonArray;
 

@@ -1,4 +1,4 @@
-package io.acari;/*
+package io.acari.util.inject;/*
  * Created by IntelliJ IDEA.
  * User: alex
  * Date: 8/27/17

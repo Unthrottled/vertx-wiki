@@ -1,6 +1,9 @@
-package io.acari;
+package io.acari.handler;
 
 import com.google.inject.Inject;
+import io.acari.core.Database;
+import io.acari.core.Queries;
+import io.acari.core.TemplateRenderer;
 import io.vertx.core.Handler;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;

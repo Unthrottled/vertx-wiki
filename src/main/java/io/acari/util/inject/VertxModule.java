@@ -1,6 +1,11 @@
-package io.acari;
+package io.acari.util.inject;
 
 import com.google.inject.AbstractModule;
+import io.acari.core.Database;
+import io.acari.core.DatabaseManager;
+import io.acari.core.HttpServer;
+import io.acari.core.Server;
+import io.acari.util.TemplateEngineProvider;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.templ.TemplateEngine;
 

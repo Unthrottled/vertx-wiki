@@ -1,6 +1,8 @@
-package io.acari;
+package io.acari.util.inject;
 
 import com.google.inject.Inject;
+import io.acari.core.Database;
+import io.acari.core.HttpServer;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import org.slf4j.Logger;

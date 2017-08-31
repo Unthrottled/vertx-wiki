@@ -2,6 +2,8 @@ package io.acari;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import io.acari.util.inject.VerticalOrchestrator;
+import io.acari.util.inject.VertxModule;
 import io.vertx.core.Future;
 
 public class VertxLauncher {

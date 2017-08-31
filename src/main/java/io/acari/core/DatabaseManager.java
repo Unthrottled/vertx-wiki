@@ -1,4 +1,4 @@
-package io.acari;
+package io.acari.core;
 
 import com.google.inject.Singleton;
 import io.vertx.core.AsyncResult;
