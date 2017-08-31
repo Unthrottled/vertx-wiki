@@ -26,7 +26,7 @@ public class IndexHandler implements Handler<RoutingContext> {
 
   public void handle(RoutingContext routingContext) {
 
-    database.executeQuery(ar -> {
+    database.getConnection(ar -> {
       if (ar.succeeded()) {
         SQLConnection sqlConnection = ar.result();
         sqlConnection.query(Queries.SQL_ALL_PAGES, resultSetAsyncResult -> {

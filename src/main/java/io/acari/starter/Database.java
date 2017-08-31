@@ -11,5 +11,5 @@ public interface Database {
 
   Future<Void> prepare(Vertx vertx);
 
-  SQLClient executeQuery(Handler<AsyncResult<SQLConnection>> asyncResultHandler);
+  SQLClient getConnection(Handler<AsyncResult<SQLConnection>> asyncResultHandler);
 }

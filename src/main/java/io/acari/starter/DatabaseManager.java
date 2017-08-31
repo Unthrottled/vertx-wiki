@@ -27,7 +27,7 @@ public class DatabaseManager implements Database {
     return future;
   }
 
-  public SQLClient executeQuery(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {
+  public SQLClient getConnection(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {
     return jdbcClient.getConnection(asyncResultHandler);
   }
 

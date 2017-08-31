@@ -33,7 +33,7 @@ public class PageHandler implements Handler<RoutingContext> {
 
   @Override
   public void handle(RoutingContext routingContext) {
-    ChainableOptional.ofNullable(routingContext.request().getParam("page")).ifPresent(pago -> database.executeQuery(connectionResult -> {
+    ChainableOptional.ofNullable(routingContext.request().getParam("page")).ifPresent(pago -> database.getConnection(connectionResult -> {
       if (connectionResult.succeeded()) {
         SQLConnection connection = connectionResult.result();
         connection.queryWithParams(Queries.SQL_GET_PAGE,

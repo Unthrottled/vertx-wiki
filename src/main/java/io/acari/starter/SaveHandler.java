@@ -33,7 +33,7 @@ public class SaveHandler implements Handler<RoutingContext> {
             .map(Boolean::valueOf)
             .map(Boolean.TRUE::equals)
             .ifPresent(newPage ->
-              database.executeQuery(aConn -> {
+              database.getConnection(aConn -> {
                 if (aConn.succeeded()) {
                   SQLConnection connection = aConn.result();
                   JsonArray params = getParams(newPage, id, pageName, markDown);

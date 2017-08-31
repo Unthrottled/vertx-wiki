@@ -23,7 +23,7 @@ public class DeletionHandler implements Handler<RoutingContext> {
   @Override
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("id"))
-      .ifPresent(id -> database.executeQuery(asc -> {
+      .ifPresent(id -> database.getConnection(asc -> {
         if (asc.succeeded()) {
           SQLConnection connection = asc.result();
           connection.updateWithParams(Queries.SQL_DELETE_PAGE,
