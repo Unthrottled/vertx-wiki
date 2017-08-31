@@ -2,7 +2,7 @@ package io.acari.handler;
 
 import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;
-import io.acari.core.Database;
+import io.acari.core.DatabaseVerticle;
 import io.acari.core.Queries;
 import io.acari.core.TemplateRenderer;
 import io.acari.util.ChainableOptional;
@@ -23,13 +23,13 @@ public class PageHandler implements Handler<RoutingContext> {
       "\n" +
       "Feel-free to write in Markdown!\n";
 
-  private final Database database;
+  private final DatabaseVerticle database;
   private final ErrorHandler errorHandler;
   private final TemplateRenderer templateRenderer;
 
 
   @Inject
-  public PageHandler(Database database, ErrorHandler errorHandler, TemplateRenderer templateRenderer) {
+  public PageHandler(DatabaseVerticle database, ErrorHandler errorHandler, TemplateRenderer templateRenderer) {
     this.database = database;
     this.errorHandler = errorHandler;
     this.templateRenderer = templateRenderer;

@@ -1,7 +1,7 @@
 package io.acari.handler;
 
 import com.google.inject.Inject;
-import io.acari.core.Database;
+import io.acari.core.DatabaseVerticle;
 import io.acari.core.Queries;
 import io.acari.core.TemplateRenderer;
 import io.vertx.core.Handler;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 public class IndexHandler implements Handler<RoutingContext> {
   private static final Logger LOGGER = LoggerFactory.getLogger(IndexHandler.class);
 
-  private final Database database;
+  private final DatabaseVerticle database;
   private final TemplateRenderer templateRenderer;
   private final ErrorHandler errorHandler;
 
   @Inject
-  public IndexHandler(Database database, TemplateRenderer templateRenderer, ErrorHandler errorHandler) {
+  public IndexHandler(DatabaseVerticle database, TemplateRenderer templateRenderer, ErrorHandler errorHandler) {
     this.database = database;
     this.templateRenderer = templateRenderer;
     this.errorHandler = errorHandler;

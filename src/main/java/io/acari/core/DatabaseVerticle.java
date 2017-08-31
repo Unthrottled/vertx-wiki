@@ -1,10 +1,7 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLClient;
@@ -13,16 +10,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-public class DatabaseManager implements Database {
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseManager.class);
+public class DatabaseVerticle extends AbstractVerticle {
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
 
   private JDBCClient jdbcClient;
 
-  public Future<Void> prepare(Vertx vertx) {
-    Future<Void> future = Future.future();
+  @Override
+  public void start(Future<Void> future) {
     jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     jdbcClient.getConnection(sqlConnectionHandler(future));
-    return future;
   }
 
   public SQLClient getConnection(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {

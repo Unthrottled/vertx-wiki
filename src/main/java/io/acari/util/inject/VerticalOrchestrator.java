@@ -1,8 +1,8 @@
 package io.acari.util.inject;
 
 import com.google.inject.Inject;
-import io.acari.core.Database;
-import io.acari.core.HttpServer;
+import io.acari.core.DatabaseVerticle;
+import io.acari.core.HttpVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import org.slf4j.Logger;
@@ -10,22 +10,19 @@ import org.slf4j.LoggerFactory;
 
 public class VerticalOrchestrator {
   private static final Logger LOGGER = LoggerFactory.getLogger(VerticalOrchestrator.class);
-  private final Database database;
-  private final HttpServer httpServer;
+  private final DatabaseVerticle database;
+  private final HttpVerticle httpVerticle;
   private final Vertx vertx;
 
   @Inject
-  public VerticalOrchestrator(Database database, HttpServer httpServer, Vertx vertx) {
+  public VerticalOrchestrator(DatabaseVerticle database, HttpVerticle httpVerticle, Vertx vertx) {
     this.database = database;
-    this.httpServer = httpServer;
+    this.httpVerticle = httpVerticle;
     this.vertx = vertx;
   }
 
   public void start(Future<Void> startupGuy) {
     LOGGER.info("STARTING!");
-    database.prepare(vertx)
-      .compose(v-> httpServer.start(vertx))
-      .setHandler(startupGuy.completer());
   }
 
 }

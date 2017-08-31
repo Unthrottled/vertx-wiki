@@ -1,7 +1,7 @@
 package io.acari.handler;
 
 import com.google.inject.Inject;
-import io.acari.core.Database;
+import io.acari.core.DatabaseVerticle;
 import io.acari.core.Queries;
 import io.acari.util.ChainableOptional;
 import io.acari.util.NewPage;
@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
 public class SaveHandler implements Handler<RoutingContext> {
   private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
 
-  private final Database database;
+  private final DatabaseVerticle database;
   private final ErrorHandler errorHandler;
 
   @Inject
-  public SaveHandler(Database database, ErrorHandler errorHandler) {
+  public SaveHandler(DatabaseVerticle database, ErrorHandler errorHandler) {
     this.database = database;
     this.errorHandler = errorHandler;
   }
