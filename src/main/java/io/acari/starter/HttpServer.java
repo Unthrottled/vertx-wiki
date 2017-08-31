@@ -16,14 +16,21 @@ public class HttpServer implements Server {
   private final PageHandler pageHandler;
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
+  private final DeletionHandler deletionHandler;
 
   @Inject
-  public HttpServer(IndexHandler indexHandler, ErrorHandler errorHandler, PageHandler pageHandler, CreationHandler creationHandler, SaveHandler saveHandler) {
+  public HttpServer(IndexHandler indexHandler,
+                    ErrorHandler errorHandler,
+                    PageHandler pageHandler,
+                    CreationHandler creationHandler,
+                    SaveHandler saveHandler,
+                    DeletionHandler deletionHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
     this.creationHandler = creationHandler;
     this.saveHandler = saveHandler;
+    this.deletionHandler = deletionHandler;
   }
 
 
@@ -36,7 +43,7 @@ public class HttpServer implements Server {
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(saveHandler);
     router.post("/create").handler(creationHandler);
-    router.post("/delete").handler(this::pageDeleteHandler);
+    router.post("/delete").handler(deletionHandler);
 
     vertx.createHttpServer()
       .requestHandler(router::accept)
@@ -54,9 +61,4 @@ public class HttpServer implements Server {
 
     return future;
   }
-
-  private void pageDeleteHandler(RoutingContext routingContext) {
-
-  }
-
 }
