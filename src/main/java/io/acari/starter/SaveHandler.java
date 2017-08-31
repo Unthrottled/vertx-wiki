@@ -6,10 +6,14 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static io.acari.starter.ChainableOptional.ofNullable;
 
 public class SaveHandler implements Handler<RoutingContext> {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
+
   private final Database database;
   private final ErrorHandler errorHandler;
 
@@ -40,7 +44,9 @@ public class SaveHandler implements Handler<RoutingContext> {
                       } else {
                         errorHandler.handle(routingContext, aRes);
                       }
-                    }).close(v -> connection.close());
+                    })
+                    .commit(voidAsyncResult -> LOGGER.info("Save page commit!"))
+                    .close(v -> connection.close());
                 } else {
                   errorHandler.handle(routingContext, aConn);
                 }

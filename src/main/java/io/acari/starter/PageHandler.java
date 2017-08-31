@@ -4,8 +4,8 @@ import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
+import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
-import io.vertx.ext.sql.SQLRowStream;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,30 +36,26 @@ public class PageHandler implements Handler<RoutingContext> {
     ChainableOptional.ofNullable(routingContext.request().getParam("page")).ifPresent(pago -> database.executeQuery(connectionResult -> {
       if (connectionResult.succeeded()) {
         SQLConnection connection = connectionResult.result();
-        connection.queryStreamWithParams(Queries.SQL_GET_PAGE,
+        connection.queryWithParams(Queries.SQL_GET_PAGE,
           new JsonArray().add(pago),
           queryResults -> {
             if (queryResults.succeeded()) {
-              SQLRowStream sqlRowStream = queryResults.result();
-              sqlRowStream.handler(tuple -> {
-                Integer id = tuple.getInteger(0);
-                String content = tuple.getString(1);
-                routingContext.put("id", id);
-                routingContext.put("rawContent", content);
-                routingContext.put("newPage", Boolean.FALSE.toString());
-                sqlRowStream.close();
-              }).exceptionHandler(throwable -> LOGGER.warn("Things Broken in Page Handler ->"))
-                .close(v -> {
-                  routingContext.put("title", pago);
-                  ChainableOptional.ofNullable(routingContext.get("newPage"))
-                    .orElseDo(() -> fillEmptyPage(routingContext));
-                  String rawContent = routingContext.<Object>get("rawContent").toString();
-                  routingContext.put("content", Processor.process(rawContent));
-                  routingContext.put("timestamp", Instant.now().toString());
-                  connection.close();
-                  templateRenderer.render(routingContext, "/page.ftl");
+              ResultSet resultSet = queryResults.result();
+              JsonArray tuple = resultSet.getResults()
+                .stream()
+                .findFirst()
+                .orElse(new JsonArray().add(-1).add(EMPTY_PAGE_MARKDOWN));
 
-                });
+              Integer id = tuple.getInteger(0);
+              String content = tuple.getString(1);
+              routingContext.put("id", id);
+              routingContext.put("rawContent", content);
+              routingContext.put("newPage", Boolean.valueOf(id == -1));
+              routingContext.put("title", pago);
+              String rawContent = routingContext.<Object>get("rawContent").toString();
+              routingContext.put("content", Processor.process(rawContent));
+              routingContext.put("timestamp", Instant.now().toString());
+              templateRenderer.render(routingContext, "/page.ftl");
             } else {
               errorHandler.handle(routingContext, queryResults);
             }
