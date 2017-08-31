@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import com.google.inject.Inject;
 import io.vertx.core.Handler;
@@ -8,8 +8,6 @@ import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static io.acari.starter.ChainableOptional.ofNullable;
 
 public class SaveHandler implements Handler<RoutingContext> {
   private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
@@ -26,10 +24,10 @@ public class SaveHandler implements Handler<RoutingContext> {
   @Override
   public void handle(RoutingContext routingContext) {
     HttpServerRequest request = routingContext.request();
-    ofNullable(request.getParam("id"))
-      .ifPresent(id -> ofNullable(request.getParam("title"))
-        .ifPresent(pageName -> ofNullable(request.getParam("markdown"))
-          .ifPresent(markDown -> ofNullable(request.getParam("newPage"))
+    ChainableOptional.ofNullable(request.getParam("id"))
+      .ifPresent(id -> ChainableOptional.ofNullable(request.getParam("title"))
+        .ifPresent(pageName -> ChainableOptional.ofNullable(request.getParam("markdown"))
+          .ifPresent(markDown -> ChainableOptional.ofNullable(request.getParam("newPage"))
             .map(Boolean::valueOf)
             .map(Boolean.TRUE::equals)
             .ifPresent(newPage ->

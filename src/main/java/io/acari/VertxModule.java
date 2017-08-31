@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import com.google.inject.AbstractModule;
 import io.vertx.core.Vertx;

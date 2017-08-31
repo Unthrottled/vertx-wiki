@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;

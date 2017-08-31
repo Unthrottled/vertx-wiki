@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import com.google.inject.Singleton;
 import io.vertx.core.AsyncResult;
@@ -11,8 +11,6 @@ import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static io.acari.starter.Queries.SQL_CREATE_PAGES_TABLE;
 
 @Singleton
 public class DatabaseManager implements Database {
@@ -35,7 +33,7 @@ public class DatabaseManager implements Database {
     return asyncResult -> {
       if (asyncResult.succeeded()) {
         SQLConnection connection = asyncResult.result();
-        connection.execute(SQL_CREATE_PAGES_TABLE, onCreate -> {
+        connection.execute(Queries.SQL_CREATE_PAGES_TABLE, onCreate -> {
           connection.close();
           if (onCreate.succeeded()) {
             future.complete();

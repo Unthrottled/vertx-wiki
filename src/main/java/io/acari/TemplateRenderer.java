@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import com.google.common.net.MediaType;
 import com.google.inject.Inject;

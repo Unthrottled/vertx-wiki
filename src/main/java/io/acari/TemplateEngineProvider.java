@@ -1,4 +1,4 @@
-package io.acari.starter;/*
+package io.acari;/*
  * Created by IntelliJ IDEA.
  * User: alex
  * Date: 8/27/17

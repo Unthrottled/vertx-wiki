@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

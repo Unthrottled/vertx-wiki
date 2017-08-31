@@ -1,4 +1,4 @@
-package io.acari.starter;
+package io.acari;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
