@@ -24,7 +24,7 @@
       <div class="form-group">
         <input type="hidden" name="id" value="${context.id}">
         <input type="hidden" name="title" value="${context.title}">
-        <input type="hidden" name="newPage" value="${context.newPage}">
+        <input type="hidden" name="newPage" value="${context.newPage?c}">
         <textarea class="form-control" id="markdown" name="markdown" rows="15">${context.rawContent}</textarea>
       </div>
       <button type="submit" class="btn btn-primary">Save</button>
