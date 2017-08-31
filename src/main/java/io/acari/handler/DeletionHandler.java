@@ -1,10 +1,10 @@
 package io.acari.handler;
 
 import com.google.inject.Inject;
-import io.acari.util.ChainableOptional;
 import io.acari.core.Database;
-import io.acari.util.PageReRouter;
 import io.acari.core.Queries;
+import io.acari.util.ChainableOptional;
+import io.acari.util.PageReRouter;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.sql.SQLConnection;

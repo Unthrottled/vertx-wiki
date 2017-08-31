@@ -1,7 +1,6 @@
 package io.acari.core;
 
 import com.google.inject.Inject;
-import io.acari.handler.PageHandler;
 import io.acari.handler.*;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
