@@ -15,11 +15,12 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SaveHandler implements Handler<RoutingContext> {
+public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
 
   private final DatabaseVerticle database;
   private final ErrorHandler errorHandler;
+  private Config config;
 
   @Inject
   public SaveHandler(DatabaseVerticle database, ErrorHandler errorHandler) {
@@ -73,5 +74,11 @@ public class SaveHandler implements Handler<RoutingContext> {
     routingContext.response()
       .setStatusCode(400)
       .end(errorMessage);
+  }
+
+  @Override
+  public SaveHandler applyConfiguration(Config config) {
+    this.config = config;
+    return null;
   }
 }

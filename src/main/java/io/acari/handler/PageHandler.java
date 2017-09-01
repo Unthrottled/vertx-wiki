@@ -23,7 +23,7 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
   private final Vertx vertx;
   private final ErrorHandler errorHandler;
   private final TemplateRenderer templateRenderer;
-  private String messageStream;
+  private Config config;
 
 
   @Inject
@@ -36,7 +36,7 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
   @Override
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("page"))
-      .ifPresent(pago -> vertx.eventBus().send(messageStream, new JsonObject().put("page", pago)
+      .ifPresent(pago -> vertx.eventBus().send(config.getDbQueueName(), new JsonObject().put("page", pago)
         , Config.deliveryOptions, connectionResult -> {
           if (connectionResult.succeeded()) {
             JsonObject messageReceieved = (JsonObject) connectionResult.result();
@@ -61,7 +61,7 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
 
   @Override
   public PageHandler applyConfiguration(Config config) {
-    messageStream = config.getDbQueueName();
+    this.config = config;
     return this;
   }
 }
