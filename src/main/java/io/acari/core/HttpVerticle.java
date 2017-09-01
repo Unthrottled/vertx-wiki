@@ -20,7 +20,6 @@ public class HttpVerticle extends AbstractVerticle {
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
   private final DeletionHandler deletionHandler;
-  private String wikiDbQueue = CONFIG_WIKIDB_QUEUE;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -40,11 +39,11 @@ public class HttpVerticle extends AbstractVerticle {
 
   @Override
   public void start(Future<Void> future) {
-    wikiDbQueue = config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE);
+    Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
     Router router = Router.router(vertx);
-    router.get("/").handler(indexHandler);
+    router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
-    router.get("/wiki/:page").handler(pageHandler);
+    router.get("/wiki/:page").handler(pageHandler.applyConfiguration(config));
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(saveHandler);
     router.post("/create").handler(creationHandler);

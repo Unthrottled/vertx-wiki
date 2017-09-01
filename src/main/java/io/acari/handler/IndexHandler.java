@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import io.acari.core.TemplateRenderer;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
   private final Vertx vertx;
   private final TemplateRenderer templateRenderer;
   private final ErrorHandler errorHandler;
-  private String messageQueue;
+  private Config config;
 
   @Inject
   public IndexHandler(Vertx vertx, TemplateRenderer templateRenderer, ErrorHandler errorHandler) {
@@ -26,8 +25,8 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
   }
 
   public void handle(RoutingContext routingContext) {
-    DeliveryOptions deliveryOptions = new DeliveryOptions().addHeader("action", "all-pages");
-    vertx.eventBus().send(messageQueue, new JsonObject(), deliveryOptions, ar -> {
+
+    vertx.eventBus().send(config.getDbQueueName(), new JsonObject(), Config.deliveryOptions, ar -> {
       if (ar.succeeded()) {
         JsonObject messageRecieved = (JsonObject) ar.result();
         routingContext.put("title", "Wiki Home");
@@ -42,7 +41,7 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
 
   @Override
   public IndexHandler applyConfiguration(Config config) {
-    messageQueue = config.getDbQueueName();
+    this.config = config;
     return this;
   }
 }
