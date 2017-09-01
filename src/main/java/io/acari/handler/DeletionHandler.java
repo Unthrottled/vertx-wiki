@@ -34,7 +34,7 @@ public class DeletionHandler implements Handler<RoutingContext> {
             new JsonArray().add(id),
             asr -> {
               connection.close();
-              if(asr.succeeded()){
+              if (asr.succeeded()) {
                 PageReRouter.reRouteHome(routingContext);
               } else {
                 errorHandler.handle(routingContext, asc);
