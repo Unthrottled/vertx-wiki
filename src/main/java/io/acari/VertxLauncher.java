@@ -11,7 +11,7 @@ public class VertxLauncher {
 
   public static void main(String... args) {
     Injector injector = Guice.createInjector(new VertxModule());
-    Vertx vertx = Vertx.vertx();
+    Vertx vertx = injector.getInstance(Vertx.class);
     vertx.deployVerticle(injector.getInstance(DatabaseVerticle.class));
     vertx.deployVerticle(injector.getInstance(HttpVerticle.class));
   }
