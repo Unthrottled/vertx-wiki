@@ -47,7 +47,7 @@ public class HttpVerticle extends AbstractVerticle {
     router.post().handler(BodyHandler.create());
     router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
-    router.post("/delete").handler(deletionHandler);
+    router.post("/delete").handler(deletionHandler.applyConfiguration(config));
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
