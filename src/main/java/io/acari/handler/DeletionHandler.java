@@ -29,7 +29,7 @@ public class DeletionHandler implements Handler<RoutingContext>, Configurable<De
       .ifPresent(id ->
         vertx.eventBus().send(config.getDbQueueName(),
           new JsonArray().add(id),
-          Config.deliveryOptions,
+          Config.createDeliveryOptions("create-page"),
           asr -> {
             if (asr.succeeded()) {
               PageReRouter.reRouteHome(routingContext);

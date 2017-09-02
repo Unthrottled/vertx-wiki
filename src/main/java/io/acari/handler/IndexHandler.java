@@ -26,7 +26,7 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
 
   public void handle(RoutingContext routingContext) {
 
-    vertx.eventBus().send(config.getDbQueueName(), new JsonObject(), Config.deliveryOptions, ar -> {
+    vertx.eventBus().send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("delete-page"), ar -> {
       if (ar.succeeded()) {
         JsonObject messageRecieved = (JsonObject) ar.result();
         routingContext.put("title", "Wiki Home");

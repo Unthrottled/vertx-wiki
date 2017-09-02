@@ -37,8 +37,9 @@ public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHa
             .map(Boolean.TRUE::equals)
             .ifPresent(newPage -> {
               JsonArray params = getParams(newPage, id, pageName, markDown);
-              vertx.eventBus().send(config.getDbQueueName(), params,
-                Config.deliveryOptions,
+              vertx.eventBus().send(config.getDbQueueName(),
+                params,
+                Config.createDeliveryOptions("save-page"),
                 aRes -> {
                   if (aRes.succeeded()) {
                     PageReRouter.reRoute(routingContext, pageName);

@@ -3,7 +3,10 @@ package io.acari.handler;
 import io.vertx.core.eventbus.DeliveryOptions;
 
 public class Config {
-  public static final DeliveryOptions deliveryOptions = new DeliveryOptions().addHeader("action", "all-pages");
+
+  public static DeliveryOptions createDeliveryOptions(String action){
+    return new DeliveryOptions().addHeader("action", action);
+  }
 
   private final String dbQueueName;
 
