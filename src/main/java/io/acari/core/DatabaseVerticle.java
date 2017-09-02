@@ -12,6 +12,8 @@ import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.acari.core.Queries.SqlQueries.CREATE_SCHEMA;
+
 @Singleton
 public class DatabaseVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
@@ -32,7 +34,7 @@ public class DatabaseVerticle extends AbstractVerticle {
     return asyncResult -> {
       if (asyncResult.succeeded()) {
         SQLConnection connection = asyncResult.result();
-        connection.execute(Queries.SQL_CREATE_PAGES_TABLE, onCreate -> {
+        connection.execute(CREATE_SCHEMA.getValue(), onCreate -> {
           connection.close();
           if (onCreate.succeeded()) {
             future.complete();
