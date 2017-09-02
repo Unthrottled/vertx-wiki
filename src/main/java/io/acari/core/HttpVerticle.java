@@ -45,7 +45,7 @@ public class HttpVerticle extends AbstractVerticle {
     router.get("/error").handler(errorHandler);
     router.get("/wiki/:page").handler(pageHandler.applyConfiguration(config));
     router.post().handler(BodyHandler.create());
-    router.post("/save").handler(saveHandler);
+    router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(deletionHandler);
 
