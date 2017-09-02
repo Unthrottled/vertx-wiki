@@ -66,6 +66,6 @@ public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHa
   @Override
   public SaveHandler applyConfiguration(Config config) {
     this.config = config;
-    return null;
+    return this;
   }
 }
