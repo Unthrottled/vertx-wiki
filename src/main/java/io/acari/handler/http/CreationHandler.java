@@ -1,4 +1,4 @@
-package io.acari.handler;
+package io.acari.handler.http;
 
 import io.acari.util.ChainableOptional;
 import io.acari.util.PageReRouter;

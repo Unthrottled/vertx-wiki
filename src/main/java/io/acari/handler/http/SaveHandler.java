@@ -1,6 +1,8 @@
-package io.acari.handler;
+package io.acari.handler.http;
 
 import com.google.inject.Inject;
+import io.acari.handler.Config;
+import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
 import io.acari.util.NewPage;
 import io.acari.util.PageReRouter;

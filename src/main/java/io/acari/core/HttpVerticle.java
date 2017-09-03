@@ -2,6 +2,7 @@ package io.acari.core;
 
 import com.google.inject.Inject;
 import io.acari.handler.*;
+import io.acari.handler.http.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.ext.web.Router;

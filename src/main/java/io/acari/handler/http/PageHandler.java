@@ -1,8 +1,10 @@
-package io.acari.handler;
+package io.acari.handler.http;
 
 import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;
 import io.acari.core.TemplateRenderer;
+import io.acari.handler.Config;
+import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;

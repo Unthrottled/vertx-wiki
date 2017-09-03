@@ -1,7 +1,7 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
-import io.acari.handler.DataMessageConsumer;
+import io.acari.handler.db.DataMessageConsumer;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
