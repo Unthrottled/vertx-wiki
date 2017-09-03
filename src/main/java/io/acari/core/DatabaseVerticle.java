@@ -2,6 +2,7 @@ package io.acari.core;
 
 import com.google.inject.Singleton;
 import io.acari.handler.data.DataMessageConsumer;
+import io.acari.handler.data.DeletionHandler;
 import io.acari.handler.data.PageHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
@@ -52,7 +53,10 @@ public class DatabaseVerticle extends AbstractVerticle {
   }
 
   private DataMessageConsumer getHandler() {
-    return new DataMessageConsumer(new PageHandler(jdbcClient));
+    return new DataMessageConsumer(
+      new PageHandler(jdbcClient),
+      new DeletionHandler(jdbcClient)
+      );
   }
 
   private JsonObject getConfiguration() {

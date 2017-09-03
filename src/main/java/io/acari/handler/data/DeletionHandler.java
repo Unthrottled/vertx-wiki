@@ -1,52 +1,49 @@
 package io.acari.handler.data;
 
-import com.google.inject.Inject;
-import io.acari.handler.Config;
-import io.acari.handler.Configurable;
+import io.acari.core.Queries;
 import io.acari.util.ChainableOptional;
-import io.acari.util.PageReRouter;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
-import io.vertx.ext.web.RoutingContext;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DeletionHandler implements Handler<RoutingContext>, Configurable<DeletionHandler> {
+public class DeletionHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(DeletionHandler.class);
 
-  private final Vertx vertx;
-  private final ErrorHandler errorHandler;
-  private Config config;
+  private final JDBCClient jdbcClient;
 
-  @Inject
-  public DeletionHandler(Vertx vertx, ErrorHandler errorHandler) {
-    this.vertx = vertx;
-    this.errorHandler = errorHandler;
+  public DeletionHandler(JDBCClient jdbcClient) {
+    this.jdbcClient = jdbcClient;
   }
 
-  @Override
-  public void handle(RoutingContext routingContext) {
-    ChainableOptional.ofNullable(routingContext.request().getParam("id"))
-      .ifPresent(id ->
-        vertx.eventBus().send(config.getDbQueueName(),
-          new JsonArray().add(id),
-          Config.createDeliveryOptions("create-page"),
-          asr -> {
-            if (asr.succeeded()) {
-              PageReRouter.reRouteHome(routingContext);
-            } else {
-              errorHandler.handle(routingContext, asr);
-            }
-          })
-      ).orElseDo(() -> routingContext.response().setStatusCode(400)
-      .end("No Id entered bruv!"));
-
-  }
 
   @Override
-  public DeletionHandler applyConfiguration(Config config) {
-    this.config = config;
-    return this;
+  public void handle(Message<JsonObject> message) {
+    ChainableOptional.ofNullable(message.body().getInteger("id"))
+      .ifPresent(id -> jdbcClient.getConnection(asc -> {
+        if (asc.succeeded()) {
+          SQLConnection connection = asc.result();
+          connection.updateWithParams(
+            Queries.SqlQueries.DELETE_PAGE.getValue(),
+            new JsonArray().add(id),
+            asr -> {
+              connection.close();
+              if (asr.succeeded()) {
+                message.reply(new JsonObject().put("status", "gewd"));
+              } else {
+                message.fail(500, asr.cause().getMessage());
+              }
+            });
+        } else {
+          message.fail(500, asc.cause().getMessage());
+        }
+      }))
+      .orElseDo(() -> message.fail(400, "No Id entered bruv!"));
+
+
   }
 }

@@ -12,10 +12,12 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(DataMessageConsumer.class);
 
   private final PageHandler pageHandler;
+  private final DeletionHandler deletionHandler;
 
-  public DataMessageConsumer(PageHandler pageHandler) {
+  public DataMessageConsumer(PageHandler pageHandler, DeletionHandler deletionHandler) {
 
     this.pageHandler = pageHandler;
+    this.deletionHandler = deletionHandler;
   }
 
   @Override
@@ -36,6 +38,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case CREATE_PAGE:
             break;
           case DELETE_PAGE:
+            deletionHandler.handle(message);
             break;
         }
       })
