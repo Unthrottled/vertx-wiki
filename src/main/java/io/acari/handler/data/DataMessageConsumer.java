@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory;
 public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(DataMessageConsumer.class);
 
-  public DataMessageConsumer() {
+  private final PageHandler pageHandler;
 
+  public DataMessageConsumer(PageHandler pageHandler) {
+
+    this.pageHandler = pageHandler;
   }
 
   @Override
@@ -24,6 +27,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           default:
             message.fail(ErrorCodes.BAD_ACTION.ordinal(), "Bad Action: " + action);
           case GET_PAGE:
+            pageHandler.handle(message);
             break;
           case ALL_PAGES:
             break;

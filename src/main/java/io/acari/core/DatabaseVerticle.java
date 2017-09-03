@@ -2,6 +2,7 @@ package io.acari.core;
 
 import com.google.inject.Singleton;
 import io.acari.handler.data.DataMessageConsumer;
+import io.acari.handler.data.PageHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -36,7 +37,7 @@ public class DatabaseVerticle extends AbstractVerticle {
           if (onCreate.succeeded()) {
             vertx.eventBus()
               .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
-                new DataMessageConsumer());
+                getHandler());
             future.complete();
           } else {
             LOGGER.error("Things Broke in the database ->", onCreate.cause());
@@ -48,6 +49,10 @@ public class DatabaseVerticle extends AbstractVerticle {
         future.fail(asyncResult.cause());
       }
     };
+  }
+
+  private DataMessageConsumer getHandler() {
+    return new DataMessageConsumer(new PageHandler(jdbcClient));
   }
 
   private JsonObject getConfiguration() {
