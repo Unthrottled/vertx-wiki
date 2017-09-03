@@ -1,74 +1,73 @@
 package io.acari.handler.data;
 
-import com.google.inject.Inject;
-import io.acari.handler.Config;
-import io.acari.handler.Configurable;
+import io.acari.core.Queries;
+import io.acari.handler.data.ErrorCodes;
 import io.acari.util.ChainableOptional;
 import io.acari.util.NewPage;
-import io.acari.util.PageReRouter;
 import io.acari.util.UpdatePage;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
-import io.vertx.ext.web.RoutingContext;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHandler> {
+public class SaveHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
 
-  private final Vertx vertx;
-  private final ErrorHandler errorHandler;
-  private Config config;
+  private final JDBCClient jdbcClient;
 
-  @Inject
-  public SaveHandler(Vertx vertx, ErrorHandler errorHandler) {
-    this.vertx = vertx;
-    this.errorHandler = errorHandler;
+  public SaveHandler(JDBCClient jdbcClient) {
+    this.jdbcClient = jdbcClient;
   }
 
   @Override
-  public void handle(RoutingContext routingContext) {
-    HttpServerRequest request = routingContext.request();
-    ChainableOptional.ofNullable(request.getParam("id"))
-      .ifPresent(id -> ChainableOptional.ofNullable(request.getParam("title"))
-        .ifPresent(pageName -> ChainableOptional.ofNullable(request.getParam("markdown"))
-          .ifPresent(markDown -> ChainableOptional.ofNullable(request.getParam("newPage"))
+  public void handle(Message<JsonObject> message) {
+    JsonObject request = message.body();
+    ChainableOptional.ofNullable(request.getString("id"))
+      .ifPresent(id -> ChainableOptional.ofNullable(request.getString("title"))
+        .ifPresent(pageName -> ChainableOptional.ofNullable(request.getString("markdown"))
+          .ifPresent(markDown -> ChainableOptional.ofNullable(request.getBoolean("newPage"))
             .map(Boolean::valueOf)
             .map(Boolean.TRUE::equals)
-            .ifPresent(newPage -> {
-              JsonArray params = getParams(newPage, id, pageName, markDown);
-              vertx.eventBus().send(config.getDbQueueName(),
-                params,
-                Config.createDeliveryOptions("save-page"),
-                aRes -> {
-                  if (aRes.succeeded()) {
-                    PageReRouter.reRoute(routingContext, pageName);
-                  } else {
-                    errorHandler.handle(routingContext, aRes);
-                  }
-                });
-            })
-            .orElseDo(() -> fourHundred(routingContext, "No NewPage Provided, Bruv.")))
-          .orElseDo(() -> fourHundred(routingContext, "No MarkDown Provided, Bruv.")))
-        .orElseDo(() -> fourHundred(routingContext, "No Title Provided, Bruv."))
-      ).orElseDo(() -> fourHundred(routingContext, "No Id Provided, Bruv."));
+            .ifPresent(newPage ->
+              jdbcClient.getConnection(aConn -> {
+                if (aConn.succeeded()) {
+                  SQLConnection connection = aConn.result();
+                  JsonArray params = getParams(newPage, id, pageName, markDown);
+                  connection.updateWithParams(getSql(newPage), params,
+                    aRes -> {
+                      if (aRes.succeeded()) {
+                        message.reply(new JsonObject().put("status", "gewd"));
+                        ;
+                      } else {
+                        message.fail(ErrorCodes.DB_ERROR.ordinal(), aRes.cause().getMessage());
+                      }
+                    })
+                    .commit(voidAsyncResult -> LOGGER.info("Save page commit!"))
+                    .close(v -> connection.close());
+                } else {
+                  message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
+                }
+              }))
+            .orElseDo(() -> fourHundred(message, "No NewPage Provided, Bruv.")))
+          .orElseDo(() -> fourHundred(message, "No MarkDown Provided, Bruv.")))
+        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
+      ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }
 
   private JsonArray getParams(Boolean newPage, String id, String pageName, String markDown) {
     return newPage ? NewPage.create(pageName, markDown) : UpdatePage.update(id, markDown);
   }
 
-  private void fourHundred(RoutingContext routingContext, String errorMessage) {
-    routingContext.response()
-      .setStatusCode(400)
-      .end(errorMessage);
+  private String getSql(Boolean newPage) {
+    return newPage ? Queries.SqlQueries.CREATE_PAGE.getValue() :
+      Queries.SqlQueries.SAVE_PAGE.getValue();
   }
 
-  @Override
-  public SaveHandler applyConfiguration(Config config) {
-    this.config = config;
-    return this;
+  private void fourHundred(Message routingContext, String errorMessage) {
+    routingContext.fail(400, errorMessage);
   }
 }

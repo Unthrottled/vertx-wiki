@@ -4,6 +4,7 @@ import com.google.inject.Singleton;
 import io.acari.handler.data.DataMessageConsumer;
 import io.acari.handler.data.DeletionHandler;
 import io.acari.handler.data.PageHandler;
+import io.acari.handler.data.SaveHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -55,7 +56,8 @@ public class DatabaseVerticle extends AbstractVerticle {
   private DataMessageConsumer getHandler() {
     return new DataMessageConsumer(
       new PageHandler(jdbcClient),
-      new DeletionHandler(jdbcClient)
+      new DeletionHandler(jdbcClient),
+      new SaveHandler(jdbcClient)
       );
   }
 

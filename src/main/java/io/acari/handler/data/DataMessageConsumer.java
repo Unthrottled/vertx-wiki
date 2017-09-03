@@ -13,11 +13,13 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
 
   private final PageHandler pageHandler;
   private final DeletionHandler deletionHandler;
+  private final SaveHandler saveHandler;
 
-  public DataMessageConsumer(PageHandler pageHandler, DeletionHandler deletionHandler) {
+  public DataMessageConsumer(PageHandler pageHandler, DeletionHandler deletionHandler, SaveHandler saveHandler) {
 
     this.pageHandler = pageHandler;
     this.deletionHandler = deletionHandler;
+    this.saveHandler = saveHandler;
   }
 
   @Override
@@ -34,6 +36,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case ALL_PAGES:
             break;
           case SAVE_PAGE:
+            saveHandler.handle(message);
             break;
           case CREATE_PAGE:
             break;
