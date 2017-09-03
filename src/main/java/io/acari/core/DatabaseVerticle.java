@@ -26,10 +26,6 @@ public class DatabaseVerticle extends AbstractVerticle {
     jdbcClient.getConnection(sqlConnectionHandler(future));
   }
 
-  public SQLClient getConnection(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {
-    return jdbcClient.getConnection(asyncResultHandler);
-  }
-
   private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {
     return asyncResult -> {
       if (asyncResult.succeeded()) {
@@ -52,8 +48,8 @@ public class DatabaseVerticle extends AbstractVerticle {
 
   private JsonObject getConfiguration() {
     return new JsonObject()
-      .put("url", "jdbc:hsqldb:file:db/wiki")
-      .put("driver_class", "org.hsqldb.jdbcDriver")
-      .put("max_pool_size", 30);
+      .put("url", config().getString(Queries.CONFIG_WIKIDB_JDBC_URL,  "jdbc:hsqldb:file:db/wiki"))
+      .put("driver_class", config().getString(Queries.CONFIG_WIKIDB_JDBC_DRIVER_CLASS, "org.hsqldb.jdbcDriver"))
+      .put("max_pool_size", config().getInteger(Queries.CONFIG_WIKIDB_JDBC_MAX_POOL_SIZE, 30));
   }
 }
