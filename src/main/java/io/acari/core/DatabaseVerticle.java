@@ -1,10 +1,7 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
-import io.acari.handler.data.DataMessageConsumer;
-import io.acari.handler.data.DeletionHandler;
-import io.acari.handler.data.PageHandler;
-import io.acari.handler.data.SaveHandler;
+import io.acari.handler.data.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -57,7 +54,8 @@ public class DatabaseVerticle extends AbstractVerticle {
     return new DataMessageConsumer(
       new PageHandler(jdbcClient),
       new DeletionHandler(jdbcClient),
-      new SaveHandler(jdbcClient)
+      new SaveHandler(jdbcClient),
+      new AllPageHandler(jdbcClient)
       );
   }
 
