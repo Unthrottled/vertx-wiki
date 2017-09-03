@@ -23,10 +23,10 @@ public class Queries {
 
   public enum SqlQueries {
     CREATE_SCHEMA("create-pages-table"),
-    ALL_PAGES("create-pages-table"),
-    CREATE_PAGE("create-pages-table"),
-    SAVE_PAGE("create-pages-table"),
-    DELETE_PAGE("create-pages-table");
+    ALL_PAGES("all-pages"),
+    CREATE_PAGE("create-page"),
+    SAVE_PAGE("save-page"),
+    DELETE_PAGE("delete-page");
 
     private final String value;
 
