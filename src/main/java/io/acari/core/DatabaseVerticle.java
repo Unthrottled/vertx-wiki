@@ -1,13 +1,13 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
+import io.acari.handler.DataMessageConsumer;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import static io.acari.core.Queries.SqlQueries.CREATE_SCHEMA;
 @Singleton
 public class DatabaseVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
+  private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
 
   private JDBCClient jdbcClient;
 
@@ -33,6 +34,9 @@ public class DatabaseVerticle extends AbstractVerticle {
         connection.execute(CREATE_SCHEMA.getValue(), onCreate -> {
           connection.close();
           if (onCreate.succeeded()) {
+            vertx.eventBus()
+              .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
+                new DataMessageConsumer());
             future.complete();
           } else {
             LOGGER.error("Things Broke in the database ->", onCreate.cause());
@@ -48,7 +52,7 @@ public class DatabaseVerticle extends AbstractVerticle {
 
   private JsonObject getConfiguration() {
     return new JsonObject()
-      .put("url", config().getString(Queries.CONFIG_WIKIDB_JDBC_URL,  "jdbc:hsqldb:file:db/wiki"))
+      .put("url", config().getString(Queries.CONFIG_WIKIDB_JDBC_URL, "jdbc:hsqldb:file:db/wiki"))
       .put("driver_class", config().getString(Queries.CONFIG_WIKIDB_JDBC_DRIVER_CLASS, "org.hsqldb.jdbcDriver"))
       .put("max_pool_size", config().getInteger(Queries.CONFIG_WIKIDB_JDBC_MAX_POOL_SIZE, 30));
   }
