@@ -23,7 +23,7 @@ public class DeletionHandler implements Handler<Message<JsonObject>> {
 
   @Override
   public void handle(Message<JsonObject> message) {
-    ChainableOptional.ofNullable(message.body().getInteger("id"))
+    ChainableOptional.ofNullable(message.body().getString("id"))
       .ifPresent(id -> jdbcClient.getConnection(asc -> {
         if (asc.succeeded()) {
           SQLConnection connection = asc.result();

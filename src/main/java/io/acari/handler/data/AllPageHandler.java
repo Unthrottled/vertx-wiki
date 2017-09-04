@@ -36,7 +36,7 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
                 .sorted()
                 .collect(JsonArray::new, JsonArray::add, JsonArray::add);
               message.reply(new JsonObject()
-                .put("pages", new JsonArray()));
+                .put("pages", pages));
             } else {
               message.fail(ErrorCodes.DB_ERROR.ordinal(), resultSetAsyncResult.cause().getMessage());
             }

@@ -31,7 +31,7 @@ public class DeletionHandler implements Handler<RoutingContext>, Configurable<De
     ChainableOptional.ofNullable(routingContext.request().getParam("id"))
       .ifPresent(id ->
         vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-          new JsonArray().add(id),
+          new JsonObject().put("id",id),
           Config.createDeliveryOptions("delete-page"),
           asr -> {
             if (asr.succeeded()) {
