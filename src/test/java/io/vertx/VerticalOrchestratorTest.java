@@ -1,4 +1,4 @@
-package io.vertx.starter;
+package io.vertx;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

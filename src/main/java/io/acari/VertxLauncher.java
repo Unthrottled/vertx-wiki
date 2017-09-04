@@ -17,11 +17,12 @@ public class VertxLauncher {
   public static void main(String... args) {
     Injector injector = Guice.createInjector(new VertxModule());
     Vertx vertx = injector.getInstance(Vertx.class);
+    vertx.registerVerticleFactory(new HttpVerticalFactory(injector));
     Future<String> dbDeploy = Future.future();
     vertx.deployVerticle(injector.getInstance(DatabaseVerticle.class), dbDeploy.completer());
     dbDeploy.compose(id -> {
       Future<String> httpDeploy = Future.future();
-      vertx.deployVerticle(injector.getInstance(HttpVerticle.class),
+      vertx.deployVerticle("io.acari.core.HttpVerticle",
         new DeploymentOptions().setInstances(2),
         httpDeploy);
       return httpDeploy;
