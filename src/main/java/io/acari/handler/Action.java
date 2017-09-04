@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum Action {
-  ALL_PAGES("all-page"),
+  ALL_PAGES("all-pages"),
   GET_PAGE("get-page"),
   CREATE_PAGE("create-page"),
   SAVE_PAGE("save-page"),

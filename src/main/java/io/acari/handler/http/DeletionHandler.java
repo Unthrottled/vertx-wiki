@@ -8,6 +8,7 @@ import io.acari.util.PageReRouter;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +30,9 @@ public class DeletionHandler implements Handler<RoutingContext>, Configurable<De
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("id"))
       .ifPresent(id ->
-        vertx.eventBus().send(config.getDbQueueName(),
+        vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
           new JsonArray().add(id),
-          Config.createDeliveryOptions("create-page"),
+          Config.createDeliveryOptions("delete-page"),
           asr -> {
             if (asr.succeeded()) {
               PageReRouter.reRouteHome(routingContext);

@@ -41,7 +41,7 @@ public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHa
             .map(Boolean::valueOf)
             .map(Boolean.TRUE::equals)
             .ifPresent(newPage -> {
-              Handler<AsyncResult<Message<Object>>> asyncResultHandler = aRes -> {
+              Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler = aRes -> {
                 if (aRes.succeeded()) {
                   PageReRouter.reRoute(routingContext, pageName);
                 } else {
@@ -64,7 +64,7 @@ public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHa
       ).orElseDo(() -> fourHundred(routingContext, "No Id Provided, Bruv."));
   }
 
-  private EventBus sendMessage(Handler<AsyncResult<Message<Object>>> asyncResultHandler, JsonObject parameters, String action) {
+  private EventBus sendMessage(Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler, JsonObject parameters, String action) {
     return vertx.eventBus()
       .send(config.getDbQueueName(),
         parameters,

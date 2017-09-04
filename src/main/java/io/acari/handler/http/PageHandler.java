@@ -38,12 +38,12 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
   @Override
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("page"))
-      .ifPresent(pago -> vertx.eventBus().send(config.getDbQueueName(),
+      .ifPresent(pago -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
         new JsonObject().put("page", pago),
         Config.createDeliveryOptions("get-page"),
         connectionResult -> {
           if (connectionResult.succeeded()) {
-            JsonObject messageReceieved = (JsonObject) connectionResult.result();
+            JsonObject messageReceieved = connectionResult.result().body();
             Integer id = messageReceieved.getInteger("id");
             String content = messageReceieved.getString("content");
             routingContext.put("id", id);

@@ -6,6 +6,7 @@ import io.acari.handler.Config;
 import io.acari.handler.Configurable;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
@@ -28,9 +29,9 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
 
   public void handle(RoutingContext routingContext) {
 
-    vertx.eventBus().send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("delete-page"), ar -> {
+    vertx.eventBus().<JsonObject>send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("all-pages"), ar -> {
       if (ar.succeeded()) {
-        JsonObject messageRecieved = (JsonObject) ar.result();
+        JsonObject messageRecieved = ar.result().body();
         routingContext.put("title", "Wiki Home");
         routingContext.put("pages", messageRecieved.getJsonArray("pages"));
         String templateFileName = "/index.ftl";
