@@ -1,7 +1,6 @@
 package io.acari.handler.data;
 
 import io.acari.core.Queries;
-import io.acari.handler.data.ErrorCodes;
 import io.acari.util.ChainableOptional;
 import io.acari.util.NewPage;
 import io.acari.util.UpdatePage;
@@ -14,31 +13,29 @@ import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SaveHandler implements Handler<Message<JsonObject>> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
+public class CreationHandler implements Handler<Message<JsonObject>> {
+  private static final Logger LOGGER = LoggerFactory.getLogger(CreationHandler.class);
 
   private final JDBCClient jdbcClient;
 
-  public SaveHandler(JDBCClient jdbcClient) {
+  public CreationHandler(JDBCClient jdbcClient) {
     this.jdbcClient = jdbcClient;
   }
 
   @Override
   public void handle(Message<JsonObject> message) {
     JsonObject request = message.body();
-    ChainableOptional.ofNullable(request.getString("id"))
-      .ifPresent(id -> ChainableOptional.ofNullable(request.getString("content"))
+    ChainableOptional.ofNullable(request.getString("name"))
+      .ifPresent(name -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content ->
           jdbcClient.getConnection(aConn -> {
             if (aConn.succeeded()) {
               SQLConnection connection = aConn.result();
-              connection.updateWithParams(
-                Queries.SqlQueries.SAVE_PAGE.getValue(),
-                new JsonArray().add(id).add(content),
+              connection.updateWithParams(Queries.SqlQueries.CREATE_PAGE.getValue(),
+                new JsonArray().add(name).add(content),
                 aRes -> {
                   if (aRes.succeeded()) {
                     message.reply(new JsonObject().put("status", "gewd"));
-                    ;
                   } else {
                     message.fail(ErrorCodes.DB_ERROR.ordinal(), aRes.cause().getMessage());
                   }
