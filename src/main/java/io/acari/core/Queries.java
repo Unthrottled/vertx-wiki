@@ -1,10 +1,43 @@
 package io.acari.core;
 
-public interface Queries {
-  String SQL_CREATE_PAGES_TABLE = "create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)";
-  String SQL_GET_PAGE = "select Id, Content from Pages where Name = ?";
-  String SQL_CREATE_PAGE = "insert into Pages values (NULL, ?, ?)";
-  String SQL_SAVE_PAGE = "update Pages set Content = ? where Id = ?";
-  String SQL_ALL_PAGES = "select Name from Pages";
-  String SQL_DELETE_PAGE = "delete from Pages where Id = ?";
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class Queries {
+  private static Properties properties;
+  static {
+    try(InputStream is = SqlQueries.class.getResourceAsStream("/db-queries.properties")){
+      properties = new Properties();
+      properties.load(is);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static String CONFIG_WIKIDB_JDBC_URL = "wikidb.jdbc.url";
+  public static String CONFIG_WIKIDB_JDBC_DRIVER_CLASS = "wikidb.jdbc.driver_class";
+  public static String CONFIG_WIKIDB_JDBC_MAX_POOL_SIZE = "wikidb.jdbc.max_pool_size";
+  public static String CONFIG_WIKIDB_SQL_QUERIES_RESOURCE_FILE = "wikidb.sqlqueries.resource.file";
+  public static String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
+
+  public enum SqlQueries {
+    CREATE_SCHEMA("create-pages-table"),
+    ALL_PAGES("all-pages"),
+    GET_PAGE("get-page"),
+    CREATE_PAGE("create-page"),
+    SAVE_PAGE("save-page"),
+    DELETE_PAGE("delete-page");
+
+    private final String value;
+
+    public String getValue() {
+      return value;
+    }
+
+    SqlQueries(String butt) {
+      this.value = properties.getProperty(butt);
+    }
+  }
+
 }

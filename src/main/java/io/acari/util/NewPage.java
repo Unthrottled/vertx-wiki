@@ -1,9 +1,11 @@
 package io.acari.util;
 
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 public class NewPage {
-  public static JsonArray create(String pageName, String markDown){
-    return new JsonArray().add(pageName).add(markDown);
+  public static JsonObject create(String pageName, String markDown) {
+    return new JsonObject()
+      .put("name", pageName)
+      .put("content", markDown);
   }
 }

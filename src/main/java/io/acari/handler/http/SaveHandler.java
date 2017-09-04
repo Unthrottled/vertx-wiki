@@ -1,29 +1,33 @@
-package io.acari.handler;
+package io.acari.handler.http;
 
 import com.google.inject.Inject;
-import io.acari.core.Database;
-import io.acari.core.Queries;
+import io.acari.handler.Config;
+import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
 import io.acari.util.NewPage;
 import io.acari.util.PageReRouter;
 import io.acari.util.UpdatePage;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.json.JsonArray;
-import io.vertx.ext.sql.SQLConnection;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SaveHandler implements Handler<RoutingContext> {
+public class SaveHandler implements Handler<RoutingContext>, Configurable<SaveHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(SaveHandler.class);
 
-  private final Database database;
+  private final Vertx vertx;
   private final ErrorHandler errorHandler;
+  private Config config;
 
   @Inject
-  public SaveHandler(Database database, ErrorHandler errorHandler) {
-    this.database = database;
+  public SaveHandler(Vertx vertx, ErrorHandler errorHandler) {
+    this.vertx = vertx;
     this.errorHandler = errorHandler;
   }
 
@@ -36,42 +40,47 @@ public class SaveHandler implements Handler<RoutingContext> {
           .ifPresent(markDown -> ChainableOptional.ofNullable(request.getParam("newPage"))
             .map(Boolean::valueOf)
             .map(Boolean.TRUE::equals)
-            .ifPresent(newPage ->
-              database.getConnection(aConn -> {
-                if (aConn.succeeded()) {
-                  SQLConnection connection = aConn.result();
-                  JsonArray params = getParams(newPage, id, pageName, markDown);
-                  connection.updateWithParams(getSql(newPage), params,
-                    aRes -> {
-                      if (aRes.succeeded()) {
-                        PageReRouter.reRoute(routingContext, pageName);
-                      } else {
-                        errorHandler.handle(routingContext, aRes);
-                      }
-                    })
-                    .commit(voidAsyncResult -> LOGGER.info("Save page commit!"))
-                    .close(v -> connection.close());
+            .ifPresent(newPage -> {
+              Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler = aRes -> {
+                if (aRes.succeeded()) {
+                  PageReRouter.reRoute(routingContext, pageName);
                 } else {
-                  errorHandler.handle(routingContext, aConn);
+                  errorHandler.handle(routingContext, aRes);
                 }
-              }))
+              };
+              if (newPage) {
+                sendMessage(asyncResultHandler,
+                  NewPage.create(pageName, markDown),
+                  "create-page");
+              } else {
+                sendMessage(asyncResultHandler,
+                  UpdatePage.update(id, markDown),
+                  "save-page");
+              }
+            })
             .orElseDo(() -> fourHundred(routingContext, "No NewPage Provided, Bruv.")))
           .orElseDo(() -> fourHundred(routingContext, "No MarkDown Provided, Bruv.")))
         .orElseDo(() -> fourHundred(routingContext, "No Title Provided, Bruv."))
       ).orElseDo(() -> fourHundred(routingContext, "No Id Provided, Bruv."));
   }
 
-  private JsonArray getParams(Boolean newPage, String id, String pageName, String markDown) {
-    return newPage ? NewPage.create(pageName, markDown) : UpdatePage.update(id, markDown);
-  }
-
-  private String getSql(Boolean newPage) {
-    return newPage ? Queries.SQL_CREATE_PAGE : Queries.SQL_SAVE_PAGE;
+  private EventBus sendMessage(Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler, JsonObject parameters, String action) {
+    return vertx.eventBus()
+      .send(config.getDbQueueName(),
+        parameters,
+        Config.createDeliveryOptions(action),
+        asyncResultHandler);
   }
 
   private void fourHundred(RoutingContext routingContext, String errorMessage) {
     routingContext.response()
       .setStatusCode(400)
       .end(errorMessage);
+  }
+
+  @Override
+  public SaveHandler applyConfiguration(Config config) {
+    this.config = config;
+    return this;
   }
 }

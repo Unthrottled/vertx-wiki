@@ -1,41 +1,42 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
+import io.acari.handler.data.*;
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.acari.core.Queries.SqlQueries.CREATE_SCHEMA;
+
 @Singleton
-public class DatabaseManager implements Database {
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseManager.class);
+public class DatabaseVerticle extends AbstractVerticle {
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
+  private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
 
   private JDBCClient jdbcClient;
 
-  public Future<Void> prepare(Vertx vertx) {
-    Future<Void> future = Future.future();
+  @Override
+  public void start(Future<Void> future) {
     jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     jdbcClient.getConnection(sqlConnectionHandler(future));
-    return future;
-  }
-
-  public SQLClient getConnection(Handler<AsyncResult<SQLConnection>> asyncResultHandler) {
-    return jdbcClient.getConnection(asyncResultHandler);
   }
 
   private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {
     return asyncResult -> {
       if (asyncResult.succeeded()) {
         SQLConnection connection = asyncResult.result();
-        connection.execute(Queries.SQL_CREATE_PAGES_TABLE, onCreate -> {
+        connection.execute(CREATE_SCHEMA.getValue(), onCreate -> {
           connection.close();
           if (onCreate.succeeded()) {
+            vertx.eventBus()
+              .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
+                getHandler());
             future.complete();
           } else {
             LOGGER.error("Things Broke in the database ->", onCreate.cause());
@@ -49,10 +50,19 @@ public class DatabaseManager implements Database {
     };
   }
 
+  private DataMessageConsumer getHandler() {
+    return new DataMessageConsumer(
+      new PageHandler(jdbcClient),
+      new DeletionHandler(jdbcClient),
+      new SaveHandler(jdbcClient),
+      new AllPageHandler(jdbcClient),
+      new CreationHandler(jdbcClient));
+  }
+
   private JsonObject getConfiguration() {
     return new JsonObject()
-      .put("url", "jdbc:hsqldb:file:db/wiki")
-      .put("driver_class", "org.hsqldb.jdbcDriver")
-      .put("max_pool_size", 30);
+      .put("url", config().getString(Queries.CONFIG_WIKIDB_JDBC_URL, "jdbc:hsqldb:file:db/wiki"))
+      .put("driver_class", config().getString(Queries.CONFIG_WIKIDB_JDBC_DRIVER_CLASS, "org.hsqldb.jdbcDriver"))
+      .put("max_pool_size", config().getInteger(Queries.CONFIG_WIKIDB_JDBC_MAX_POOL_SIZE, 30));
   }
 }

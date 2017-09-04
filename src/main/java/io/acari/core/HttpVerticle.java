@@ -2,15 +2,19 @@ package io.acari.core;
 
 import com.google.inject.Inject;
 import io.acari.handler.*;
+import io.acari.handler.http.*;
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpServer implements Server {
-  private static final Logger LOGGER = LoggerFactory.getLogger(HttpServer.class);
+public class HttpVerticle extends AbstractVerticle {
+  private static final Logger LOGGER = LoggerFactory.getLogger(HttpVerticle.class);
+  private static final String CONFIG_HTTP_SERVER_PORT = "http.server.port";
+  private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
+  private static final int CONFIG_HTTP_SERVER_PORT_NUMBER = 8989;
   private final IndexHandler indexHandler;
   private final ErrorHandler errorHandler;
   private final PageHandler pageHandler;
@@ -19,12 +23,12 @@ public class HttpServer implements Server {
   private final DeletionHandler deletionHandler;
 
   @Inject
-  public HttpServer(IndexHandler indexHandler,
-                    ErrorHandler errorHandler,
-                    PageHandler pageHandler,
-                    CreationHandler creationHandler,
-                    SaveHandler saveHandler,
-                    DeletionHandler deletionHandler) {
+  public HttpVerticle(IndexHandler indexHandler,
+                      ErrorHandler errorHandler,
+                      PageHandler pageHandler,
+                      CreationHandler creationHandler,
+                      SaveHandler saveHandler,
+                      DeletionHandler deletionHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -34,20 +38,22 @@ public class HttpServer implements Server {
   }
 
 
-  public Future<Void> start(Vertx vertx) {
-    Future<Void> future = Future.future();
+  @Override
+  public void start(Future<Void> future) {
+    Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
     Router router = Router.router(vertx);
-    router.get("/").handler(indexHandler);
+    router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
-    router.get("/wiki/:page").handler(pageHandler);
+    router.get("/wiki/:page").handler(pageHandler.applyConfiguration(config));
     router.post().handler(BodyHandler.create());
-    router.post("/save").handler(saveHandler);
+    router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
-    router.post("/delete").handler(deletionHandler);
+    router.post("/delete").handler(deletionHandler.applyConfiguration(config));
 
+    int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
       .requestHandler(router::accept)
-      .listen(8989, httpServerAsyncResult -> {
+      .listen(portNumber, httpServerAsyncResult -> {
         io.vertx.core.http.HttpServer result = httpServerAsyncResult.result();
         if (httpServerAsyncResult.succeeded()) {
           LOGGER.info("Server listening on port " + result.actualPort());
@@ -57,8 +63,5 @@ public class HttpServer implements Server {
           future.fail(httpServerAsyncResult.cause());
         }
       });
-
-
-    return future;
   }
 }

@@ -53,8 +53,8 @@ public class ChainableOptional<T> {
     return this;
   }
 
-  public ChainableOptional<T> orElseDo(Runnable runnable){
-    if(this.value == null){
+  public ChainableOptional<T> orElseDo(Runnable runnable) {
+    if (this.value == null) {
       runnable.run();
     }
     return this;

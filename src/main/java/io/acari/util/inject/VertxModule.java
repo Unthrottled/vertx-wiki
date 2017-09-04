@@ -1,10 +1,6 @@
 package io.acari.util.inject;
 
 import com.google.inject.AbstractModule;
-import io.acari.core.Database;
-import io.acari.core.DatabaseManager;
-import io.acari.core.HttpServer;
-import io.acari.core.Server;
 import io.acari.util.TemplateEngineProvider;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.templ.TemplateEngine;
@@ -15,8 +11,6 @@ import io.vertx.ext.web.templ.TemplateEngine;
 public class VertxModule extends AbstractModule {
   protected void configure() {
     //add configuration logic here
-    bind(Database.class).to(DatabaseManager.class);
-    bind(Server.class).to(HttpServer.class);
     bind(Vertx.class).toProvider(VertxProvider.class);
     bind(TemplateEngine.class).toProvider(TemplateEngineProvider.class);
   }
