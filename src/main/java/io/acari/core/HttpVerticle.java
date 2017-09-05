@@ -49,10 +49,20 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(deletionHandler.applyConfiguration(config));
+    Router apiRouter = Router.router(vertx);
+    apiRouter.get("/pages").handler(indexHandler.applyConfiguration(config));
+    apiRouter.get("/pages/:page").handler(pageHandler.applyConfiguration(config));
+    apiRouter.get("/error").handler(errorHandler);
+    apiRouter.post().handler(BodyHandler.create());
+    apiRouter.post("/pages").handler(creationHandler);
+    apiRouter.put().handler(BodyHandler.create());
+    apiRouter.put("/pages/:id").handler(saveHandler.applyConfiguration(config));
+    apiRouter.delete("/pages/:id").handler(deletionHandler.applyConfiguration(config));
+    router.mountSubRouter("/api", apiRouter);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
-      .requestHandler(router::accept)
+      .requestHandler(apiRouter::accept)
       .listen(portNumber, httpServerAsyncResult -> {
         io.vertx.core.http.HttpServer result = httpServerAsyncResult.result();
         if (httpServerAsyncResult.succeeded()) {
