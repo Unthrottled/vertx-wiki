@@ -26,8 +26,8 @@ public class VertxLauncher {
         httpDeploy);
       return httpDeploy;
     }).setHandler(stringAsyncResult -> {
-      if(stringAsyncResult.succeeded()){
-          LOGGER.info("STARTED");
+      if (stringAsyncResult.succeeded()) {
+        LOGGER.info("STARTED");
       } else {
         LOGGER.error("FAILED ->", stringAsyncResult.cause());
       }

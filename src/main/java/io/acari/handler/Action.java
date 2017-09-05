@@ -14,20 +14,23 @@ public enum Action {
   UNKNOWN("WE-AINT-FOUND-SHIT");
 
   private static Map<String, Action> ref;
-  private String getAction(){
-    return action;
-  }
-  public static Action of(String guy){
-    return ref.getOrDefault(guy, UNKNOWN);
-  }
 
   static {
     ref = Arrays.stream(Action.values())
       .collect(Collectors.toMap(Action::getAction, Function.identity()));
   }
+
   private String action;
 
   Action(String s) {
     action = s;
+  }
+
+  public static Action of(String guy) {
+    return ref.getOrDefault(guy, UNKNOWN);
+  }
+
+  private String getAction() {
+    return action;
   }
 }
