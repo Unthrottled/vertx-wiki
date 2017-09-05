@@ -56,7 +56,7 @@ public class DatabaseVerticle extends AbstractVerticle {
       new DeletionHandler(jdbcClient),
       new SaveHandler(jdbcClient),
       new AllPageHandler(jdbcClient),
-      new CreationHandler(jdbcClient));
+      new CreationHandler(jdbcClient), allPageDataHandler);
   }
 
   private JsonObject getConfiguration() {
