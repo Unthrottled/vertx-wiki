@@ -40,6 +40,8 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case ALL_PAGES:
             allPageHandler.handle(message);
             break;
+          case ALL_PAGES_DATA:
+            break;
           case SAVE_PAGE:
             saveHandler.handle(message);
             break;
