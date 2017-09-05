@@ -2,8 +2,6 @@ package io.acari.handler.data;
 
 import io.acari.core.Queries;
 import io.acari.util.ChainableOptional;
-import io.acari.util.NewPage;
-import io.acari.util.UpdatePage;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;

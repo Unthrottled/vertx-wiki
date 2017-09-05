@@ -3,7 +3,6 @@ package io.acari;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.acari.core.DatabaseVerticle;
-import io.acari.core.HttpVerticle;
 import io.acari.util.inject.VertxModule;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
