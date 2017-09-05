@@ -50,7 +50,7 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
             routingContext.put("rawContent", content);
             routingContext.put("newPage", Boolean.valueOf(id == -1));
             routingContext.put("title", pago);
-            String rawContent = routingContext.<Object>get("rawContent").toString();
+            String rawContent = routingContext.get("rawContent").toString();
             routingContext.put("content", Processor.process(rawContent));
             routingContext.put("timestamp", Instant.now().toString());
             templateRenderer.render(routingContext, "/page.ftl");

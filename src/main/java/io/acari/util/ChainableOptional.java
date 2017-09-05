@@ -107,6 +107,6 @@ public class ChainableOptional<T> {
   }
 
   public String toString() {
-    return this.value != null ? String.format("Optional[%s]", new Object[]{this.value}) : "Optional.empty";
+    return this.value != null ? String.format("Optional[%s]", this.value) : "Optional.empty";
   }
 }
