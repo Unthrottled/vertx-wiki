@@ -35,9 +35,17 @@ task wrapper(type: Wrapper) {
   gradleVersion = '4.0'
 }
 
+configurations{
+  annotationProcessor
+}
+
+
 dependencies {
   compile "io.vertx:vertx-core:3.4.2"
   compile "io.vertx:vertx-web:3.4.2"
+  compile "io.vertx:vertx-service-proxy:3.4.2"
+  compileOnly "io.vertx:vertx-codegen:3.4.2"
+  annotationProcessor "io.vertx:vertx-codegen:3.4.2"
   compile "io.vertx:vertx-jdbc-client:3.4.2"
   compile "org.hsqldb:hsqldb:2.3.4"
   compile "io.vertx:vertx-web-templ-freemarker:3.4.2"
@@ -50,3 +58,24 @@ dependencies {
 
   testCompile "io.vertx:vertx-unit:3.4.2"
 }
+
+
+
+sourceSets {
+  processed {
+    java {
+      compileClasspath += configurations.annotationProcessor
+    }
+  }
+
+  main {
+    java {
+      compileClasspath += processed.output
+    }
+  }
+}
+
+compileProcessedJava {
+  options.annotationProcessorPath = configurations.annotationProcessor
+}
+

@@ -12,6 +12,7 @@ import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,6 +35,7 @@ public class VerticalOrchestratorTest {
     provider.get().close(tc.asyncAssertSuccess());
   }
 
+  @Ignore
   @Test
   public void testThatTheServerIsStarted(TestContext tc) {
     Async async = tc.async();
