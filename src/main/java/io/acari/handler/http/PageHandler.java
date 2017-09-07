@@ -60,7 +60,6 @@ public class PageHandler implements Handler<RoutingContext>, Configurable<PageHa
         })).orElseDo(() -> routingContext.response()
       .setStatusCode(400)
       .end("No Path Provided, bruv."));
-
   }
 
   @Override

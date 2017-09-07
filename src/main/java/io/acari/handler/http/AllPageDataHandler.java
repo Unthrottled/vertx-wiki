@@ -60,7 +60,7 @@ public class AllPageDataHandler implements Handler<RoutingContext>, Configurable
       .map(b->(JsonObject)b)
       .map(pageData -> new JsonObject()
         .put("id", pageData.getInteger("ID"))
-        .put("data", pageData.getString("NAME")))
+        .put("name", pageData.getString("NAME")))
       .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
   }
 
