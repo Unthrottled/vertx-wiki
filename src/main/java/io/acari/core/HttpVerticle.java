@@ -21,6 +21,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
   private final DeletionHandler deletionHandler;
+  private final AllPageDataHandler allPageDataHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -28,13 +29,15 @@ public class HttpVerticle extends AbstractVerticle {
                       PageHandler pageHandler,
                       CreationHandler creationHandler,
                       SaveHandler saveHandler,
-                      DeletionHandler deletionHandler) {
+                      DeletionHandler deletionHandler,
+                      AllPageDataHandler allPageDataHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
     this.creationHandler = creationHandler;
     this.saveHandler = saveHandler;
     this.deletionHandler = deletionHandler;
+    this.allPageDataHandler = allPageDataHandler;
   }
 
 
@@ -50,9 +53,8 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(deletionHandler.applyConfiguration(config));
     Router apiRouter = Router.router(vertx);
-    apiRouter.get("/pages").handler(indexHandler.applyConfiguration(config));
+    apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(pageHandler.applyConfiguration(config));
-    apiRouter.get("/error").handler(errorHandler);
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/pages").handler(creationHandler);
     apiRouter.put().handler(BodyHandler.create());
