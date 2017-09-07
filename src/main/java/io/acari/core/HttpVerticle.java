@@ -64,7 +64,7 @@ public class HttpVerticle extends AbstractVerticle {
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
-      .requestHandler(apiRouter::accept)
+      .requestHandler(router::accept)
       .listen(portNumber, httpServerAsyncResult -> {
         io.vertx.core.http.HttpServer result = httpServerAsyncResult.result();
         if (httpServerAsyncResult.succeeded()) {

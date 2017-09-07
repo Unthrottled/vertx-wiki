@@ -24,7 +24,7 @@ public class AllPageDataHandler implements Handler<Message<JsonObject>> {
     jdbcClient.getConnection(ar -> {
       if (ar.succeeded()) {
         SQLConnection sqlConnection = ar.result();
-        sqlConnection.query(Queries.SqlQueries.ALL_PAGES.getValue(),
+        sqlConnection.query(Queries.SqlQueries.ALL_PAGES_DATA.getValue(),
           resultSetAsyncResult -> {
             sqlConnection.close();
             if (resultSetAsyncResult.succeeded()) {

@@ -30,7 +30,7 @@ public class AllPageDataHandler implements Handler<RoutingContext>, Configurable
 
   public void handle(RoutingContext routingContext) {
 
-    vertx.eventBus().<List<JsonObject>>send(config.getDbQueueName(),
+    vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
       new JsonObject(),
       Config.createDeliveryOptions("all-pages-data"), ar -> {
         JsonObject responseGuy = new JsonObject();
@@ -40,7 +40,7 @@ public class AllPageDataHandler implements Handler<RoutingContext>, Configurable
       });
   }
 
-  private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<List<JsonObject>>> ar) {
+  private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {
     if (ar.succeeded()) {
       JsonArray pages = createPagesData(ar);
       responseGuy.put("success", true);
@@ -54,12 +54,18 @@ public class AllPageDataHandler implements Handler<RoutingContext>, Configurable
     }
   }
 
-  private JsonArray createPagesData(AsyncResult<Message<List<JsonObject>>> ar) {
-    return ar.result().body().stream()
+  private JsonArray createPagesData(AsyncResult<Message<JsonObject>> ar) {
+    return getBody(ar)
+      .stream()
+      .map(b->(JsonObject)b)
       .map(pageData -> new JsonObject()
-        .put("id", pageData.getInteger("Id"))
-        .put("data", pageData.getString("Name")))
+        .put("id", pageData.getInteger("ID"))
+        .put("data", pageData.getString("NAME")))
       .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
+  }
+
+  private JsonArray getBody(AsyncResult<Message<JsonObject>> ar) {
+    return ar.result().body().getJsonArray("pages");
   }
 
   @Override
