@@ -23,6 +23,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final DeletionHandler deletionHandler;
   private final AllPageDataHandler allPageDataHandler;
   private final APIPageHandler apiPageHandler;
+  private final APICreationHandler apiCreationHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -32,7 +33,8 @@ public class HttpVerticle extends AbstractVerticle {
                       SaveHandler saveHandler,
                       DeletionHandler deletionHandler,
                       AllPageDataHandler allPageDataHandler,
-                      APIPageHandler apiPageHandler) {
+                      APIPageHandler apiPageHandler,
+                      APICreationHandler apiCreationHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -41,12 +43,14 @@ public class HttpVerticle extends AbstractVerticle {
     this.deletionHandler = deletionHandler;
     this.allPageDataHandler = allPageDataHandler;
     this.apiPageHandler = apiPageHandler;
+    this.apiCreationHandler = apiCreationHandler;
   }
 
 
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
+
     Router router = Router.router(vertx);
     router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
@@ -55,11 +59,12 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(deletionHandler.applyConfiguration(config));
+
     Router apiRouter = Router.router(vertx);
     apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     apiRouter.post().handler(BodyHandler.create());
-    apiRouter.post("/pages").handler(creationHandler);
+    apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages/:id").handler(saveHandler.applyConfiguration(config));
     apiRouter.delete("/pages/:id").handler(deletionHandler.applyConfiguration(config));
