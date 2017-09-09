@@ -2,6 +2,7 @@ package io.acari.core;
 
 import com.google.inject.Inject;
 import io.acari.handler.Config;
+import io.acari.handler.auth.LoginHandler;
 import io.acari.handler.http.*;
 import io.acari.handler.http.ErrorHandler;
 import io.vertx.core.AbstractVerticle;
@@ -33,6 +34,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APICreationHandler apiCreationHandler;
   private final APIUpdateHandler apiUpdateHandler;
   private final APIDeletionHandler apiDeletionHandler;
+  private final LoginHandler loginHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -45,7 +47,8 @@ public class HttpVerticle extends AbstractVerticle {
                       APIPageHandler apiPageHandler,
                       APICreationHandler apiCreationHandler,
                       APIUpdateHandler apiUpdateHandler,
-                      APIDeletionHandler apiDeletionHandler) {
+                      APIDeletionHandler apiDeletionHandler,
+                      LoginHandler loginHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -57,6 +60,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.apiCreationHandler = apiCreationHandler;
     this.apiUpdateHandler = apiUpdateHandler;
     this.apiDeletionHandler = apiDeletionHandler;
+    this.loginHandler = loginHandler;
   }
 
 
@@ -75,10 +79,21 @@ public class HttpVerticle extends AbstractVerticle {
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
     router.route().handler(UserSessionHandler.create(authProvider));
+
     AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/login");
     router.route("/").handler(authHandler);
     router.route("/wiki/*").handler(authHandler);
     router.route("/action/*").handler(authHandler);
+
+    router.get("/login").handler(loginHandler);
+    router.get("/login-auth").handler(FormLoginHandler.create(authProvider));
+    router.get("/logout").handler(routingContext -> {
+      routingContext.clearUser();
+      routingContext.response()
+        .setStatusCode(302)
+        .putHeader("Location", "/")
+        .end();
+    });
 
     router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
