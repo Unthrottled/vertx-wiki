@@ -86,7 +86,8 @@ public class HttpVerticle extends AbstractVerticle {
     router.route("/action/*").handler(authHandler);
 
     router.get("/login").handler(loginHandler);
-    router.post("/login-auth").handler(FormLoginHandler.create(authProvider));
+    router.post("/login-auth").handler(FormLoginHandler.create(authProvider)
+      .setDirectLoggedInOKURL("/"));
     router.get("/logout").handler(routingContext -> {
       routingContext.clearUser();
       routingContext.response()
