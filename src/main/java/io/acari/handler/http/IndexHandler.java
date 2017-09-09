@@ -27,17 +27,20 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
   }
 
   public void handle(RoutingContext routingContext) {
-
-    vertx.eventBus().<JsonObject>send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("all-pages"), ar -> {
-      if (ar.succeeded()) {
-        JsonObject messageRecieved = ar.result().body();
-        routingContext.put("title", "Wiki Home");
-        routingContext.put("pages", messageRecieved.getJsonArray("pages"));
-        String templateFileName = "/index.ftl";
-        templateRenderer.render(routingContext, templateFileName);
-      } else {
-        errorHandler.handle(routingContext, ar);
-      }
+    routingContext.user().isAuthorised("create", bar -> {
+      vertx.eventBus().<JsonObject>send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("all-pages"), ar -> {
+        if (ar.succeeded()) {
+          JsonObject messageRecieved = ar.result().body();
+          routingContext.put("title", "Wiki Home");
+          routingContext.put("pages", messageRecieved.getJsonArray("pages"));
+          routingContext.put("canCreatePage", bar.succeeded() && ar.succeeded());
+          routingContext.put("username", routingContext.user().principal().getString("username"));
+          String templateFileName = "/index.ftl";
+          templateRenderer.render(routingContext, templateFileName);
+        } else {
+          errorHandler.handle(routingContext, ar);
+        }
+      });
     });
   }
 
