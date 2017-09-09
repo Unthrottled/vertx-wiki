@@ -25,6 +25,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APIPageHandler apiPageHandler;
   private final APICreationHandler apiCreationHandler;
   private final APIUpdateHandler apiUpdateHandler;
+  private final APIDeletionHandler apiDeletionHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -36,7 +37,8 @@ public class HttpVerticle extends AbstractVerticle {
                       AllPageDataHandler allPageDataHandler,
                       APIPageHandler apiPageHandler,
                       APICreationHandler apiCreationHandler,
-                      APIUpdateHandler apiUpdateHandler) {
+                      APIUpdateHandler apiUpdateHandler,
+                      APIDeletionHandler apiDeletionHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -47,6 +49,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.apiPageHandler = apiPageHandler;
     this.apiCreationHandler = apiCreationHandler;
     this.apiUpdateHandler = apiUpdateHandler;
+    this.apiDeletionHandler = apiDeletionHandler;
   }
 
 
@@ -69,8 +72,9 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
-    apiRouter.put("/pages/").handler(apiUpdateHandler.applyConfiguration(config));
-    apiRouter.delete("/pages/:id").handler(deletionHandler.applyConfiguration(config));
+    apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
+    apiRouter.delete().handler(BodyHandler.create());
+    apiRouter.delete("/pages").handler(apiDeletionHandler.applyConfiguration(config));
     router.mountSubRouter("/api", apiRouter);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
