@@ -31,7 +31,7 @@ public class SaveHandler implements Handler<Message<JsonObject>> {
               SQLConnection connection = aConn.result();
               connection.updateWithParams(
                 Queries.SqlQueries.SAVE_PAGE.getValue(),
-                new JsonArray().add(id).add(content),
+                new JsonArray().add(content).add(id),
                 aRes -> {
                   if (aRes.succeeded()) {
                     message.reply(new JsonObject().put("status", "gewd"));

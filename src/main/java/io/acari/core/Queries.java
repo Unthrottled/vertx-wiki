@@ -24,6 +24,7 @@ public class Queries {
   public enum SqlQueries {
     CREATE_SCHEMA("create-pages-table"),
     ALL_PAGES("all-pages"),
+    ALL_PAGES_DATA("all-pages-data"),
     GET_PAGE("get-page"),
     CREATE_PAGE("create-page"),
     SAVE_PAGE("save-page"),

@@ -21,6 +21,11 @@ public class HttpVerticle extends AbstractVerticle {
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
   private final DeletionHandler deletionHandler;
+  private final AllPageDataHandler allPageDataHandler;
+  private final APIPageHandler apiPageHandler;
+  private final APICreationHandler apiCreationHandler;
+  private final APIUpdateHandler apiUpdateHandler;
+  private final APIDeletionHandler apiDeletionHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -28,19 +33,30 @@ public class HttpVerticle extends AbstractVerticle {
                       PageHandler pageHandler,
                       CreationHandler creationHandler,
                       SaveHandler saveHandler,
-                      DeletionHandler deletionHandler) {
+                      DeletionHandler deletionHandler,
+                      AllPageDataHandler allPageDataHandler,
+                      APIPageHandler apiPageHandler,
+                      APICreationHandler apiCreationHandler,
+                      APIUpdateHandler apiUpdateHandler,
+                      APIDeletionHandler apiDeletionHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
     this.creationHandler = creationHandler;
     this.saveHandler = saveHandler;
     this.deletionHandler = deletionHandler;
+    this.allPageDataHandler = allPageDataHandler;
+    this.apiPageHandler = apiPageHandler;
+    this.apiCreationHandler = apiCreationHandler;
+    this.apiUpdateHandler = apiUpdateHandler;
+    this.apiDeletionHandler = apiDeletionHandler;
   }
 
 
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
+
     Router router = Router.router(vertx);
     router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
@@ -49,6 +65,17 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/save").handler(saveHandler.applyConfiguration(config));
     router.post("/create").handler(creationHandler);
     router.post("/delete").handler(deletionHandler.applyConfiguration(config));
+
+    Router apiRouter = Router.router(vertx);
+    apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
+    apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
+    apiRouter.post().handler(BodyHandler.create());
+    apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
+    apiRouter.put().handler(BodyHandler.create());
+    apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
+    apiRouter.delete().handler(BodyHandler.create());
+    apiRouter.delete("/pages").handler(apiDeletionHandler.applyConfiguration(config));
+    router.mountSubRouter("/api", apiRouter);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
