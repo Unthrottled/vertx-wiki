@@ -3,10 +3,17 @@ package io.acari.core;
 import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.http.*;
+import io.acari.handler.http.ErrorHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.AuthProvider;
+import io.vertx.ext.auth.shiro.ShiroAuth;
+import io.vertx.ext.auth.shiro.ShiroAuthOptions;
+import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.*;
+import io.vertx.ext.web.sstore.LocalSessionStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,15 +63,30 @@ public class HttpVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
+    AuthProvider authProvider = ShiroAuth.create(vertx,
+      new ShiroAuthOptions()
+        .setType(ShiroAuthRealmType.PROPERTIES)
+        .setConfig(new JsonObject()
+          .put("properties_path", "classpath:user.properties")));
 
     Router router = Router.router(vertx);
+
+    router.route().handler(CookieHandler.create());
+    router.route().handler(BodyHandler.create());
+    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
+    router.route().handler(UserSessionHandler.create(authProvider));
+    AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/login");
+    router.route("/").handler(authHandler);
+    router.route("/wiki/*").handler(authHandler);
+    router.route("/action/*").handler(authHandler);
+
     router.get("/").handler(indexHandler.applyConfiguration(config));
     router.get("/error").handler(errorHandler);
     router.get("/wiki/:page").handler(pageHandler.applyConfiguration(config));
     router.post().handler(BodyHandler.create());
-    router.post("/save").handler(saveHandler.applyConfiguration(config));
-    router.post("/create").handler(creationHandler);
-    router.post("/delete").handler(deletionHandler.applyConfiguration(config));
+    router.post("/action/save").handler(saveHandler.applyConfiguration(config));
+    router.post("/action/create").handler(creationHandler);
+    router.post("/action/delete").handler(deletionHandler.applyConfiguration(config));
 
     Router apiRouter = Router.router(vertx);
     apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
