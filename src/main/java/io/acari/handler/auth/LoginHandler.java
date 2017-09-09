@@ -16,6 +16,6 @@ public class LoginHandler implements Handler<RoutingContext> {
   @Override
   public void handle(RoutingContext routingContext) {
     routingContext.put("title", "Login");
-    templateRenderer.render(routingContext, "templates/login.ftl");
+    templateRenderer.render(routingContext, "/login.ftl");
   }
 }
