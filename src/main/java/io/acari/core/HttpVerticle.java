@@ -9,6 +9,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
+import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.shiro.ShiroAuth;
 import io.vertx.ext.auth.shiro.ShiroAuthOptions;
 import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
@@ -35,6 +36,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APIUpdateHandler apiUpdateHandler;
   private final APIDeletionHandler apiDeletionHandler;
   private final LoginHandler loginHandler;
+  private final TokenHandler tokenHandler;
 
   @Inject
   public HttpVerticle(IndexHandler indexHandler,
@@ -48,7 +50,8 @@ public class HttpVerticle extends AbstractVerticle {
                       APICreationHandler apiCreationHandler,
                       APIUpdateHandler apiUpdateHandler,
                       APIDeletionHandler apiDeletionHandler,
-                      LoginHandler loginHandler) {
+                      LoginHandler loginHandler,
+                      TokenHandler tokenHandler) {
     this.indexHandler = indexHandler;
     this.errorHandler = errorHandler;
     this.pageHandler = pageHandler;
@@ -61,6 +64,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.apiUpdateHandler = apiUpdateHandler;
     this.apiDeletionHandler = apiDeletionHandler;
     this.loginHandler = loginHandler;
+    this.tokenHandler = tokenHandler;
   }
 
 
@@ -105,6 +109,15 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/action/delete").handler(deletionHandler.applyConfiguration(config));
 
     Router apiRouter = Router.router(vertx);
+
+    JWTAuth jwtAuth = JWTAuth.create(vertx, new JsonObject()
+      .put("keystore", new JsonObject()
+        .put("path", "keystore.jceks")
+        .put("type", "jceks")
+        .put("password", "secret")));//TODO: DIS FEELS ICKY
+    apiRouter.route().handler(JWTAuthHandler.create(jwtAuth, "/token"));
+    apiRouter.route().handler(tokenHandler);
+
     apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     apiRouter.post().handler(BodyHandler.create());
