@@ -27,20 +27,32 @@ public class DeletionHandler implements Handler<RoutingContext>, Configurable<De
 
   @Override
   public void handle(RoutingContext routingContext) {
-    ChainableOptional.ofNullable(routingContext.request().getParam("id"))
-      .ifPresent(id ->
-        vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-          new JsonObject().put("id", id),
-          Config.createDeliveryOptions("delete-page"),
-          asr -> {
-            if (asr.succeeded()) {
-              PageReRouter.reRouteHome(routingContext);
-            } else {
-              errorHandler.handle(routingContext, asr);
-            }
-          })
-      ).orElseDo(() -> routingContext.response().setStatusCode(400)
-      .end("No Id entered bruv!"));
+    routingContext.user().isAuthorised("delete", booleanAsyncResult -> {
+      ChainableOptional.ofNullable(booleanAsyncResult.succeeded() && booleanAsyncResult.result())
+        .filter(b -> b)
+        .ifPresent(canDelete -> {
+          ChainableOptional.ofNullable(routingContext.request().getParam("id"))
+            .ifPresent(id ->
+              vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+                new JsonObject().put("id", id),
+                Config.createDeliveryOptions("delete-page"),
+                asr -> {
+                  if (asr.succeeded()) {
+                    PageReRouter.reRouteHome(routingContext);
+                  } else {
+                    errorHandler.handle(routingContext, asr);
+                  }
+                })
+            ).orElseDo(() -> routingContext.response().setStatusCode(400)
+            .end("No Id entered bruv!"));
+        })
+        .orElseDo(() -> {
+          routingContext.response()
+            .setStatusCode(403)
+            .end();
+        });
+    });
+
 
   }
 
