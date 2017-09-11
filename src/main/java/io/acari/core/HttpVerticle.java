@@ -30,7 +30,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
   private final DeletionHandler deletionHandler;
-  private final AllPageDataHandler allPageDataHandler;
+  private final APIAllPageDataHandler APIAllPageDataHandler;
   private final APIPageHandler apiPageHandler;
   private final APICreationHandler apiCreationHandler;
   private final APIUpdateHandler apiUpdateHandler;
@@ -45,7 +45,7 @@ public class HttpVerticle extends AbstractVerticle {
                       CreationHandler creationHandler,
                       SaveHandler saveHandler,
                       DeletionHandler deletionHandler,
-                      AllPageDataHandler allPageDataHandler,
+                      APIAllPageDataHandler APIAllPageDataHandler,
                       APIPageHandler apiPageHandler,
                       APICreationHandler apiCreationHandler,
                       APIUpdateHandler apiUpdateHandler,
@@ -58,7 +58,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.creationHandler = creationHandler;
     this.saveHandler = saveHandler;
     this.deletionHandler = deletionHandler;
-    this.allPageDataHandler = allPageDataHandler;
+    this.APIAllPageDataHandler = APIAllPageDataHandler;
     this.apiPageHandler = apiPageHandler;
     this.apiCreationHandler = apiCreationHandler;
     this.apiUpdateHandler = apiUpdateHandler;
@@ -120,7 +120,7 @@ public class HttpVerticle extends AbstractVerticle {
       .applyConfiguration(jwtAuth)
       .applyConfiguration(authProvider));
 
-    apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
+    apiRouter.get("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));

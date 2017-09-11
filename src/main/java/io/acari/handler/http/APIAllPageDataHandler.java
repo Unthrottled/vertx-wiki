@@ -1,7 +1,6 @@
 package io.acari.handler.http;
 
 import com.google.inject.Inject;
-import io.acari.core.TemplateRenderer;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
 import io.vertx.core.AsyncResult;
@@ -15,16 +14,14 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
-public class AllPageDataHandler implements Handler<RoutingContext>, Configurable<Config, AllPageDataHandler> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AllPageDataHandler.class);
+public class APIAllPageDataHandler implements Handler<RoutingContext>, Configurable<Config, APIAllPageDataHandler> {
+  private static final Logger LOGGER = LoggerFactory.getLogger(APIAllPageDataHandler.class);
 
   private final Vertx vertx;
   private Config config;
 
   @Inject
-  public AllPageDataHandler(Vertx vertx) {
+  public APIAllPageDataHandler(Vertx vertx) {
     this.vertx = vertx;
   }
 
@@ -69,7 +66,7 @@ public class AllPageDataHandler implements Handler<RoutingContext>, Configurable
   }
 
   @Override
-  public AllPageDataHandler applyConfiguration(Config config) {
+  public APIAllPageDataHandler applyConfiguration(Config config) {
     this.config = config;
     return this;
   }
