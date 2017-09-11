@@ -5,6 +5,7 @@ import io.acari.handler.Config;
 import io.acari.handler.auth.LoginHandler;
 import io.acari.handler.http.*;
 import io.acari.handler.http.ErrorHandler;
+import io.acari.handler.http.auth.TokenHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
