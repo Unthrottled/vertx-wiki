@@ -23,17 +23,25 @@ public class APICreationHandler implements Handler<RoutingContext>, Configurable
   }
 
   public void handle(RoutingContext routingContext) {
-    JsonObject bodyAsJson = routingContext.getBodyAsJson();
-    ChainableOptional.ofNullable(bodyAsJson.getString("name"))
-      .ifPresent(pago -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
-        .ifPresent(markdown -> {
-          DeliveryOptions deliveryOptions = Config.createDeliveryOptions("create-page");
-          JsonObject params = new JsonObject()
-            .put("name", pago)
-            .put("content", markdown);
-          simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-        }).orElseDo(() -> fourHundred(routingContext, "markdown")))
-      .orElseDo(() -> fourHundred(routingContext, "name"));
+    ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canCreate", false))
+      .filter(b -> b)
+      .ifPresent(canCreate -> {
+        JsonObject bodyAsJson = routingContext.getBodyAsJson();
+        ChainableOptional.ofNullable(bodyAsJson.getString("name"))
+          .ifPresent(pago -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
+            .ifPresent(markdown -> {
+              DeliveryOptions deliveryOptions = Config.createDeliveryOptions("create-page");
+              JsonObject params = new JsonObject()
+                .put("name", pago)
+                .put("content", markdown);
+              simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+            }).orElseDo(() -> fourHundred(routingContext, "markdown")))
+          .orElseDo(() -> fourHundred(routingContext, "name"));
+      })
+      .orElseDo(() -> routingContext
+        .response()
+        .setStatusCode(401)
+        .end());
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {
