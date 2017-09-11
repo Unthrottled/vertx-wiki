@@ -112,18 +112,18 @@ public class HttpVerticle extends AbstractVerticle {
     Router apiRouter = Router.router(vertx);
 
     JWTAuth jwtAuth = JWTAuth.create(vertx, new JsonObject()
-      .put("keystore", new JsonObject()
+      .put("keyStore", new JsonObject()//dis needs to be camel case
         .put("path", "keystore.jceks")
         .put("type", "jceks")
         .put("password", "secret")));//TODO: DIS FEELS ICKY
     apiRouter.route().handler(JWTAuthHandler.create(jwtAuth, "/api/token"));
-    apiRouter.get("/token").handler(tokenHandler
+    apiRouter.post().handler(BodyHandler.create());
+    apiRouter.post("/token").handler(tokenHandler
       .applyConfiguration(jwtAuth)
       .applyConfiguration(authProvider));
 
     apiRouter.get("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
-    apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
