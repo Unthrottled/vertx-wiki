@@ -33,35 +33,45 @@ public class SaveHandler implements Handler<RoutingContext>, Configurable<Config
 
   @Override
   public void handle(RoutingContext routingContext) {
-    HttpServerRequest request = routingContext.request();
-    ChainableOptional.ofNullable(request.getParam("id"))
-      .ifPresent(id -> ChainableOptional.ofNullable(request.getParam("title"))
-        .ifPresent(pageName -> ChainableOptional.ofNullable(request.getParam("markdown"))
-          .ifPresent(markDown -> ChainableOptional.ofNullable(request.getParam("newPage"))
-            .map(Boolean::valueOf)
-            .map(Boolean.TRUE::equals)
-            .ifPresent(newPage -> {
-              Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler = aRes -> {
-                if (aRes.succeeded()) {
-                  PageReRouter.reRoute(routingContext, pageName);
-                } else {
-                  errorHandler.handle(routingContext, aRes);
-                }
-              };
-              if (newPage) {
-                sendMessage(asyncResultHandler,
-                  NewPage.create(pageName, markDown),
-                  "create-page");
-              } else {
-                sendMessage(asyncResultHandler,
-                  UpdatePage.update(id, markDown),
-                  "save-page");
-              }
-            })
-            .orElseDo(() -> fourHundred(routingContext, "No NewPage Provided, Bruv.")))
-          .orElseDo(() -> fourHundred(routingContext, "No MarkDown Provided, Bruv.")))
-        .orElseDo(() -> fourHundred(routingContext, "No Title Provided, Bruv."))
-      ).orElseDo(() -> fourHundred(routingContext, "No Id Provided, Bruv."));
+    routingContext.user().isAuthorised("update", booleanAsyncResult -> {
+      ChainableOptional.of(booleanAsyncResult)
+        .filter(AsyncResult::succeeded)
+        .filter(AsyncResult::result)
+        .ifPresent(canUpdate -> {
+          HttpServerRequest request = routingContext.request();
+          ChainableOptional.ofNullable(request.getParam("id"))
+            .ifPresent(id -> ChainableOptional.ofNullable(request.getParam("title"))
+              .ifPresent(pageName -> ChainableOptional.ofNullable(request.getParam("markdown"))
+                .ifPresent(markDown -> ChainableOptional.ofNullable(request.getParam("newPage"))
+                  .map(Boolean::valueOf)
+                  .map(Boolean.TRUE::equals)
+                  .ifPresent(newPage -> {
+                    Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler = aRes -> {
+                      if (aRes.succeeded()) {
+                        PageReRouter.reRoute(routingContext, pageName);
+                      } else {
+                        errorHandler.handle(routingContext, aRes);
+                      }
+                    };
+                    if (newPage) {
+                      sendMessage(asyncResultHandler,
+                        NewPage.create(pageName, markDown),
+                        "create-page");
+                    } else {
+                      sendMessage(asyncResultHandler,
+                        UpdatePage.update(id, markDown),
+                        "save-page");
+                    }
+                  })
+                  .orElseDo(() -> fourHundred(routingContext, "No NewPage Provided, Bruv.")))
+                .orElseDo(() -> fourHundred(routingContext, "No MarkDown Provided, Bruv.")))
+              .orElseDo(() -> fourHundred(routingContext, "No Title Provided, Bruv."))
+            ).orElseDo(() -> fourHundred(routingContext, "No Id Provided, Bruv."));
+        })
+        .orElseDo(() -> routingContext.response()
+          .setStatusCode(401)
+          .end());
+    });
   }
 
   private EventBus sendMessage(Handler<AsyncResult<Message<JsonObject>>> asyncResultHandler, JsonObject parameters, String action) {
