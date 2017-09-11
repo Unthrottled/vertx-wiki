@@ -1,4 +1,4 @@
-package io.acari.handler.http;
+package io.acari.handler.http.auth;
 
 import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
