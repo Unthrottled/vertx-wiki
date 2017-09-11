@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class AllPageDataHandler implements Handler<RoutingContext>, Configurable<AllPageDataHandler> {
+public class AllPageDataHandler implements Handler<RoutingContext>, Configurable<Config, AllPageDataHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(AllPageDataHandler.class);
 
   private final Vertx vertx;

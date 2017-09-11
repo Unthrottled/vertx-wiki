@@ -116,7 +116,9 @@ public class HttpVerticle extends AbstractVerticle {
         .put("type", "jceks")
         .put("password", "secret")));//TODO: DIS FEELS ICKY
     apiRouter.route().handler(JWTAuthHandler.create(jwtAuth, "/token"));
-    apiRouter.route().handler(tokenHandler);
+    apiRouter.route().handler(tokenHandler
+      .applyConfiguration(jwtAuth)
+      .applyConfiguration(authProvider));
 
     apiRouter.get("/pages").handler(allPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));

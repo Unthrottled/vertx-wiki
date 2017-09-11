@@ -11,7 +11,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IndexHandler implements Handler<RoutingContext>, Configurable<IndexHandler> {
+public class IndexHandler implements Handler<RoutingContext>, Configurable<Config, IndexHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(IndexHandler.class);
 
   private final Vertx vertx;

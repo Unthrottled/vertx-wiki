@@ -12,7 +12,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APICreationHandler implements Handler<RoutingContext>, Configurable<APICreationHandler> {
+public class APICreationHandler implements Handler<RoutingContext>, Configurable<Config, APICreationHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(APICreationHandler.class);
   private final Vertx vertx;
   private SimpleResponseHandler simpleResponseHandler;
