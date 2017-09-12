@@ -32,23 +32,25 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                 .filter(AsyncResult::succeeded)
                 .map(AsyncResult::result)
                 .ifPresent(user -> {
-                  user.isAuthorised("create", canCreate ->
-                    user.isAuthorised("delete", canDelete ->
-                      user.isAuthorised("update", canUpdate -> {
-                        String token = jwtAuth.generateToken(
-                          new JsonObject()
-                            .put("username", username)
-                            .put("canCreate", canCreate.succeeded() && canCreate.result())
-                            .put("canDelete", canDelete.succeeded() && canDelete.result())
-                            .put("canUpdate", canUpdate.succeeded() && canUpdate.result()),
-                          new JWTOptions()
-                            .setSubject("Wiki API")
-                            .setIssuer("Vert.x")
-                        );
-                        routingContext.response()
-                          .putHeader("Content-Type", "text/plain")
-                          .end(token);
-                      })));
+                  user.isAuthorised("view", canView ->
+                    user.isAuthorised("create", canCreate ->
+                      user.isAuthorised("delete", canDelete ->
+                        user.isAuthorised("update", canUpdate -> {
+                          String token = jwtAuth.generateToken(
+                            new JsonObject()
+                              .put("username", username)
+                              .put("canView", canView.succeeded() && canView.result())
+                              .put("canCreate", canCreate.succeeded() && canCreate.result())
+                              .put("canDelete", canDelete.succeeded() && canDelete.result())
+                              .put("canUpdate", canUpdate.succeeded() && canUpdate.result()),
+                            new JWTOptions()
+                              .setSubject("Wiki API")
+                              .setIssuer("Vert.x")
+                          );
+                          routingContext.response()
+                            .putHeader("Content-Type", "text/plain")
+                            .end(token);
+                        }))));
                 })
                 .orElseDo(() -> {
                   LOGGER.warn("Thing Broke in Token Handler -> ", authRes.cause());
