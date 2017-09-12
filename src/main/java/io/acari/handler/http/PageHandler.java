@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 
-public class PageHandler implements Handler<RoutingContext>, Configurable<PageHandler> {
+public class PageHandler implements Handler<RoutingContext>, Configurable<Config, PageHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(PageHandler.class);
   private static final String EMPTY_PAGE_MARKDOWN =
     "# A new page\n" +

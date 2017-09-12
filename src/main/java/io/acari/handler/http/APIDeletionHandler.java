@@ -12,7 +12,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIDeletionHandler implements Handler<RoutingContext>, Configurable<APIDeletionHandler> {
+public class APIDeletionHandler implements Handler<RoutingContext>, Configurable<Config, APIDeletionHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(APIDeletionHandler.class);
   private final Vertx vertx;
   private SimpleResponseHandler simpleResponseHandler;
@@ -23,14 +23,22 @@ public class APIDeletionHandler implements Handler<RoutingContext>, Configurable
   }
 
   public void handle(RoutingContext routingContext) {
-    JsonObject bodyAsJson = routingContext.getBodyAsJson();
-    ChainableOptional.ofNullable(bodyAsJson.getString("id"))
-      .ifPresent(id -> {
-        DeliveryOptions deliveryOptions = Config.createDeliveryOptions("delete-page");
-        JsonObject params = new JsonObject()
-          .put("id", id);
-        simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-      }).orElseDo(() -> fourHundred(routingContext, "id"));
+    ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canDelete", false))
+      .filter(b -> b)
+      .ifPresent(canDelete -> {
+        JsonObject bodyAsJson = routingContext.getBodyAsJson();
+        ChainableOptional.ofNullable(bodyAsJson.getString("id"))
+          .ifPresent(id -> {
+            DeliveryOptions deliveryOptions = Config.createDeliveryOptions("delete-page");
+            JsonObject params = new JsonObject()
+              .put("id", id);
+            simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+          }).orElseDo(() -> fourHundred(routingContext, "id"));
+      })
+      .orElseDo(() -> routingContext
+        .response()
+        .setStatusCode(401)
+        .end());
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {

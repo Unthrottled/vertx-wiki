@@ -14,7 +14,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIPageHandler implements Handler<RoutingContext>, Configurable<APIPageHandler> {
+public class APIPageHandler implements Handler<RoutingContext>, Configurable<Config, APIPageHandler> {
   public static final int NOT_FOUND = -1;
   private static final Logger LOGGER = LoggerFactory.getLogger(APIPageHandler.class);
   private final Vertx vertx;

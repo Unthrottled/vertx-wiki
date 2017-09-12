@@ -12,7 +12,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<APIUpdateHandler> {
+public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<Config, APIUpdateHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(APIUpdateHandler.class);
   private final Vertx vertx;
   private SimpleResponseHandler simpleResponseHandler;
@@ -23,17 +23,25 @@ public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<A
   }
 
   public void handle(RoutingContext routingContext) {
-    JsonObject bodyAsJson = routingContext.getBodyAsJson();
-    ChainableOptional.ofNullable(bodyAsJson.getString("id"))
-      .ifPresent(id -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
-        .ifPresent(markdown -> {
-          DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
-          JsonObject params = new JsonObject()
-            .put("id", id)
-            .put("content", markdown);
-          simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-        }).orElseDo(() -> fourHundred(routingContext, "markdown")))
-      .orElseDo(() -> fourHundred(routingContext, "id"));
+    ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canUpdate", false))
+      .filter(b -> b)
+      .ifPresent(canUpdate -> {
+        JsonObject bodyAsJson = routingContext.getBodyAsJson();
+        ChainableOptional.ofNullable(bodyAsJson.getString("id"))
+          .ifPresent(id -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
+            .ifPresent(markdown -> {
+              DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
+              JsonObject params = new JsonObject()
+                .put("id", id)
+                .put("content", markdown);
+              simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+            }).orElseDo(() -> fourHundred(routingContext, "markdown")))
+          .orElseDo(() -> fourHundred(routingContext, "id"));
+      })
+      .orElseDo(() -> routingContext
+        .response()
+        .setStatusCode(401)
+        .end());
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {

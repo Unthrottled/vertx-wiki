@@ -1,6 +1,6 @@
 package io.acari.handler;
 
-public interface Configurable<T> {
+public interface Configurable<T, R> {
 
-  T applyConfiguration(Config config);
+  R applyConfiguration(T config);
 }

@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import io.acari.core.TemplateRenderer;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
+import io.acari.util.ChainableOptional;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
@@ -11,7 +13,7 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IndexHandler implements Handler<RoutingContext>, Configurable<IndexHandler> {
+public class IndexHandler implements Handler<RoutingContext>, Configurable<Config, IndexHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(IndexHandler.class);
 
   private final Vertx vertx;
@@ -27,18 +29,29 @@ public class IndexHandler implements Handler<RoutingContext>, Configurable<Index
   }
 
   public void handle(RoutingContext routingContext) {
-
-    vertx.eventBus().<JsonObject>send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("all-pages"), ar -> {
-      if (ar.succeeded()) {
-        JsonObject messageRecieved = ar.result().body();
-        routingContext.put("title", "Wiki Home");
-        routingContext.put("pages", messageRecieved.getJsonArray("pages"));
-        String templateFileName = "/index.ftl";
-        templateRenderer.render(routingContext, templateFileName);
-      } else {
-        errorHandler.handle(routingContext, ar);
-      }
-    });
+    routingContext.user().isAuthorised("view", booleanAsyncResult ->
+      ChainableOptional.of(booleanAsyncResult)
+        .filter(AsyncResult::succeeded)
+        .filter(AsyncResult::result)
+        .ifPresent(canView ->
+          routingContext.user().isAuthorised("create", bar -> {
+            vertx.eventBus().<JsonObject>send(config.getDbQueueName(), new JsonObject(), Config.createDeliveryOptions("all-pages"), ar -> {
+              if (ar.succeeded()) {
+                JsonObject messageRecieved = ar.result().body();
+                routingContext.put("title", "Wiki Home");
+                routingContext.put("pages", messageRecieved.getJsonArray("pages"));
+                routingContext.put("canCreatePage", bar.succeeded() && ar.succeeded());
+                routingContext.put("username", routingContext.user().principal().getString("username"));
+                String templateFileName = "/index.ftl";
+                templateRenderer.render(routingContext, templateFileName);
+              } else {
+                errorHandler.handle(routingContext, ar);
+              }
+            });
+          }))
+        .orElseDo(() -> routingContext.response()
+          .setStatusCode(401)
+          .end()));
   }
 
   @Override
