@@ -3,6 +3,7 @@ package io.acari.handler.http;
 import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
+import io.acari.util.ChainableOptional;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -26,15 +27,22 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
   }
 
   public void handle(RoutingContext routingContext) {
-
-    vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-      new JsonObject(),
-      Config.createDeliveryOptions("all-pages-data"), ar -> {
-        JsonObject responseGuy = new JsonObject();
-        getRoutingContext(responseGuy, routingContext, ar)
-          .putHeader("Content-Type", "application/json")
-          .end(responseGuy.encode());
-      });
+    routingContext.user().isAuthorised("view", booleanAsyncResult ->
+      ChainableOptional.of(booleanAsyncResult)
+        .filter(AsyncResult::succeeded)
+        .filter(AsyncResult::result)
+        .ifPresent(canView ->
+          vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+            new JsonObject(),
+            Config.createDeliveryOptions("all-pages-data"), ar -> {
+              JsonObject responseGuy = new JsonObject();
+              getRoutingContext(responseGuy, routingContext, ar)
+                .putHeader("Content-Type", "application/json")
+                .end(responseGuy.encode());
+            }))
+        .orElseDo(() -> routingContext.response()
+          .setStatusCode(401)
+          .end()));
   }
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {
@@ -54,7 +62,7 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
   private JsonArray createPagesData(AsyncResult<Message<JsonObject>> ar) {
     return getBody(ar)
       .stream()
-      .map(b->(JsonObject)b)
+      .map(b -> (JsonObject) b)
       .map(pageData -> new JsonObject()
         .put("id", pageData.getInteger("ID"))
         .put("name", pageData.getString("NAME")))
