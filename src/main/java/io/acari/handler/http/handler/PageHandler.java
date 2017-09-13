@@ -1,4 +1,4 @@
-package io.acari.handler.http;
+package io.acari.handler.http.handler;
 
 import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;

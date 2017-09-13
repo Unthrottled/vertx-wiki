@@ -1,4 +1,4 @@
-package io.acari.handler.http;
+package io.acari.handler.http.handler;
 
 import io.acari.handler.Config;
 import io.vertx.core.AsyncResult;
