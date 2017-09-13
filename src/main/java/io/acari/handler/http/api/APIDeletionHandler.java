@@ -1,8 +1,9 @@
-package io.acari.handler.http;
+package io.acari.handler.http.api;
 
 import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
+import io.acari.handler.http.SimpleResponseHandler;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;

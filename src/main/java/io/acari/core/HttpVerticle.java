@@ -5,6 +5,7 @@ import io.acari.handler.Config;
 import io.acari.handler.auth.LoginHandler;
 import io.acari.handler.http.*;
 import io.acari.handler.http.ErrorHandler;
+import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -31,7 +32,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final CreationHandler creationHandler;
   private final SaveHandler saveHandler;
   private final DeletionHandler deletionHandler;
-  private final APIAllPageDataHandler APIAllPageDataHandler;
+  private final io.acari.handler.http.api.APIAllPageDataHandler APIAllPageDataHandler;
   private final APIPageHandler apiPageHandler;
   private final APICreationHandler apiCreationHandler;
   private final APIUpdateHandler apiUpdateHandler;

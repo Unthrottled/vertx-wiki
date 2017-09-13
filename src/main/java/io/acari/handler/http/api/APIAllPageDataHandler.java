@@ -1,4 +1,4 @@
-package io.acari.handler.http;
+package io.acari.handler.http.api;
 
 import com.google.inject.Inject;
 import io.acari.handler.Config;

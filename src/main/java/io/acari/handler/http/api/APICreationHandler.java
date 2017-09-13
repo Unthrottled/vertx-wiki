@@ -1,8 +1,9 @@
-package io.acari.handler.http;
+package io.acari.handler.http.api;
 
 import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
+import io.acari.handler.http.SimpleResponseHandler;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -12,31 +13,31 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<Config, APIUpdateHandler> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(APIUpdateHandler.class);
+public class APICreationHandler implements Handler<RoutingContext>, Configurable<Config, APICreationHandler> {
+  private static final Logger LOGGER = LoggerFactory.getLogger(APICreationHandler.class);
   private final Vertx vertx;
   private SimpleResponseHandler simpleResponseHandler;
 
   @Inject
-  public APIUpdateHandler(Vertx vertx) {
+  public APICreationHandler(Vertx vertx) {
     this.vertx = vertx;
   }
 
   public void handle(RoutingContext routingContext) {
-    ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canUpdate", false))
+    ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canCreate", false))
       .filter(b -> b)
-      .ifPresent(canUpdate -> {
+      .ifPresent(canCreate -> {
         JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        ChainableOptional.ofNullable(bodyAsJson.getString("id"))
-          .ifPresent(id -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
+        ChainableOptional.ofNullable(bodyAsJson.getString("name"))
+          .ifPresent(pago -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
             .ifPresent(markdown -> {
-              DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
+              DeliveryOptions deliveryOptions = Config.createDeliveryOptions("create-page");
               JsonObject params = new JsonObject()
-                .put("id", id)
+                .put("name", pago)
                 .put("content", markdown);
               simpleResponseHandler.handle(routingContext, params, deliveryOptions);
             }).orElseDo(() -> fourHundred(routingContext, "markdown")))
-          .orElseDo(() -> fourHundred(routingContext, "id"));
+          .orElseDo(() -> fourHundred(routingContext, "name"));
       })
       .orElseDo(() -> routingContext
         .response()
@@ -51,7 +52,7 @@ public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<C
   }
 
   @Override
-  public APIUpdateHandler applyConfiguration(Config config) {
+  public APICreationHandler applyConfiguration(Config config) {
     this.simpleResponseHandler = new SimpleResponseHandler(config, vertx);
     return this;
   }
