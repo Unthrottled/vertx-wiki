@@ -8,7 +8,7 @@ var proxy = require('http-proxy-middleware');
 var http = require('http');
 var keepAliveAgent = new http.Agent({ keepAlive: true });
 
-var proxyPeel = proxy('/hystrix', {
+var proxyPeel = proxy('/', {
     target: 'http://localhost:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,

@@ -21,4 +21,5 @@ require("d3");
 require("angular2-ui-switch");
 require("bootstrap-slider");
 require("ng2-nouislider");
+require("bootstrap");
 //# sourceMappingURL=vendor.js.map

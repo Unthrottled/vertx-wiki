@@ -19,3 +19,4 @@ import 'd3';
 import 'angular2-ui-switch';
 import 'bootstrap-slider';
 import 'ng2-nouislider';
+import 'bootstrap';
