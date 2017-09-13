@@ -1,8 +1,8 @@
 {
-  "name": "circuit-breaker-dashboard",
+  "name": "wiki",
   "version": "1.0.0",
   "private": true,
-  "description": "Project used to demonstrate the Spring Boot Hystrix Dashboard",
+  "description": "Project used to demonstrate capabilities of the Vert.x Library",
   "scripts": {
     "test:once": "karma start karma.conf.js --single-run",
     "compile": "tsc -p angular4/",
