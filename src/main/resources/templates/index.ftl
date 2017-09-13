@@ -15,7 +15,8 @@
   </#if>
     <h1 class="display-4">${context.title}</h1>
     <div class="float-xs-right">
-      <a class="btn btn-outline-danger" href="/logout" role="button" aria-pressed="true">Logout (${context.username})</a>
+      <a class="btn btn-outline-danger" href="/logout" role="button" aria-pressed="true">Logout
+        (${context.username})</a>
     </div>
   </div>
 
@@ -32,16 +33,16 @@
   </#list>
 
   <#--<#if context.canCreatePage>-->
-    <#--<#if context.backup_gist_url?has_content>-->
-      <#--<div class="alert alert-success" role="alert">-->
-        <#--Successfully created a backup:-->
-        <#--<a href="${context.backup_gist_url}" class="alert-link">${context.backup_gist_url}</a>-->
-      <#--</div>-->
-    <#--<#else>-->
-      <#--<p>-->
-        <#--<a class="btn btn-outline-secondary btn-sm" href="/action/backup" role="button" aria-pressed="true">Backup</a>-->
-      <#--</p>-->
-    <#--</#if>-->
+  <#--<#if context.backup_gist_url?has_content>-->
+  <#--<div class="alert alert-success" role="alert">-->
+  <#--Successfully created a backup:-->
+  <#--<a href="${context.backup_gist_url}" class="alert-link">${context.backup_gist_url}</a>-->
+  <#--</div>-->
+  <#--<#else>-->
+  <#--<p>-->
+  <#--<a class="btn btn-outline-secondary btn-sm" href="/action/backup" role="button" aria-pressed="true">Backup</a>-->
+  <#--</p>-->
+  <#--</#if>-->
   <#--</#if>-->
   </div>
 

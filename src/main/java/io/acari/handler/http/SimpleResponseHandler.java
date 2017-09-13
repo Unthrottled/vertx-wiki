@@ -18,7 +18,7 @@ public class SimpleResponseHandler {
     this.vertx = vertx;
   }
 
-  public void handle(RoutingContext routingContext, JsonObject params, DeliveryOptions deliveryOptions){
+  public void handle(RoutingContext routingContext, JsonObject params, DeliveryOptions deliveryOptions) {
     vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
       params,
       deliveryOptions,
