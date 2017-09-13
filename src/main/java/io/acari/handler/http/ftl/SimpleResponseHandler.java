@@ -1,4 +1,4 @@
-package io.acari.handler.http.handler;
+package io.acari.handler.http.ftl;
 
 import io.acari.handler.Config;
 import io.vertx.core.AsyncResult;
