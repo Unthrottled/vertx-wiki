@@ -28,16 +28,16 @@ public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<C
       .filter(b -> b)
       .ifPresent(canUpdate -> {
         JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        ChainableOptional.ofNullable(bodyAsJson.getString("id"))
-          .ifPresent(id -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
+        ChainableOptional.ofNullable(bodyAsJson.getString("name"))
+          .ifPresent(name -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
             .ifPresent(markdown -> {
               DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
               JsonObject params = new JsonObject()
-                .put("id", id)
+                .put("name", name)
                 .put("content", markdown);
               simpleResponseHandler.handle(routingContext, params, deliveryOptions);
             }).orElseDo(() -> fourHundred(routingContext, "markdown")))
-          .orElseDo(() -> fourHundred(routingContext, "id"));
+          .orElseDo(() -> fourHundred(routingContext, "name"));
       })
       .orElseDo(() -> routingContext
         .response()
