@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var host_service_1 = require("../session/host.service");
+var host_service_1 = require("./host.service");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/share");
 require("rxjs/add/operator/publishReplay");
@@ -29,7 +29,7 @@ var SessionService = (function () {
         var _this = this;
         if (!this.sessionIdo.observers.length) {
             this.http.get(this.hostService.fetchUrl() + 'hystrix/get/stream-id')
-                .map(function (response) { return response.json(); })
+                .lift(function (response) { return response.json(); })
                 .subscribe(function (sessionId) { return _this.sessionIdo.next(sessionId); });
         }
         return this.sessionIdo;

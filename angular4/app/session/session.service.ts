@@ -2,8 +2,8 @@
  * Created by alex on 6/6/17.
  */
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {HostService} from '../session/host.service';
+import {Http, Response} from '@angular/http';
+import {HostService} from './host.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
@@ -20,7 +20,7 @@ export class SessionService {
     fetchSessionId(): Observable<String> {
         if (!this.sessionIdo.observers.length) {
             this.http.get(this.hostService.fetchUrl() + 'hystrix/get/stream-id')
-                .map(response => response.json())
+                .lift((response: Response) => response.json())
                 .subscribe(sessionId => this.sessionIdo.next(sessionId));
         }
 
