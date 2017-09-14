@@ -11,12 +11,9 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
-var ng2_nouislider_1 = require("ng2-nouislider");
 var angular2_ui_switch_1 = require("angular2-ui-switch");
 var message_component_1 = require("./messages/message.component");
 var switch_component_1 = require("./switch/switch.component");
-var throttle_component_1 = require("./sliders/throttle.component");
-var latency_component_1 = require("./sliders/latency.component");
 var host_service_1 = require("./session/host.service");
 var session_service_1 = require("./session/session.service");
 var message_service_1 = require("./messages/message.service");
@@ -32,15 +29,12 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            ng2_nouislider_1.NouisliderModule,
             angular2_ui_switch_1.UiSwitchModule
         ],
         declarations: [
             app_component_1.AppComponent,
             message_component_1.MessageComponent,
-            switch_component_1.SwitchComponent,
-            throttle_component_1.ThrottleComponent,
-            latency_component_1.LatencyCompontent
+            switch_component_1.SwitchComponent
         ],
         bootstrap: [app_component_1.AppComponent],
         providers: [host_service_1.HostService, session_service_1.SessionService, message_service_1.MessageService, window_1.WindowRef]
