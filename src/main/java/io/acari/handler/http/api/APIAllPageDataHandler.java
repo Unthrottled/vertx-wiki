@@ -27,10 +27,8 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
   }
 
   public void handle(RoutingContext routingContext) {
-    routingContext.user().isAuthorised("view", booleanAsyncResult ->
-      ChainableOptional.of(booleanAsyncResult)
-        .filter(AsyncResult::succeeded)
-        .filter(AsyncResult::result)
+    ChainableOptional.of(routingContext.user().principal().getBoolean("canView", false))
+        .filter(b->b)
         .ifPresent(canView ->
           vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
             new JsonObject(),
@@ -42,7 +40,7 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
             }))
         .orElseDo(() -> routingContext.response()
           .setStatusCode(401)
-          .end()));
+          .end());
   }
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {

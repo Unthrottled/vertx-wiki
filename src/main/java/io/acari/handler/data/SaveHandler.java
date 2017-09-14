@@ -23,7 +23,7 @@ public class SaveHandler implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     JsonObject request = message.body();
-    ChainableOptional.ofNullable(request.getString("id"))
+    ChainableOptional.ofNullable(request.getString("name"))
       .ifPresent(id -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content ->
           jdbcClient.getConnection(aConn -> {
