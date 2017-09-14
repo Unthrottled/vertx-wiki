@@ -17,9 +17,6 @@ require("rxjs");
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
 require("jquery");
-require("d3");
 require("angular2-ui-switch");
-require("bootstrap-slider");
-require("ng2-nouislider");
 require("bootstrap");
 //# sourceMappingURL=vendor.js.map

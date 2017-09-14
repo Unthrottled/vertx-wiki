@@ -15,8 +15,5 @@ import 'rxjs';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
 import 'jquery';
-import 'd3';
 import 'angular2-ui-switch';
-import 'bootstrap-slider';
-import 'ng2-nouislider';
 import 'bootstrap';
