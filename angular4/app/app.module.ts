@@ -19,8 +19,7 @@ import {BaseComponent} from "./base.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent},
-  {path: 'butt', component: MessageComponent},
-  {path: '**', redirectTo: ''},
+  {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
 
@@ -47,7 +46,7 @@ const appRoutes = [
     LoginComponent
   ],
   bootstrap: [AppComponent],
-  providers: [HostService, SessionService, MessageService, WindowRef]
+  providers: [HostService, SessionService, MessageService, WindowRef, AuthService, AuthGuard]
 })
 export class AppModule {
 }

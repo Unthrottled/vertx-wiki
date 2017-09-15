@@ -19,11 +19,13 @@ var host_service_1 = require("./session/host.service");
 var session_service_1 = require("./session/session.service");
 var message_service_1 = require("./messages/message.service");
 var window_1 = require("./util/window");
+var auth_service_1 = require("./auth/auth.service");
+var auth_guard_1 = require("./auth/auth.guard");
 var login_component_1 = require("./auth/login.component");
 var base_component_1 = require("./base.component");
 var appRoutes = [
-    { path: '', component: base_component_1.BaseComponent },
-    { path: 'butt', component: message_component_1.MessageComponent },
+    { path: '', component: login_component_1.LoginComponent },
+    { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: '**', redirectTo: '' },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
@@ -52,7 +54,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent
         ],
         bootstrap: [app_component_1.AppComponent],
-        providers: [host_service_1.HostService, session_service_1.SessionService, message_service_1.MessageService, window_1.WindowRef]
+        providers: [host_service_1.HostService, session_service_1.SessionService, message_service_1.MessageService, window_1.WindowRef, auth_service_1.AuthService, auth_guard_1.AuthGuard]
     })
 ], AppModule);
 exports.AppModule = AppModule;
