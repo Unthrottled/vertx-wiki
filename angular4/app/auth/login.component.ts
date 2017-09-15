@@ -1,36 +1,29 @@
 /**
  * Created by alex on 9/15/17.
  */
-import { Component }        from '@angular/core';
+import { Component, OnInit }        from '@angular/core';
 import { Router,
   NavigationExtras } from '@angular/router';
 import { AuthService }      from './auth.service';
+import {User} from "./user.model";
 
 @Component({
-  template: `
-    <h2>LOGIN</h2>
-    <p>{{message}}</p>
-    <p>
-      <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
-      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-    </p>`
+  templateUrl: 'templates/login.template.htm'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   message: string;
-
+  model: any = {};
   constructor(public authService: AuthService, public router: Router) {
-    this.setMessage();
+
   }
 
-  setMessage() {
-    this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+  getUser(): User {
+    return new User(this.model.username, this.model.password);
   }
 
   login() {
-    this.message = 'Trying to log in ...';
 
-    this.authService.login().subscribe(() => {
-      this.setMessage();
+    this.authService.login(this.getUser()).subscribe(() => {
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
@@ -49,8 +42,11 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.authService.logout();
+  }
+
   logout() {
     this.authService.logout();
-    this.setMessage();
   }
 }
