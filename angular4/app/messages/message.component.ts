@@ -16,7 +16,7 @@ import {Message} from './message';
     `
 })
 export class MessageComponent implements OnInit {
-    public messages: Message[] = [];
+    public messages: Message[] = [new Message("success: aoeuaoeuaoeu")];
 
     constructor(private messageService: MessageService, private zone: NgZone) {
     }

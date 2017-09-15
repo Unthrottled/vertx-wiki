@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
 var angular2_ui_switch_1 = require("angular2-ui-switch");
@@ -18,6 +19,10 @@ var host_service_1 = require("./session/host.service");
 var session_service_1 = require("./session/session.service");
 var message_service_1 = require("./messages/message.service");
 var window_1 = require("./util/window");
+var appRoutes = [
+    { path: 'butt', component: message_component_1.MessageComponent },
+    { path: '', component: app_component_1.AppComponent }
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +34,11 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            angular2_ui_switch_1.UiSwitchModule
+            angular2_ui_switch_1.UiSwitchModule,
+            router_1.RouterModule.forRoot(appRoutes)
+        ],
+        exports: [
+            router_1.RouterModule
         ],
         declarations: [
             app_component_1.AppComponent,

@@ -14,11 +14,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var message_service_1 = require("./message.service");
+var message_1 = require("./message");
 var MessageComponent = (function () {
     function MessageComponent(messageService, zone) {
         this.messageService = messageService;
         this.zone = zone;
-        this.messages = [];
+        this.messages = [new message_1.Message("success: aoeuaoeuaoeu")];
     }
     MessageComponent.prototype.ngOnInit = function () {
         var _this = this;
