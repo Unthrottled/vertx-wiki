@@ -54,6 +54,7 @@ var LoginComponent = (function () {
 }());
 LoginComponent = __decorate([
     core_1.Component({
+        selector: 'login-form-guy',
         templateUrl: 'templates/login.template.htm'
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])

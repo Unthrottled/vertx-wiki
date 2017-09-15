@@ -9,6 +9,7 @@ import {User} from "./user.model";
 import './login.template.htm'
 
 @Component({
+  selector: 'login-form-guy',
   templateUrl: 'templates/login.template.htm'
 })
 export class LoginComponent implements OnInit {
