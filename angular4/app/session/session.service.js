@@ -28,8 +28,11 @@ var SessionService = (function () {
     SessionService.prototype.fetchSessionId = function () {
         var _this = this;
         if (!this.sessionIdo.observers.length) {
-            this.http.get(this.hostService.fetchUrl() + 'hystrix/get/stream-id')
-                .lift(function (response) { return response.json(); })
+            this.http.get(this.hostService.fetchUrl() + '')
+                .lift(function (response) {
+                return response && response.json ?
+                    response.json() : '';
+            })
                 .subscribe(function (sessionId) { return _this.sessionIdo.next(sessionId); });
         }
         return this.sessionIdo;

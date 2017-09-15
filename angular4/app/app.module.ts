@@ -14,8 +14,7 @@ import {MessageService} from "./messages/message.service";
 import {WindowRef} from "./util/window";
 
 const appRoutes = [
-  {path: 'butt', component: MessageComponent},
-  {path: '', component: AppComponent}
+  {path: 'butt', component: MessageComponent}
 ];
 
 

@@ -20,8 +20,7 @@ var session_service_1 = require("./session/session.service");
 var message_service_1 = require("./messages/message.service");
 var window_1 = require("./util/window");
 var appRoutes = [
-    { path: 'butt', component: message_component_1.MessageComponent },
-    { path: '', component: app_component_1.AppComponent }
+    { path: 'butt', component: message_component_1.MessageComponent }
 ];
 var AppModule = (function () {
     function AppModule() {

@@ -7,7 +7,7 @@ import {MessageService} from './message.service';
 import {Message} from './message';
 @Component({
     selector: 'message-ticker',
-    template: `
+    template: `      
         <span class="stream-table">
                     <div *ngFor="let x of messages">
                         <span [ngClass]="{'worked': x.isSuccess(), 'failed': !x.isSuccess() }" class="stream-data">{{x.getMessage()}}</span>
