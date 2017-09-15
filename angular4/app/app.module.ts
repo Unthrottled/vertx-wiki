@@ -12,9 +12,16 @@ import {HostService} from "./session/host.service";
 import {SessionService} from "./session/session.service";
 import {MessageService} from "./messages/message.service";
 import {WindowRef} from "./util/window";
+import {AuthService} from "./auth/auth.service";
+import {AuthGuard} from "./auth/auth.guard";
+import {LoginComponent} from "./auth/login.component";
+import {BaseComponent} from "./base.component";
 
 const appRoutes = [
-  {path: 'butt', component: MessageComponent}
+  {path: '', component: BaseComponent},
+  {path: 'butt', component: MessageComponent},
+  {path: '**', redirectTo: ''},
+  {path: 'login', component: LoginComponent}
 ];
 
 
@@ -35,6 +42,9 @@ const appRoutes = [
     AppComponent,
     MessageComponent,
     SwitchComponent
+    ,
+    BaseComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent],
   providers: [HostService, SessionService, MessageService, WindowRef]

@@ -6,6 +6,7 @@ import { Router,
   NavigationExtras } from '@angular/router';
 import { AuthService }      from './auth.service';
 import {User} from "./user.model";
+import './login.template.htm'
 
 @Component({
   templateUrl: 'templates/login.template.htm'
