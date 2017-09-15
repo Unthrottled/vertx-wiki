@@ -24,9 +24,8 @@ var auth_guard_1 = require("./auth/auth.guard");
 var login_component_1 = require("./auth/login.component");
 var base_component_1 = require("./base.component");
 var appRoutes = [
-    { path: '', component: login_component_1.LoginComponent },
+    { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
-    { path: '**', redirectTo: '' },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
 var AppModule = (function () {

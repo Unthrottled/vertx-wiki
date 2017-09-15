@@ -18,7 +18,7 @@ import {LoginComponent} from "./auth/login.component";
 import {BaseComponent} from "./base.component";
 
 const appRoutes = [
-  {path: '', component: BaseComponent},
+  {path: '', component: BaseComponent, canActivate: [AuthGuard]},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
