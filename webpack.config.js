@@ -36,15 +36,6 @@ module.exports = {
             ]
             },
             {
-                test: require.resolve('d3'),
-                use: [
-                    {
-                        loader: 'expose-loader',
-                        options: 'd3'
-                    }
-                ]
-            },
-            {
                 test: /\.ts$/,
                 loaders: [
                     {
