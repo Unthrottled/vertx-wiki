@@ -35,20 +35,23 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                   user.isAuthorised("create", canCreate ->
                     user.isAuthorised("delete", canDelete ->
                       user.isAuthorised("update", canUpdate -> {
+                        JsonObject principal = new JsonObject()
+                          .put("username", username)
+                          .put("canView", canView.succeeded() && canView.result())
+                          .put("canCreate", canCreate.succeeded() && canCreate.result())
+                          .put("canDelete", canDelete.succeeded() && canDelete.result())
+                          .put("canUpdate", canUpdate.succeeded() && canUpdate.result());
                         String token = jwtAuth.generateToken(
-                          new JsonObject()
-                            .put("username", username)
-                            .put("canView", canView.succeeded() && canView.result())
-                            .put("canCreate", canCreate.succeeded() && canCreate.result())
-                            .put("canDelete", canDelete.succeeded() && canDelete.result())
-                            .put("canUpdate", canUpdate.succeeded() && canUpdate.result()),
+                          principal,
                           new JWTOptions()
                             .setSubject("Wiki API")
                             .setIssuer("Vert.x")
                         );
                         routingContext.response()
-                          .putHeader("Content-Type", "text/plain")
-                          .end(token);
+                          .putHeader("Content-Type", "application/json")
+                          .end(new JsonObject()
+                            .put("token", token)
+                            .put("principal", principal).encode());
                       })))))
                 .orElseDo(() -> {
                   LOGGER.warn("Thing Broke in Token Handler -> ", authRes.cause());
