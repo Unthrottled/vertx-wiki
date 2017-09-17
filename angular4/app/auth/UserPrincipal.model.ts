@@ -11,10 +11,10 @@ export class UserPrincipal {
 
 
   constructor(principal: any) {
-    this._canView = principal.canView;
-    this._canCreate = principal.canCreate;
-    this._canUpdate = principal.canUpdate;
-    this._canDelete = principal.canDelete;
+    this._canView = principal.principal.canView;
+    this._canCreate = principal.principal.canCreate;
+    this._canUpdate = principal.principal.canUpdate;
+    this._canDelete = principal.principal.canDelete;
     this._token = principal.token;
   }
 
