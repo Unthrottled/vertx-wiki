@@ -25,7 +25,7 @@ var AuthService = (function () {
     }
     AuthService.prototype.login = function (user) {
         var _this = this;
-        return this.http.post(this.hostService.fetchUrl() + '/api/token', user)
+        return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
             .map(function (response) {
             return response && response.json ?
                 response.json() : '';
@@ -38,6 +38,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
+        this.currentPrincipal = new ReplaySubject_1.ReplaySubject();
     };
     return AuthService;
 }());

@@ -6,16 +6,12 @@ export class User {
   private _password: String;
 
 
-  constructor(private usrNm: String, private pswd: String) {
-    this._username = usrNm;
-    this._password = pswd;
+  constructor(private login: String, private password: String) {
+    this._username = login;
+    this._password = password;
   }
 
   get username(): String {
     return this._username;
-  }
-
-  get password(): String {
-    return this._password;
   }
 }

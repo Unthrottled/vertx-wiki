@@ -17,6 +17,7 @@ var router_1 = require("@angular/router");
 var auth_service_1 = require("./auth.service");
 var user_model_1 = require("./user.model");
 require("./login.template.htm");
+var Subscriber_1 = require("rxjs/Subscriber");
 var LoginComponent = (function () {
     function LoginComponent(authService, router) {
         this.authService = authService;
@@ -28,21 +29,16 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
-        this.authService.login(this.getUser()).subscribe(function () {
-            if (_this.authService.isLoggedIn) {
-                // Get the redirect URL from our auth service
-                // If no redirect has been set, use the default
-                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : '/admin';
-                // Set our navigation extras object
-                // that passes on our global query params and fragment
-                var navigationExtras = {
-                    queryParamsHandling: 'preserve',
-                    preserveFragment: true
-                };
-                // Redirect the user
-                _this.router.navigate([redirect], navigationExtras);
-            }
-        });
+        this.authService.login(this.getUser())
+            .subscribe(Subscriber_1.Subscriber.create(function (prince) {
+            // Set our navigation extras object
+            // that passes on our global query params and fragment
+            var navigationExtras = {
+                queryParamsHandling: 'preserve',
+                preserveFragment: true
+            };
+            _this.router.navigate(['/'], navigationExtras);
+        }, function () { return console.log("OHHHH SHIIIITTTTTTTT"); }));
     };
     LoginComponent.prototype.ngOnInit = function () {
         this.authService.logout();

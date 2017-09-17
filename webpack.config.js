@@ -8,7 +8,7 @@ var proxy = require('http-proxy-middleware');
 var http = require('http');
 var keepAliveAgent = new http.Agent({ keepAlive: true });
 
-var proxyPeel = proxy('/', {
+var proxyPeel = proxy('/api', {
     target: 'http://localhost:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -115,7 +115,7 @@ module.exports = {
             host: 'localhost',
             port: 3000,
             server: {baseDir: ['dist']},
-            // middleware: [proxyPeel]
+            middleware: [proxyPeel]
         })
     ]
 };

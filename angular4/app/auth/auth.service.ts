@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<UserPrincipal> {
-    return this.http.post(this.hostService.fetchUrl() + '/api/token', user)
+    return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
       .map((response: Response) => {
         return response && response.json ?
           response.json() : ''
