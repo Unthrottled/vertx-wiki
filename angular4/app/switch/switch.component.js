@@ -14,42 +14,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./switch.component.htm");
-var http_1 = require("@angular/http");
-var session_service_1 = require("../session/session.service");
-var host_service_1 = require("../session/host.service");
+var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
+var Permissions_component_1 = require("../auth/Permissions.component");
 var SwitchComponent = (function () {
-    function SwitchComponent(sessionService, http, hostService, zone) {
-        this.sessionService = sessionService;
-        this.http = http;
-        this.hostService = hostService;
-        this.zone = zone;
+    function SwitchComponent(token) {
+        this.token = token;
         this.liveness = true;
     }
+    Object.defineProperty(SwitchComponent.prototype, "enabled", {
+        get: function () {
+            return Permissions_component_1.Permissions.canActivate(this.token, 'update')
+                .map(function (canDo) { return !canDo; });
+        },
+        enumerable: true,
+        configurable: true
+    });
     SwitchComponent.prototype.ngOnInit = function () {
-        var httpo = this.http;
-        var hosto = this.hostService;
-        var self = this;
-        var zono = self.zone;
-        this.sessionService.fetchSessionId()
-            .subscribe(function (sessionId) {
-            httpo.get(hosto.fetchUrl() + 'hystrix/get/' + sessionId + '/liveness')
-                .subscribe(function (response) {
-                zono.run(function () { return self.liveness = response.json().serviceAlive; });
-            });
-        });
     };
     SwitchComponent.prototype.change = function (value) {
-        var httpo = this.http;
-        var hosto = this.hostService;
-        var self = this;
-        var zono = self.zone;
-        this.sessionService.fetchSessionId()
-            .subscribe(function (sessionId) {
-            httpo.post(hosto.fetchUrl() + 'hystrix/post/' + sessionId + '/liveness', { serviceAlive: value, sessionId: sessionId })
-                .subscribe(function (response) {
-                zono.run(function () { return self.liveness = response.json().serviceAlive; });
-            });
-        });
     };
     return SwitchComponent;
 }());
@@ -59,7 +41,7 @@ SwitchComponent = __decorate([
         templateUrl: "./templates/switch.component.htm",
         styleUrls: []
     }),
-    __metadata("design:paramtypes", [session_service_1.SessionService, http_1.Http, host_service_1.HostService, core_1.NgZone])
+    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
 ], SwitchComponent);
 exports.SwitchComponent = SwitchComponent;
 //# sourceMappingURL=switch.component.js.map
