@@ -7,6 +7,8 @@ import { Router,
 import { AuthService }      from './auth.service';
 import {User} from "./user.model";
 import './login.template.htm'
+import {Subscriber} from "rxjs/Subscriber";
+import {UserPrincipal} from "./UserPrincipal.model";
 
 @Component({
   selector: 'login-form-guy',
@@ -24,24 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.authService.login(this.getUser())
+      .subscribe(Subscriber.create((prince: UserPrincipal)=>{
+          // Set our navigation extras object
+          // that passes on our global query params and fragment
+          let navigationExtras: NavigationExtras = {
+            queryParamsHandling: 'preserve',
+            preserveFragment: true
+          };
 
-    this.authService.login(this.getUser()).subscribe(() => {
-      if (this.authService.isLoggedIn) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
-
-        // Set our navigation extras object
-        // that passes on our global query params and fragment
-        let navigationExtras: NavigationExtras = {
-          queryParamsHandling: 'preserve',
-          preserveFragment: true
-        };
-
-        // Redirect the user
-        this.router.navigate([redirect], navigationExtras);
-      }
-    });
+          this.router.navigate(['/'], navigationExtras);
+      }, ()=> console.log("OHHHH SHIIIITTTTTTTT")));
   }
 
   ngOnInit(): void {

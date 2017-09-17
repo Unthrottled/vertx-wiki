@@ -14,9 +14,6 @@ export class AuthService {
   isLoggedIn = false;
   private currentPrincipal = new ReplaySubject<UserPrincipal>(1);
 
-  // store the URL so we can redirect after logging in
-  redirectUrl: string;
-
   constructor(private http: Http, private hostService: HostService) {
 
   }
