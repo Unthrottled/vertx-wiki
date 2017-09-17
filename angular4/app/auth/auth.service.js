@@ -15,43 +15,48 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 var host_service_1 = require("../session/host.service");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
-var ReplaySubject_1 = require("rxjs/ReplaySubject");
 var AuthService = (function () {
-    function AuthService(http, hostService) {
+    function AuthService(http, hostService, userToken) {
         this.http = http;
         this.hostService = hostService;
-        this.isLoggedIn = false;
+        this.userToken = userToken;
+        this._isLoggedIn = false;
     }
     AuthService.prototype.login = function (user) {
-        if (!this.currentPrincipal) {
-            var self_1 = this;
-            return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
-                .map(function (response) {
-                return response && response.json ?
-                    response.json() : '';
-            })
-                .map(function (json) { return new UserPrincipal_model_1.UserPrincipal(json); })
-                .flatMap(function (prince) {
-                self_1.currentPrincipal = new ReplaySubject_1.ReplaySubject(1);
-                self_1.currentPrincipal.next(prince);
-                self_1.isLoggedIn = true;
-                return self_1.currentPrincipal;
-            });
-        }
-        else {
-            return this.currentPrincipal;
-        }
+        var self = this;
+        return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+            .map(function (response) {
+            return response && response.json ?
+                response.json() : '';
+        })
+            .map(function (json) {
+            self.userToken.newUserPrincipal(json);
+            return self.userToken;
+        })
+            .map(function (prince) {
+            self.isLoggedIn = true;
+            return self.isLoggedIn;
+        });
     };
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
-        this.currentPrincipal = null;
         return new Promise(function (res) { return res(true); });
     };
+    Object.defineProperty(AuthService.prototype, "isLoggedIn", {
+        get: function () {
+            return this._isLoggedIn;
+        },
+        set: function (val) {
+            this._isLoggedIn = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return AuthService;
 }());
 AuthService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, host_service_1.HostService])
+    __metadata("design:paramtypes", [http_1.Http, host_service_1.HostService, UserPrincipal_model_1.UserPrincipal])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

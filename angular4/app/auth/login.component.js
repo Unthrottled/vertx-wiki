@@ -18,10 +18,12 @@ var auth_service_1 = require("./auth.service");
 var user_model_1 = require("./user.model");
 require("./login.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
+var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var LoginComponent = (function () {
-    function LoginComponent(authService, router) {
+    function LoginComponent(authService, router, prince) {
         this.authService = authService;
         this.router = router;
+        this.prince = prince;
         this.model = {};
     }
     LoginComponent.prototype.getUser = function () {
@@ -29,15 +31,18 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.login = function () {
         var _this = this;
+        var self = this;
         this.authService.login(this.getUser())
-            .subscribe(Subscriber_1.Subscriber.create(function (prince) {
-            // Set our navigation extras object
-            // that passes on our global query params and fragment
-            var navigationExtras = {
-                queryParamsHandling: 'preserve',
-                preserveFragment: true
-            };
-            _this.router.navigate(['/'], navigationExtras);
+            .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
+            if (succeded) {
+                // Set our navigation extras object
+                // that passes on our global query params and fragment
+                var navigationExtras = {
+                    queryParamsHandling: 'preserve',
+                    preserveFragment: true
+                };
+                _this.router.navigate(['/'], navigationExtras);
+            }
         }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
     };
     LoginComponent.prototype.ngOnInit = function () {
@@ -53,7 +58,7 @@ LoginComponent = __decorate([
         selector: 'login-form-guy',
         templateUrl: 'templates/login.template.htm'
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

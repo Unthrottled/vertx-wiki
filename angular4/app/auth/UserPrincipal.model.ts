@@ -1,7 +1,9 @@
 /**
  * Created by alex on 9/16/17.
  */
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class UserPrincipal {
   private _canView: boolean;
   private _canDelete: boolean;
@@ -10,7 +12,15 @@ export class UserPrincipal {
   private _token: String;
 
 
-  constructor(principal: any) {
+  constructor() {
+
+  }
+
+  newUserPrincipal(principal: any){
+    this.setFields(principal);
+  }
+
+  private setFields(principal: any){
     this._canView = principal.principal.canView;
     this._canCreate = principal.principal.canCreate;
     this._canUpdate = principal.principal.canUpdate;

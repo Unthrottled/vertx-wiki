@@ -7,40 +7,42 @@ import "rxjs/add/operator/catch";
 import {User} from "./user.model";
 import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
-import {ReplaySubject} from "rxjs/ReplaySubject";
 
 @Injectable()
 export class AuthService {
-  isLoggedIn = false;
-  private currentPrincipal : ReplaySubject<UserPrincipal>;
+  private _isLoggedIn = false;
 
-  constructor(private http: Http, private hostService: HostService) {
+  constructor(private http: Http, private hostService: HostService, private userToken: UserPrincipal) {
 
   }
 
-  login(user: User): Observable<UserPrincipal> {
-    if(!this.currentPrincipal){
-      let self = this;
-      return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
-        .map((response: Response) => {
-          return response && response.json ?
-            response.json() : ''
-        })
-        .map(json => new UserPrincipal(json))
-        .flatMap((prince: UserPrincipal) => {
-          self.currentPrincipal = new ReplaySubject<UserPrincipal>(1);
-          self.currentPrincipal.next(prince);
-          self.isLoggedIn = true;
-          return self.currentPrincipal;
-        });
-    } else {
-      return this.currentPrincipal;
-    }
+  login(user: User): Observable<boolean> {
+    let self = this;
+    return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+      .map((response: Response) => {
+        return response && response.json ?
+          response.json() : ''
+      })
+      .map(json => {
+        self.userToken.newUserPrincipal(json);
+        return self.userToken;
+      })
+      .map((prince: UserPrincipal) => {
+        self.isLoggedIn = true;
+        return self.isLoggedIn;
+      });
   }
 
   logout(): Promise<boolean> {
     this.isLoggedIn = false;
-    this.currentPrincipal = null;
-    return new Promise((res)=> res(true))
+    return new Promise((res) => res(true))
+  }
+
+  set isLoggedIn(val: boolean) {
+    this._isLoggedIn = val;
+  }
+
+  get isLoggedIn(): boolean {
+    return this._isLoggedIn;
   }
 }

@@ -20,6 +20,7 @@ var AuthGuard = (function () {
         this.router = router;
         this.authService = authService;
     }
+    //TODO: MAKE ME ACTUALLY GUARD THINGS ON PRINCIPAL/
     AuthGuard.prototype.canActivate = function (route, state) {
         if (this.authService.isLoggedIn) {
             return true;

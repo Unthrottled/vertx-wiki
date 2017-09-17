@@ -1,12 +1,11 @@
 /**
  * Created by alex on 9/15/17.
  */
-import { Component, OnInit }        from '@angular/core';
-import { Router,
-  NavigationExtras } from '@angular/router';
-import { AuthService }      from './auth.service';
+import {Component, OnInit} from "@angular/core";
+import {NavigationExtras, Router} from "@angular/router";
+import {AuthService} from "./auth.service";
 import {User} from "./user.model";
-import './login.template.htm'
+import "./login.template.htm";
 import {Subscriber} from "rxjs/Subscriber";
 import {UserPrincipal} from "./UserPrincipal.model";
 
@@ -17,7 +16,8 @@ import {UserPrincipal} from "./UserPrincipal.model";
 export class LoginComponent implements OnInit {
   message: string;
   model: any = {};
-  constructor(public authService: AuthService, public router: Router) {
+
+  constructor(public authService: AuthService, public router: Router, private prince: UserPrincipal) {
 
   }
 
@@ -26,8 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    let self = this;
     this.authService.login(this.getUser())
-      .subscribe(Subscriber.create((prince: UserPrincipal)=>{
+      .subscribe(Subscriber.create((succeded: boolean) => {
+        if(succeded){
           // Set our navigation extras object
           // that passes on our global query params and fragment
           let navigationExtras: NavigationExtras = {
@@ -36,7 +38,8 @@ export class LoginComponent implements OnInit {
           };
 
           this.router.navigate(['/'], navigationExtras);
-      }, (e)=> console.log("OHHHH SHIIIITTTTTTTT" + e)));
+        }
+      }, (e) => console.log("OHHHH SHIIIITTTTTTTT" + e)));
   }
 
   ngOnInit(): void {

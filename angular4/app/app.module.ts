@@ -17,6 +17,7 @@ import {AuthGuard} from "./auth/auth.guard";
 import {LoginComponent} from "./auth/login.component";
 import {BaseComponent} from "./base.component";
 import {LogoutComponent} from "./auth/logout.component";
+import {UserPrincipal} from "./auth/UserPrincipal.model";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard]},
@@ -47,7 +48,13 @@ const appRoutes = [
     LogoutComponent
   ],
   bootstrap: [AppComponent],
-  providers: [HostService, SessionService, MessageService, WindowRef, AuthService, AuthGuard]
+  providers: [HostService,
+    SessionService,
+    MessageService,
+    WindowRef,
+    AuthService,
+    AuthGuard,
+    UserPrincipal]
 })
 export class AppModule {
 }
