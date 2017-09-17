@@ -26,8 +26,10 @@ var base_component_1 = require("./base.component");
 var logout_component_1 = require("./auth/logout.component");
 var UserPrincipal_model_1 = require("./auth/UserPrincipal.model");
 var Pages_component_1 = require("./pages/Pages.component");
+var Permissions_component_1 = require("./auth/Permissions.component");
+var pages_resolve_service_1 = require("./pages/pages-resolve.service");
 var appRoutes = [
-    { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
@@ -64,7 +66,9 @@ AppModule = __decorate([
             window_1.WindowRef,
             auth_service_1.AuthService,
             auth_guard_1.AuthGuard,
-            UserPrincipal_model_1.UserPrincipal]
+            UserPrincipal_model_1.UserPrincipal,
+            Permissions_component_1.Permissions,
+            pages_resolve_service_1.PagesResolve]
     })
 ], AppModule);
 exports.AppModule = AppModule;

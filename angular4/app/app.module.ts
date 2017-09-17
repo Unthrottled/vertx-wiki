@@ -19,9 +19,11 @@ import {BaseComponent} from "./base.component";
 import {LogoutComponent} from "./auth/logout.component";
 import {UserPrincipal} from "./auth/UserPrincipal.model";
 import {PagesComponent} from "./pages/Pages.component";
+import {Permissions} from "./auth/Permissions.component";
+import {PagesResolve} from "./pages/pages-resolve.service";
 
 const appRoutes = [
-  {path: '', component: BaseComponent, canActivate: [AuthGuard]},
+  {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
@@ -56,7 +58,9 @@ const appRoutes = [
     WindowRef,
     AuthService,
     AuthGuard,
-    UserPrincipal]
+    UserPrincipal,
+    Permissions,
+    PagesResolve]
 })
 export class AppModule {
 }
