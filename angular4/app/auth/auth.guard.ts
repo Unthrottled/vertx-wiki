@@ -4,20 +4,22 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import {AuthService} from "./auth.service";
+import {Permissions} from "./Permissions.component";
+import {UserPrincipal} from "./UserPrincipal.model";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private userToken: UserPrincipal) { }
 
-  //TODO: MAKE ME ACTUALLY GUARD THINGS ON PRINCIPAL/
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
     if (this.authService.isLoggedIn) {
-      return true;
+      return Permissions.canActivate(this.userToken, route.fragment);
     }
 
     // not logged in so redirect to login page with the return url
     this.router.navigate(['/login']);
-    return false;
+    return Observable.of(false);
   }
 }

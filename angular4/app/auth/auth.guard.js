@@ -15,25 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_service_1 = require("./auth.service");
+var Permissions_component_1 = require("./Permissions.component");
+var UserPrincipal_model_1 = require("./UserPrincipal.model");
+var Observable_1 = require("rxjs/Observable");
 var AuthGuard = (function () {
-    function AuthGuard(router, authService) {
+    function AuthGuard(router, authService, userToken) {
         this.router = router;
         this.authService = authService;
+        this.userToken = userToken;
     }
-    //TODO: MAKE ME ACTUALLY GUARD THINGS ON PRINCIPAL/
     AuthGuard.prototype.canActivate = function (route, state) {
         if (this.authService.isLoggedIn) {
-            return true;
+            return Permissions_component_1.Permissions.canActivate(this.userToken, route.fragment);
         }
         // not logged in so redirect to login page with the return url
         this.router.navigate(['/login']);
-        return false;
+        return Observable_1.Observable.of(false);
     };
     return AuthGuard;
 }());
 AuthGuard = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService])
+    __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService, UserPrincipal_model_1.UserPrincipal])
 ], AuthGuard);
 exports.AuthGuard = AuthGuard;
 //# sourceMappingURL=auth.guard.js.map
