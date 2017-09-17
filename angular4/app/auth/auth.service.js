@@ -21,24 +21,30 @@ var AuthService = (function () {
         this.http = http;
         this.hostService = hostService;
         this.isLoggedIn = false;
-        this.currentPrincipal = new ReplaySubject_1.ReplaySubject(1);
     }
     AuthService.prototype.login = function (user) {
-        var _this = this;
-        return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
-            .map(function (response) {
-            return response && response.json ?
-                response.json() : '';
-        })
-            .map(function (json) { return new UserPrincipal_model_1.UserPrincipal(json); })
-            .flatMap(function (prince) {
-            _this.currentPrincipal.next(prince);
-            return _this.currentPrincipal;
-        });
+        if (!this.currentPrincipal) {
+            var self_1 = this;
+            return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+                .map(function (response) {
+                return response && response.json ?
+                    response.json() : '';
+            })
+                .map(function (json) { return new UserPrincipal_model_1.UserPrincipal(json); })
+                .flatMap(function (prince) {
+                self_1.currentPrincipal = new ReplaySubject_1.ReplaySubject(1);
+                self_1.currentPrincipal.next(prince);
+                self_1.isLoggedIn = true;
+                return self_1.currentPrincipal;
+            });
+        }
+        else {
+            return this.currentPrincipal;
+        }
     };
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
-        this.currentPrincipal = new ReplaySubject_1.ReplaySubject();
+        this.currentPrincipal = null;
     };
     return AuthService;
 }());

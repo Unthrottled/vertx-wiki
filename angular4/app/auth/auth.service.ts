@@ -12,27 +12,34 @@ import {ReplaySubject} from "rxjs/ReplaySubject";
 @Injectable()
 export class AuthService {
   isLoggedIn = false;
-  private currentPrincipal = new ReplaySubject<UserPrincipal>(1);
+  private currentPrincipal : ReplaySubject<UserPrincipal>;
 
   constructor(private http: Http, private hostService: HostService) {
 
   }
 
   login(user: User): Observable<UserPrincipal> {
-    return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
-      .map((response: Response) => {
-        return response && response.json ?
-          response.json() : ''
-      })
-      .map(json => new UserPrincipal(json))
-      .flatMap((prince: UserPrincipal) => {
-        this.currentPrincipal.next(prince);
-        return this.currentPrincipal;
-      });
+    if(!this.currentPrincipal){
+      let self = this;
+      return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+        .map((response: Response) => {
+          return response && response.json ?
+            response.json() : ''
+        })
+        .map(json => new UserPrincipal(json))
+        .flatMap((prince: UserPrincipal) => {
+          self.currentPrincipal = new ReplaySubject<UserPrincipal>(1);
+          self.currentPrincipal.next(prince);
+          self.isLoggedIn = true;
+          return self.currentPrincipal;
+        });
+    } else {
+      return this.currentPrincipal;
+    }
   }
 
   logout(): void {
     this.isLoggedIn = false;
-    this.currentPrincipal = new ReplaySubject<UserPrincipal>();
+    this.currentPrincipal = null;
   }
 }

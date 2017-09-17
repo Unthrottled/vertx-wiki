@@ -38,7 +38,7 @@ var LoginComponent = (function () {
                 preserveFragment: true
             };
             _this.router.navigate(['/'], navigationExtras);
-        }, function () { return console.log("OHHHH SHIIIITTTTTTTT"); }));
+        }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
     };
     LoginComponent.prototype.ngOnInit = function () {
         this.authService.logout();
