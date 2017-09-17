@@ -8,7 +8,7 @@ export class PageMin {
 
   constructor(pageMin: any){
     this._id = pageMin.id;
-    this._name = name;
+    this._name = pageMin.name;
   }
 
 

@@ -18,6 +18,7 @@ import {LoginComponent} from "./auth/login.component";
 import {BaseComponent} from "./base.component";
 import {LogoutComponent} from "./auth/logout.component";
 import {UserPrincipal} from "./auth/UserPrincipal.model";
+import {PagesComponent} from "./pages/Pages.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard]},
@@ -45,7 +46,8 @@ const appRoutes = [
     SwitchComponent,
     BaseComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    PagesComponent
   ],
   bootstrap: [AppComponent],
   providers: [HostService,
