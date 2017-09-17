@@ -45,6 +45,7 @@ var AuthService = (function () {
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
         this.currentPrincipal = null;
+        return new Promise(function (res) { return res(true); });
     };
     return AuthService;
 }());

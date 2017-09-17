@@ -38,8 +38,9 @@ export class AuthService {
     }
   }
 
-  logout(): void {
+  logout(): Promise<boolean> {
     this.isLoggedIn = false;
     this.currentPrincipal = null;
+    return new Promise((res)=> res(true))
   }
 }

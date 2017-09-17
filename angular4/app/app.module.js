@@ -23,6 +23,7 @@ var auth_service_1 = require("./auth/auth.service");
 var auth_guard_1 = require("./auth/auth.guard");
 var login_component_1 = require("./auth/login.component");
 var base_component_1 = require("./base.component");
+var logout_component_1 = require("./auth/logout.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
@@ -50,7 +51,8 @@ AppModule = __decorate([
             message_component_1.MessageComponent,
             switch_component_1.SwitchComponent,
             base_component_1.BaseComponent,
-            login_component_1.LoginComponent
+            login_component_1.LoginComponent,
+            logout_component_1.LogoutComponent
         ],
         bootstrap: [app_component_1.AppComponent],
         providers: [host_service_1.HostService, session_service_1.SessionService, message_service_1.MessageService, window_1.WindowRef, auth_service_1.AuthService, auth_guard_1.AuthGuard]

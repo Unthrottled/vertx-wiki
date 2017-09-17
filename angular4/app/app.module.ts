@@ -16,6 +16,7 @@ import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth.guard";
 import {LoginComponent} from "./auth/login.component";
 import {BaseComponent} from "./base.component";
+import {LogoutComponent} from "./auth/logout.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard]},
@@ -40,10 +41,10 @@ const appRoutes = [
   declarations: [
     AppComponent,
     MessageComponent,
-    SwitchComponent
-    ,
+    SwitchComponent,
     BaseComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   bootstrap: [AppComponent],
   providers: [HostService, SessionService, MessageService, WindowRef, AuthService, AuthGuard]
