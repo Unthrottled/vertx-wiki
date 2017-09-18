@@ -21,6 +21,8 @@ import {UserPrincipal} from "./auth/UserPrincipal.model";
 import {PagesComponent} from "./pages/Pages.component";
 import {Permissions} from "./auth/Permissions.component";
 import {PagesResolve} from "./pages/pages-resolve.service";
+import {PagesService} from "./pages/Pages.service";
+import {BackendService} from "./util/backend.service";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -60,7 +62,9 @@ const appRoutes = [
     AuthGuard,
     UserPrincipal,
     Permissions,
-    PagesResolve]
+    PagesResolve,
+    PagesService,
+    BackendService]
 })
 export class AppModule {
 }

@@ -9,7 +9,7 @@ export class PagePayload {
   private _succeded: boolean = false;
   constructor(payload: any){
     this._succeded = payload.success;
-    this._pages = payload.pages.map(pageMin=> new PageMin(pageMin));
+    this._pages = payload.pages.map((pageMin: any)=> new PageMin(pageMin));
   }
 
 
