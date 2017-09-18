@@ -23,6 +23,7 @@ import {Permissions} from "./auth/Permissions.component";
 import {PagesResolve} from "./pages/pages-resolve.service";
 import {PagesService} from "./pages/Pages.service";
 import {BackendService} from "./util/backend.service";
+import {PageComponent} from "./pages/Page.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -51,7 +52,8 @@ const appRoutes = [
     BaseComponent,
     LoginComponent,
     LogoutComponent,
-    PagesComponent
+    PagesComponent,
+    PageComponent
   ],
   bootstrap: [AppComponent],
   providers: [HostService,
