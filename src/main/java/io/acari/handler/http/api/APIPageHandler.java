@@ -30,16 +30,14 @@ public class APIPageHandler implements Handler<RoutingContext>, Configurable<Con
       .ifPresent(pago -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
         new JsonObject().put("page", pago),
         Config.createDeliveryOptions("get-page"),
-        connectionResult -> {
-          routingContext.response()
-            .putHeader("Content-Type", "application/json")
-            .end(getPayLoad(connectionResult, routingContext).encode());
-        })).orElseDo(() -> routingContext.response()
+        connectionResult -> routingContext.response()
+          .putHeader("Content-Type", "application/json")
+          .end(getPayLoad(connectionResult, routingContext, pago).encode()))).orElseDo(() -> routingContext.response()
       .setStatusCode(400)
       .end("No Path Provided, bruv."));
   }
 
-  private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext) {
+  private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) {
     if (connectionResult.succeeded()) {
       JsonObject message = connectionResult.result().body();
       if (message.getInteger("id") == NOT_FOUND) {
@@ -52,7 +50,8 @@ public class APIPageHandler implements Handler<RoutingContext>, Configurable<Con
           .put("success", true)
           .put("id", message.getInteger("id"))
           .put("markdown", content)
-          .put("html", Processor.process(content));
+          .put("html", Processor.process(content))
+          .put("name", pageName);
       }
     } else {
       routingContext.response().setStatusCode(500);
