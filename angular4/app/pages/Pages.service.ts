@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {PageMin} from "./Page.min.model";
 import {BackendService} from "../util/backend.service";
 import {PagePayload} from "./PagePayload.model";
+import {PageFull} from "./Page.full.model";
 
 @Injectable()
 export class PagesService {
@@ -18,4 +19,8 @@ export class PagesService {
     return this.backendService.fetchAllPages()
       .map((payload: PagePayload) => payload.pages);
   }
+
+  fetchPage(name: string): Observable<PageFull> {
+    return
+}
 }
