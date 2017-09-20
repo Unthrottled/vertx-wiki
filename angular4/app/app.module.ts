@@ -27,6 +27,7 @@ import {BackendService} from "./util/backend.service";
 import {PageComponent} from "./pages/Page.component";
 import {PageResolve} from "./pages/page-resolve.service";
 import {EditComponent} from "./pages/Edit.component";
+import {SimpleNotificationsModule} from "angular2-notifications-lite";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -43,6 +44,7 @@ const appRoutes = [
     HttpModule,
     UiSwitchModule,
     MarkdownModule.forRoot(),
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
     )

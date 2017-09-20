@@ -34,6 +34,7 @@ var backend_service_1 = require("./util/backend.service");
 var Page_component_1 = require("./pages/Page.component");
 var page_resolve_service_1 = require("./pages/page-resolve.service");
 var Edit_component_1 = require("./pages/Edit.component");
+var angular2_notifications_lite_1 = require("angular2-notifications-lite");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: Page_component_1.PageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -53,6 +54,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             angular2_ui_switch_1.UiSwitchModule,
             angular2_markdown_1.MarkdownModule.forRoot(),
+            angular2_notifications_lite_1.SimpleNotificationsModule.forRoot(),
             router_1.RouterModule.forRoot(appRoutes)
         ],
         exports: [

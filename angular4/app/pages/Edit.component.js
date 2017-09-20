@@ -56,7 +56,6 @@ var EditComponent = (function () {
         console.log("saved");
     };
     EditComponent.prototype.reset = function () {
-        console.log("reset");
         this.onReset.emit(true);
     };
     return EditComponent;

@@ -19,4 +19,5 @@ require("rxjs");
 require("jquery");
 require("angular2-ui-switch");
 require("angular2-markdown");
+require("angular2-notifications-lite");
 //# sourceMappingURL=vendor.js.map

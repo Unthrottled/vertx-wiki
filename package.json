@@ -60,7 +60,8 @@
     "zone.js": "^0.8.4",
     "angular2-ui-switch": "^1.2.0",
     "bootstrap": "^4.0.0-beta",
-    "angular2-markdown": "^1.6.0"
+    "angular2-markdown": "^1.6.0",
+    "angular2-notifications-lite": "^0.1.2"
   },
   "devDependencies": {
     "@types/angular": "^1.5.16",
