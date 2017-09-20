@@ -18,6 +18,7 @@ var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 var host_service_1 = require("../session/host.service");
 var PagePayload_model_1 = require("../pages/PagePayload.model");
 var PageFullPayload_model_1 = require("../pages/PageFullPayload.model");
+var StatusPayload_model_1 = require("../pages/StatusPayload.model");
 var BackendService = (function () {
     function BackendService(http, userToken, hostService) {
         this.http = http;
@@ -32,8 +33,15 @@ var BackendService = (function () {
         return this.httpGet("api/pages/" + pageName)
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
+    BackendService.prototype.updatePage = function (pageName, pageBody) {
+        return this.httpPut("api/pages/" + pageName, { "name": pageName, "markdown": pageBody })
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
+    };
     BackendService.prototype.httpGet = function (s) {
         return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
+    };
+    BackendService.prototype.httpPut = function (s, body) {
+        return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
     };
     BackendService.prototype.getRequestOptions = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

@@ -11,6 +11,7 @@ import {UserPrincipal} from "../auth/UserPrincipal.model";
 import {HostService} from "../session/host.service";
 import {PagePayload} from "../pages/PagePayload.model";
 import {FullPagePayload} from "../pages/PageFullPayload.model";
+import {StatusPayload} from "../pages/StatusPayload.model";
 
 @Injectable()
 export class BackendService {
@@ -31,8 +32,18 @@ export class BackendService {
       .map((response: Response) => new FullPagePayload(response.json()));
   }
 
+  updatePage(pageName: String, pageBody: String): Observable<StatusPayload> {
+    return this.httpPut("api/pages/" + pageName,
+      {"name": pageName, "markdown": pageBody})
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
   private httpGet(s: string): Observable<Response> {
     return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
+  }
+
+  private httpPut(s: string, body: any): Observable<Response> {
+    return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
   }
 
   private getRequestOptions(): RequestOptionsArgs {

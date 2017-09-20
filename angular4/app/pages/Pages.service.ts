@@ -8,6 +8,7 @@ import {BackendService} from "../util/backend.service";
 import {PagePayload} from "./PagePayload.model";
 import {PageFull} from "./Page.full.model";
 import {FullPagePayload} from "./PageFullPayload.model";
+import {StatusPayload} from "./StatusPayload.model";
 
 @Injectable()
 export class PagesService {
@@ -27,8 +28,7 @@ export class PagesService {
 }
 
   savePage(pageFull: PageFull): Observable<boolean> {
-    return Observable.create(false);
-    // return this.backendService.fetchPage(pageFull.name)
-    //   .map((pagePayload: FullPagePayload)=>pagePayload.page);
+    return this.backendService.updatePage(pageFull.name, pageFull.markdown)
+      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
 }
 }
