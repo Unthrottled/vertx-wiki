@@ -7,6 +7,8 @@ import {Observable} from "rxjs/Observable";
 import {Permissions} from "../auth/Permissions.component";
 import {PageMin} from "./Page.min.model";
 import {PagesService} from "./Pages.service";
+import {PageFull} from "./Page.full.model";
+import {FullPagePayload} from "./PageFullPayload.model";
 
 @Injectable()
 export class PageResolve implements Resolve<PageMin[]> {
@@ -14,11 +16,12 @@ export class PageResolve implements Resolve<PageMin[]> {
 
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageMin[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageFull> {
     return this.permissons.canView
       .flatMap(canView => {
         if (canView) {
-          return this.pagesService.fetchPage();
+          return this.pagesService.fetchPage(route.params[0])
+            .map((pagePayload: FullPagePayload) => pagePayload.page);
         } else {
           return Observable.of([]);
         }
