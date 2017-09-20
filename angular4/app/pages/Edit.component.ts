@@ -20,6 +20,9 @@ export class EditComponent {
   @Output()
   private onReset = new EventEmitter();
 
+  @Output()
+  private onSave = new EventEmitter();
+
   constructor(private router: Router, private notificationService: NotificationsService) {
   }
 
@@ -53,11 +56,7 @@ export class EditComponent {
   }
 
   save(){
-    this.notificationService.success('Page Saved!', ':)',{
-      timeOut: 3000,
-      showProgressBar: true,
-      clickToClose: true
-    })
+    this.onSave.emit(true);
   }
 
   reset(){

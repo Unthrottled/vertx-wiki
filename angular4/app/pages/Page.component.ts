@@ -7,16 +7,23 @@ import "./page.htm";
 import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
 import {Resetable} from "../objects/Resetable";
+import {Saveable} from "../objects/Saveable";
+import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
 })
-export class PageComponent implements OnInit, Resetable {
+export class PageComponent implements OnInit, Resetable, Saveable {
  private _title: string;
   private _content: string;
   private _editMode: boolean = false;
   private _htmlContent: string;
   constructor(private router: ActivatedRoute, private pagesService: PagesService) {
+  }
+
+  save(): Observable<boolean> {
+    let self = this;
+    return Observable.empty();
   }
 
   reset(): void {

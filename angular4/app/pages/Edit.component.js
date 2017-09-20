@@ -22,6 +22,7 @@ var EditComponent = (function () {
         this.notificationService = notificationService;
         this.contentChange = new core_1.EventEmitter();
         this.onReset = new core_1.EventEmitter();
+        this.onSave = new core_1.EventEmitter();
     }
     Object.defineProperty(EditComponent.prototype, "id", {
         get: function () {
@@ -55,11 +56,7 @@ var EditComponent = (function () {
         configurable: true
     });
     EditComponent.prototype.save = function () {
-        this.notificationService.success('Page Saved!', ':)', {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-        });
+        this.onSave.emit(true);
     };
     EditComponent.prototype.reset = function () {
         this.onReset.emit(true);
@@ -74,6 +71,10 @@ __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], EditComponent.prototype, "onReset", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditComponent.prototype, "onSave", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", String),

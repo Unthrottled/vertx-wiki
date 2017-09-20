@@ -16,12 +16,17 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./page.htm");
 var Pages_service_1 = require("./Pages.service");
+var Observable_1 = require("rxjs/Observable");
 var PageComponent = (function () {
     function PageComponent(router, pagesService) {
         this.router = router;
         this.pagesService = pagesService;
         this._editMode = false;
     }
+    PageComponent.prototype.save = function () {
+        var self = this;
+        return Observable_1.Observable.empty();
+    };
     PageComponent.prototype.reset = function () {
         var self = this;
         this.pagesService
