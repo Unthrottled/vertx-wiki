@@ -7,6 +7,6 @@
     <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
   </label>
   <div>
-    <edit-page [enabled]="!editMode" [(content)]="content"></edit-page>
+    <edit-page [id]="title" [enabled]="!editMode" [(content)]="content" (onReset)="reset()"></edit-page>
   </div>
 </div>

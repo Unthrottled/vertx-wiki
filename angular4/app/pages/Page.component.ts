@@ -5,25 +5,37 @@ import {Component, OnInit, EventEmitter, Output, Input} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import "./page.htm";
 import {PageFull} from "./Page.full.model";
+import {PagesService} from "./Pages.service";
+import {Resetable} from "../objects/Resetable";
 @Component({
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
 })
-export class PageComponent implements OnInit {
+export class PageComponent implements OnInit, Resetable {
  private _title: string;
- private _content: string;
- private _editMode: boolean = false;
- private _htmlContent: string;
+  private _content: string;
+  private _editMode: boolean = false;
+  private _htmlContent: string;
+  constructor(private router: ActivatedRoute, private pagesService: PagesService) {
+  }
 
-  constructor(private router: ActivatedRoute) {
+  reset(): void {
+    let self = this;
+    this.pagesService
+      .fetchPage(self.title)
+      .subscribe((pageFull: PageFull)=>self.load(pageFull));
   }
 
   ngOnInit(): void {
     this.router.data.subscribe((data: {pages: PageFull}) => {
-      this._title = '{'+data.pages.name+'}';
-      this._htmlContent = data.pages.html;
-      this._content = data.pages.markdown;
+      this.load(data.pages);
     });
+  }
+
+  private load(page: PageFull) {
+    this.title = page.name;
+    this.htmlContent = page.html;
+    this.content = page.markdown;
   }
 
 

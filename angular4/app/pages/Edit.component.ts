@@ -2,6 +2,7 @@
  * Created by alex on 9/17/17.
  */
 import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Router} from '@angular/router';
 import "./edit.htm";
 @Component({
   selector: 'edit-page',
@@ -9,11 +10,26 @@ import "./edit.htm";
 })
 export class EditComponent {
   private _enabled: boolean;
+  private _id: string;
   private _content: string;
+
   @Output()
   private contentChange = new EventEmitter();
 
-  constructor() {
+  @Output()
+  private onReset = new EventEmitter();
+
+  constructor(private router: Router) {
+  }
+
+  @Input()
+  get id(): string {
+    return this._id;
+  }
+
+
+  set id(value: string) {
+    this._id = value;
   }
 
   @Input()
@@ -34,4 +50,13 @@ export class EditComponent {
   get content(): string {
     return this._content;
   }
+
+  save(){
+    console.log("saved");
+  }
+
+  reset(){
+    this.onReset.emit(true);
+  }
+
 }

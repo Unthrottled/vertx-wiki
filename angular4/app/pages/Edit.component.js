@@ -13,11 +13,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 require("./edit.htm");
 var EditComponent = (function () {
-    function EditComponent() {
+    function EditComponent(router) {
+        this.router = router;
         this.contentChange = new core_1.EventEmitter();
+        this.onReset = new core_1.EventEmitter();
     }
+    Object.defineProperty(EditComponent.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(EditComponent.prototype, "enabled", {
         get: function () {
             return this._enabled;
@@ -39,12 +52,28 @@ var EditComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    EditComponent.prototype.save = function () {
+        console.log("saved");
+    };
+    EditComponent.prototype.reset = function () {
+        console.log("reset");
+        this.onReset.emit(true);
+    };
     return EditComponent;
 }());
 __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], EditComponent.prototype, "contentChange", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditComponent.prototype, "onReset", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], EditComponent.prototype, "id", null);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Boolean),
@@ -60,7 +89,7 @@ EditComponent = __decorate([
         selector: 'edit-page',
         templateUrl: './templates/edit.htm'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [router_1.Router])
 ], EditComponent);
 exports.EditComponent = EditComponent;
 //# sourceMappingURL=Edit.component.js.map
