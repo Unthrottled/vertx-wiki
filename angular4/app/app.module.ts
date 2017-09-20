@@ -25,7 +25,7 @@ import {Permissions} from "./auth/Permissions.component";
 import {PagesResolve} from "./pages/pages-resolve.service";
 import {PagesService} from "./pages/Pages.service";
 import {BackendService} from "./util/backend.service";
-import {PageComponent} from "./pages/Page.component";
+import {PageComponent} from "./pages/BasePage.component";
 import {PageResolve} from "./pages/page-resolve.service";
 import {EditComponent} from "./pages/Edit.component";
 import {SimpleNotificationsModule} from "angular2-notifications";
