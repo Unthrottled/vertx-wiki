@@ -1,10 +1,7 @@
 <div class="content-container">
   <h1>{{title}}</h1>
-  <div [innerHTML] ="htmlContent">
-  </div>
-  <div>
-    {{content}}
-  </div>
+  <markdown [data]="content">
+  </markdown>
   <label class="dead-mans-switch">
     EDIT
     <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>

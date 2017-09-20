@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+var angular2_markdown_1 = require("angular2-markdown");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
 var angular2_ui_switch_1 = require("angular2-ui-switch");
@@ -51,6 +52,7 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             angular2_ui_switch_1.UiSwitchModule,
+            angular2_markdown_1.MarkdownModule.forRoot(),
             router_1.RouterModule.forRoot(appRoutes)
         ],
         exports: [
