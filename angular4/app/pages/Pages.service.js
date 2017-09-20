@@ -13,7 +13,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
+var Observable_1 = require("rxjs/Observable");
 var backend_service_1 = require("../util/backend.service");
+var Page_full_model_1 = require("./Page.full.model");
 var PagesService = (function () {
     function PagesService(backendService) {
         this.backendService = backendService;
@@ -29,6 +31,12 @@ var PagesService = (function () {
     PagesService.prototype.savePage = function (pageName, pageContent) {
         return this.backendService.updatePage(pageName, pageContent)
             .map(function (statusPayload) { return statusPayload.succeded; });
+    };
+    PagesService.prototype.freshPage = function () {
+        return Observable_1.Observable.of(new Page_full_model_1.PageFull({ markdown: "# A new page\n" +
+                "\n" +
+                "Feel-free to write in Markdown!\n",
+        }));
     };
     return PagesService;
 }());

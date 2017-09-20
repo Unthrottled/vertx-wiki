@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import "./page.htm";
 import {PageFull} from "./Page.full.model";
@@ -96,6 +96,7 @@ export class PageComponent implements OnInit, Resetable, Saveable {
     this._content = value;
   }
 
+  @Input()
   get editMode(): boolean {
     return this._editMode;
   }

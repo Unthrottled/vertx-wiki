@@ -34,6 +34,7 @@ public class SaveHandler implements Handler<Message<JsonObject>> {
                 new JsonArray().add(content).add(id),
                 aRes -> {
                   if (aRes.succeeded()) {
+                    LOGGER.info(aRes.result().toJson().encode());
                     message.reply(new JsonObject().put("status", "gewd"));
                   } else {
                     message.fail(ErrorCodes.DB_ERROR.ordinal(), aRes.cause().getMessage());

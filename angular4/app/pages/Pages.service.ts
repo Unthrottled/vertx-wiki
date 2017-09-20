@@ -31,4 +31,12 @@ export class PagesService {
     return this.backendService.updatePage(pageName, pageContent)
       .map((statusPayload: StatusPayload)=>statusPayload.succeded);
 }
+
+  freshPage() : Observable<PageFull> {
+    return Observable.of(new PageFull(
+      {markdown: "# A new page\n" +
+      "\n" +
+      "Feel-free to write in Markdown!\n",
+      }))
+  }
 }

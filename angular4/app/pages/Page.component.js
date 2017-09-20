@@ -120,6 +120,11 @@ var PageComponent = (function () {
     });
     return PageComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], PageComponent.prototype, "editMode", null);
 PageComponent = __decorate([
     core_1.Component({
         selector: 'wiki-page',
