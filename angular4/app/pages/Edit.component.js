@@ -16,8 +16,7 @@ var core_1 = require("@angular/core");
 require("./edit.htm");
 var EditComponent = (function () {
     function EditComponent() {
-        this.enabledEmitter = new core_1.EventEmitter();
-        this.contentEmitter = new core_1.EventEmitter();
+        this.contentChange = new core_1.EventEmitter();
     }
     Object.defineProperty(EditComponent.prototype, "enabled", {
         get: function () {
@@ -25,7 +24,6 @@ var EditComponent = (function () {
         },
         set: function (value) {
             this._enabled = value;
-            this.enabledEmitter.emit(this._enabled);
         },
         enumerable: true,
         configurable: true
@@ -36,8 +34,7 @@ var EditComponent = (function () {
         },
         set: function (value) {
             this._content = value;
-            console.log("poop");
-            this.contentEmitter.emit(this._content);
+            this.contentChange.emit(this._content);
         },
         enumerable: true,
         configurable: true
@@ -47,11 +44,7 @@ var EditComponent = (function () {
 __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
-], EditComponent.prototype, "enabledEmitter", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], EditComponent.prototype, "contentEmitter", void 0);
+], EditComponent.prototype, "contentChange", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Boolean),

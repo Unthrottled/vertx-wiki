@@ -1,8 +1,9 @@
 <div class="content-container">
   <h1>{{title}}</h1>
+  <div [innerHTML] ="htmlContent">
+  </div>
   <div>
     {{content}}
-    <edit-page [enabled]="!editMode" [(content)]="rawContent"></edit-page>
   </div>
   <label class="dead-mans-switch">
     EDIT

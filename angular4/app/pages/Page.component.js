@@ -24,8 +24,8 @@ var PageComponent = (function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
             _this._title = '{' + data.pages.name + '}';
-            _this._content = data.pages.html;
-            _this._rawContent = data.pages.markdown;
+            _this._htmlContent = data.pages.html;
+            _this._content = data.pages.markdown;
         });
     };
     Object.defineProperty(PageComponent.prototype, "title", {
@@ -43,7 +43,6 @@ var PageComponent = (function () {
             return this._content;
         },
         set: function (value) {
-            console.log("diarrhea");
             this._content = value;
         },
         enumerable: true,
@@ -59,13 +58,12 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PageComponent.prototype, "rawContent", {
+    Object.defineProperty(PageComponent.prototype, "htmlContent", {
         get: function () {
-            return this._rawContent;
+            return this._htmlContent;
         },
         set: function (value) {
-            console.log("shit");
-            this._rawContent = value;
+            this._htmlContent = value;
         },
         enumerable: true,
         configurable: true

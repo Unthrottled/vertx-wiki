@@ -40,7 +40,6 @@ export class PageComponent implements OnInit {
   }
 
   set content(value: string) {
-    console.log("diarrhea");
     this._content = value;
   }
 
@@ -57,7 +56,6 @@ export class PageComponent implements OnInit {
   }
 
   set htmlContent(value: string) {
-    console.log("shit");
     this._htmlContent = value;
   }
 }

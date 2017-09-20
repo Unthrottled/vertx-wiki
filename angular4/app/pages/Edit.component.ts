@@ -27,7 +27,6 @@ export class EditComponent {
 
   set content(value: string) {
     this._content = value;
-    console.log("poop");
     this.contentChange.emit(this._content);
   }
 
