@@ -23,6 +23,16 @@ var PageComponent = (function () {
         this.pagesService = pagesService;
         this._editMode = false;
     }
+    Object.defineProperty(PageComponent.prototype, "pageFull", {
+        get: function () {
+            return this._pageFull;
+        },
+        set: function (value) {
+            this._pageFull = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     PageComponent.prototype.save = function () {
         var self = this;
         return Observable_1.Observable.empty();
@@ -43,6 +53,7 @@ var PageComponent = (function () {
         this.title = page.name;
         this.htmlContent = page.html;
         this.content = page.markdown;
+        this.pageFull = page;
     };
     Object.defineProperty(PageComponent.prototype, "title", {
         get: function () {
