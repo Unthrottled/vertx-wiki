@@ -3,7 +3,6 @@
  */
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Router} from '@angular/router';
-import {NotificationsService} from 'angular2-notifications';
 import "./edit.htm";
 @Component({
   selector: 'edit-page',
@@ -23,7 +22,7 @@ export class EditComponent {
   @Output()
   private onSave = new EventEmitter();
 
-  constructor(private router: Router, private notificationService: NotificationsService) {
+  constructor(private router: Router) {
   }
 
   @Input()

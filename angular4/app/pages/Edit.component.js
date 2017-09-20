@@ -14,12 +14,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var angular2_notifications_1 = require("angular2-notifications");
 require("./edit.htm");
 var EditComponent = (function () {
-    function EditComponent(router, notificationService) {
+    function EditComponent(router) {
         this.router = router;
-        this.notificationService = notificationService;
         this.contentChange = new core_1.EventEmitter();
         this.onReset = new core_1.EventEmitter();
         this.onSave = new core_1.EventEmitter();
@@ -95,7 +93,7 @@ EditComponent = __decorate([
         selector: 'edit-page',
         templateUrl: './templates/edit.htm'
     }),
-    __metadata("design:paramtypes", [router_1.Router, angular2_notifications_1.NotificationsService])
+    __metadata("design:paramtypes", [router_1.Router])
 ], EditComponent);
 exports.EditComponent = EditComponent;
 //# sourceMappingURL=Edit.component.js.map

@@ -16,10 +16,12 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./page.htm");
 var Pages_service_1 = require("./Pages.service");
+var angular2_notifications_1 = require("angular2-notifications");
 var PageComponent = (function () {
-    function PageComponent(router, pagesService) {
+    function PageComponent(router, pagesService, notificationService) {
         this.router = router;
         this.pagesService = pagesService;
+        this.notificationService = notificationService;
         this._editMode = false;
     }
     Object.defineProperty(PageComponent.prototype, "pageFull", {
@@ -33,14 +35,35 @@ var PageComponent = (function () {
         configurable: true
     });
     PageComponent.prototype.save = function () {
+        var _this = this;
         var self = this;
-        return this.pagesService
-            .savePage(this.pageFull);
+        var returnGuy = this.pagesService
+            .savePage(this.pageFull.name, this.pageFull.markdown);
+        returnGuy.subscribe(function (success) {
+            if (success) {
+                _this.notificationService.success('Page Saved!', ':)', {
+                    timeOut: 3000,
+                    showProgressBar: true,
+                    clickToClose: true
+                });
+            }
+            else {
+                self.failure();
+            }
+        }, function (error) { return self.failure(); });
+        return returnGuy;
+    };
+    PageComponent.prototype.failure = function () {
+        this.notificationService.error('Page NOT Saved!', ':( Try again.', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        });
     };
     PageComponent.prototype.reset = function () {
         var self = this;
         this.pagesService
-            .fetchPage(self.pageFull)
+            .fetchPage(self.pageFull.name)
             .subscribe(function (pageFull) { return self.load(pageFull); });
     };
     PageComponent.prototype.ngOnInit = function () {
@@ -102,7 +125,7 @@ PageComponent = __decorate([
         selector: 'wiki-page',
         templateUrl: './templates/page.htm'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService])
 ], PageComponent);
 exports.PageComponent = PageComponent;
 //# sourceMappingURL=Page.component.js.map

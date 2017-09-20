@@ -22,13 +22,13 @@ export class PagesService {
       .map((payload: PagePayload) => payload.pages);
   }
 
-  fetchPage(pageFull: PageFull): Observable<PageFull> {
-    return this.backendService.fetchPage(pageFull.name)
+  fetchPage(pageName: String): Observable<PageFull> {
+    return this.backendService.fetchPage(pageName)
       .map((pagePayload: FullPagePayload)=>pagePayload.page);
 }
 
-  savePage(pageFull: PageFull): Observable<boolean> {
-    return this.backendService.updatePage(pageFull.name, pageFull.markdown)
+  savePage(pageName: String, pageContent: String): Observable<boolean> {
+    return this.backendService.updatePage(pageName, pageContent)
       .map((statusPayload: StatusPayload)=>statusPayload.succeded);
 }
 }

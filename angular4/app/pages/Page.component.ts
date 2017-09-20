@@ -1,14 +1,15 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, OnInit, EventEmitter, Output, Input} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import "./page.htm";
 import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
-import {Observable} from 'rxjs/Observable';
+import {NotificationsService} from "angular2-notifications";
+import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
@@ -21,29 +22,52 @@ export class PageComponent implements OnInit, Resetable, Saveable {
   set pageFull(value: PageFull) {
     this._pageFull = value;
   }
- private _title: string;
+
+  private _title: string;
   private _content: string;
   private _editMode: boolean = false;
   private _htmlContent: string;
   private _pageFull: PageFull;
-  constructor(private router: ActivatedRoute, private pagesService: PagesService) {
+
+  constructor(private router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
   }
 
   save(): Observable<boolean> {
     let self = this;
-    return this.pagesService
-      .savePage(this.pageFull);
+    let returnGuy = this.pagesService
+      .savePage(this.pageFull.name, this.pageFull.markdown);
+    returnGuy.subscribe((success: boolean) => {
+      if (success) {
+        this.notificationService.success('Page Saved!', ':)', {
+          timeOut: 3000,
+          showProgressBar: true,
+          clickToClose: true
+        })
+      } else {
+        self.failure()
+      }
+    }, (error: any) => self.failure());
+    return returnGuy
+
+  }
+
+  private failure() {
+    this.notificationService.error('Page NOT Saved!', ':( Try again.', {
+      timeOut: 3000,
+      showProgressBar: true,
+      clickToClose: true
+    })
   }
 
   reset(): void {
     let self = this;
     this.pagesService
-      .fetchPage(self.pageFull)
-      .subscribe((pageFull: PageFull)=>self.load(pageFull));
+      .fetchPage(self.pageFull.name)
+      .subscribe((pageFull: PageFull) => self.load(pageFull));
   }
 
   ngOnInit(): void {
-    this.router.data.subscribe((data: {pages: PageFull}) => {
+    this.router.data.subscribe((data: { pages: PageFull }) => {
       this.load(data.pages);
     });
   }

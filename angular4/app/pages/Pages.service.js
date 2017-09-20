@@ -22,12 +22,12 @@ var PagesService = (function () {
         return this.backendService.fetchAllPages()
             .map(function (payload) { return payload.pages; });
     };
-    PagesService.prototype.fetchPage = function (pageFull) {
-        return this.backendService.fetchPage(pageFull.name)
+    PagesService.prototype.fetchPage = function (pageName) {
+        return this.backendService.fetchPage(pageName)
             .map(function (pagePayload) { return pagePayload.page; });
     };
-    PagesService.prototype.savePage = function (pageFull) {
-        return this.backendService.updatePage(pageFull.name, pageFull.markdown)
+    PagesService.prototype.savePage = function (pageName, pageContent) {
+        return this.backendService.updatePage(pageName, pageContent)
             .map(function (statusPayload) { return statusPayload.succeded; });
     };
     return PagesService;
