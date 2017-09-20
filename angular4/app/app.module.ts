@@ -3,6 +3,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {MarkdownModule} from 'angular2-markdown';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from "./app.component";
 import {HttpModule} from "@angular/http";
@@ -27,7 +28,7 @@ import {BackendService} from "./util/backend.service";
 import {PageComponent} from "./pages/Page.component";
 import {PageResolve} from "./pages/page-resolve.service";
 import {EditComponent} from "./pages/Edit.component";
-import {SimpleNotificationsModule} from "angular2-notifications-lite";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -45,6 +46,7 @@ const appRoutes = [
     UiSwitchModule,
     MarkdownModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
+    BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes
     )

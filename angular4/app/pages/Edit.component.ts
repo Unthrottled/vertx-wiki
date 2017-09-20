@@ -3,6 +3,7 @@
  */
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Router} from '@angular/router';
+import {NotificationsService} from 'angular2-notifications';
 import "./edit.htm";
 @Component({
   selector: 'edit-page',
@@ -19,7 +20,7 @@ export class EditComponent {
   @Output()
   private onReset = new EventEmitter();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private notificationService: NotificationsService) {
   }
 
   @Input()
@@ -52,7 +53,11 @@ export class EditComponent {
   }
 
   save(){
-    console.log("saved");
+    this.notificationService.success('Page Saved!', ':)',{
+      timeOut: 3000,
+      showProgressBar: true,
+      clickToClose: true
+    })
   }
 
   reset(){

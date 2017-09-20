@@ -14,10 +14,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var angular2_notifications_1 = require("angular2-notifications");
 require("./edit.htm");
 var EditComponent = (function () {
-    function EditComponent(router) {
+    function EditComponent(router, notificationService) {
         this.router = router;
+        this.notificationService = notificationService;
         this.contentChange = new core_1.EventEmitter();
         this.onReset = new core_1.EventEmitter();
     }
@@ -53,7 +55,11 @@ var EditComponent = (function () {
         configurable: true
     });
     EditComponent.prototype.save = function () {
-        console.log("saved");
+        this.notificationService.success('Page Saved!', ':)', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        });
     };
     EditComponent.prototype.reset = function () {
         this.onReset.emit(true);
@@ -88,7 +94,7 @@ EditComponent = __decorate([
         selector: 'edit-page',
         templateUrl: './templates/edit.htm'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router, angular2_notifications_1.NotificationsService])
 ], EditComponent);
 exports.EditComponent = EditComponent;
 //# sourceMappingURL=Edit.component.js.map

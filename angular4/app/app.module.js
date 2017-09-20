@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var angular2_markdown_1 = require("angular2-markdown");
+var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
 var angular2_ui_switch_1 = require("angular2-ui-switch");
@@ -34,7 +35,7 @@ var backend_service_1 = require("./util/backend.service");
 var Page_component_1 = require("./pages/Page.component");
 var page_resolve_service_1 = require("./pages/page-resolve.service");
 var Edit_component_1 = require("./pages/Edit.component");
-var angular2_notifications_lite_1 = require("angular2-notifications-lite");
+var angular2_notifications_1 = require("angular2-notifications");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: Page_component_1.PageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -54,7 +55,8 @@ AppModule = __decorate([
             http_1.HttpModule,
             angular2_ui_switch_1.UiSwitchModule,
             angular2_markdown_1.MarkdownModule.forRoot(),
-            angular2_notifications_lite_1.SimpleNotificationsModule.forRoot(),
+            angular2_notifications_1.SimpleNotificationsModule.forRoot(),
+            animations_1.BrowserAnimationsModule,
             router_1.RouterModule.forRoot(appRoutes)
         ],
         exports: [
