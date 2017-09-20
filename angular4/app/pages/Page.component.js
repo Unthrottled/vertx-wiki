@@ -18,6 +18,7 @@ require("./page.htm");
 var PageComponent = (function () {
     function PageComponent(router) {
         this.router = router;
+        this.editMode = false;
     }
     PageComponent.prototype.ngOnInit = function () {
         var _this = this;

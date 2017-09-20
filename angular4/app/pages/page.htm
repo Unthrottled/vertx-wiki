@@ -4,6 +4,9 @@
   </div>
   <label class="dead-mans-switch">
     EDIT
-    <dead-mans-switch></dead-mans-switch>
+    <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
   </label>
+  <div>
+    <edit-page [enabled]="editMode"></edit-page>
+  </div>
 </div>

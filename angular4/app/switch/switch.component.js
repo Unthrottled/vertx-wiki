@@ -48,6 +48,10 @@ var SwitchComponent = (function () {
     return SwitchComponent;
 }());
 __decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], SwitchComponent.prototype, "livenessChange", void 0);
+__decorate([
     core_1.Input(),
     __metadata("design:type", Boolean),
     __metadata("design:paramtypes", [Boolean])

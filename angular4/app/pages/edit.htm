@@ -1,7 +1,6 @@
-<div [ngShow]="enabled">
+<div [hidden]="!enabled">
   <div class="content-container">
-    <input [(ngModel)]="content">
-    </input>
+    <input type="text" [(ngModel)]="content"/>
   </div>
 </div>
 

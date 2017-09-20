@@ -12,6 +12,7 @@ import {PageFull} from "./Page.full.model";
 export class PageComponent implements OnInit {
  private title: string;
  private content: string;
+ private editMode: boolean = false;
 
   constructor(private router: ActivatedRoute) {
   }
