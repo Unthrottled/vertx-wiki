@@ -22,7 +22,7 @@ var PageComponent = (function () {
     PageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
-            _this.title = data.pages.name;
+            _this.title = '{' + data.pages.name + '}';
             _this.content = data.pages.html;
         });
     };

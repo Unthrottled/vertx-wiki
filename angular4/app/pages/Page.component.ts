@@ -18,7 +18,7 @@ export class PageComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.data.subscribe((data: {pages: PageFull}) => {
-      this.title = data.pages.name;
+      this.title = '{'+data.pages.name+'}';
       this.content = data.pages.html;
     });
   }
