@@ -19,7 +19,8 @@ var Permissions_component_1 = require("../auth/Permissions.component");
 var SwitchComponent = (function () {
     function SwitchComponent(token) {
         this.token = token;
-        this.liveness = true;
+        this._liveness = false;
+        this.livenessChange = new core_1.EventEmitter();
     }
     Object.defineProperty(SwitchComponent.prototype, "enabled", {
         get: function () {
@@ -33,8 +34,24 @@ var SwitchComponent = (function () {
     };
     SwitchComponent.prototype.change = function (value) {
     };
+    Object.defineProperty(SwitchComponent.prototype, "liveness", {
+        get: function () {
+            return this._liveness;
+        },
+        set: function (value) {
+            this._liveness = value;
+            this.livenessChange.emit(this._liveness);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return SwitchComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], SwitchComponent.prototype, "liveness", null);
 SwitchComponent = __decorate([
     core_1.Component({
         selector: 'dead-mans-switch',

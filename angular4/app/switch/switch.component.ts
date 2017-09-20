@@ -1,37 +1,46 @@
 /**
  * Created by alex on 6/7/17.
  */
-import {Component, NgZone, OnInit} from '@angular/core';
-import './switch.component.htm';
-import {Http} from '@angular/http';
-import {SessionService} from '../session/session.service';
-import {HostService} from '../session/host.service';
+import {Component, OnInit, Input, EventEmitter} from "@angular/core";
+import "./switch.component.htm";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 import {Permissions} from "../auth/Permissions.component";
-import {Observable} from  'rxjs/Observable'
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
-    selector: 'dead-mans-switch',
-    templateUrl: `./templates/switch.component.htm`,
-    styleUrls: []
+  selector: 'dead-mans-switch',
+  templateUrl: `./templates/switch.component.htm`,
+  styleUrls: []
 })
 export class SwitchComponent implements OnInit {
-    liveness: Boolean = true;
+  private _liveness: Boolean = false;
+  private livenessChange = new EventEmitter();
 
-  constructor(private token:UserPrincipal) {
+  constructor(private token: UserPrincipal) {
   }
 
-  get enabled(): Observable<boolean>{
+  get enabled(): Observable<boolean> {
     return Permissions.canActivate(this.token, 'update')
       .map(canDo => !canDo);
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
 
-    }
+  }
 
-    change(value: any): void {
+  change(value: any): void {
 
-    }
+  }
+
+
+  @Input()
+  get liveness(): Boolean {
+    return this._liveness;
+  }
+
+  set liveness(value: Boolean) {
+    this._liveness = value;
+    this.livenessChange.emit(this._liveness);
+  }
 }
