@@ -4,12 +4,13 @@
 
 
 import {Injectable} from "@angular/core";
-import {Http, RequestOptionsArgs, Headers, Response} from "@angular/http";
+import {Headers, Http, RequestOptionsArgs, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 
 import {HostService} from "../session/host.service";
 import {PagePayload} from "../pages/PagePayload.model";
+import {FullPagePayload} from "../pages/PageFullPayload.model";
 
 @Injectable()
 export class BackendService {
@@ -21,15 +22,23 @@ export class BackendService {
   }
 
   fetchAllPages(): Observable<PagePayload> {
-
-    return this.http.get(this.hostService.fetchUrl() + "api/pages", this.getRequestOptions())
+    return this.httpGet("api/pages")
       .map((response: Response) => new PagePayload(response.json()));
+  }
+
+  fetchPage(pageName: String): Observable<FullPagePayload> {
+    return this.httpGet("api/pages/" + pageName)
+      .map((response: Response) => new FullPagePayload(response.json()));
+  }
+
+  private httpGet(s: string): Observable<Response> {
+    return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
   }
 
   private getRequestOptions(): RequestOptionsArgs {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', 'Bearer ' + this.userToken.token);
-    let returnVal : RequestOptionsArgs = {headers: headers};
+    let returnVal: RequestOptionsArgs = {headers: headers};
     return returnVal;
   }
 }

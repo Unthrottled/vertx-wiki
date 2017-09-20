@@ -17,6 +17,7 @@ var http_1 = require("@angular/http");
 var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 var host_service_1 = require("../session/host.service");
 var PagePayload_model_1 = require("../pages/PagePayload.model");
+var PageFullPayload_model_1 = require("../pages/PageFullPayload.model");
 var BackendService = (function () {
     function BackendService(http, userToken, hostService) {
         this.http = http;
@@ -24,8 +25,15 @@ var BackendService = (function () {
         this.hostService = hostService;
     }
     BackendService.prototype.fetchAllPages = function () {
-        return this.http.get(this.hostService.fetchUrl() + "api/pages", this.getRequestOptions())
+        return this.httpGet("api/pages")
             .map(function (response) { return new PagePayload_model_1.PagePayload(response.json()); });
+    };
+    BackendService.prototype.fetchPage = function (pageName) {
+        return this.httpGet("api/pages/" + pageName)
+            .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
+    };
+    BackendService.prototype.httpGet = function (s) {
+        return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
     };
     BackendService.prototype.getRequestOptions = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
