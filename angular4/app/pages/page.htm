@@ -7,6 +7,6 @@
     <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
   </label>
   <div>
-    <edit-page [enabled]="editMode"></edit-page>
+    <edit-page [enabled]="editMode" [(content)]="markdown"></edit-page>
   </div>
 </div>

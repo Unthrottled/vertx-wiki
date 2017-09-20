@@ -25,6 +25,7 @@ var PageComponent = (function () {
         this.router.data.subscribe(function (data) {
             _this.title = '{' + data.pages.name + '}';
             _this.content = data.pages.html;
+            _this.markdown = data.pages.markdown;
         });
     };
     return PageComponent;

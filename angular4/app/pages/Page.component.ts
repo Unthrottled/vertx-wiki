@@ -13,6 +13,7 @@ export class PageComponent implements OnInit {
  private title: string;
  private content: string;
  private editMode: boolean = false;
+ private markdown: string;
 
   constructor(private router: ActivatedRoute) {
   }
@@ -21,6 +22,7 @@ export class PageComponent implements OnInit {
     this.router.data.subscribe((data: {pages: PageFull}) => {
       this.title = '{'+data.pages.name+'}';
       this.content = data.pages.html;
+      this.markdown = data.pages.markdown;
     });
   }
 }
