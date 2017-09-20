@@ -38,7 +38,7 @@ var Edit_component_1 = require("./pages/Edit.component");
 var angular2_notifications_1 = require("angular2-notifications");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
-    { path: 'page/:name', component: Page_component_1.PageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
+    { path: 'page/:name', component: Page_component_1.BasePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
@@ -70,7 +70,7 @@ AppModule = __decorate([
             login_component_1.LoginComponent,
             logout_component_1.LogoutComponent,
             Pages_component_1.PagesComponent,
-            Page_component_1.PageComponent,
+            Page_component_1.BasePageComponent,
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],

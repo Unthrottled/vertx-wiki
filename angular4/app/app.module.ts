@@ -25,14 +25,14 @@ import {Permissions} from "./auth/Permissions.component";
 import {PagesResolve} from "./pages/pages-resolve.service";
 import {PagesService} from "./pages/Pages.service";
 import {BackendService} from "./util/backend.service";
-import {PageComponent} from "./pages/BasePage.component";
+import {BasePageComponent} from "./pages/BasePage.component";
 import {PageResolve} from "./pages/page-resolve.service";
 import {EditComponent} from "./pages/Edit.component";
 import {SimpleNotificationsModule} from "angular2-notifications";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
-  {path: 'page/:name', component: PageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
+  {path: 'page/:name', component: BasePageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
@@ -62,7 +62,7 @@ const appRoutes = [
     LoginComponent,
     LogoutComponent,
     PagesComponent,
-    PageComponent,
+    BasePageComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],

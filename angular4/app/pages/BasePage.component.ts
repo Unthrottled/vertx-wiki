@@ -14,7 +14,7 @@ import {Observable} from "rxjs/Observable";
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
 })
-export class PageComponent implements OnInit, Resetable, Saveable {
+export class BasePageComponent implements OnInit, Resetable, Saveable {
   get pageFull(): PageFull {
     return this._pageFull;
   }
