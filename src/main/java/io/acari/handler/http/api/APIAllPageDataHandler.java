@@ -35,6 +35,7 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
             Config.createDeliveryOptions("all-pages-data"), ar -> {
               JsonObject responseGuy = new JsonObject();
               getRoutingContext(responseGuy, routingContext, ar)
+                .putHeader("Cache-Control", "no-store, no-cache")
                 .putHeader("Content-Type", "application/json")
                 .end(responseGuy.encode());
             }))

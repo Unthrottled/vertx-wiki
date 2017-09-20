@@ -31,6 +31,7 @@ public class APIPageHandler implements Handler<RoutingContext>, Configurable<Con
         new JsonObject().put("page", pago),
         Config.createDeliveryOptions("get-page"),
         connectionResult -> routingContext.response()
+          .putHeader("Cache-Control", "no-store, no-cache")
           .putHeader("Content-Type", "application/json")
           .end(getPayLoad(connectionResult, routingContext, pago).encode()))).orElseDo(() -> routingContext.response()
       .setStatusCode(400)
