@@ -18,16 +18,58 @@ require("./page.htm");
 var PageComponent = (function () {
     function PageComponent(router) {
         this.router = router;
-        this.editMode = false;
+        this._editMode = false;
     }
     PageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
-            _this.title = '{' + data.pages.name + '}';
-            _this.content = data.pages.html;
-            _this.markdown = data.pages.markdown;
+            _this._title = '{' + data.pages.name + '}';
+            _this._content = data.pages.html;
+            _this._rawContent = data.pages.markdown;
         });
     };
+    Object.defineProperty(PageComponent.prototype, "title", {
+        get: function () {
+            return this._title;
+        },
+        set: function (value) {
+            this._title = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageComponent.prototype, "content", {
+        get: function () {
+            return this._content;
+        },
+        set: function (value) {
+            console.log("diarrhea");
+            this._content = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageComponent.prototype, "editMode", {
+        get: function () {
+            return this._editMode;
+        },
+        set: function (value) {
+            this._editMode = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PageComponent.prototype, "rawContent", {
+        get: function () {
+            return this._rawContent;
+        },
+        set: function (value) {
+            console.log("shit");
+            this._rawContent = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return PageComponent;
 }());
 PageComponent = __decorate([

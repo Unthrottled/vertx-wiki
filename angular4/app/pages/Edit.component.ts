@@ -11,9 +11,7 @@ export class EditComponent {
   private _enabled: boolean;
   private _content: string;
   @Output()
-  private enabledEmitter = new EventEmitter();
-  @Output()
-  private contentEmitter = new EventEmitter();
+  private contentChange = new EventEmitter();
 
   constructor() {
   }
@@ -25,12 +23,12 @@ export class EditComponent {
 
   set enabled(value: boolean) {
     this._enabled = value;
-    this.enabledEmitter.emit(this._enabled);
   }
 
   set content(value: string) {
     this._content = value;
-    this.contentEmitter.emit(this._content);
+    console.log("poop");
+    this.contentChange.emit(this._content);
   }
 
   @Input()

@@ -36,6 +36,7 @@ var EditComponent = (function () {
         },
         set: function (value) {
             this._content = value;
+            console.log("poop");
             this.contentEmitter.emit(this._content);
         },
         enumerable: true,

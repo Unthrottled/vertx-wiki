@@ -1,12 +1,14 @@
 <div class="content-container">
   <h1>{{title}}</h1>
-  <div [innerHTML] ="content">
+  <div>
+    {{content}}
+    <edit-page [enabled]="!editMode" [(content)]="rawContent"></edit-page>
   </div>
   <label class="dead-mans-switch">
     EDIT
     <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
   </label>
   <div>
-    <edit-page [enabled]="editMode" [(content)]="markdown"></edit-page>
+    <edit-page [enabled]="!editMode" [(content)]="content"></edit-page>
   </div>
 </div>
