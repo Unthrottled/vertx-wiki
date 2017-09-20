@@ -21,8 +21,14 @@ export class PagesService {
       .map((payload: PagePayload) => payload.pages);
   }
 
-  fetchPage(name: string): Observable<PageFull> {
-    return this.backendService.fetchPage(name)
+  fetchPage(pageFull: PageFull): Observable<PageFull> {
+    return this.backendService.fetchPage(pageFull.name)
       .map((pagePayload: FullPagePayload)=>pagePayload.page);
+}
+
+  savePage(pageFull: PageFull): Observable<boolean> {
+    return Observable.create(false);
+    // return this.backendService.fetchPage(pageFull.name)
+    //   .map((pagePayload: FullPagePayload)=>pagePayload.page);
 }
 }

@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
+var Observable_1 = require("rxjs/Observable");
 var backend_service_1 = require("../util/backend.service");
 var PagesService = (function () {
     function PagesService(backendService) {
@@ -22,9 +23,14 @@ var PagesService = (function () {
         return this.backendService.fetchAllPages()
             .map(function (payload) { return payload.pages; });
     };
-    PagesService.prototype.fetchPage = function (name) {
-        return this.backendService.fetchPage(name)
+    PagesService.prototype.fetchPage = function (pageFull) {
+        return this.backendService.fetchPage(pageFull.name)
             .map(function (pagePayload) { return pagePayload.page; });
+    };
+    PagesService.prototype.savePage = function (pageFull) {
+        return Observable_1.Observable.create(false);
+        // return this.backendService.fetchPage(pageFull.name)
+        //   .map((pagePayload: FullPagePayload)=>pagePayload.page);
     };
     return PagesService;
 }());

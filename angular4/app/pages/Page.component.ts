@@ -31,13 +31,14 @@ export class PageComponent implements OnInit, Resetable, Saveable {
 
   save(): Observable<boolean> {
     let self = this;
-    return Observable.empty();
+    return this.pagesService
+      .savePage(this.pageFull);
   }
 
   reset(): void {
     let self = this;
     this.pagesService
-      .fetchPage(self.title)
+      .fetchPage(self.pageFull)
       .subscribe((pageFull: PageFull)=>self.load(pageFull));
   }
 
