@@ -13,18 +13,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
 require("./page.htm");
-var Pages_service_1 = require("./Pages.service");
-var angular2_notifications_1 = require("angular2-notifications");
-var PageComponent = (function () {
-    function PageComponent(router, pagesService, notificationService) {
+var BasePageComponent = (function () {
+    function BasePageComponent(router) {
         this.router = router;
-        this.pagesService = pagesService;
-        this.notificationService = notificationService;
         this._editMode = false;
     }
-    Object.defineProperty(PageComponent.prototype, "pageFull", {
+    Object.defineProperty(BasePageComponent.prototype, "pageFull", {
         get: function () {
             return this._pageFull;
         },
@@ -34,51 +29,19 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    PageComponent.prototype.save = function () {
-        var _this = this;
-        var self = this;
-        var returnGuy = this.pagesService
-            .savePage(this.pageFull.name, this.pageFull.markdown);
-        returnGuy.subscribe(function (success) {
-            if (success) {
-                _this.notificationService.success('Page Saved!', ':)', {
-                    timeOut: 3000,
-                    showProgressBar: true,
-                    clickToClose: true
-                });
-            }
-            else {
-                self.failure();
-            }
-        }, function (error) { return self.failure(); });
-        return returnGuy;
-    };
-    PageComponent.prototype.failure = function () {
-        this.notificationService.error('Page NOT Saved!', ':( Try again.', {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-        });
-    };
-    PageComponent.prototype.reset = function () {
-        var self = this;
-        this.pagesService
-            .fetchPage(self.pageFull.name)
-            .subscribe(function (pageFull) { return self.load(pageFull); });
-    };
-    PageComponent.prototype.ngOnInit = function () {
+    BasePageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
             _this.load(data.pages);
         });
     };
-    PageComponent.prototype.load = function (page) {
+    BasePageComponent.prototype.load = function (page) {
         this.title = page.name;
         this.htmlContent = page.html;
         this.content = page.markdown;
         this.pageFull = page;
     };
-    Object.defineProperty(PageComponent.prototype, "title", {
+    Object.defineProperty(BasePageComponent.prototype, "title", {
         get: function () {
             return this._title;
         },
@@ -88,7 +51,7 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PageComponent.prototype, "content", {
+    Object.defineProperty(BasePageComponent.prototype, "content", {
         get: function () {
             return this._content;
         },
@@ -98,7 +61,7 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PageComponent.prototype, "editMode", {
+    Object.defineProperty(BasePageComponent.prototype, "editMode", {
         get: function () {
             return this._editMode;
         },
@@ -108,7 +71,7 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PageComponent.prototype, "htmlContent", {
+    Object.defineProperty(BasePageComponent.prototype, "htmlContent", {
         get: function () {
             return this._htmlContent;
         },
@@ -118,19 +81,12 @@ var PageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    return PageComponent;
+    return BasePageComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Boolean),
     __metadata("design:paramtypes", [Boolean])
-], PageComponent.prototype, "editMode", null);
-PageComponent = __decorate([
-    core_1.Component({
-        selector: 'wiki-page',
-        templateUrl: './templates/page.htm'
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService])
-], PageComponent);
-exports.PageComponent = PageComponent;
-//# sourceMappingURL=Page.component.js.map
+], BasePageComponent.prototype, "editMode", null);
+exports.BasePageComponent = BasePageComponent;
+//# sourceMappingURL=BasePage.component.js.map
