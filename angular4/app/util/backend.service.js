@@ -34,7 +34,7 @@ var BackendService = (function () {
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.updatePage = function (pageName, pageBody) {
-        return this.httpPut("api/pages/" + pageName, { "name": pageName, "markdown": pageBody })
+        return this.httpPut("api/pages", { "name": pageName, "markdown": pageBody })
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.httpGet = function (s) {

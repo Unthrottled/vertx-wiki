@@ -1,0 +1,1 @@
+{"version":3,"file":"StatusPayload.model.js","sourceRoot":"","sources":["StatusPayload.model.ts"],"names":[],"mappings":"AACA;;GAEG;;;AAGH;IAGE,uBAAY,OAAY;QAFhB,cAAS,GAAY,KAAK,CAAC;QAGjC,IAAI,CAAC,SAAS,GAAG,OAAO,CAAC,OAAO,CAAC;IACnC,CAAC;IAED,sBAAI,mCAAQ;aAAZ;YACE,MAAM,CAAC,IAAI,CAAC,SAAS,CAAC;QACxB,CAAC;;;OAAA;IACH,oBAAC;AAAD,CAAC,AAVD,IAUC;AAVY,sCAAa"}

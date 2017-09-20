@@ -33,7 +33,7 @@ export class BackendService {
   }
 
   updatePage(pageName: String, pageBody: String): Observable<StatusPayload> {
-    return this.httpPut("api/pages/" + pageName,
+    return this.httpPut("api/pages",
       {"name": pageName, "markdown": pageBody})
       .map((response: Response) => new StatusPayload(response.json()));
   }
