@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {MarkdownModule} from 'angular2-markdown';
 
 import {AppComponent} from "./app.component";
 import {HttpModule} from "@angular/http";
@@ -41,6 +42,7 @@ const appRoutes = [
     FormsModule,
     HttpModule,
     UiSwitchModule,
+    MarkdownModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
     )

@@ -16,3 +16,4 @@ import 'rxjs';
 // You can import js, ts, css, sass, ...
 import 'jquery';
 import 'angular2-ui-switch';
+import 'angular2-markdown';

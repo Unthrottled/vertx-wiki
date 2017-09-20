@@ -18,4 +18,5 @@ require("rxjs");
 // You can import js, ts, css, sass, ...
 require("jquery");
 require("angular2-ui-switch");
+require("angular2-markdown");
 //# sourceMappingURL=vendor.js.map
