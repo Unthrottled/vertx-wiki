@@ -24,9 +24,11 @@ import {PagesResolve} from "./pages/pages-resolve.service";
 import {PagesService} from "./pages/Pages.service";
 import {BackendService} from "./util/backend.service";
 import {PageComponent} from "./pages/Page.component";
+import {PageResolve} from "./pages/page-resolve.service";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
+  {path: 'page/:name', component: PageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
@@ -65,6 +67,7 @@ const appRoutes = [
     UserPrincipal,
     Permissions,
     PagesResolve,
+    PageResolve,
     PagesService,
     BackendService]
 })

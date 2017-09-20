@@ -7,6 +7,7 @@ import {PageMin} from "./Page.min.model";
 import {BackendService} from "../util/backend.service";
 import {PagePayload} from "./PagePayload.model";
 import {PageFull} from "./Page.full.model";
+import {FullPagePayload} from "./PageFullPayload.model";
 
 @Injectable()
 export class PagesService {
@@ -21,6 +22,7 @@ export class PagesService {
   }
 
   fetchPage(name: string): Observable<PageFull> {
-    return
+    return this.backendService.fetchPage(name)
+      .map((pagePayload: FullPagePayload)=>pagePayload.page);
 }
 }

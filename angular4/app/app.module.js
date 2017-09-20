@@ -31,8 +31,10 @@ var pages_resolve_service_1 = require("./pages/pages-resolve.service");
 var Pages_service_1 = require("./pages/Pages.service");
 var backend_service_1 = require("./util/backend.service");
 var Page_component_1 = require("./pages/Page.component");
+var page_resolve_service_1 = require("./pages/page-resolve.service");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
+    { path: 'page/:name', component: Page_component_1.PageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
@@ -73,6 +75,7 @@ AppModule = __decorate([
             UserPrincipal_model_1.UserPrincipal,
             Permissions_component_1.Permissions,
             pages_resolve_service_1.PagesResolve,
+            page_resolve_service_1.PageResolve,
             Pages_service_1.PagesService,
             backend_service_1.BackendService]
     })

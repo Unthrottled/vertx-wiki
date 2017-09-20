@@ -23,7 +23,8 @@ var PagesService = (function () {
             .map(function (payload) { return payload.pages; });
     };
     PagesService.prototype.fetchPage = function (name) {
-        return;
+        return this.backendService.fetchPage(name)
+            .map(function (pagePayload) { return pagePayload.page; });
     };
     return PagesService;
 }());

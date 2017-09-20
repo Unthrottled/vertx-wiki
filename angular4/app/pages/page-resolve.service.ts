@@ -5,13 +5,11 @@ import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Permissions} from "../auth/Permissions.component";
-import {PageMin} from "./Page.min.model";
 import {PagesService} from "./Pages.service";
 import {PageFull} from "./Page.full.model";
-import {FullPagePayload} from "./PageFullPayload.model";
 
 @Injectable()
-export class PageResolve implements Resolve<PageMin[]> {
+export class PageResolve implements Resolve<PageFull> {
   constructor(private permissons: Permissions, private pagesService: PagesService) {
 
   }
@@ -20,10 +18,9 @@ export class PageResolve implements Resolve<PageMin[]> {
     return this.permissons.canView
       .flatMap(canView => {
         if (canView) {
-          return this.pagesService.fetchPage(route.params[0])
-            .map((pagePayload: FullPagePayload) => pagePayload.page);
+          return this.pagesService.fetchPage(route.params["name"]);
         } else {
-          return Observable.of([]);
+          return Observable.empty();
         }
       });
   }
