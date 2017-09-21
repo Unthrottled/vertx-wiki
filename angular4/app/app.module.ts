@@ -2,8 +2,8 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {MarkdownModule} from 'angular2-markdown';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MarkdownModule} from "angular2-markdown";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import {AppComponent} from "./app.component";
 import {HttpModule} from "@angular/http";
@@ -25,15 +25,18 @@ import {Permissions} from "./auth/Permissions.component";
 import {PagesResolve} from "./pages/pages-resolve.service";
 import {PagesService} from "./pages/Pages.service";
 import {BackendService} from "./util/backend.service";
-import {BasePageComponent} from "./pages/BasePage.component";
 import {PageResolve} from "./pages/page-resolve.service";
 import {EditComponent} from "./pages/Edit.component";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {EditPageComponent} from "./pages/EditPage.component";
+import {NewPageResolve} from "./pages/new-page-resolve.service";
+import {TitleCreationComponent} from "./pages/TitleCreation.component";
+import {CreatePageComponent} from "./pages/CreatePage.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
   {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
+  {path: 'create/:name', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
@@ -64,6 +67,8 @@ const appRoutes = [
     LogoutComponent,
     PagesComponent,
     EditPageComponent,
+    TitleCreationComponent,
+    CreatePageComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],

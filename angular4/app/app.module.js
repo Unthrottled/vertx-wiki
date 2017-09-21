@@ -36,9 +36,13 @@ var page_resolve_service_1 = require("./pages/page-resolve.service");
 var Edit_component_1 = require("./pages/Edit.component");
 var angular2_notifications_1 = require("angular2-notifications");
 var EditPage_component_1 = require("./pages/EditPage.component");
+var new_page_resolve_service_1 = require("./pages/new-page-resolve.service");
+var TitleCreation_component_1 = require("./pages/TitleCreation.component");
+var CreatePage_component_1 = require("./pages/CreatePage.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
+    { path: 'create/:name', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent }
 ];
@@ -71,6 +75,8 @@ AppModule = __decorate([
             logout_component_1.LogoutComponent,
             Pages_component_1.PagesComponent,
             EditPage_component_1.EditPageComponent,
+            TitleCreation_component_1.TitleCreationComponent,
+            CreatePage_component_1.CreatePageComponent,
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],
