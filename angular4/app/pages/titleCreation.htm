@@ -1,4 +1,5 @@
 <div [ngClass]="{'worked': valid, 'failed': !valid }">{{title}}</div>
 <input  type="text"
+        pattern="[a-zA-Z0-9._%+-]+"
         [(ngModel)]="title"
         (onChange)="validate(title)">
