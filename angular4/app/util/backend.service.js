@@ -42,11 +42,18 @@ var BackendService = (function () {
         return this.httpPut("api/pages", { "name": pageName, "markdown": pageBody })
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
+    BackendService.prototype.createPage = function (pageName, pageBody) {
+        return this.httpPost("api/pages", { "name": pageName, "markdown": pageBody })
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
+    };
     BackendService.prototype.httpGet = function (s) {
         return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
     };
     BackendService.prototype.httpPut = function (s, body) {
         return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
+    };
+    BackendService.prototype.httpPost = function (s, body) {
+        return this.http.post(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
     };
     BackendService.prototype.getRequestOptions = function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

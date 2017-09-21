@@ -32,6 +32,11 @@ export class PagesService {
       .map((statusPayload: StatusPayload)=>statusPayload.succeded);
 }
 
+  createPage(pageName: String, pageContent: String): Observable<boolean> {
+    return this.backendService.createPage(pageName, pageContent)
+      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
+}
+
   freshPage() : Observable<PageFull> {
     return Observable.of(new PageFull(
       {markdown: "# A new page\n" +
