@@ -14,7 +14,8 @@ import {BasePageComponent} from "./BasePage.component";
   templateUrl: './templates/create.page.htm'
 })
 export class CreatePageComponent extends BasePageComponent {
-  private _validTitle : boolean;
+  private _validTitle: boolean;
+
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
     super(router);
     this.editMode = true;
@@ -22,9 +23,9 @@ export class CreatePageComponent extends BasePageComponent {
 
   save(): Observable<boolean> {
     let self = this;
-    if(self.validTitle){
+    if (self.validTitle) {
       let returnGuy = this.pagesService
-        .savePage(this.pageFull.name, this.pageFull.markdown);
+        .createPage(this.pageFull.name, this.pageFull.markdown);
       returnGuy.subscribe((success: boolean) => {
         if (success) {
           this.notificationService.success('Page Saved!', ':)', {
@@ -67,7 +68,7 @@ export class CreatePageComponent extends BasePageComponent {
     this._validTitle = value;
   }
 
-  titleValidationChange(delta: boolean){
+  titleValidationChange(delta: boolean) {
     this.validTitle = delta;
   }
 }
