@@ -18,9 +18,10 @@ export class TitleValidationService {
 
   }
 
-  isValid(pageName: String, pageContent: String): Observable<boolean> {
-    return this.backendService.pageExists(pageName)
-      .map((statusPayload: ExistsPayload)=>statusPayload.exists);
+  isValid(pageName: String): Observable<boolean> {
+    return this.backendService
+      .pageExists(pageName)
+      .map((statusPayload: ExistsPayload)=>!statusPayload.exists);
 }
 
 }

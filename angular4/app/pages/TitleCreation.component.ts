@@ -3,6 +3,7 @@
  */
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import "./titleCreation.htm";
+import {TitleValidationService} from "./TitleValidation.service";
 @Component({
   selector: 'title-creation',
   templateUrl: './templates/titleCreation.htm'
@@ -14,7 +15,7 @@ export class TitleCreationComponent {
   @Output()
   private validChange = new EventEmitter();
 
-  constructor() {
+  constructor(private titleValidationService: TitleValidationService) {
   }
 
   set content(value: string) {
@@ -27,7 +28,11 @@ export class TitleCreationComponent {
   }
 
   validate(title: String): void {
-
+    let self = this;
+    this.titleValidationService
+      .isValid(title)
+      .subscribe((valid: boolean)=> self.valid=valid,
+        error => console.warn('OOHHHHH SHIT ' + error))
   }
 
   get valid(): boolean {

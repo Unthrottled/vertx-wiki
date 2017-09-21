@@ -39,6 +39,7 @@ var EditPage_component_1 = require("./pages/EditPage.component");
 var new_page_resolve_service_1 = require("./pages/new-page-resolve.service");
 var TitleCreation_component_1 = require("./pages/TitleCreation.component");
 var CreatePage_component_1 = require("./pages/CreatePage.component");
+var TitleValidation_service_1 = require("./pages/TitleValidation.service");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -92,6 +93,7 @@ AppModule = __decorate([
             page_resolve_service_1.PageResolve,
             Pages_service_1.PagesService,
             new_page_resolve_service_1.NewPageResolve,
+            TitleValidation_service_1.TitleValidationService,
             backend_service_1.BackendService,]
     })
 ], AppModule);

@@ -2,4 +2,4 @@
 <input  type="text"
         pattern="[a-zA-Z0-9._%+-]+"
         [(ngModel)]="content"
-        (onChange)="validate(content)">
+        (ngModelChange)="validate(content)">
