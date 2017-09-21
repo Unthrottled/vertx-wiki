@@ -15,6 +15,9 @@ export class TitleCreationComponent {
   @Output()
   private contentChange = new EventEmitter();
 
+  @Output()
+  private validChange = new EventEmitter();
+
   constructor(private router: Router) {
   }
 
@@ -32,8 +35,13 @@ export class TitleCreationComponent {
 
   }
 
-
   get valid(): boolean {
     return this._valid;
+  }
+
+
+  set valid(value: boolean) {
+    this._valid = value;
+    this.validChange.emit(this._valid);
   }
 }
