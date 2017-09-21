@@ -12,6 +12,7 @@ import {HostService} from "../session/host.service";
 import {PagePayload} from "../pages/PagePayload.model";
 import {FullPagePayload} from "../pages/PageFullPayload.model";
 import {StatusPayload} from "../pages/StatusPayload.model";
+import {ExistsPayload} from "../pages/ExistsPayload.model";
 
 @Injectable()
 export class BackendService {
@@ -30,6 +31,11 @@ export class BackendService {
   fetchPage(pageName: String): Observable<FullPagePayload> {
     return this.httpGet("api/pages/" + pageName)
       .map((response: Response) => new FullPagePayload(response.json()));
+  }
+
+  pageExists(pageName: String): Observable<ExistsPayload> {
+    return this.httpGet("api/exists/" + pageName)
+      .map((response: Response) => new ExistsPayload(response.json()));
   }
 
   updatePage(pageName: String, pageBody: String): Observable<StatusPayload> {
