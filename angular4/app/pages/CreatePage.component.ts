@@ -16,7 +16,7 @@ import {BasePageComponent} from "./BasePage.component";
 export class CreatePageComponent extends BasePageComponent {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
     super(router);
-
+    this.editMode = true;
   }
 
   save(): Observable<boolean> {

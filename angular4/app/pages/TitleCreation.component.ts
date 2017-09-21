@@ -1,8 +1,7 @@
 /**
  * Created by alex on 9/20/17.
  */
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {Router} from '@angular/router';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import "./titleCreation.htm";
 @Component({
   selector: 'title-creation',
@@ -13,17 +12,13 @@ export class TitleCreationComponent {
   private _valid: boolean = false;
 
   @Output()
-  private contentChange = new EventEmitter();
-
-  @Output()
   private validChange = new EventEmitter();
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   set content(value: string) {
     this._content = value;
-    this.contentChange.emit(this._content);
   }
 
   @Input()
@@ -31,7 +26,7 @@ export class TitleCreationComponent {
     return this._content;
   }
 
-  validate(title: String) : void {
+  validate(title: String): void {
 
   }
 

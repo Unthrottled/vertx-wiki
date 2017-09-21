@@ -1,5 +1,5 @@
-<div [ngClass]="{'worked': valid, 'failed': !valid }">{{title}}</div>
+<div [ngClass]="{'worked': valid, 'failed': !valid }">{{content}}</div>
 <input  type="text"
         pattern="[a-zA-Z0-9._%+-]+"
-        [(ngModel)]="title"
-        (onChange)="validate(title)">
+        [(ngModel)]="content"
+        (onChange)="validate(content)">
