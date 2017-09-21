@@ -1,4 +1,4 @@
-<div [ngClass]="{'worked': valid, 'failed': !valid }">{{content}}</div>
+<div [ngClass]="{'worked': validTitle, 'failed': !validTitle }">{{content}}</div>
 <input  type="text"
         pattern="[a-zA-Z0-9._%+-]+"
         [(ngModel)]="content"

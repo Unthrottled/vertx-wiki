@@ -14,6 +14,7 @@ import {BasePageComponent} from "./BasePage.component";
   templateUrl: './templates/create.page.htm'
 })
 export class CreatePageComponent extends BasePageComponent {
+  private _validTitle : boolean;
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
     super(router);
     this.editMode = true;
@@ -21,21 +22,25 @@ export class CreatePageComponent extends BasePageComponent {
 
   save(): Observable<boolean> {
     let self = this;
-    let returnGuy = this.pagesService
-      .savePage(this.pageFull.name, this.pageFull.markdown);
-    returnGuy.subscribe((success: boolean) => {
-      if (success) {
-        this.notificationService.success('Page Saved!', ':)', {
-          timeOut: 3000,
-          showProgressBar: true,
-          clickToClose: true
-        })
-      } else {
-        self.failure()
-      }
-    }, (error: any) => self.failure());
-    return returnGuy
-
+    if(self.validTitle){
+      let returnGuy = this.pagesService
+        .savePage(this.pageFull.name, this.pageFull.markdown);
+      returnGuy.subscribe((success: boolean) => {
+        if (success) {
+          this.notificationService.success('Page Saved!', ':)', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+          })
+        } else {
+          self.failure()
+        }
+      }, (error: any) => self.failure());
+      return
+    } else {
+      self.failure();
+      return Observable.of(false);
+    }
   }
 
   private failure() {
@@ -51,5 +56,18 @@ export class CreatePageComponent extends BasePageComponent {
     this.pagesService
       .fetchPage(self.pageFull.name)
       .subscribe((pageFull: PageFull) => self.load(pageFull));
+  }
+
+
+  get validTitle(): boolean {
+    return this._validTitle;
+  }
+
+  set validTitle(value: boolean) {
+    this._validTitle = value;
+  }
+
+  titleValidationChange(delta: boolean){
+    this.validTitle = delta;
   }
 }

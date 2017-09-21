@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/20/17.
  */
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, NgZone, Output} from "@angular/core";
 import "./titleCreation.htm";
 import {TitleValidationService} from "./TitleValidation.service";
 @Component({
@@ -10,12 +10,12 @@ import {TitleValidationService} from "./TitleValidation.service";
 })
 export class TitleCreationComponent {
   private _content: string;
-  private _valid: boolean = false;
+  private _validTitle: boolean = false;
 
   @Output()
-  private validChange = new EventEmitter();
+  private onValidate = new EventEmitter();
 
-  constructor(private titleValidationService: TitleValidationService) {
+  constructor(private titleValidationService: TitleValidationService, private zone: NgZone) {
   }
 
   set content(value: string) {
@@ -31,17 +31,17 @@ export class TitleCreationComponent {
     let self = this;
     this.titleValidationService
       .isValid(title)
-      .subscribe((valid: boolean)=> self.valid=valid,
+      .subscribe((valid: boolean) => self.zone.run(() => self.validTitle = valid),
         error => console.warn('OOHHHHH SHIT ' + error))
   }
 
-  get valid(): boolean {
-    return this._valid;
+  get validTitle(): boolean {
+    return this._validTitle;
   }
 
 
-  set valid(value: boolean) {
-    this._valid = value;
-    this.validChange.emit(this._valid);
+  set validTitle(value: boolean) {
+    this._validTitle = value;
+    this.onValidate.emit(this._validTitle);
   }
 }
