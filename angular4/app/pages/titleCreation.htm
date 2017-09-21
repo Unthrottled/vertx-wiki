@@ -1,0 +1,4 @@
+<div [ngClass]="{'worked': valid, 'failed': !valid }">{{title}}</div>
+<input  type="text"
+        [(ngModel)]="title"
+        (onChange)="validate(title)">
