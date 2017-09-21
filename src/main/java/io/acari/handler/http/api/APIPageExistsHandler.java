@@ -22,7 +22,7 @@ public class APIPageExistsHandler extends BaseAPIPageHandler {
         routingContext.response().setStatusCode(200);
         return new JsonObject()
           .put("success", true)
-          .put("exists", message.getBoolean("exits"))
+          .put("exists", message.getBoolean("exists"))
           .put("name", pageName);
 
       });
