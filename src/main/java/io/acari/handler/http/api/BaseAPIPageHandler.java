@@ -51,7 +51,7 @@ public class BaseAPIPageHandler implements Handler<RoutingContext>, Configurable
     }
   }
 
-  private JsonObject getFailure() {
+  protected static JsonObject getFailure() {
     return new JsonObject()
       .put("success", false);
   }
