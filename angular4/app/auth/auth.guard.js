@@ -26,7 +26,7 @@ var AuthGuard = (function () {
     }
     AuthGuard.prototype.canActivate = function (route, state) {
         if (this.authService.isLoggedIn) {
-            return Permissions_component_1.Permissions.canActivate(this.userToken, route.fragment);
+            return Permissions_component_1.Permissions.canActivate(this.userToken, route.routeConfig.path);
         }
         // not logged in so redirect to login page with the return url
         this.router.navigate(['/login']);

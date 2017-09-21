@@ -36,7 +36,7 @@ import {CreatePageComponent} from "./pages/CreatePage.component";
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
   {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
-  {path: 'create/:name', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
+  {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent}
 ];
@@ -83,7 +83,8 @@ const appRoutes = [
     PagesResolve,
     PageResolve,
     PagesService,
-    BackendService]
+    NewPageResolve,
+    BackendService,]
 })
 export class AppModule {
 }

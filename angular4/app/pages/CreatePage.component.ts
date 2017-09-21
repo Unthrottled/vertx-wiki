@@ -3,7 +3,7 @@
  */
 import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import "./page.htm";
+import "./create.page.htm";
 import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
 import {NotificationsService} from "angular2-notifications";
@@ -11,7 +11,7 @@ import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
 @Component({
   selector: 'new-page',
-  templateUrl: './templates/page.htm'
+  templateUrl: './templates/create.page.htm'
 })
 export class CreatePageComponent extends BasePageComponent {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {

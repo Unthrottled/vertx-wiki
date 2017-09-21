@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
     if (this.authService.isLoggedIn) {
-      return Permissions.canActivate(this.userToken, route.fragment);
+      return Permissions.canActivate(this.userToken, route.routeConfig.path);
     }
 
     // not logged in so redirect to login page with the return url
