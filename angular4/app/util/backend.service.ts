@@ -44,12 +44,22 @@ export class BackendService {
       .map((response: Response) => new StatusPayload(response.json()));
   }
 
+  createPage(pageName: String, pageBody: String): Observable<StatusPayload> {
+    return this.httpPost("api/pages",
+      {"name": pageName, "markdown": pageBody})
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
   private httpGet(s: string): Observable<Response> {
     return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
   }
 
   private httpPut(s: string, body: any): Observable<Response> {
     return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
+  }
+
+  private httpPost(s: string, body: any): Observable<Response> {
+    return this.http.post(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
   }
 
   private getRequestOptions(): RequestOptionsArgs {
