@@ -14,7 +14,7 @@ import {Deleteable} from "../objects/Deleteable";
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
 })
-export class EditPageComponent extends BasePageComponent implements Deleteable{
+export class EditPageComponent extends BasePageComponent implements Deleteable {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
 
@@ -23,10 +23,10 @@ export class EditPageComponent extends BasePageComponent implements Deleteable{
   deleteMe(): Observable<boolean> {
     let self = this;
     let returnGuy = this.pagesService
-      .savePage(this.pageFull.name, this.pageFull.markdown);
+      .deletePage(this.pageFull.name);
     returnGuy.subscribe((success: boolean) => {
       if (success) {
-        //delete call
+        self.actualRouter.navigate(['/']);
       } else {
         self.failure()
       }

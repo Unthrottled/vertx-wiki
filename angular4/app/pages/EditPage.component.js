@@ -41,10 +41,10 @@ var EditPageComponent = (function (_super) {
     EditPageComponent.prototype.deleteMe = function () {
         var self = this;
         var returnGuy = this.pagesService
-            .savePage(this.pageFull.name, this.pageFull.markdown);
+            .deletePage(this.pageFull.name);
         returnGuy.subscribe(function (success) {
             if (success) {
-                //delete call
+                self.actualRouter.navigate(['/']);
             }
             else {
                 self.failure();
