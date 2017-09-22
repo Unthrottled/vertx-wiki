@@ -132,8 +132,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
-    apiRouter.delete().handler(BodyHandler.create());
-    apiRouter.delete("/pages").handler(apiDeletionHandler.applyConfiguration(config));
+    apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
     router.mountSubRouter("/api", apiRouter);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);

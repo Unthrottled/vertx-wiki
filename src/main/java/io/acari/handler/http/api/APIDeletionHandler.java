@@ -26,16 +26,13 @@ public class APIDeletionHandler implements Handler<RoutingContext>, Configurable
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canDelete", false))
       .filter(b -> b)
-      .ifPresent(canDelete -> {
-        JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        ChainableOptional.ofNullable(bodyAsJson.getString("id"))
-          .ifPresent(id -> {
-            DeliveryOptions deliveryOptions = Config.createDeliveryOptions("delete-page");
-            JsonObject params = new JsonObject()
-              .put("id", id);
-            simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-          }).orElseDo(() -> fourHundred(routingContext, "id"));
-      })
+      .ifPresent(canDelete -> ChainableOptional.ofNullable(routingContext.pathParam("page"))
+        .ifPresent(name -> {
+          DeliveryOptions deliveryOptions = Config.createDeliveryOptions("delete-page");
+          JsonObject params = new JsonObject()
+            .put("name", name);
+          simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+        }).orElseDo(() -> fourHundred(routingContext, "name")))
       .orElseDo(() -> routingContext
         .response()
         .setStatusCode(401)
