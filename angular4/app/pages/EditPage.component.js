@@ -30,13 +30,28 @@ var angular2_notifications_1 = require("angular2-notifications");
 var BasePage_component_1 = require("./BasePage.component");
 var EditPageComponent = (function (_super) {
     __extends(EditPageComponent, _super);
-    function EditPageComponent(router, pagesService, notificationService) {
+    function EditPageComponent(router, pagesService, notificationService, actualRouter) {
         var _this = _super.call(this, router) || this;
         _this.router = router;
         _this.pagesService = pagesService;
         _this.notificationService = notificationService;
+        _this.actualRouter = actualRouter;
         return _this;
     }
+    EditPageComponent.prototype.deleteMe = function () {
+        var self = this;
+        var returnGuy = this.pagesService
+            .savePage(this.pageFull.name, this.pageFull.markdown);
+        returnGuy.subscribe(function (success) {
+            if (success) {
+                //delete call
+            }
+            else {
+                self.failure();
+            }
+        }, function (error) { return self.failure(); });
+        return returnGuy;
+    };
     EditPageComponent.prototype.save = function () {
         var _this = this;
         var self = this;
@@ -76,7 +91,7 @@ EditPageComponent = __decorate([
         selector: 'wiki-page',
         templateUrl: './templates/page.htm'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
 ], EditPageComponent);
 exports.EditPageComponent = EditPageComponent;
 //# sourceMappingURL=EditPage.component.js.map

@@ -34,6 +34,10 @@ var BackendService = (function () {
         return this.httpGet("api/pages/" + pageName)
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
+    BackendService.prototype.deletePage = function (pageName) {
+        return this.httpDelete("api/page/" + pageName)
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
+    };
     BackendService.prototype.pageExists = function (pageName) {
         return this.httpGet("api/exists/" + pageName)
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
@@ -51,6 +55,9 @@ var BackendService = (function () {
     };
     BackendService.prototype.httpPut = function (s, body) {
         return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
+    };
+    BackendService.prototype.httpDelete = function (s) {
+        return this.http.delete(this.hostService.fetchUrl() + s, this.getRequestOptions());
     };
     BackendService.prototype.httpPost = function (s, body) {
         return this.http.post(this.hostService.fetchUrl() + s, body, this.getRequestOptions());

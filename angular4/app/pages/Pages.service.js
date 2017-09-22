@@ -36,6 +36,10 @@ var PagesService = (function () {
         return this.backendService.createPage(pageName, pageContent)
             .map(function (statusPayload) { return statusPayload.succeded; });
     };
+    PagesService.prototype.deletePage = function (pageName) {
+        return this.backendService.deletePage(pageName)
+            .map(function (statusPayload) { return statusPayload.succeded; });
+    };
     PagesService.prototype.freshPage = function () {
         return Observable_1.Observable.of(new Page_full_model_1.PageFull({ markdown: "# A new page\n" +
                 "\n" +

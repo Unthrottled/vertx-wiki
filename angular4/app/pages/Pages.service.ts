@@ -37,6 +37,11 @@ export class PagesService {
       .map((statusPayload: StatusPayload)=>statusPayload.succeded);
 }
 
+  deletePage(pageName: String): Observable<boolean> {
+    return this.backendService.deletePage(pageName)
+      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
+}
+
   freshPage() : Observable<PageFull> {
     return Observable.of(new PageFull(
       {markdown: "# A new page\n" +
