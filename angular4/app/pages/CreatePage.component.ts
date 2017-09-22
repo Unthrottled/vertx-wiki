@@ -25,7 +25,7 @@ export class CreatePageComponent extends BasePageComponent {
     let self = this;
     if (self.validTitle) {
       let returnGuy = this.pagesService
-        .createPage(this.pageFull.name, this.pageFull.markdown);
+        .createPage(this.title, this.content);
       returnGuy.subscribe((success: boolean) => {
         if (success) {
           this.notificationService.success('Page Saved!', ':)', {
@@ -68,7 +68,11 @@ export class CreatePageComponent extends BasePageComponent {
     this._validTitle = value;
   }
 
-  titleValidationChange(delta: boolean) {
+  titleValidationChange(delta: boolean) : void {
     this.validTitle = delta;
+  }
+
+  titleChange(delta: string): void{
+    this.title = delta;
   }
 }

@@ -44,7 +44,7 @@ var CreatePageComponent = (function (_super) {
         var self = this;
         if (self.validTitle) {
             var returnGuy = this.pagesService
-                .createPage(this.pageFull.name, this.pageFull.markdown);
+                .createPage(this.title, this.content);
             returnGuy.subscribe(function (success) {
                 if (success) {
                     _this.notificationService.success('Page Saved!', ':)', {
@@ -89,6 +89,9 @@ var CreatePageComponent = (function (_super) {
     });
     CreatePageComponent.prototype.titleValidationChange = function (delta) {
         this.validTitle = delta;
+    };
+    CreatePageComponent.prototype.titleChange = function (delta) {
+        this.title = delta;
     };
     return CreatePageComponent;
 }(BasePage_component_1.BasePageComponent));

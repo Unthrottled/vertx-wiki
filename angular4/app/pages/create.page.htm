@@ -1,5 +1,7 @@
 <div class="content-container">
-  <title-creation (onValidate)="titleValidationChange($event)" [content]="title"></title-creation>
+  <title-creation (onValidate)="titleValidationChange($event)"
+                  (onChange)="title = $event"
+                  [content]="title"></title-creation>
   <markdown [data]="content">
   </markdown>
   <label class="dead-mans-switch">

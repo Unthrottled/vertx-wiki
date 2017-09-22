@@ -21,6 +21,7 @@ var TitleCreationComponent = (function () {
         this.zone = zone;
         this._validTitle = false;
         this.onValidate = new core_1.EventEmitter();
+        this.onChange = new core_1.EventEmitter();
     }
     Object.defineProperty(TitleCreationComponent.prototype, "content", {
         get: function () {
@@ -28,6 +29,7 @@ var TitleCreationComponent = (function () {
         },
         set: function (value) {
             this._content = value;
+            this.onChange.emit(this._content);
         },
         enumerable: true,
         configurable: true
@@ -55,6 +57,10 @@ __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], TitleCreationComponent.prototype, "onValidate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], TitleCreationComponent.prototype, "onChange", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", String),

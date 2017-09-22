@@ -14,12 +14,15 @@ export class TitleCreationComponent {
 
   @Output()
   private onValidate = new EventEmitter();
+  @Output()
+  private onChange = new EventEmitter();
 
   constructor(private titleValidationService: TitleValidationService, private zone: NgZone) {
   }
 
   set content(value: string) {
     this._content = value;
+    this.onChange.emit(this._content);
   }
 
   @Input()
