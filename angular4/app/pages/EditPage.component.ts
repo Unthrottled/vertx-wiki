@@ -2,21 +2,36 @@
  * Created by alex on 9/17/17.
  */
 import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import "./page.htm";
 import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
+import {Deleteable} from "../objects/Deleteable";
 @Component({
   selector: 'wiki-page',
   templateUrl: './templates/page.htm'
 })
-export class EditPageComponent extends BasePageComponent {
-  constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
+export class EditPageComponent extends BasePageComponent implements Deleteable{
+  constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
 
+  }
+
+  deleteMe(): Observable<boolean> {
+    let self = this;
+    let returnGuy = this.pagesService
+      .savePage(this.pageFull.name, this.pageFull.markdown);
+    returnGuy.subscribe((success: boolean) => {
+      if (success) {
+        //delete call
+      } else {
+        self.failure()
+      }
+    }, (error: any) => self.failure());
+    return returnGuy
   }
 
   save(): Observable<boolean> {
