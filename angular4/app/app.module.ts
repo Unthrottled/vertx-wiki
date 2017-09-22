@@ -33,6 +33,7 @@ import {NewPageResolve} from "./pages/new-page-resolve.service";
 import {TitleCreationComponent} from "./pages/TitleCreation.component";
 import {CreatePageComponent} from "./pages/CreatePage.component";
 import {TitleValidationService} from "./pages/TitleValidation.service";
+import {DeletionComponent} from "./pages/deletion.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -70,6 +71,7 @@ const appRoutes = [
     EditPageComponent,
     TitleCreationComponent,
     CreatePageComponent,
+    DeletionComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],

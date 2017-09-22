@@ -1,8 +1,8 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {Router} from '@angular/router';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Router} from "@angular/router";
 import "./edit.htm";
 @Component({
   selector: 'edit-page',
@@ -21,6 +21,9 @@ export class EditComponent {
 
   @Output()
   private onSave = new EventEmitter();
+
+  @Output()
+  private onDelete = new EventEmitter();
 
   constructor(private router: Router) {
   }
@@ -54,12 +57,16 @@ export class EditComponent {
     return this._content;
   }
 
-  save(){
+  save() {
     this.onSave.emit(true);
   }
 
-  reset(){
+  reset() {
     this.onReset.emit(true);
+  }
+
+  delete() {
+    this.onDelete.emit(true);
   }
 
 }
