@@ -33,6 +33,11 @@ export class BackendService {
       .map((response: Response) => new FullPagePayload(response.json()));
   }
 
+  deletePage(pageName: String): Observable<StatusPayload> {
+    return this.httpDelete("api/page/" + pageName)
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
   pageExists(pageName: String): Observable<ExistsPayload> {
     return this.httpGet("api/exists/" + pageName)
       .map((response: Response) => new ExistsPayload(response.json()));
@@ -56,6 +61,10 @@ export class BackendService {
 
   private httpPut(s: string, body: any): Observable<Response> {
     return this.http.put(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
+  }
+
+  private httpDelete(s: string): Observable<Response> {
+    return this.http.delete(this.hostService.fetchUrl() + s,this.getRequestOptions());
   }
 
   private httpPost(s: string, body: any): Observable<Response> {
