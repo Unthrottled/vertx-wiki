@@ -9,12 +9,16 @@ import {PagesService} from "./Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
+import {EditOptions} from "./EditOptions.model";
 @Component({
   selector: 'new-page',
   templateUrl: './templates/create.page.htm'
 })
 export class CreatePageComponent extends BasePageComponent {
   private _validTitle: boolean;
+  private _editOptions: EditOptions = {
+    hideDelete: true
+  };
 
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
@@ -70,5 +74,14 @@ export class CreatePageComponent extends BasePageComponent {
 
   titleChange(delta: string): void{
     this.title = delta;
+  }
+
+
+  get editOptions(): EditOptions {
+    return this._editOptions;
+  }
+
+  set editOptions(value: EditOptions) {
+    this._editOptions = value;
   }
 }

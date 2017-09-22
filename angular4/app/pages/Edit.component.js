@@ -22,6 +22,9 @@ var EditComponent = (function () {
         this.onReset = new core_1.EventEmitter();
         this.onSave = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
+        this.options = {
+            hideDelete: false
+        };
     }
     Object.defineProperty(EditComponent.prototype, "id", {
         get: function () {
@@ -60,9 +63,19 @@ var EditComponent = (function () {
     EditComponent.prototype.reset = function () {
         this.onReset.emit(true);
     };
-    EditComponent.prototype.delete = function () {
+    EditComponent.prototype.deleted = function () {
         this.onDelete.emit(true);
     };
+    Object.defineProperty(EditComponent.prototype, "options", {
+        get: function () {
+            return this._options;
+        },
+        set: function (value) {
+            this._options = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return EditComponent;
 }());
 __decorate([
@@ -96,6 +109,11 @@ __decorate([
     __metadata("design:type", String),
     __metadata("design:paramtypes", [String])
 ], EditComponent.prototype, "content", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], EditComponent.prototype, "options", null);
 EditComponent = __decorate([
     core_1.Component({
         selector: 'edit-page',

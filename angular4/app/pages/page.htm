@@ -10,6 +10,7 @@
     <edit-page [id]="title"
                [enabled]="!editMode"
                [(content)]="content"
+               [options]="editOptions"
                (onReset)="reset()"
                (onSave)="save()"
                (onDelete)="deleteMe()"></edit-page>

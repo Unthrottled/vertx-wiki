@@ -6,7 +6,9 @@
   <div class="content-container">
     <button (click)="save()">Save Changes</button>
     <button (click)="reset()">Reset Changes</button>
-    <deletion-component (onClick)="delete()"></deletion-component>
+    <div [hidden]="options.hideDelete">
+      <deletion-component (onClick)="deleted()"></deletion-component>
+    </div>
   </div>
   <div>
     <simple-notifications></simple-notifications>

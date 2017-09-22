@@ -4,6 +4,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Router} from "@angular/router";
 import "./edit.htm";
+import {EditOptions} from "./EditOptions.model";
 @Component({
   selector: 'edit-page',
   templateUrl: './templates/edit.htm'
@@ -12,7 +13,7 @@ export class EditComponent {
   private _enabled: boolean;
   private _id: string;
   private _content: string;
-
+  private _options: EditOptions;
   @Output()
   private contentChange = new EventEmitter();
 
@@ -26,6 +27,9 @@ export class EditComponent {
   private onDelete = new EventEmitter();
 
   constructor(private router: Router) {
+    this.options = {
+      hideDelete: false
+    }
   }
 
   @Input()
@@ -33,10 +37,10 @@ export class EditComponent {
     return this._id;
   }
 
-
   set id(value: string) {
     this._id = value;
   }
+
 
   @Input()
   get enabled(): boolean {
@@ -65,8 +69,17 @@ export class EditComponent {
     this.onReset.emit(true);
   }
 
-  delete() {
+  deleted() {
     this.onDelete.emit(true);
+  }
+
+  @Input()
+  get options(): EditOptions {
+    return this._options;
+  }
+
+  set options(value: EditOptions) {
+    this._options = value;
   }
 
 }

@@ -11,6 +11,7 @@
   <div>
     <edit-page [id]="title"
                [enabled]="!editMode"
+               [options]="editOptions"
                [(content)]="content"
                (onReset)="reset()"
                (onSave)="save()"></edit-page>
