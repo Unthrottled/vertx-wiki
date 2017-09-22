@@ -2,7 +2,7 @@
  * Created by alex on 9/17/17.
  */
 import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import "./create.page.htm";
 import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
@@ -16,7 +16,7 @@ import {BasePageComponent} from "./BasePage.component";
 export class CreatePageComponent extends BasePageComponent {
   private _validTitle: boolean;
 
-  constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService) {
+  constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
     this.editMode = true;
   }
@@ -28,11 +28,7 @@ export class CreatePageComponent extends BasePageComponent {
         .createPage(this.title, this.content);
       returnGuy.subscribe((success: boolean) => {
         if (success) {
-          this.notificationService.success('Page Saved!', ':)', {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-          })
+          self.actualRouter.navigate(['/page/'+self.title]);
         } else {
           self.failure()
         }

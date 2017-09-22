@@ -9,6 +9,10 @@
     <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
   </label>
   <div>
-    <edit-page [id]="title" [enabled]="!editMode" [(content)]="content" (onReset)="reset()" (onSave)="save()"></edit-page>
+    <edit-page [id]="title"
+               [enabled]="!editMode"
+               [(content)]="content"
+               (onReset)="reset()"
+               (onSave)="save()"></edit-page>
   </div>
 </div>

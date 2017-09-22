@@ -31,27 +31,23 @@ var Observable_1 = require("rxjs/Observable");
 var BasePage_component_1 = require("./BasePage.component");
 var CreatePageComponent = (function (_super) {
     __extends(CreatePageComponent, _super);
-    function CreatePageComponent(router, pagesService, notificationService) {
+    function CreatePageComponent(router, pagesService, notificationService, actualRouter) {
         var _this = _super.call(this, router) || this;
         _this.router = router;
         _this.pagesService = pagesService;
         _this.notificationService = notificationService;
+        _this.actualRouter = actualRouter;
         _this.editMode = true;
         return _this;
     }
     CreatePageComponent.prototype.save = function () {
-        var _this = this;
         var self = this;
         if (self.validTitle) {
             var returnGuy = this.pagesService
                 .createPage(this.title, this.content);
             returnGuy.subscribe(function (success) {
                 if (success) {
-                    _this.notificationService.success('Page Saved!', ':)', {
-                        timeOut: 3000,
-                        showProgressBar: true,
-                        clickToClose: true
-                    });
+                    self.actualRouter.navigate(['/page/' + self.title]);
                 }
                 else {
                     self.failure();
@@ -100,7 +96,7 @@ CreatePageComponent = __decorate([
         selector: 'new-page',
         templateUrl: './templates/create.page.htm'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
 ], CreatePageComponent);
 exports.CreatePageComponent = CreatePageComponent;
 //# sourceMappingURL=CreatePage.component.js.map
