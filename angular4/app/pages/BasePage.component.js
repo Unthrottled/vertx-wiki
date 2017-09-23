@@ -18,6 +18,9 @@ var BasePageComponent = (function () {
     function BasePageComponent(router) {
         this.router = router;
         this._editMode = false;
+        this._editOptions = {
+            hideDelete: true
+        };
     }
     Object.defineProperty(BasePageComponent.prototype, "pageFull", {
         get: function () {
@@ -77,6 +80,16 @@ var BasePageComponent = (function () {
         },
         set: function (value) {
             this._htmlContent = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BasePageComponent.prototype, "editOptions", {
+        get: function () {
+            return this._editOptions;
+        },
+        set: function (value) {
+            this._editOptions = value;
         },
         enumerable: true,
         configurable: true

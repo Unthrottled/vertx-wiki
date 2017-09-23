@@ -36,6 +36,9 @@ var EditPageComponent = (function (_super) {
         _this.pagesService = pagesService;
         _this.notificationService = notificationService;
         _this.actualRouter = actualRouter;
+        _this.editOptions = {
+            hideDelete: false
+        };
         return _this;
     }
     EditPageComponent.prototype.deleteMe = function () {

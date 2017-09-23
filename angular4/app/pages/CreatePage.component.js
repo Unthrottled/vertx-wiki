@@ -37,9 +37,6 @@ var CreatePageComponent = (function (_super) {
         _this.pagesService = pagesService;
         _this.notificationService = notificationService;
         _this.actualRouter = actualRouter;
-        _this._editOptions = {
-            hideDelete: true
-        };
         _this.editMode = true;
         return _this;
     }
@@ -92,16 +89,6 @@ var CreatePageComponent = (function (_super) {
     CreatePageComponent.prototype.titleChange = function (delta) {
         this.title = delta;
     };
-    Object.defineProperty(CreatePageComponent.prototype, "editOptions", {
-        get: function () {
-            return this._editOptions;
-        },
-        set: function (value) {
-            this._editOptions = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     return CreatePageComponent;
 }(BasePage_component_1.BasePageComponent));
 CreatePageComponent = __decorate([

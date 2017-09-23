@@ -16,9 +16,6 @@ import {EditOptions} from "./EditOptions.model";
 })
 export class CreatePageComponent extends BasePageComponent {
   private _validTitle: boolean;
-  private _editOptions: EditOptions = {
-    hideDelete: true
-  };
 
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
@@ -32,7 +29,7 @@ export class CreatePageComponent extends BasePageComponent {
         .createPage(this.title, this.content);
       returnGuy.subscribe((success: boolean) => {
         if (success) {
-          self.actualRouter.navigate(['/page/'+self.title]);
+          self.actualRouter.navigate(['/page/' + self.title]);
         } else {
           self.failure()
         }
@@ -68,20 +65,11 @@ export class CreatePageComponent extends BasePageComponent {
     this._validTitle = value;
   }
 
-  titleValidationChange(delta: boolean) : void {
+  titleValidationChange(delta: boolean): void {
     this.validTitle = delta;
   }
 
-  titleChange(delta: string): void{
+  titleChange(delta: string): void {
     this.title = delta;
-  }
-
-
-  get editOptions(): EditOptions {
-    return this._editOptions;
-  }
-
-  set editOptions(value: EditOptions) {
-    this._editOptions = value;
   }
 }

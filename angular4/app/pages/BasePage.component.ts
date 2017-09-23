@@ -8,6 +8,7 @@ import {PageFull} from "./Page.full.model";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
 import {Observable} from 'rxjs/Observable';
+import {EditOptions} from "./EditOptions.model";
 
 
 export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
@@ -24,6 +25,9 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
   private _editMode: boolean = false;
   private _htmlContent: string;
   private _pageFull: PageFull;
+  protected _editOptions: EditOptions = {
+    hideDelete: true
+  };
 
   constructor(protected router: ActivatedRoute) {
   }
@@ -76,5 +80,13 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
 
   set htmlContent(value: string) {
     this._htmlContent = value;
+  }
+
+  get editOptions(): EditOptions {
+    return this._editOptions;
+  }
+
+  set editOptions(value: EditOptions) {
+    this._editOptions = value;
   }
 }
