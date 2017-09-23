@@ -16,7 +16,6 @@ body {
     background-color:#464646;
     background-image: url('../images/stripe.png');
     -webkit-text-size-adjust: 100%;
-    max-width: 1060px;
     overflow-x: hidden;
     display: block;
     margin: auto;
@@ -55,11 +54,19 @@ body {
 }
 
 .edit-content{
+}
 
+.edit-options {
+  display: flex;
+}
+
+.content-edit {
+  width: 100%;
+  min-height: 500px;
 }
 
 .page-content {
-
+  word-wrap: break-word;
 }
 
 .content-container {
