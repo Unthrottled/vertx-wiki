@@ -54,6 +54,7 @@ body {
 }
 
 .edit-content{
+  text-align: right;
 }
 
 .edit-options {
@@ -67,6 +68,11 @@ body {
 
 .page-content {
   word-wrap: break-word;
+  flex-grow: 1;
+}
+
+.view-container{
+  display: flex;
 }
 
 .content-container {
