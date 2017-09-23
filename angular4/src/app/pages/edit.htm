@@ -1,0 +1,17 @@
+<div [hidden]="enabled">
+  <div class="content-container">
+    <textarea [(ngModel)]="content">
+    </textarea>
+  </div>
+  <div class="content-container">
+    <button (click)="save()">Save Changes</button>
+    <button (click)="reset()">Reset Changes</button>
+    <div [hidden]="options.hideDelete">
+      <deletion-component (onClick)="deleted()"></deletion-component>
+    </div>
+  </div>
+  <div>
+    <simple-notifications></simple-notifications>
+  </div>
+</div>
+

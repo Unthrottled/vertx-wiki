@@ -23,13 +23,13 @@ public class DeletionHandler implements Handler<Message<JsonObject>> {
 
   @Override
   public void handle(Message<JsonObject> message) {
-    ChainableOptional.ofNullable(message.body().getString("id"))
-      .ifPresent(id -> jdbcClient.getConnection(asc -> {
+    ChainableOptional.ofNullable(message.body().getString("name"))
+      .ifPresent(name -> jdbcClient.getConnection(asc -> {
         if (asc.succeeded()) {
           SQLConnection connection = asc.result();
           connection.updateWithParams(
             Queries.SqlQueries.DELETE_PAGE.getValue(),
-            new JsonArray().add(id),
+            new JsonArray().add(name),
             asr -> {
               connection.close();
               if (asr.succeeded()) {
@@ -42,7 +42,7 @@ public class DeletionHandler implements Handler<Message<JsonObject>> {
           message.fail(500, asc.cause().getMessage());
         }
       }))
-      .orElseDo(() -> message.fail(400, "No Id entered bruv!"));
+      .orElseDo(() -> message.fail(400, "No Name entered bruv!"));
 
 
   }
