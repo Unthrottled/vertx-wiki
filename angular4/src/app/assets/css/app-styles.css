@@ -51,8 +51,15 @@ body {
 }
 
 .dead-mans-switch {
-    float: right;
-    display: inline-block;
+
+}
+
+.edit-content{
+
+}
+
+.page-content {
+
 }
 
 .content-container {
