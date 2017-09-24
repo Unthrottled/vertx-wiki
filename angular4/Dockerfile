@@ -1,0 +1,8 @@
+FROM node:latest
+MAINTAINER Alex Simons "alexsimons9999@gmail.com"
+USER root
+VOLUME /app
+WORKDIR /app
+
+ENTRYPOINT ["npm", "run", "watch"]
+
