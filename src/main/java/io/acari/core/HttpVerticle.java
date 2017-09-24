@@ -2,11 +2,8 @@ package io.acari.core;
 
 import com.google.inject.Inject;
 import io.acari.handler.Config;
-import io.acari.handler.auth.LoginHandler;
-import io.acari.handler.http.ftl.*;
 import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
-import io.acari.handler.http.ftl.ErrorHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
