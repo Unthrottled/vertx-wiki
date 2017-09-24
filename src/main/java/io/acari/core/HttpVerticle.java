@@ -26,48 +26,27 @@ public class HttpVerticle extends AbstractVerticle {
   private static final String CONFIG_HTTP_SERVER_PORT = "http.server.port";
   private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
   private static final int CONFIG_HTTP_SERVER_PORT_NUMBER = 8989;
-  private final IndexHandler indexHandler;
-  private final ErrorHandler errorHandler;
-  private final PageHandler pageHandler;
-  private final CreationHandler creationHandler;
-  private final SaveHandler saveHandler;
-  private final DeletionHandler deletionHandler;
   private final io.acari.handler.http.api.APIAllPageDataHandler APIAllPageDataHandler;
   private final APIPageHandler apiPageHandler;
   private final APICreationHandler apiCreationHandler;
   private final APIUpdateHandler apiUpdateHandler;
   private final APIDeletionHandler apiDeletionHandler;
-  private final LoginHandler loginHandler;
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
 
   @Inject
-  public HttpVerticle(IndexHandler indexHandler,
-                      ErrorHandler errorHandler,
-                      PageHandler pageHandler,
-                      CreationHandler creationHandler,
-                      SaveHandler saveHandler,
-                      DeletionHandler deletionHandler,
-                      APIAllPageDataHandler APIAllPageDataHandler,
+  public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
                       APIPageHandler apiPageHandler,
                       APICreationHandler apiCreationHandler,
                       APIUpdateHandler apiUpdateHandler,
                       APIDeletionHandler apiDeletionHandler,
-                      LoginHandler loginHandler,
                       TokenHandler tokenHandler,
                       APIPageExistsHandler apiPageExistsHandler) {
-    this.indexHandler = indexHandler;
-    this.errorHandler = errorHandler;
-    this.pageHandler = pageHandler;
-    this.creationHandler = creationHandler;
-    this.saveHandler = saveHandler;
-    this.deletionHandler = deletionHandler;
     this.APIAllPageDataHandler = APIAllPageDataHandler;
     this.apiPageHandler = apiPageHandler;
     this.apiCreationHandler = apiCreationHandler;
     this.apiUpdateHandler = apiUpdateHandler;
     this.apiDeletionHandler = apiDeletionHandler;
-    this.loginHandler = loginHandler;
     this.tokenHandler = tokenHandler;
     this.apiPageExistsHandler = apiPageExistsHandler;
   }
@@ -117,8 +96,6 @@ public class HttpVerticle extends AbstractVerticle {
 
     StaticHandler requestHandler = StaticHandler.create();
     router.get("/*").handler(requestHandler);
-//    router.get("/assets/*").handler(requestHandler);
-    router.get("/templates/*").handler(requestHandler);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
