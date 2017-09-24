@@ -92,7 +92,7 @@ public class HttpVerticle extends AbstractVerticle {
     router.mountSubRouter("/api", apiRouter);
 
     StaticHandler requestHandler = StaticHandler.create();
-    router.get("/*").handler(requestHandler);
+    router.get("/*").handler(requestHandler).failureHandler(routingContext -> routingContext.reroute("/"));
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
