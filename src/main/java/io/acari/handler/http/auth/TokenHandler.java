@@ -27,37 +27,35 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
             JsonObject credentials = new JsonObject()
               .put("username", username)
               .put("password", password);
-            authProvider.authenticate(credentials, authRes -> {
-              ChainableOptional.of(authRes)
-                .filter(AsyncResult::succeeded)
-                .map(AsyncResult::result)
-                .ifPresent(user -> user.isAuthorised("view", canView ->
-                  user.isAuthorised("create", canCreate ->
-                    user.isAuthorised("delete", canDelete ->
-                      user.isAuthorised("update", canUpdate -> {
-                        JsonObject principal = new JsonObject()
-                          .put("username", username)
-                          .put("canView", canView.succeeded() && canView.result())
-                          .put("canCreate", canCreate.succeeded() && canCreate.result())
-                          .put("canDelete", canDelete.succeeded() && canDelete.result())
-                          .put("canUpdate", canUpdate.succeeded() && canUpdate.result());
-                        String token = jwtAuth.generateToken(
-                          principal,
-                          new JWTOptions()
-                            .setSubject("Wiki API")
-                            .setIssuer("Vert.x")
-                        );
-                        routingContext.response()
-                          .putHeader("Content-Type", "application/json")
-                          .end(new JsonObject()
-                            .put("token", token)
-                            .put("principal", principal).encode());
-                      })))))
-                .orElseDo(() -> {
-                  LOGGER.warn("Thing Broke in Token Handler -> ", authRes.cause());
-                  routingContext.response().setStatusCode(401).end();
-                });
-            });
+            authProvider.authenticate(credentials, authRes -> ChainableOptional.of(authRes)
+              .filter(AsyncResult::succeeded)
+              .map(AsyncResult::result)
+              .ifPresent(user -> user.isAuthorised("view", canView ->
+                user.isAuthorised("create", canCreate ->
+                  user.isAuthorised("delete", canDelete ->
+                    user.isAuthorised("update", canUpdate -> {
+                      JsonObject principal = new JsonObject()
+                        .put("username", username)
+                        .put("canView", canView.succeeded() && canView.result())
+                        .put("canCreate", canCreate.succeeded() && canCreate.result())
+                        .put("canDelete", canDelete.succeeded() && canDelete.result())
+                        .put("canUpdate", canUpdate.succeeded() && canUpdate.result());
+                      String token = jwtAuth.generateToken(
+                        principal,
+                        new JWTOptions()
+                          .setSubject("Wiki API")
+                          .setIssuer("Vert.x")
+                      );
+                      routingContext.response()
+                        .putHeader("Content-Type", "application/json")
+                        .end(new JsonObject()
+                          .put("token", token)
+                          .put("principal", principal).encode());
+                    })))))
+              .orElseDo(() -> {
+                LOGGER.warn("Thing Broke in Token Handler -> ", authRes.cause());
+                routingContext.response().setStatusCode(401).end();
+              }));
           })
           .orElseDo(() -> fourHundred(routingContext, "password")))
       .orElseDo(() -> fourHundred(routingContext, "login"));

@@ -22,11 +22,9 @@ public class SimpleResponseHandler {
     vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
       params,
       deliveryOptions,
-      connectionResult -> {
-        routingContext.response()
-          .putHeader("Content-Type", "application/json")
-          .end(getPayLoad(connectionResult, routingContext).encode());
-      });
+      connectionResult -> routingContext.response()
+        .putHeader("Content-Type", "application/json")
+        .end(getPayLoad(connectionResult, routingContext).encode()));
   }
 
   private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext) {
