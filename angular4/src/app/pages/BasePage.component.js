@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./page.htm");
+var Observable_1 = require("rxjs/Observable");
 var BasePageComponent = (function () {
     function BasePageComponent(router) {
         this.router = router;
@@ -43,6 +44,7 @@ var BasePageComponent = (function () {
         this.htmlContent = page.html;
         this.content = page.markdown;
         this.pageFull = page;
+        return Observable_1.Observable.of(true);
     };
     Object.defineProperty(BasePageComponent.prototype, "title", {
         get: function () {

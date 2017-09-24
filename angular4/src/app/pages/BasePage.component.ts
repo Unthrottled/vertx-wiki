@@ -41,11 +41,12 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
     });
   }
 
-  protected load(page: PageFull) {
+  protected load(page: PageFull) : Observable<boolean>{
     this.title = page.name;
     this.htmlContent = page.html;
     this.content = page.markdown;
     this.pageFull = page;
+    return Observable.of(true);
   }
 
 

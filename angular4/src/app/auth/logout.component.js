@@ -28,9 +28,9 @@ var LogoutComponent = (function () {
         this.authService.logout()
             .then(function (success) { return self.router.navigate(['/login']); });
     };
-    Object.defineProperty(LogoutComponent.prototype, "isLoggedIn", {
+    Object.defineProperty(LogoutComponent.prototype, "hideLogout", {
         get: function () {
-            return this.authService.isLoggedIn;
+            return !this.authService.isLoggedIn;
         },
         enumerable: true,
         configurable: true
