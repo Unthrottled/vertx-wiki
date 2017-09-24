@@ -1,0 +1,103 @@
+.boxed-content {
+    background: #afafaf;
+    z-index: 10000;
+    position: relative;
+    width: 99.984%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+body {
+    font-family:Tahoma, Geneva, sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    font-weight: 300;
+    color:#f9f9f9;
+    background-color:#464646;
+    background-image: url(assets/stripe.ea57599555451c53af1db0db4f5b2664.png);
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    display: block;
+    margin: auto;
+    padding: 40px 50px;
+}
+
+.hystrix-dashboard-container{
+    display: inline-block;
+    margin: 20px;
+    padding: 10px;
+    background-color: #e6e6e6;
+    color: #3e3e3e;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.message-control-container{
+    color: #3e3e3e;
+}
+
+.stream-data {
+    color: #3e3e3e;
+}
+
+.app-container {
+    width: 95%;
+    padding: 20px;
+}
+
+.slider-bro {
+    margin-top: 3rem;
+}
+
+.dead-mans-switch {
+
+}
+
+.edit-content{
+  text-align: right;
+}
+
+.edit-options {
+  display: flex;
+}
+
+.content-edit {
+  width: 100%;
+  min-height: 500px;
+}
+
+.page-content {
+  word-wrap: break-word;
+  flex-grow: 1;
+}
+
+.view-container{
+  display: flex;
+}
+
+.content-container {
+    background: #e6e6e6;
+    color: #3e3e3e;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.app-control-container{
+    text-align: center;
+}
+
+.stream-table {
+}
+
+.failed {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.worked {
+    color: green;
+    font-weight: bold;
+    font-size: 1.5rem;
+}

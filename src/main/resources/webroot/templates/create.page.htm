@@ -1,0 +1,19 @@
+<div class="content-container">
+  <title-creation (onValidate)="titleValidationChange($event)"
+                  (onChange)="title = $event"
+                  [content]="title"></title-creation>
+  <markdown [data]="content">
+  </markdown>
+  <label class="dead-mans-switch">
+    EDIT
+    <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
+  </label>
+  <div>
+    <edit-page [id]="title"
+               [enabled]="!editMode"
+               [options]="editOptions"
+               [(content)]="content"
+               (onReset)="reset()"
+               (onSave)="save()"></edit-page>
+  </div>
+</div>

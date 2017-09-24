@@ -89,29 +89,9 @@ public class HttpVerticle extends AbstractVerticle {
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
     router.route().handler(UserSessionHandler.create(authProvider));
 
-    AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/login");
-    router.route("/").handler(authHandler);
+    AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/");
     router.route("/wiki/*").handler(authHandler);
     router.route("/action/*").handler(authHandler);
-
-    router.get("/login").handler(loginHandler);
-    router.post("/login-auth").handler(FormLoginHandler.create(authProvider)
-      .setDirectLoggedInOKURL("/"));
-    router.get("/logout").handler(routingContext -> {
-      routingContext.clearUser();
-      routingContext.response()
-        .setStatusCode(302)
-        .putHeader("Location", "/")
-        .end();
-    });
-
-    router.get("/").handler(indexHandler.applyConfiguration(config));
-    router.get("/error").handler(errorHandler);
-    router.get("/wiki/:page").handler(pageHandler.applyConfiguration(config));
-    router.post().handler(BodyHandler.create());
-    router.post("/action/save").handler(saveHandler.applyConfiguration(config));
-    router.post("/action/create").handler(creationHandler);
-    router.post("/action/delete").handler(deletionHandler.applyConfiguration(config));
 
     Router apiRouter = Router.router(vertx);
 
@@ -134,6 +114,11 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
     apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
     router.mountSubRouter("/api", apiRouter);
+
+    StaticHandler requestHandler = StaticHandler.create();
+    router.get("/*").handler(requestHandler);
+//    router.get("/assets/*").handler(requestHandler);
+    router.get("/templates/*").handler(requestHandler);
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
     vertx.createHttpServer()
