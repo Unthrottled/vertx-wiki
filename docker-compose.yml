@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web-content:
+    build: ./angular4
+    image: alexsimons/vertx-web-content
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./angular4:/app
+    entrypoint:
+      - npm
+      - run
+      - watch
+  web-service:
+    build: ./web-service
+    image: alexsimons/vertx-web-service
+
+#Use this compose file to run both the vertx web server and
+#Take advantage having a browersync server to watch and automagically
+#compile and update your files. Note: sometimes when it detects a change,
+#the typescript files are not recompiled into the respective js mappings (eg run "npm run compile" which
+#runs the node task compile specified in the package.json (: )

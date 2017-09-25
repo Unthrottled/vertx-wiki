@@ -9,7 +9,7 @@ var http = require('http');
 var keepAliveAgent = new http.Agent({ keepAlive: true });
 
 var proxyPeel = proxy('/api', {
-    target: 'http://localhost:8989',
+    target: 'http://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
     agent: keepAliveAgent
