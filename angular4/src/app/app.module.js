@@ -41,6 +41,7 @@ var TitleCreation_component_1 = require("./pages/TitleCreation.component");
 var CreatePage_component_1 = require("./pages/CreatePage.component");
 var TitleValidation_service_1 = require("./pages/TitleValidation.service");
 var deletion_component_1 = require("./pages/deletion.component");
+var create_button_component_1 = require("./pages/create.button.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -80,6 +81,7 @@ AppModule = __decorate([
             TitleCreation_component_1.TitleCreationComponent,
             CreatePage_component_1.CreatePageComponent,
             deletion_component_1.DeletionComponent,
+            create_button_component_1.CreateComponent,
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],
