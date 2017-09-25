@@ -68,19 +68,7 @@ var CreatePageComponent = (function (_super) {
         });
     };
     CreatePageComponent.prototype.reset = function () {
-        var self = this;
-        this.pagesService
-            .fetchPage(self.pageFull.name)
-            .flatMap(function (pageFull) { return self.load(pageFull); })
-            .subscribe(function (result) { return self.notificationService.success("Page Reloaded!", "Things might have changed!", {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-        }); }, function (error) { return self.notificationService.error("Unable to Reset!", "Try again, or not, it may no work :/", {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-        }); });
+        this.actualRouter.navigate(['/']);
     };
     Object.defineProperty(CreatePageComponent.prototype, "validTitle", {
         get: function () {

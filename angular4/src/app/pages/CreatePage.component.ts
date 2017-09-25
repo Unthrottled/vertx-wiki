@@ -50,20 +50,7 @@ export class CreatePageComponent extends BasePageComponent {
   }
 
   reset(): void {
-    let self = this;
-    this.pagesService
-      .fetchPage(self.pageFull.name)
-      .flatMap((pageFull: PageFull) => self.load(pageFull))
-      .subscribe((result: boolean)=> self.notificationService.success("Page Reloaded!", "Things might have changed!", {
-          timeOut: 3000,
-          showProgressBar: true,
-          clickToClose: true
-        }),
-        (error: any)=>self.notificationService.error("Unable to Reset!", "Try again, or not, it may no work :/",{
-          timeOut: 3000,
-          showProgressBar: true,
-          clickToClose: true
-        }));
+    this.actualRouter.navigate(['/']);
   }
 
 
