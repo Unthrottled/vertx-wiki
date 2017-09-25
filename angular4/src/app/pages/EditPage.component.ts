@@ -39,7 +39,7 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
   save(): Observable<boolean> {
     let self = this;
     let returnGuy = this.pagesService
-      .savePage(this.pageFull.name, this.pageFull.markdown);
+      .savePage(this.pageFull.name, self.content);
     returnGuy.subscribe((success: boolean) => {
       if (success) {
         this.notificationService.success('Page Saved!', ':)', {

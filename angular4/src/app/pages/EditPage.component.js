@@ -59,7 +59,7 @@ var EditPageComponent = (function (_super) {
         var _this = this;
         var self = this;
         var returnGuy = this.pagesService
-            .savePage(this.pageFull.name, this.pageFull.markdown);
+            .savePage(this.pageFull.name, self.content);
         returnGuy.subscribe(function (success) {
             if (success) {
                 _this.notificationService.success('Page Saved!', ':)', {
