@@ -7,6 +7,10 @@
  - [Java 8 runtime](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
  - [Gradle 2.3+ ](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
 
+Needs docker, docker-compose (needs to support version 3 compose files)
+needs node, needs to install node modules locally. make note of node task that deploys minified code to the resources dir of web service.
+
+
 
 Because the application plugin is being used, you may directly run the application:
 
