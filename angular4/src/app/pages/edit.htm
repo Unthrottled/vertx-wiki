@@ -5,9 +5,7 @@
   </div>
   <div class="edit-options">
     <button (click)="save()">Save Changes</button>
-    <div [hidden]="options.hideReset">
-      <button (click)="reset()">Reset Changes</button>
-    </div>
+    <button (click)="reset()">Reset Changes</button>
     <div [hidden]="options.hideDelete">
       <deletion-component (onClick)="deleted()"></deletion-component>
     </div>

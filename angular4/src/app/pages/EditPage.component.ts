@@ -18,8 +18,7 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
     this.editOptions = {
-      hideDelete: false,
-      hideReset: false
+      hideDelete: false
     };
   }
 

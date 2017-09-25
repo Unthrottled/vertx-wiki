@@ -37,8 +37,7 @@ var EditPageComponent = (function (_super) {
         _this.notificationService = notificationService;
         _this.actualRouter = actualRouter;
         _this.editOptions = {
-            hideDelete: false,
-            hideReset: false
+            hideDelete: false
         };
         return _this;
     }

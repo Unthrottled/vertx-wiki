@@ -20,8 +20,7 @@ var BasePageComponent = (function () {
         this.router = router;
         this._editMode = false;
         this._editOptions = {
-            hideDelete: true,
-            hideReset: true
+            hideDelete: true
         };
     }
     Object.defineProperty(BasePageComponent.prototype, "pageFull", {

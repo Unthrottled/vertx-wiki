@@ -26,8 +26,7 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
   private _htmlContent: string;
   private _pageFull: PageFull;
   protected _editOptions: EditOptions = {
-    hideDelete: true,
-    hideReset: true
+    hideDelete: true
   };
 
   constructor(protected router: ActivatedRoute) {
