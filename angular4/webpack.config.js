@@ -8,6 +8,7 @@ var proxy = require('http-proxy-middleware');
 var http = require('http');
 var keepAliveAgent = new http.Agent({ keepAlive: true });
 
+
 var proxyPeel = proxy('/api', {
     target: 'http://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
@@ -64,19 +65,17 @@ module.exports = {
                 exclude: [/node_modules/, /build/, /dist/, /gradle/],
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]' +
-                '!postcss-loader',
-              }),
+                use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]'
+              })
             },
             {
                 test: /\.scss$/,
                 exclude: [/node_modules/, /build/, /dist/, /gradle/],
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' +
-                '!postcss-loader' +
-                '!sass-loader',
-              }),
+                use: 'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' + +
+                '!sass-loader'
+              })
             }
         ]
     },
