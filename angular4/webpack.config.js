@@ -62,10 +62,21 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: [/node_modules/, /build/, /dist/, /gradle/],
-                use: ExtractTextPlugin.extract({
-                    use: 'css-loader'
-                })
-
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]' +
+                '!postcss-loader',
+              }),
+            },
+            {
+                test: /\.scss$/,
+                exclude: [/node_modules/, /build/, /dist/, /gradle/],
+              use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' +
+                '!postcss-loader' +
+                '!sass-loader',
+              }),
             }
         ]
     },
