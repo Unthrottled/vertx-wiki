@@ -62,6 +62,7 @@
     "zone.js": "^0.8.4",
     "angular2-ui-switch": "^1.2.0",
     "bootstrap": "^4.0.0-beta",
+    "popper": "^1.0.0",
     "angular2-markdown": "^1.6.0",
     "angular2-notifications": "^0.7.7"
   },
