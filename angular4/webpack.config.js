@@ -65,7 +65,7 @@ module.exports = {
                 exclude: [/node_modules/, /build/, /dist/, /gradle/],
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]'
+                use: 'css-loader?modules&importLoaders=1&localIdentName=[local]'
               })
             },
             {
@@ -73,7 +73,7 @@ module.exports = {
                 exclude: [/node_modules/, /build/, /dist/, /gradle/],
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' + +
+                use: 'css-loader?modules&importLoaders=2&localIdentName=[local]' + +
                 '!sass-loader'
               })
             }
