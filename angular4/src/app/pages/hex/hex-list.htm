@@ -1,9 +1,7 @@
 <div>
   <div id="hexoGrid">
-    <div class="hexo" *ngFor="let page of pages">
-      <div class="hexoIn">
-        <a routerLink="/page/{{page.name}}">{{page.name}}</a>
-      </div>
+    <div *ngFor="let hexRowModel of hexRows">
+      <hex-row [pages]="hexRowModel.pages" [config]="hexRowModel.hexRowInput"></hex-row>
     </div>
   </div>
 </div>
