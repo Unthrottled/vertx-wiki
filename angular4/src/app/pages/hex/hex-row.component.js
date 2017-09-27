@@ -38,6 +38,14 @@ var HexRowComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
+        get: function () {
+            console.log(this.config);
+            return this.config ? !this.config.even : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return HexRowComponent;
 }());
 __decorate([

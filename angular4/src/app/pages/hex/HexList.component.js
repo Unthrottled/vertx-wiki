@@ -21,8 +21,8 @@ var HexListComponent = (function () {
         this._pages = [];
     }
     HexListComponent.prototype.ngOnInit = function () {
-        var hexsPerEvenRow = this.getHexsPerEvenRow();
-        var hexsPerOddRow = this.getHexesPerOddRow();
+        var hexsPerEvenRow = this.getHexsPerEvenRow() - 1;
+        var hexsPerOddRow = this.getHexesPerOddRow() - 1;
         var rowCount = this.getRowCount();
         var start = 0, end = hexsPerEvenRow;
         for (var i = 1; i <= rowCount; i++) {
@@ -76,10 +76,10 @@ var HexListComponent = (function () {
         configurable: true
     });
     HexListComponent.prototype.getHexsPerEvenRow = function () {
-        return 9;
+        return 8;
     };
     HexListComponent.prototype.getHexesPerOddRow = function () {
-        return 8;
+        return 9;
     };
     return HexListComponent;
 }());

@@ -1,4 +1,4 @@
-<div class="hexoRow">
+<div class="hexoRow" [ngClass]="{'hexo-offset': needsOffset}">
   <div class="hexo" *ngFor="let page of pages">
     <div class="hexoIn">
       <a routerLink="/page/{{page.name}}">{{page.name}}</a>

@@ -15,8 +15,8 @@ export class HexListComponent implements OnInit {
   private _hexRows: HexRowModel[] = [];
 
   ngOnInit(): void {
-    let hexsPerEvenRow = this.getHexsPerEvenRow();
-    let hexsPerOddRow = this.getHexesPerOddRow();
+    let hexsPerEvenRow = this.getHexsPerEvenRow() - 1;
+    let hexsPerOddRow = this.getHexesPerOddRow() - 1;
     let rowCount = this.getRowCount();
     let start = 0, end = hexsPerEvenRow;
     for (let i = 1; i <= rowCount; i++) {
@@ -76,10 +76,10 @@ export class HexListComponent implements OnInit {
   }
 
   private getHexsPerEvenRow(): number {
-    return 9;
+    return 8;
   }
 
   private getHexesPerOddRow(): number {
-    return 8;
+    return 9;
   }
 }

@@ -32,6 +32,11 @@ export class HexRowComponent {
     return this._config;
   }
 
+  get needsOffset(): boolean{
+    console.log(this.config);
+    return this.config ? !this.config.even : false;
+  }
+
   set config(value: HexRowInput) {
     this._config = value;
   }
