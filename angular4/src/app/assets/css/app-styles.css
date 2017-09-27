@@ -54,7 +54,7 @@ body {
 }
 
 .edit-content{
-  text-align: right;
+
 }
 
 .edit-options {
@@ -84,7 +84,7 @@ body {
 }
 
 .app-control-container{
-    text-align: center;
+  padding: 5px;
 }
 
 .stream-table {

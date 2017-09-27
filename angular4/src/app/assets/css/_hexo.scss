@@ -1,0 +1,52 @@
+#hexoGrid {
+  display: -webkit-flex; /* Safari */
+  -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  white-space: nowrap;
+}
+
+
+.hexo:before {
+  content: " ";
+  width: 0; height: 0;
+  border-bottom: 30px solid lightblue;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  position: absolute;
+  left: 0;
+  top: -30px;
+}
+
+.hexo {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 104px;
+  height: 60px;
+  text-align: center;
+  background-color: lightblue;
+  position: relative;
+}
+
+.hexo:after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  border-top: 30px solid lightblue;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+}
+
+.hexo:nth-child(n2+0){
+  background-color: rebeccapurple;
+}
+
+.hexoIn {
+  bottom: -15px;
+  position: relative;
+}
+
