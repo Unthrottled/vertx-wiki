@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 
 import "./hex-list.htm";
 import {PageMin} from "../Page.min.model";
@@ -10,7 +10,12 @@ import {HexRowInput} from "./Hex-Row.input";
   selector: 'hex-list',
   templateUrl: './templates/hex-list.htm'
 })
-export class HexListComponent {
+export class HexListComponent implements OnInit{
+
+
+  ngOnInit(): void {
+
+  }
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
 
