@@ -42,6 +42,8 @@ var CreatePage_component_1 = require("./pages/CreatePage.component");
 var TitleValidation_service_1 = require("./pages/TitleValidation.service");
 var deletion_component_1 = require("./pages/deletion.component");
 var create_button_component_1 = require("./pages/create.button.component");
+var hex_row_component_1 = require("./pages/hex/hex-row.component");
+var HexList_component_1 = require("./pages/hex/HexList.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -82,6 +84,8 @@ AppModule = __decorate([
             CreatePage_component_1.CreatePageComponent,
             deletion_component_1.DeletionComponent,
             create_button_component_1.CreateComponent,
+            hex_row_component_1.HexRowComponent,
+            HexList_component_1.HexListComponent,
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],
