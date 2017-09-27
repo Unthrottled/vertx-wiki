@@ -7,6 +7,10 @@ var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var proxy = require('http-proxy-middleware');
 var http = require('http');
 var keepAliveAgent = new http.Agent({ keepAlive: true });
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css"
+});
 
 
 var proxyPeel = proxy('/api', {
@@ -62,20 +66,24 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                exclude: [/node_modules/, /build/, /dist/, /gradle/],
+                exclude: [/build/, /dist/, /gradle/],
               use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: 'css-loader?modules&importLoaders=1&localIdentName=[local]'
               })
             },
             {
-                test: /\.scss$/,
-                exclude: [/node_modules/, /build/, /dist/, /gradle/],
-              use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: 'css-loader?modules&importLoaders=2&localIdentName=[local]' + +
-                '!sass-loader'
-              })
+                test: /\.s[ac]ss$/,
+                exclude: [/build/, /dist/, /gradle/],
+                use: extractSass.extract({
+                  use: [{
+                    loader: "css-loader"
+                  }, {
+                    loader: "sass-loader"
+                  }],
+                  // use style-loader in development
+                  fallback: "style-loader"
+                })
             }
         ]
     },
@@ -92,7 +100,8 @@ module.exports = {
           Popper: ['popper.js', 'default'],
           // In case you imported plugins individually, you must also require them here:
           Util: "exports-loader?Util!bootstrap/js/dist/util",
-          Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+          Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+          Tether: 'tether'
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {

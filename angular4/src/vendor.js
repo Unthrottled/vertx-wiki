@@ -20,5 +20,4 @@ require("jquery");
 require("angular2-ui-switch");
 require("angular2-markdown");
 require("angular2-notifications");
-require("bootstrap");
 //# sourceMappingURL=vendor.js.map

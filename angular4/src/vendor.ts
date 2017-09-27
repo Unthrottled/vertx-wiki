@@ -18,4 +18,3 @@ import 'jquery';
 import 'angular2-ui-switch';
 import 'angular2-markdown';
 import 'angular2-notifications';
-import 'bootstrap';
