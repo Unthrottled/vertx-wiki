@@ -10,7 +10,7 @@ import {HexRowInput} from "./Hex-Row.input";
   selector: 'hex-list',
   templateUrl: './templates/hex-row.htm'
 })
-export class HexRowComponent {
+export class HexListComponent {
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
 

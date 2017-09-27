@@ -35,6 +35,8 @@ import {CreatePageComponent} from "./pages/CreatePage.component";
 import {TitleValidationService} from "./pages/TitleValidation.service";
 import {DeletionComponent} from "./pages/deletion.component";
 import {CreateComponent} from "./pages/create.button.component";
+import {HexRowComponent} from "./pages/hex/hex-row.component";
+import {HexListComponent} from "./pages/hex/HexList.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -74,6 +76,8 @@ const appRoutes = [
     CreatePageComponent,
     DeletionComponent,
     CreateComponent,
+    HexRowComponent,
+    HexListComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],
