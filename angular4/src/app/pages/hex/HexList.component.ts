@@ -16,27 +16,28 @@ export class HexListComponent implements OnInit {
 
   ngOnInit(): void {
     let hexsPerEvenRow = this.getHexsPerEvenRow();
-    let hexsPerOddRow = this.getHexsPerEvenRow();
+    let hexsPerOddRow = this.getHexesPerOddRow();
     let rowCount = this.getRowCount();
     let start = 0, end = hexsPerEvenRow;
     for (let i = 1; i <= rowCount; i++) {
       if (i % 2 === 0) {
-        this.hexRows.push(new HexRowModel(this.pages.slice(start, end + 1), {
+        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
           even: true
         }));
         start = end;
         end += hexsPerEvenRow;
       } else {
-        this.hexRows.push(new HexRowModel(this.pages.slice(start, end + 1), {
+        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
           even: false
         }));
+        start = end;
         end += hexsPerOddRow;
       }
     }
   }
 
   private getRowCount(): number {
-    return 3;
+    return 4;
   }
 
   private _pages: PageMin[] = [];

@@ -1,5 +1,7 @@
-<div class="hexo" *ngFor="let page of pages">
-  <div class="hexoIn">
-    <a routerLink="/page/{{page.name}}">{{page.name}}</a>
+<div class="hexoRow">
+  <div class="hexo" *ngFor="let page of pages">
+    <div class="hexoIn">
+      <a routerLink="/page/{{page.name}}">{{page.name}}</a>
+    </div>
   </div>
 </div>

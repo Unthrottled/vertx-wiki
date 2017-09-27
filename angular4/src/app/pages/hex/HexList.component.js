@@ -22,27 +22,28 @@ var HexListComponent = (function () {
     }
     HexListComponent.prototype.ngOnInit = function () {
         var hexsPerEvenRow = this.getHexsPerEvenRow();
-        var hexsPerOddRow = this.getHexsPerEvenRow();
+        var hexsPerOddRow = this.getHexesPerOddRow();
         var rowCount = this.getRowCount();
         var start = 0, end = hexsPerEvenRow;
         for (var i = 1; i <= rowCount; i++) {
             if (i % 2 === 0) {
-                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end + 1), {
+                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
                     even: true
                 }));
                 start = end;
                 end += hexsPerEvenRow;
             }
             else {
-                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end + 1), {
+                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
                     even: false
                 }));
+                start = end;
                 end += hexsPerOddRow;
             }
         }
     };
     HexListComponent.prototype.getRowCount = function () {
-        return 3;
+        return 4;
     };
     Object.defineProperty(HexListComponent.prototype, "pages", {
         get: function () {
