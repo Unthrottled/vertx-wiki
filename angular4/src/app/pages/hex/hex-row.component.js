@@ -40,7 +40,6 @@ var HexRowComponent = (function () {
     });
     Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
         get: function () {
-            console.log(this.config);
             return this.config ? !this.config.even : false;
         },
         enumerable: true,

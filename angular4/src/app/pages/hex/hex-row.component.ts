@@ -33,7 +33,6 @@ export class HexRowComponent {
   }
 
   get needsOffset(): boolean{
-    console.log(this.config);
     return this.config ? !this.config.even : false;
   }
 
