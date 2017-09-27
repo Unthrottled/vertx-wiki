@@ -3,12 +3,12 @@
  */
 import {Component, Input} from "@angular/core";
 
-import "./hex-list.htm";
+import "./hex-row.htm";
 import {PageMin} from "../Page.min.model";
 import {HexRowInput} from "./Hex-Row.input";
 @Component({
   selector: 'hex-list',
-  templateUrl: './templates/hex-list.htm'
+  templateUrl: './templates/hex-row.htm'
 })
 export class HexRowComponent {
   private _pages: PageMin[] = [];
