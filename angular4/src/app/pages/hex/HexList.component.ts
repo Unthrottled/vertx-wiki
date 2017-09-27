@@ -76,10 +76,10 @@ export class HexListComponent implements OnInit {
   }
 
   private getHexsPerEvenRow(): number {
-    return 8;
+    return 9;
   }
 
   private getHexesPerOddRow(): number {
-    return 9;
+    return 10;
   }
 }

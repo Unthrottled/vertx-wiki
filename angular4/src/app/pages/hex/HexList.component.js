@@ -76,10 +76,10 @@ var HexListComponent = (function () {
         configurable: true
     });
     HexListComponent.prototype.getHexsPerEvenRow = function () {
-        return 8;
+        return 9;
     };
     HexListComponent.prototype.getHexesPerOddRow = function () {
-        return 9;
+        return 10;
     };
     return HexListComponent;
 }());
