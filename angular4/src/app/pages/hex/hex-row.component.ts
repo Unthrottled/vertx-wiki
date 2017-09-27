@@ -8,7 +8,7 @@ import {PageMin} from "../Page.min.model";
 import {HexRowInput} from "./Hex-Row.input";
 @Component({
   selector: 'hex-row',
-  templateUrl: './templates/hex-list.htm'
+  templateUrl: './templates/hex-row.htm'
 })
 export class HexRowComponent {
   private _pages: PageMin[] = [];

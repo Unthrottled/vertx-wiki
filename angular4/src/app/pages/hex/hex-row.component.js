@@ -53,7 +53,7 @@ __decorate([
 HexRowComponent = __decorate([
     core_1.Component({
         selector: 'hex-row',
-        templateUrl: './templates/hex-list.htm'
+        templateUrl: './templates/hex-row.htm'
     }),
     __metadata("design:paramtypes", [])
 ], HexRowComponent);
