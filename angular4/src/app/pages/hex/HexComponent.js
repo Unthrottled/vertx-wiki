@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 require("./hex.htm");
 var HexComponent = (function () {
     function HexComponent() {
+        this.onClick = new core_1.EventEmitter();
     }
     Object.defineProperty(HexComponent.prototype, "width", {
         get: function () {
@@ -44,8 +45,15 @@ var HexComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    HexComponent.prototype.clicked = function (name) {
+        this.onClick.emit(name);
+    };
     return HexComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], HexComponent.prototype, "onClick", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Number),

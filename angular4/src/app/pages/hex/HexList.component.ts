@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, ElementRef, Input, OnInit} from "@angular/core";
+import {Component, ElementRef, Input, OnInit, Output, EventEmitter} from "@angular/core";
 
 import "./hex-list.htm";
 import {PageMin} from "../Page.min.model";
@@ -15,6 +15,8 @@ export class HexListComponent {
   private _hexRows: HexRowModel[] = [];
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
+  @Output()
+  private onClick = new EventEmitter();
 
   constructor(private disElement: ElementRef) {
 
@@ -91,5 +93,9 @@ export class HexListComponent {
 
   private getSpacing() {
     return 5;
+  }
+
+  hexClicked(name: string): void {
+    this.onClick.emit(name);
   }
 }

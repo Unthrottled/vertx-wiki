@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 import "./hex-row.htm";
 import {PageMin} from "../Page.min.model";
@@ -18,6 +18,8 @@ export class HexRowComponent {
 
   private _hexWidth: number = 104;
   private _hexHeight: number = HexRowComponent.goldenRatio * this._hexWidth;
+  @Output()
+  private onClick = new EventEmitter();
 
   constructor() {
   }
@@ -60,5 +62,9 @@ export class HexRowComponent {
 
   set hexWidth(value: number) {
     this._hexWidth = value;
+  }
+
+  hexClicked(name: string): void{
+    this.onClick.emit(name);
   }
 }

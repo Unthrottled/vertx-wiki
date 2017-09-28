@@ -20,6 +20,7 @@ var HexListComponent = (function () {
         this.disElement = disElement;
         this._hexRows = [];
         this._pages = [];
+        this.onClick = new core_1.EventEmitter();
     }
     HexListComponent.prototype.ngAfterViewInit = function () {
         var hexsPerEvenRow = this.getHexsPerEvenRow();
@@ -91,8 +92,15 @@ var HexListComponent = (function () {
     HexListComponent.prototype.getSpacing = function () {
         return 5;
     };
+    HexListComponent.prototype.hexClicked = function (name) {
+        this.onClick.emit(name);
+    };
     return HexListComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], HexListComponent.prototype, "onClick", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array),

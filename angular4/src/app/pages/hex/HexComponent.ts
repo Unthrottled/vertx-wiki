@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import './hex.htm';
 @Component({
   selector: 'hex',
@@ -8,6 +8,8 @@ export class HexComponent {
   private _width: number;
   private _height: number;
   private _name: number;
+  @Output()
+  private onClick = new EventEmitter();
 
   @Input()
   get width(): number {
@@ -34,5 +36,9 @@ export class HexComponent {
 
   set name(value: number) {
     this._name = value;
+  }
+
+  clicked(name: string): void{
+    this.onClick.emit(name);
   }
 }

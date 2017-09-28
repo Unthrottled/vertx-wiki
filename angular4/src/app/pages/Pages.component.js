@@ -16,8 +16,9 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./pages.list.htm");
 var PagesComponent = (function () {
-    function PagesComponent(router) {
+    function PagesComponent(router, realRouter) {
         this.router = router;
+        this.realRouter = realRouter;
         this.pages = [];
     }
     PagesComponent.prototype.ngOnInit = function () {
@@ -26,6 +27,9 @@ var PagesComponent = (function () {
             _this.pages = data.pages;
         });
     };
+    PagesComponent.prototype.reRoute = function (pageName) {
+        this.realRouter.navigate(['/page/' + pageName]);
+    };
     return PagesComponent;
 }());
 PagesComponent = __decorate([
@@ -33,7 +37,7 @@ PagesComponent = __decorate([
         selector: 'pages-list',
         templateUrl: './templates/pages.list.htm'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
 ], PagesComponent);
 exports.PagesComponent = PagesComponent;
 //# sourceMappingURL=Pages.component.js.map

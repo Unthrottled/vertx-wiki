@@ -2,5 +2,6 @@
   <hex *ngFor="let page of pages"
         [width]="hexWidth"
         [height]="hexHeight"
-        [name]="page.name"></hex>
+        [name]="page.name"
+        (onClick)="hexClicked($event)"></hex>
 </div>

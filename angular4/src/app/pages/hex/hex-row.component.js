@@ -19,6 +19,7 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         this._pages = [];
         this._hexWidth = 104;
         this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
+        this.onClick = new core_1.EventEmitter();
     }
     Object.defineProperty(HexRowComponent.prototype, "pages", {
         get: function () {
@@ -67,9 +68,16 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         enumerable: true,
         configurable: true
     });
+    HexRowComponent.prototype.hexClicked = function (name) {
+        this.onClick.emit(name);
+    };
     return HexRowComponent;
 }());
 HexRowComponent.goldenRatio = 0.576923077;
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], HexRowComponent.prototype, "onClick", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array),
