@@ -14,9 +14,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./hex-row.htm");
-var HexRowComponent = (function () {
+var HexRowComponent = HexRowComponent_1 = (function () {
     function HexRowComponent() {
         this._pages = [];
+        this._hexWidth = 104;
+        this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
     }
     Object.defineProperty(HexRowComponent.prototype, "pages", {
         get: function () {
@@ -45,8 +47,29 @@ var HexRowComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(HexRowComponent.prototype, "hexHeight", {
+        get: function () {
+            return this._hexHeight;
+        },
+        set: function (value) {
+            this._hexHeight = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HexRowComponent.prototype, "hexWidth", {
+        get: function () {
+            return this._hexWidth;
+        },
+        set: function (value) {
+            this._hexWidth = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return HexRowComponent;
 }());
+HexRowComponent.goldenRatio = 0.576923077;
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array),
@@ -57,7 +80,7 @@ __decorate([
     __metadata("design:type", Object),
     __metadata("design:paramtypes", [Object])
 ], HexRowComponent.prototype, "config", null);
-HexRowComponent = __decorate([
+HexRowComponent = HexRowComponent_1 = __decorate([
     core_1.Component({
         selector: 'hex-row',
         templateUrl: './templates/hex-row.htm'
@@ -65,4 +88,5 @@ HexRowComponent = __decorate([
     __metadata("design:paramtypes", [])
 ], HexRowComponent);
 exports.HexRowComponent = HexRowComponent;
+var HexRowComponent_1;
 //# sourceMappingURL=hex-row.component.js.map

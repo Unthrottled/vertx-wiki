@@ -14,6 +14,11 @@ export class HexRowComponent {
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
 
+  private static goldenRatio: number = 0.576923077;
+
+  private _hexWidth: number = 104;
+  private _hexHeight: number = HexRowComponent.goldenRatio * this._hexWidth;
+
   constructor() {
   }
 
@@ -38,5 +43,22 @@ export class HexRowComponent {
 
   set config(value: HexRowInput) {
     this._config = value;
+  }
+
+
+  get hexHeight(): number {
+    return this._hexHeight;
+  }
+
+  set hexHeight(value: number) {
+    this._hexHeight = value;
+  }
+
+  get hexWidth(): number {
+    return this._hexWidth;
+  }
+
+  set hexWidth(value: number) {
+    this._hexWidth = value;
   }
 }
