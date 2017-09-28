@@ -37,6 +37,7 @@ import {DeletionComponent} from "./pages/deletion.component";
 import {CreateComponent} from "./pages/create.button.component";
 import {HexRowComponent} from "./pages/hex/hex-row.component";
 import {HexListComponent} from "./pages/hex/HexList.component";
+import {HexComponent} from "./pages/hex/HexComponent";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -78,6 +79,7 @@ const appRoutes = [
     CreateComponent,
     HexRowComponent,
     HexListComponent,
+    HexComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],

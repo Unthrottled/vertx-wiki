@@ -1,11 +1,6 @@
 <div class="hexoRow" [ngClass]="{'hexo-offset': needsOffset}">
-  <!--Needs to be a Hex Component-->
-  <div class="hexo"
-       [style.width.px]="hexWidth"
-       [style.height.px]="hexHeight"
-       *ngFor="let page of pages">
-    <div class="hexoIn">
-      <a routerLink="/page/{{page.name}}">{{page.name}}</a>
-    </div>
-  </div>
+  <hex *ngFor="let page of pages"
+        [width]="hexWidth"
+        [height]="hexHeight"
+        [name]="page.name"></hex>
 </div>
