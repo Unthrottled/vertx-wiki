@@ -26,7 +26,7 @@ export class HexListComponent {
     let hexsPerEvenRow = this.getHexsPerEvenRow();
     let hexsPerOddRow = this.getHexesPerOddRow();
     let start = 0, end = hexsPerEvenRow;
-    let rows = 0, odd = false;
+    let odd = false;
     let hexs = this.pages.length;
     while (hexs > 0) {
       if (odd = !odd) {

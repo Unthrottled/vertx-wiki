@@ -26,7 +26,7 @@ var HexListComponent = (function () {
         var hexsPerEvenRow = this.getHexsPerEvenRow();
         var hexsPerOddRow = this.getHexesPerOddRow();
         var start = 0, end = hexsPerEvenRow;
-        var rows = 0, odd = false;
+        var odd = false;
         var hexs = this.pages.length;
         while (hexs > 0) {
             if (odd = !odd) {
