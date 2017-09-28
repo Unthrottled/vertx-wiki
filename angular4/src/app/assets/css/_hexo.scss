@@ -1,3 +1,5 @@
+$hexColor: lightblue;
+
 .hexoGrid {
 
 }
@@ -6,7 +8,7 @@
 .hexo:before {
   content: " ";
   width: 0; height: 0;
-  border-bottom: 30px solid lightblue;
+  border-bottom: 30px solid $hexColor;
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
   position: absolute;
@@ -28,7 +30,7 @@
   margin-bottom: 5px;
   margin-right: 5px;
   text-align: center;
-  background-color: lightblue;
+  background-color: $hexColor;
   position: relative;
   cursor: pointer;
 }
@@ -58,7 +60,7 @@
   position: absolute;
   bottom: -30px;
   left: 0;
-  border-top: 30px solid lightblue;
+  border-top: 30px solid $hexColor;
   border-left: 52px solid transparent;
   border-right: 52px solid transparent;
 }
