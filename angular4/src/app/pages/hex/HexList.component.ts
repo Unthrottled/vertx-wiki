@@ -28,7 +28,7 @@ export class HexListComponent {
     let start = 0, end = hexsPerEvenRow;
     let odd = false;
     let hexs = this.pages.length;
-    while (hexs > 0) {
+    while (hexs >= 0) {
       if (odd = !odd) {
         this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
           even: false

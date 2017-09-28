@@ -28,7 +28,7 @@ var HexListComponent = (function () {
         var start = 0, end = hexsPerEvenRow;
         var odd = false;
         var hexs = this.pages.length;
-        while (hexs > 0) {
+        while (hexs >= 0) {
             if (odd = !odd) {
                 this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
                     even: false
