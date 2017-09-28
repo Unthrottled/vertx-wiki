@@ -30,6 +30,23 @@
   text-align: center;
   background-color: lightblue;
   position: relative;
+  cursor: pointer;
+}
+
+.hexo:hover {
+  -webkit-animation: breath 1000ms infinite;
+}
+
+@-webkit-keyframes breath {
+  0% {
+    transform: scale(0.85,0.85);
+  }
+  50% {
+    transform: scale(1.15,1.15);
+  }
+  100% {
+    transform: scale(0.85,0.85);
+  }
 }
 
 .hexo:after {
