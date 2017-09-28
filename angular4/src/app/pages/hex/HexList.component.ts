@@ -13,7 +13,8 @@ import {HexRowModel} from "./HexRow.model";
 })
 export class HexListComponent {
   private _hexRows: HexRowModel[] = [];
-
+  private _pages: PageMin[] = [];
+  private _config: HexRowInput;
 
   constructor(private disElement: ElementRef) {
 
@@ -25,8 +26,8 @@ export class HexListComponent {
     let start = 0, end = hexsPerEvenRow;
     let rows = 0, odd = false;
     let hexs = this.pages.length;
-    while (hexs > 0){
-      if(odd = !odd){
+    while (hexs > 0) {
+      if (odd = !odd) {
         this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
           even: false
         }));
@@ -43,9 +44,6 @@ export class HexListComponent {
       }
     }
   }
-
-  private _pages: PageMin[] = [];
-  private _config: HexRowInput;
 
 
   @Input()
@@ -83,11 +81,11 @@ export class HexListComponent {
     return Math.floor(this.getParentWidth() / this.getHexWidth());
   }
 
-  private getParentWidth() : number{
+  private getParentWidth(): number {
     return this.disElement.nativeElement.parentNode.offsetWidth;
   }
 
-  private getHexWidth() :number{
+  private getHexWidth(): number {
     return 104 + this.getSpacing();
   }
 
