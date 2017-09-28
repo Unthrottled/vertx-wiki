@@ -86,7 +86,10 @@ var HexListComponent = (function () {
         return this.disElement.nativeElement.parentNode.offsetWidth;
     };
     HexListComponent.prototype.getHexWidth = function () {
-        return 104;
+        return 104 + this.getSpacing();
+    };
+    HexListComponent.prototype.getSpacing = function () {
+        return 5;
     };
     return HexListComponent;
 }());

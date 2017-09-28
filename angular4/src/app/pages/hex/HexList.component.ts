@@ -88,6 +88,10 @@ export class HexListComponent {
   }
 
   private getHexWidth() :number{
-    return 104;
+    return 104 + this.getSpacing();
+  }
+
+  private getSpacing() {
+    return 5;
   }
 }
