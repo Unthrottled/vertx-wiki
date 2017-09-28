@@ -16,34 +16,35 @@ var core_1 = require("@angular/core");
 require("./hex-list.htm");
 var HexRow_model_1 = require("./HexRow.model");
 var HexListComponent = (function () {
-    function HexListComponent() {
+    function HexListComponent(disElement) {
+        this.disElement = disElement;
         this._hexRows = [];
         this._pages = [];
     }
-    HexListComponent.prototype.ngOnInit = function () {
-        var hexsPerEvenRow = this.getHexsPerEvenRow() - 1;
-        var hexsPerOddRow = this.getHexesPerOddRow() - 1;
-        var rowCount = this.getRowCount();
+    HexListComponent.prototype.ngAfterViewInit = function () {
+        var hexsPerEvenRow = this.getHexsPerEvenRow();
+        var hexsPerOddRow = this.getHexesPerOddRow();
         var start = 0, end = hexsPerEvenRow;
-        for (var i = 1; i <= rowCount; i++) {
-            if (i % 2 === 0) {
-                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
-                    even: true
-                }));
-                start = end;
-                end += hexsPerEvenRow;
-            }
-            else {
+        var rows = 0, odd = false;
+        var hexs = this.pages.length;
+        while (hexs > 0) {
+            if (odd = !odd) {
                 this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
                     even: false
                 }));
                 start = end;
                 end += hexsPerOddRow;
+                hexs -= hexsPerOddRow;
+            }
+            else {
+                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
+                    even: true
+                }));
+                start = end;
+                end += hexsPerEvenRow;
+                hexs -= hexsPerEvenRow;
             }
         }
-    };
-    HexListComponent.prototype.getRowCount = function () {
-        return 4;
     };
     Object.defineProperty(HexListComponent.prototype, "pages", {
         get: function () {
@@ -76,10 +77,16 @@ var HexListComponent = (function () {
         configurable: true
     });
     HexListComponent.prototype.getHexsPerEvenRow = function () {
-        return 9;
+        return this.getHexesPerOddRow() - 1;
     };
     HexListComponent.prototype.getHexesPerOddRow = function () {
-        return 10;
+        return Math.floor(this.getParentWidth() / this.getHexWidth());
+    };
+    HexListComponent.prototype.getParentWidth = function () {
+        return this.disElement.nativeElement.parentNode.offsetWidth;
+    };
+    HexListComponent.prototype.getHexWidth = function () {
+        return 104;
     };
     return HexListComponent;
 }());
@@ -98,7 +105,7 @@ HexListComponent = __decorate([
         selector: 'hex-list',
         templateUrl: './templates/hex-list.htm'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [core_1.ElementRef])
 ], HexListComponent);
 exports.HexListComponent = HexListComponent;
 //# sourceMappingURL=HexList.component.js.map

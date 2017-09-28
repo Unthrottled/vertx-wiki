@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, ElementRef, Input, OnInit} from "@angular/core";
 
 import "./hex-list.htm";
 import {PageMin} from "../Page.min.model";
@@ -11,40 +11,41 @@ import {HexRowModel} from "./HexRow.model";
   selector: 'hex-list',
   templateUrl: './templates/hex-list.htm'
 })
-export class HexListComponent implements OnInit {
+export class HexListComponent {
   private _hexRows: HexRowModel[] = [];
 
-  ngOnInit(): void {
-    let hexsPerEvenRow = this.getHexsPerEvenRow() - 1;
-    let hexsPerOddRow = this.getHexesPerOddRow() - 1;
-    let rowCount = this.getRowCount();
+
+  constructor(private disElement: ElementRef) {
+
+  }
+
+  ngAfterViewInit(): void {
+    let hexsPerEvenRow = this.getHexsPerEvenRow();
+    let hexsPerOddRow = this.getHexesPerOddRow();
     let start = 0, end = hexsPerEvenRow;
-    for (let i = 1; i <= rowCount; i++) {
-      if (i % 2 === 0) {
-        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
-          even: true
-        }));
-        start = end;
-        end += hexsPerEvenRow;
-      } else {
+    let rows = 0, odd = false;
+    let hexs = this.pages.length;
+    while (hexs > 0){
+      if(odd = !odd){
         this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
           even: false
         }));
         start = end;
         end += hexsPerOddRow;
+        hexs -= hexsPerOddRow;
+      } else {
+        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
+          even: true
+        }));
+        start = end;
+        end += hexsPerEvenRow;
+        hexs -= hexsPerEvenRow;
       }
     }
   }
 
-  private getRowCount(): number {
-    return 4;
-  }
-
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
-
-  constructor() {
-  }
 
 
   @Input()
@@ -70,16 +71,23 @@ export class HexListComponent implements OnInit {
     return this._hexRows;
   }
 
-
   set hexRows(value: HexRowModel[]) {
     this._hexRows = value;
   }
 
   private getHexsPerEvenRow(): number {
-    return 9;
+    return this.getHexesPerOddRow() - 1;
   }
 
   private getHexesPerOddRow(): number {
-    return 10;
+    return Math.floor(this.getParentWidth() / this.getHexWidth());
+  }
+
+  private getParentWidth() : number{
+    return this.disElement.nativeElement.parentNode.offsetWidth;
+  }
+
+  private getHexWidth() :number{
+    return 104;
   }
 }
