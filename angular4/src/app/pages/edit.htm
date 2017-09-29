@@ -4,8 +4,8 @@
     </textarea>
   </div>
   <div class="edit-options">
-    <button (click)="save()">Save Changes</button>
-    <button (click)="reset()">Discard Changes</button>
+    <button class="btn btn-lg btn-success" role="button" (click)="save()">Save Changes</button>
+    <button class="btn btn-lg btn-danger" role="button" (click)="reset()">Discard Changes</button>
     <div [hidden]="options.hideDelete">
       <deletion-component (onClick)="deleted()"></deletion-component>
     </div>
