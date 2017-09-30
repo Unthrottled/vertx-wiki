@@ -38,6 +38,7 @@ import {CreateComponent} from "./pages/create.button.component";
 import {HexRowComponent} from "./pages/hex/hex-row.component";
 import {HexListComponent} from "./pages/hex/HexList.component";
 import {HexComponent} from "./pages/hex/HexComponent";
+import {SearchComponent} from "./pages/search/Search.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -80,6 +81,7 @@ const appRoutes = [
     HexRowComponent,
     HexListComponent,
     HexComponent,
+    SearchComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],

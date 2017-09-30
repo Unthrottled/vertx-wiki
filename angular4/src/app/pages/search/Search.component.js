@@ -1,0 +1,75 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Created by alex on 9/17/17.
+ */
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+require("./search.htm");
+var angular2_notifications_1 = require("angular2-notifications");
+var Observable_1 = require("rxjs/Observable");
+var TitleValidation_service_1 = require("../TitleValidation.service");
+var SearchComponent = (function () {
+    function SearchComponent(pagesService, notificationService, actualRouter) {
+        this.pagesService = pagesService;
+        this.notificationService = notificationService;
+        this.actualRouter = actualRouter;
+        this._model = {};
+    }
+    SearchComponent.prototype.search = function (searchedTitle) {
+        var self = this;
+        if (searchedTitle) {
+            var returnGuy = this.pagesService.isValid(searchedTitle)
+                .map(function (doesNotExist) { return !doesNotExist; });
+            returnGuy.subscribe(function (success) {
+                if (success) {
+                    self.actualRouter.navigate(['/page/' + searchedTitle]);
+                }
+                else {
+                    self.failure();
+                }
+            }, function (error) { return self.failure(); });
+            return returnGuy;
+        }
+        else {
+            self.failure();
+            return Observable_1.Observable.of(false);
+        }
+    };
+    SearchComponent.prototype.failure = function () {
+        this.notificationService.warn('Page not found!', 'Create one, maybe?', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        });
+    };
+    Object.defineProperty(SearchComponent.prototype, "model", {
+        get: function () {
+            return this._model;
+        },
+        set: function (value) {
+            this._model = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SearchComponent;
+}());
+SearchComponent = __decorate([
+    core_1.Component({
+        selector: 'page-search',
+        templateUrl: './templates/search.htm'
+    }),
+    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, angular2_notifications_1.NotificationsService, router_1.Router])
+], SearchComponent);
+exports.SearchComponent = SearchComponent;
+//# sourceMappingURL=Search.component.js.map
