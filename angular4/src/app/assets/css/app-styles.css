@@ -1,44 +1,44 @@
 .boxed-content {
-    background: #afafaf;
-    z-index: 10000;
-    position: relative;
-    width: 99.984%;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #afafaf;
+  z-index: 10000;
+  position: relative;
+  width: 99.984%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.hystrix-dashboard-container{
-    display: inline-block;
-    margin: 20px;
-    padding: 10px;
-    background-color: #e6e6e6;
-    color: #3e3e3e;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.hystrix-dashboard-container {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px;
+  background-color: #e6e6e6;
+  color: #3e3e3e;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.message-control-container{
-    color: #3e3e3e;
+.message-control-container {
+  color: #3e3e3e;
 }
 
 .stream-data {
-    color: #3e3e3e;
+  color: #3e3e3e;
 }
 
 .app-container {
-    width: 95%;
-    padding: 20px;
+  width: 95%;
+  padding: 20px;
 }
 
 .slider-bro {
-    margin-top: 3rem;
+  margin-top: 3rem;
 }
 
 .dead-mans-switch {
 
 }
 
-.edit-content{
+.edit-content {
 
 }
 
@@ -56,19 +56,19 @@
   flex-grow: 1;
 }
 
-.view-container{
+.view-container {
   display: flex;
 }
 
 .content-container {
-    background: #e6e6e6;
-    color: #3e3e3e;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #e6e6e6;
+  color: #3e3e3e;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.app-control-container{
+.app-control-container {
   padding: 5px;
 }
 
@@ -76,13 +76,13 @@
 }
 
 .failed {
-    color: red;
-    font-weight: bold;
-    font-size: 1.5rem;
+  color: red;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .worked {
-    color: green;
-    font-weight: bold;
-    font-size: 1.5rem;
+  color: green;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
