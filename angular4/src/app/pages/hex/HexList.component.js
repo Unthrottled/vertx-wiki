@@ -19,17 +19,19 @@ var HexListComponent = (function () {
     function HexListComponent(disElement, ngZone) {
         this.disElement = disElement;
         this.ngZone = ngZone;
-        this._hexRows = [];
         this._pages = [];
         this.onClick = new core_1.EventEmitter();
         var self = this;
         window.onresize = function (e) {
             self.ngZone.run(function () {
-                self.ngAfterViewInit();
+                self.layoutRows();
             });
         };
     }
     HexListComponent.prototype.ngAfterViewInit = function () {
+        this.layoutRows();
+    };
+    HexListComponent.prototype.layoutRows = function () {
         this.hexRows = [];
         var hexsPerEvenRow = this.getHexsPerEvenRow();
         var hexsPerOddRow = this.getHexesPerOddRow();
