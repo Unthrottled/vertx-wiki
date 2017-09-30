@@ -4,6 +4,11 @@ $hexColor: #28a745;
   color: #e6e6e6;
 }
 
+@mixin hexRain(){
+  background-image: url(../images/hex.png) !important;
+  background-position: right !important;
+  background-repeat: repeat-y !important;
+}
 
 .hexo:before {
   content: " ";
