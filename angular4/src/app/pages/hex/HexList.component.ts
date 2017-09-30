@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, ElementRef, Input, OnInit, Output, EventEmitter} from "@angular/core";
+import {Component, ElementRef, Input, OnInit, Output, EventEmitter, NgZone} from "@angular/core";
 
 import "./hex-list.htm";
 import {PageMin} from "../Page.min.model";
@@ -12,17 +12,27 @@ import {HexRowModel} from "./HexRow.model";
   templateUrl: './templates/hex-list.htm'
 })
 export class HexListComponent {
-  private _hexRows: HexRowModel[] = [];
+  private _hexRows: HexRowModel[];
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
   @Output()
   private onClick = new EventEmitter();
 
-  constructor(private disElement: ElementRef) {
-
+  constructor(private disElement: ElementRef, private ngZone: NgZone) {
+    let self = this;
+    window.onresize = (e) => {
+        self.ngZone.run(()=> {
+          self.layoutRows();
+        })
+      }
   }
 
   ngAfterViewInit(): void {
+    this.layoutRows();
+  }
+
+  private layoutRows() {
+    this.hexRows = [];
     let hexsPerEvenRow = this.getHexsPerEvenRow();
     let hexsPerOddRow = this.getHexesPerOddRow();
     let start = 0, end = hexsPerEvenRow;

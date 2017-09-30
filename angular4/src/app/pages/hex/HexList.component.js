@@ -16,13 +16,21 @@ var core_1 = require("@angular/core");
 require("./hex-list.htm");
 var HexRow_model_1 = require("./HexRow.model");
 var HexListComponent = (function () {
-    function HexListComponent(disElement) {
+    function HexListComponent(disElement, ngZone) {
         this.disElement = disElement;
+        this.ngZone = ngZone;
         this._hexRows = [];
         this._pages = [];
         this.onClick = new core_1.EventEmitter();
+        var self = this;
+        window.onresize = function (e) {
+            self.ngZone.run(function () {
+                self.ngAfterViewInit();
+            });
+        };
     }
     HexListComponent.prototype.ngAfterViewInit = function () {
+        this.hexRows = [];
         var hexsPerEvenRow = this.getHexsPerEvenRow();
         var hexsPerOddRow = this.getHexesPerOddRow();
         var start = 0, end = hexsPerEvenRow;
@@ -116,7 +124,7 @@ HexListComponent = __decorate([
         selector: 'hex-list',
         templateUrl: './templates/hex-list.htm'
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
+    __metadata("design:paramtypes", [core_1.ElementRef, core_1.NgZone])
 ], HexListComponent);
 exports.HexListComponent = HexListComponent;
 //# sourceMappingURL=HexList.component.js.map
