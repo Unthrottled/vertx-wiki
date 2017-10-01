@@ -7,6 +7,8 @@ import "./search.htm";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {TitleValidationService} from "../TitleValidation.service";
+import {Permissions} from "../../auth/Permissions.component";
+import {UserPrincipal} from "../../auth/UserPrincipal.model";
 @Component({
   selector: 'page-search',
   templateUrl: './templates/search.htm'
@@ -14,14 +16,14 @@ import {TitleValidationService} from "../TitleValidation.service";
 export class SearchComponent {
   private _model: any = {};
 
-  constructor(private pagesService: TitleValidationService, private notificationService: NotificationsService, private actualRouter: Router) {
+  constructor(private pagesService: TitleValidationService, private notificationService: NotificationsService, private actualRouter: Router, private userToken: UserPrincipal) {
   }
 
   search(searchedTitle: string): Observable<boolean> {
     let self = this;
-    if (searchedTitle) {
+    if (!this.cantSearch && searchedTitle) {
       let returnGuy = this.pagesService.isValid(searchedTitle)
-        .map((doesNotExist: boolean)=> !doesNotExist);
+        .map((doesNotExist: boolean) => !doesNotExist);
       returnGuy.subscribe((success: boolean) => {
         if (success) {
           self.actualRouter.navigate(['/page/' + searchedTitle]);
@@ -30,10 +32,8 @@ export class SearchComponent {
         }
       }, (error: any) => self.failure());
       return returnGuy;
-    } else {
-      self.failure();
-      return Observable.of(false);
     }
+    return Observable.of(false);
   }
 
   private failure() {
@@ -51,5 +51,10 @@ export class SearchComponent {
 
   set model(value: any) {
     this._model = value;
+  }
+
+  get cantSearch(): Observable<boolean> {
+    return Permissions.canActivate(this.userToken, 'view')
+      .map((canCreate: boolean) => !canCreate);
   }
 }

@@ -18,16 +18,19 @@ require("./search.htm");
 var angular2_notifications_1 = require("angular2-notifications");
 var Observable_1 = require("rxjs/Observable");
 var TitleValidation_service_1 = require("../TitleValidation.service");
+var Permissions_component_1 = require("../../auth/Permissions.component");
+var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
 var SearchComponent = (function () {
-    function SearchComponent(pagesService, notificationService, actualRouter) {
+    function SearchComponent(pagesService, notificationService, actualRouter, userToken) {
         this.pagesService = pagesService;
         this.notificationService = notificationService;
         this.actualRouter = actualRouter;
+        this.userToken = userToken;
         this._model = {};
     }
     SearchComponent.prototype.search = function (searchedTitle) {
         var self = this;
-        if (searchedTitle) {
+        if (!this.cantSearch && searchedTitle) {
             var returnGuy = this.pagesService.isValid(searchedTitle)
                 .map(function (doesNotExist) { return !doesNotExist; });
             returnGuy.subscribe(function (success) {
@@ -40,10 +43,7 @@ var SearchComponent = (function () {
             }, function (error) { return self.failure(); });
             return returnGuy;
         }
-        else {
-            self.failure();
-            return Observable_1.Observable.of(false);
-        }
+        return Observable_1.Observable.of(false);
     };
     SearchComponent.prototype.failure = function () {
         this.notificationService.warn('Page not found!', 'Create one, maybe?', {
@@ -62,6 +62,14 @@ var SearchComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SearchComponent.prototype, "cantSearch", {
+        get: function () {
+            return Permissions_component_1.Permissions.canActivate(this.userToken, 'view')
+                .map(function (canCreate) { return !canCreate; });
+        },
+        enumerable: true,
+        configurable: true
+    });
     return SearchComponent;
 }());
 SearchComponent = __decorate([
@@ -69,7 +77,7 @@ SearchComponent = __decorate([
         selector: 'page-search',
         templateUrl: './templates/search.htm'
     }),
-    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, angular2_notifications_1.NotificationsService, router_1.Router])
+    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, angular2_notifications_1.NotificationsService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
 ], SearchComponent);
 exports.SearchComponent = SearchComponent;
 //# sourceMappingURL=Search.component.js.map
