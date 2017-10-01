@@ -41,6 +41,13 @@ $hexColor: #28a745;
   cursor: pointer;
 }
 
+.hex-content {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
+
 .hexo:hover {
   -webkit-animation: breath 1500ms infinite;
   animation: breath 1500ms infinite;
