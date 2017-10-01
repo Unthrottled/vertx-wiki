@@ -1,6 +1,7 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
+import io.acari.auth.AuthConfigs;
 import io.acari.handler.data.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
@@ -8,6 +9,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +22,20 @@ public class DatabaseVerticle extends AbstractVerticle {
   private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
 
   private JDBCClient jdbcClient;
+  private MongoClient mongoClient;
 
   @Override
   public void start(Future<Void> future) {
     jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
+    mongoClient = MongoClient.createShared(vertx, getConfig());
     jdbcClient.getConnection(sqlConnectionHandler(future));
+  }
+
+  private JsonObject getConfig() {
+    return new JsonObject()
+      .put("host", AuthConfigs.Configs.HOST)
+      .put("port", AuthConfigs.Configs.PORT)
+      ;
   }
 
   private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {
