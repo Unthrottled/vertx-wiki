@@ -3,12 +3,14 @@ package io.acari.core;
 import com.google.inject.Singleton;
 import io.acari.auth.AuthConfigs;
 import io.acari.handler.data.*;
+import io.acari.util.ChainableOptional;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.mongo.IndexOptions;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
@@ -28,6 +30,18 @@ public class DatabaseVerticle extends AbstractVerticle {
   public void start(Future<Void> future) {
 //    jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     mongoClient = MongoClient.createShared(vertx, getConfig());
+    mongoClient.createCollection("user", voidAsyncResult ->
+      ChainableOptional.of(voidAsyncResult)
+        .filter(AsyncResult::succeeded)
+        .ifPresent(vasr -> mongoClient.createIndexWithOptions("user", new JsonObject()
+            .put("username", 1),
+          new IndexOptions(new JsonObject().put("unique", true)),
+          voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
+            .filter(AsyncResult::succeeded)
+            .ifPresent(res -> LOGGER.info("created index on user collection"))
+            .orElseDo(() -> LOGGER.warn("Problem creating user index", voidAsyncResult1.cause()))))
+        .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause()))
+    );
 //    jdbcClient.getConnection(sqlConnectionHandler(future));
   }
 
