@@ -30,18 +30,25 @@ public class DatabaseVerticle extends AbstractVerticle {
   public void start(Future<Void> future) {
 //    jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     mongoClient = MongoClient.createShared(vertx, getConfig());
-    mongoClient.createCollection("user", voidAsyncResult ->
-      ChainableOptional.of(voidAsyncResult)
+    mongoClient.getCollections(listAsyncResult ->
+      ChainableOptional.of(listAsyncResult)
         .filter(AsyncResult::succeeded)
-        .ifPresent(vasr -> mongoClient.createIndexWithOptions("user", new JsonObject()
-            .put("username", 1),
-          new IndexOptions(new JsonObject().put("unique", true)),
-          voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
-            .filter(AsyncResult::succeeded)
-            .ifPresent(res -> LOGGER.info("created index on user collection"))
-            .orElseDo(() -> LOGGER.warn("Problem creating user index", voidAsyncResult1.cause()))))
-        .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause()))
-    );
+        .ifPresent(lasr ->
+          ChainableOptional.of(lasr.result().stream()
+            .noneMatch("user"::equals))
+            .filter(noUser->noUser)
+            .ifPresent(userCollectionNotExist -> mongoClient.createCollection("user", voidAsyncResult ->
+              ChainableOptional.of(voidAsyncResult)
+                .filter(AsyncResult::succeeded)
+                .ifPresent(vasr -> mongoClient.createIndexWithOptions("user", new JsonObject()
+                    .put("username", 1),
+                  new IndexOptions(new JsonObject().put("unique", true)),
+                  voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
+                    .filter(AsyncResult::succeeded)
+                    .ifPresent(res -> LOGGER.info("created index on user collection"))
+                    .orElseDo(() -> LOGGER.warn("Problem creating user index", voidAsyncResult1.cause()))))
+                .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause())))))
+        .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", listAsyncResult.cause())));
 //    jdbcClient.getConnection(sqlConnectionHandler(future));
   }
 
@@ -49,7 +56,7 @@ public class DatabaseVerticle extends AbstractVerticle {
     return new JsonObject()
       .put("host", AuthConfigs.Configs.HOST.getValue())
       .put("port", Integer.parseInt(AuthConfigs.Configs.PORT.getValue()))
-      ;
+    ;
   }
 
   private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {
