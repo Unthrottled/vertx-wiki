@@ -16,7 +16,6 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./search.htm");
 var angular2_notifications_1 = require("angular2-notifications");
-var Observable_1 = require("rxjs/Observable");
 var TitleValidation_service_1 = require("../TitleValidation.service");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
@@ -29,21 +28,24 @@ var SearchComponent = (function () {
         this._model = {};
     }
     SearchComponent.prototype.search = function (searchedTitle) {
+        var _this = this;
         var self = this;
-        if (!this.cantSearch && searchedTitle) {
-            var returnGuy = this.pagesService.isValid(searchedTitle)
-                .map(function (doesNotExist) { return !doesNotExist; });
-            returnGuy.subscribe(function (success) {
-                if (success) {
-                    self.actualRouter.navigate(['/page/' + searchedTitle]);
-                }
-                else {
-                    self.failure();
-                }
-            }, function (error) { return self.failure(); });
-            return returnGuy;
-        }
-        return Observable_1.Observable.of(false);
+        this.cantSearch
+            .map(function (cantCreate) { return !cantCreate; })
+            .subscribe(function (canCreate) {
+            if (searchedTitle) {
+                _this.pagesService.isValid(searchedTitle)
+                    .map(function (doesNotExist) { return !doesNotExist; })
+                    .subscribe(function (success) {
+                    if (success) {
+                        self.actualRouter.navigate(['/page/' + searchedTitle]);
+                    }
+                    else {
+                        self.failure();
+                    }
+                }, function (error) { return self.failure(); });
+            }
+        });
     };
     SearchComponent.prototype.failure = function () {
         this.notificationService.warn('Page not found!', 'Create one, maybe?', {

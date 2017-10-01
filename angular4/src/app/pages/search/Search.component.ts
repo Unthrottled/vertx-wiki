@@ -19,21 +19,23 @@ export class SearchComponent {
   constructor(private pagesService: TitleValidationService, private notificationService: NotificationsService, private actualRouter: Router, private userToken: UserPrincipal) {
   }
 
-  search(searchedTitle: string): Observable<boolean> {
+  search(searchedTitle: string) {
     let self = this;
-    if (!this.cantSearch && searchedTitle) {
-      let returnGuy = this.pagesService.isValid(searchedTitle)
-        .map((doesNotExist: boolean) => !doesNotExist);
-      returnGuy.subscribe((success: boolean) => {
-        if (success) {
-          self.actualRouter.navigate(['/page/' + searchedTitle]);
-        } else {
-          self.failure()
+    this.cantSearch
+      .map((cantCreate: boolean) => !cantCreate)
+      .subscribe((canCreate: boolean) => {
+        if (searchedTitle) {
+          this.pagesService.isValid(searchedTitle)
+            .map((doesNotExist: boolean) => !doesNotExist)
+            .subscribe((success: boolean) => {
+              if (success) {
+                self.actualRouter.navigate(['/page/' + searchedTitle]);
+              } else {
+                self.failure()
+              }
+            }, (error: any) => self.failure());
         }
-      }, (error: any) => self.failure());
-      return returnGuy;
-    }
-    return Observable.of(false);
+      });
   }
 
   private failure() {
