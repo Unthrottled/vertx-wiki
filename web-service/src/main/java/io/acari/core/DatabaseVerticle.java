@@ -26,15 +26,15 @@ public class DatabaseVerticle extends AbstractVerticle {
 
   @Override
   public void start(Future<Void> future) {
-    jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
+//    jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     mongoClient = MongoClient.createShared(vertx, getConfig());
-    jdbcClient.getConnection(sqlConnectionHandler(future));
+//    jdbcClient.getConnection(sqlConnectionHandler(future));
   }
 
   private JsonObject getConfig() {
     return new JsonObject()
-      .put("host", AuthConfigs.Configs.HOST)
-      .put("port", AuthConfigs.Configs.PORT)
+      .put("host", AuthConfigs.Configs.HOST.getValue())
+      .put("port", Integer.parseInt(AuthConfigs.Configs.PORT.getValue()))
       ;
   }
 
