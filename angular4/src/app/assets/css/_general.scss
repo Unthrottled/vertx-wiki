@@ -22,3 +22,13 @@ body {
   margin: auto;
   padding: 40px 50px;
 }
+
+
+.page-content {
+  flex-grow: 1;
+}
+
+.page-content * {
+  word-break: break-all;
+  word-wrap: break-word;
+}

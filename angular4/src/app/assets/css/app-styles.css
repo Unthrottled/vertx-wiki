@@ -51,11 +51,6 @@
   min-height: 500px;
 }
 
-.page-content {
-  word-wrap: break-word;
-  flex-grow: 1;
-}
-
 .view-container {
   display: flex;
 }
