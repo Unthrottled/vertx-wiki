@@ -23,6 +23,10 @@ public class DatabaseVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     mongoClient = MongoClient.createShared(vertx, getConfig());
+    vertx.eventBus()
+      .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
+        getHandler());
+
     mongoClient.getCollections(listAsyncResult ->
       ChainableOptional.of(listAsyncResult)
         .filter(AsyncResult::succeeded)
