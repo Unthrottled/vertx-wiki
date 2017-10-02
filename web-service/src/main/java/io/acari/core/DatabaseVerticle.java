@@ -7,16 +7,11 @@ import io.acari.util.ChainableOptional;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mongo.IndexOptions;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static io.acari.core.Queries.SqlQueries.CREATE_SCHEMA;
 
 @Singleton
 public class DatabaseVerticle extends AbstractVerticle {
@@ -50,7 +45,7 @@ public class DatabaseVerticle extends AbstractVerticle {
                       future.complete();
                     })
                     .orElseDo(() -> {
-                      LOGGER.warn("Problem creating user index", voidAsyncResult1.cause())
+                      LOGGER.warn("Problem creating user index", voidAsyncResult1.cause());
                       future.fail(voidAsyncResult1.cause());
                     })))
                 .orElseDo(() -> {

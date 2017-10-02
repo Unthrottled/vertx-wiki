@@ -48,7 +48,5 @@ public class PageHandler implements Handler<Message<JsonObject>> {
           message.fail(500, asyncResultHandler.cause().getMessage());
         }
       })).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
-
   }
-
 }

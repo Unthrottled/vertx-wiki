@@ -1,25 +1,41 @@
 package io.acari.handler.data;
 
-import com.google.inject.Inject;
+import io.acari.util.ChainableOptional;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static io.acari.core.Queries.SqlQueries.PAGE_EXISTS;
-
-public class PageExistsHandler extends BasePageHandler {
+public class PageExistsHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(PageExistsHandler.class);
+  private final MongoClient mongoClient;
 
-  @Inject
-  public PageExistsHandler(JDBCClient jdbcClient) {
-    super(jdbcClient, (resultSet) -> resultSet.getResults()
-        .stream()
-        .findFirst()
-        .map(jsonArray -> new JsonObject()
-          .put("exists", jsonArray.getInteger(0) > 0))
-        .orElse(new JsonObject()
-          .put("exists", false)),
-      PAGE_EXISTS);
+  public PageExistsHandler(MongoClient mongoClient) {
+    this.mongoClient = mongoClient;
+  }
+
+  @Override
+  public void handle(Message<JsonObject> message) {
+    ChainableOptional.ofNullable(message.body().getString("page"))
+      .ifPresent(pago -> mongoClient.find("pages", new JsonObject(), asyncResultHandler -> {
+        ChainableOptional.of(asyncResultHandler)
+          .filter(AsyncResult::succeeded)
+          .ifPresent(result -> {
+            message.reply(result.result()
+              .stream()
+              .findFirst()
+              .map(jsonArray -> new JsonObject()
+                .put("exists", jsonArray.getInteger("id") > 0))
+              .orElse(new JsonObject()
+                .put("exists", false)));
+          })
+          .orElseDo(() -> {
+            LOGGER.warn("Ohhhhhh Sheeit", asyncResultHandler.cause().getMessage());
+            message.fail(500, asyncResultHandler.cause().getMessage());
+          });
+      })).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
   }
 }
