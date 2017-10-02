@@ -31,35 +31,51 @@ public class DatabaseVerticle extends AbstractVerticle {
       ChainableOptional.of(listAsyncResult)
         .filter(AsyncResult::succeeded)
         .orElseDo(future::complete)
-        .ifPresent(lasr ->
-          ChainableOptional.of(lasr.result().stream()
-            .noneMatch("user"::equals))
-            .filter(noUser -> noUser)
-            .ifPresent(userCollectionNotExist -> mongoClient.createCollection("user", voidAsyncResult ->
-              ChainableOptional.of(voidAsyncResult)
-                .filter(AsyncResult::succeeded)
-                .ifPresent(vasr -> mongoClient.createIndexWithOptions("user", new JsonObject()
-                    .put("username", 1),
-                  //todo: setup page.
-                  new IndexOptions(new JsonObject().put("unique", true)),
-                  voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
-                    .filter(AsyncResult::succeeded)
-                    .ifPresent(res -> {
-                      LOGGER.info("created index on user collection");
-                      future.complete();
-                    })
-                    .orElseDo(() -> {
-                      LOGGER.warn("Problem creating user index", voidAsyncResult1.cause());
-                      future.fail(voidAsyncResult1.cause());
-                    })))
-                .orElseDo(() -> {
-                  LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
-                  future.fail(voidAsyncResult.cause());
-                }))))
+        .ifPresent(lasr -> {
+          String user = "user";
+          createTable(future,
+            user,
+            lasr.result().stream()
+              .noneMatch(user::equals), new JsonObject()
+              .put("username", 1));
+          String pages = "pages";
+          createTable(future,
+            pages,
+            lasr.result().stream().noneMatch(pages::equals),
+            new JsonObject()
+              .put("name", 1));
+        })
         .orElseDo(() -> {
           LOGGER.warn("Ohhhh shiiiiiiittttttt", listAsyncResult.cause());
           future.fail(listAsyncResult.cause());
         }));
+  }
+
+  private void createTable(Future<Void> future, String user, boolean noUser, JsonObject username) {
+    ChainableOptional.of(noUser)
+      .filter(b -> b)
+      .ifPresent(userCollectionNotExist -> mongoClient.createCollection(user, voidAsyncResult ->
+        ChainableOptional.of(voidAsyncResult)
+          .filter(AsyncResult::succeeded)
+          .ifPresent(vasr -> {
+            mongoClient.createIndexWithOptions(user, username,
+              //todo: setup page.
+              new IndexOptions(new JsonObject().put("unique", true)),
+              voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
+                .filter(AsyncResult::succeeded)
+                .ifPresent(res -> {
+                  LOGGER.info("created index on user collection");
+                  future.complete();
+                })
+                .orElseDo(() -> {
+                  LOGGER.warn("Problem creating " + user + " index", voidAsyncResult1.cause());
+                  future.fail(voidAsyncResult1.cause());
+                }));
+          })
+          .orElseDo(() -> {
+            LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
+            future.fail(voidAsyncResult.cause());
+          })));
   }
 
   private JsonObject getConfig() {
