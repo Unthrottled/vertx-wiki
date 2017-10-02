@@ -41,6 +41,7 @@ public class DatabaseVerticle extends AbstractVerticle {
                 .filter(AsyncResult::succeeded)
                 .ifPresent(vasr -> mongoClient.createIndexWithOptions("user", new JsonObject()
                     .put("username", 1),
+                  //todo: setup page.
                   new IndexOptions(new JsonObject().put("unique", true)),
                   voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
                     .filter(AsyncResult::succeeded)
