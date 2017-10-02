@@ -23,20 +23,19 @@ public class DatabaseVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
   private static final String CONFIG_WIKIDB_QUEUE = "wikidb.queue";
 
-  private JDBCClient jdbcClient;
   private MongoClient mongoClient;
 
   @Override
   public void start(Future<Void> future) {
-//    jdbcClient = JDBCClient.createShared(vertx, getConfiguration());
     mongoClient = MongoClient.createShared(vertx, getConfig());
     mongoClient.getCollections(listAsyncResult ->
       ChainableOptional.of(listAsyncResult)
         .filter(AsyncResult::succeeded)
+        .orElseDo(future::complete)
         .ifPresent(lasr ->
           ChainableOptional.of(lasr.result().stream()
             .noneMatch("user"::equals))
-            .filter(noUser->noUser)
+            .filter(noUser -> noUser)
             .ifPresent(userCollectionNotExist -> mongoClient.createCollection("user", voidAsyncResult ->
               ChainableOptional.of(voidAsyncResult)
                 .filter(AsyncResult::succeeded)
@@ -45,54 +44,44 @@ public class DatabaseVerticle extends AbstractVerticle {
                   new IndexOptions(new JsonObject().put("unique", true)),
                   voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
                     .filter(AsyncResult::succeeded)
-                    .ifPresent(res -> LOGGER.info("created index on user collection"))
-                    .orElseDo(() -> LOGGER.warn("Problem creating user index", voidAsyncResult1.cause()))))
-                .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause())))))
-        .orElseDo(() -> LOGGER.warn("Ohhhh shiiiiiiittttttt", listAsyncResult.cause())));
-//    jdbcClient.getConnection(sqlConnectionHandler(future));
+                    .ifPresent(res -> {
+                      LOGGER.info("created index on user collection");
+                      future.complete();
+                    })
+                    .orElseDo(() -> {
+                      LOGGER.warn("Problem creating user index", voidAsyncResult1.cause())
+                      future.fail(voidAsyncResult1.cause());
+                    })))
+                .orElseDo(() -> {
+                  LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
+                  future.fail(voidAsyncResult.cause());
+                }))))
+        .orElseDo(() -> {
+          LOGGER.warn("Ohhhh shiiiiiiittttttt", listAsyncResult.cause());
+          future.fail(listAsyncResult.cause());
+        }));
   }
 
   private JsonObject getConfig() {
     return new JsonObject()
       .put("host", AuthConfigs.Configs.HOST.getValue())
       .put("port", Integer.parseInt(AuthConfigs.Configs.PORT.getValue()))
-    ;
-  }
-
-  private Handler<AsyncResult<SQLConnection>> sqlConnectionHandler(Future<Void> future) {
-    return asyncResult -> {
-      if (asyncResult.succeeded()) {
-        SQLConnection connection = asyncResult.result();
-        connection.execute(CREATE_SCHEMA.getValue(), onCreate -> {
-          connection.close();
-          if (onCreate.succeeded()) {
-            vertx.eventBus()
-              .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
-                getHandler());
-            future.complete();
-          } else {
-            LOGGER.error("Things Broke in the database ->", onCreate.cause());
-            future.fail(onCreate.cause());
-          }
-        });
-      } else {
-        LOGGER.error("Could not establish database connection :( ->", asyncResult.cause());
-        future.fail(asyncResult.cause());
-      }
-    };
+      ;
   }
 
   private DataMessageConsumer getHandler() {
     return new DataMessageConsumer(
-      new PageHandler(jdbcClient),
-      new DeletionHandler(jdbcClient),
-      new SaveHandler(jdbcClient),
-      new AllPageHandler(jdbcClient),
-      new CreationHandler(jdbcClient),
-      new AllPageDataHandler(jdbcClient),
-      new PageExistsHandler(jdbcClient));
+      new PageHandler(mongoClient),
+      new DeletionHandler(mongoClient),
+      new SaveHandler(mongoClient),
+      new AllPageHandler(mongoClient),
+      new CreationHandler(mongoClient),
+      new AllPageDataHandler(mongoClient),
+      new PageExistsHandler(mongoClient));
   }
 
+
+  //todo: feex me
   private JsonObject getConfiguration() {
     return new JsonObject()
       .put("url", config().getString(Queries.CONFIG_WIKIDB_JDBC_URL, "jdbc:hsqldb:file:db/wiki"))
