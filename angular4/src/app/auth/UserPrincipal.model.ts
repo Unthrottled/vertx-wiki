@@ -16,11 +16,11 @@ export class UserPrincipal {
 
   }
 
-  newUserPrincipal(principal: any){
+  newUserPrincipal(principal: any) {
     this.setFields(principal);
   }
 
-  private setFields(principal: any){
+  private setFields(principal: any) {
     this._canView = principal.principal.canView;
     this._canCreate = principal.principal.canCreate;
     this._canUpdate = principal.principal.canUpdate;

@@ -1,10 +1,10 @@
 /**
  * Created by alex on 9/15/17.
  */
-import { Component, OnInit }        from '@angular/core';
-import { Router} from '@angular/router';
-import { AuthService }      from './auth.service';
-import './logout.template.htm'
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {AuthService} from "./auth.service";
+import "./logout.template.htm";
 
 @Component({
   selector: 'logout-butt',
@@ -22,10 +22,10 @@ export class LogoutComponent implements OnInit {
   logout() {
     let self = this;
     this.authService.logout()
-      .then(success=> self.router.navigate(['/login']));
+      .then(success => self.router.navigate(['/login']));
   }
 
-  get hideLogout() : boolean {
+  get hideLogout(): boolean {
     return !this.authService.isLoggedIn;
   }
 }

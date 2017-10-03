@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 import "./hex-row.htm";
 import {PageMin} from "../Page.min.model";
@@ -39,7 +39,7 @@ export class HexRowComponent {
     return this._config;
   }
 
-  get needsOffset(): boolean{
+  get needsOffset(): boolean {
     return this.config ? !this.config.even : false;
   }
 
@@ -64,7 +64,7 @@ export class HexRowComponent {
     this._hexWidth = value;
   }
 
-  hexClicked(name: string): void{
+  hexClicked(name: string): void {
     this.onClick.emit(name);
   }
 }

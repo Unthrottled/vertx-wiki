@@ -24,29 +24,30 @@ export class PagesService {
 
   fetchPage(pageName: String): Observable<PageFull> {
     return this.backendService.fetchPage(pageName)
-      .map((pagePayload: FullPagePayload)=>pagePayload.page);
-}
+      .map((pagePayload: FullPagePayload) => pagePayload.page);
+  }
 
   savePage(pageName: String, pageContent: String): Observable<boolean> {
     return this.backendService.updatePage(pageName, pageContent)
-      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
-}
+      .map((statusPayload: StatusPayload) => statusPayload.succeded);
+  }
 
   createPage(pageName: String, pageContent: String): Observable<boolean> {
     return this.backendService.createPage(pageName, pageContent)
-      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
-}
+      .map((statusPayload: StatusPayload) => statusPayload.succeded);
+  }
 
   deletePage(pageName: String): Observable<boolean> {
     return this.backendService.deletePage(pageName)
-      .map((statusPayload: StatusPayload)=>statusPayload.succeded);
-}
+      .map((statusPayload: StatusPayload) => statusPayload.succeded);
+  }
 
-  freshPage() : Observable<PageFull> {
+  freshPage(): Observable<PageFull> {
     return Observable.of(new PageFull(
-      {markdown: "# A new page\n" +
-      "\n" +
-      "Feel-free to write in Markdown!\n",
+      {
+        markdown: "# A new page\n" +
+        "\n" +
+        "Feel-free to write in Markdown!\n",
       }))
   }
 }

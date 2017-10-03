@@ -1,1 +1,10 @@
-{"version":3,"file":"EditOptions.model.js","sourceRoot":"","sources":["EditOptions.model.ts"],"names":[],"mappings":"AAAA;;GAEG"}
+{
+  "version": 3,
+  "file": "EditOptions.model.js",
+  "sourceRoot": "",
+  "sources": [
+    "EditOptions.model.ts"
+  ],
+  "names": [],
+  "mappings": "AAAA;;GAEG"
+}

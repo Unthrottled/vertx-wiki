@@ -64,7 +64,7 @@ export class BackendService {
   }
 
   private httpDelete(s: string): Observable<Response> {
-    return this.http.delete(this.hostService.fetchUrl() + s,this.getRequestOptions());
+    return this.http.delete(this.hostService.fetchUrl() + s, this.getRequestOptions());
   }
 
   private httpPost(s: string, body: any): Observable<Response> {

@@ -10,9 +10,10 @@
                name="username"
                placeholder="User Name"
                [(ngModel)]="model.username"
-               #username="ngModel" required />
+               #username="ngModel" required/>
         <div *ngIf="f.submitted && !username.valid"
-             class="help-block">Username is required</div>
+             class="help-block">Username is required
+        </div>
       </div>
       <div class="form-group"
            [ngClass]="{ 'has-error': f.submitted && !password.valid }">
@@ -21,12 +22,14 @@
                class="form-control"
                placeholder="Password"
                name="password"
-               [(ngModel)]="model.password" #password="ngModel" required />
+               [(ngModel)]="model.password" #password="ngModel" required/>
         <div *ngIf="f.submitted && !password.valid"
-             class="help-block">Password is required</div>
+             class="help-block">Password is required
+        </div>
       </div>
       <button [disabled]="!f.form.valid"
-              class="btn btn-lg btn-primary btn-block">Login</button>
+              class="btn btn-lg btn-primary btn-block">Login
+      </button>
     </form>
   </div>
 </div>

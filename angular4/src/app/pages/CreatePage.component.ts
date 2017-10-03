@@ -4,12 +4,10 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import "./create.page.htm";
-import {PageFull} from "./Page.full.model";
 import {PagesService} from "./Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
-import {EditOptions} from "./EditOptions.model";
 @Component({
   selector: 'new-page',
   templateUrl: './templates/create.page.htm'
