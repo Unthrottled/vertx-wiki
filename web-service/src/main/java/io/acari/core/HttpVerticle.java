@@ -6,9 +6,11 @@ import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.auth.jwt.JWTAuth;
+import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.auth.shiro.ShiroAuth;
 import io.vertx.ext.auth.shiro.ShiroAuthOptions;
 import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
@@ -57,11 +59,8 @@ public class HttpVerticle extends AbstractVerticle {
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
     mongoClient = mongoClient = MongoClient.createShared(vertx, getConfig());
-    AuthProvider authProvider = ShiroAuth.create(vertx,
-      new ShiroAuthOptions()
-        .setType(ShiroAuthRealmType.PROPERTIES)
-        .setConfig(new JsonObject()
-          .put("properties_path", "classpath:user.properties")));
+    JsonObject authProps = new JsonObject();
+    MongoAuth authProvider = MongoAuth.create(mongoClient, authProps);
 
     Router router = Router.router(vertx);
 
