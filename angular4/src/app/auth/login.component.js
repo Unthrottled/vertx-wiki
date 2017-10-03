@@ -1,15 +1,14 @@
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length,
-      r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
+};
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-  };
-Object.defineProperty(exports, "__esModule", {value: true});
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/15/17.
  */
@@ -21,48 +20,45 @@ require("./login.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var LoginComponent = (function () {
-  function LoginComponent(authService, router, prince) {
-    this.authService = authService;
-    this.router = router;
-    this.prince = prince;
-    this.model = {};
-  }
-
-  LoginComponent.prototype.getUser = function () {
-    return new user_model_1.User(this.model.username, this.model.password);
-  };
-  LoginComponent.prototype.login = function () {
-    var _this = this;
-    var self = this;
-    this.authService.login(this.getUser())
-      .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
-        if (succeded) {
-          // Set our navigation extras object
-          // that passes on our global query params and fragment
-          var navigationExtras = {
-            queryParamsHandling: 'preserve',
-            preserveFragment: true
-          };
-          _this.router.navigate(['/'], navigationExtras);
-        }
-      }, function (e) {
-        return console.log("OHHHH SHIIIITTTTTTTT" + e);
-      }));
-  };
-  LoginComponent.prototype.ngOnInit = function () {
-    this.authService.logout();
-  };
-  LoginComponent.prototype.logout = function () {
-    this.authService.logout();
-  };
-  return LoginComponent;
+    function LoginComponent(authService, router, prince) {
+        this.authService = authService;
+        this.router = router;
+        this.prince = prince;
+        this.model = {};
+    }
+    LoginComponent.prototype.getUser = function () {
+        return new user_model_1.User(this.model.username, this.model.password);
+    };
+    LoginComponent.prototype.login = function () {
+        var _this = this;
+        var self = this;
+        this.authService.login(this.getUser())
+            .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
+            if (succeded) {
+                // Set our navigation extras object
+                // that passes on our global query params and fragment
+                var navigationExtras = {
+                    queryParamsHandling: 'preserve',
+                    preserveFragment: true
+                };
+                _this.router.navigate(['/'], navigationExtras);
+            }
+        }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
+    };
+    LoginComponent.prototype.ngOnInit = function () {
+        this.authService.logout();
+    };
+    LoginComponent.prototype.logout = function () {
+        this.authService.logout();
+    };
+    return LoginComponent;
 }());
 LoginComponent = __decorate([
-  core_1.Component({
-    selector: 'login-form-guy',
-    templateUrl: 'templates/login.template.htm'
-  }),
-  __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
+    core_1.Component({
+        selector: 'login-form-guy',
+        templateUrl: 'templates/login.template.htm'
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map
