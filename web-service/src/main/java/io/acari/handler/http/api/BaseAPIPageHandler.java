@@ -17,8 +17,8 @@ public class BaseAPIPageHandler implements Handler<RoutingContext>, Configurable
   private static final Logger LOGGER = LoggerFactory.getLogger(BaseAPIPageHandler.class);
   private final Vertx vertx;
   private final String action;
-  private Config config;
   private final TriFunction<AsyncResult<Message<JsonObject>>, RoutingContext, String, JsonObject> fundie;
+  private Config config;
 
 
   public BaseAPIPageHandler(Vertx vertx,
@@ -27,6 +27,11 @@ public class BaseAPIPageHandler implements Handler<RoutingContext>, Configurable
     this.vertx = vertx;
     this.action = action;
     this.fundie = fundie;
+  }
+
+  protected static JsonObject getFailure() {
+    return new JsonObject()
+      .put("success", false);
   }
 
   public void handle(RoutingContext routingContext) {
@@ -49,11 +54,6 @@ public class BaseAPIPageHandler implements Handler<RoutingContext>, Configurable
       routingContext.response().setStatusCode(500);
       return getFailure();
     }
-  }
-
-  protected static JsonObject getFailure() {
-    return new JsonObject()
-      .put("success", false);
   }
 
   @Override
