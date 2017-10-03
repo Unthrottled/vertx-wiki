@@ -12,11 +12,14 @@ import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.shiro.ShiroAuth;
 import io.vertx.ext.auth.shiro.ShiroAuthOptions;
 import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
+import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.*;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static io.acari.util.MongoConfig.getConfig;
 
 public class HttpVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpVerticle.class);
@@ -30,6 +33,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APIDeletionHandler apiDeletionHandler;
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
+  private MongoClient mongoClient;
 
   @Inject
   public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -52,6 +56,7 @@ public class HttpVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
+    mongoClient = mongoClient = MongoClient.createShared(vertx, getConfig());
     AuthProvider authProvider = ShiroAuth.create(vertx,
       new ShiroAuthOptions()
         .setType(ShiroAuthRealmType.PROPERTIES)

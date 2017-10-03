@@ -13,6 +13,8 @@ import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.acari.util.MongoConfig.getConfig;
+
 @Singleton
 public class DatabaseVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseVerticle.class);
@@ -76,13 +78,6 @@ public class DatabaseVerticle extends AbstractVerticle {
             LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
             future.fail(voidAsyncResult.cause());
           })));
-  }
-
-  private JsonObject getConfig() {
-    return new JsonObject()
-      .put("host", AuthConfigs.Configs.HOST.getValue())
-      .put("port", Integer.parseInt(AuthConfigs.Configs.PORT.getValue()))
-      ;
   }
 
   private DataMessageConsumer getHandler() {
