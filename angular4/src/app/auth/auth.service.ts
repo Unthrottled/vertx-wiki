@@ -7,6 +7,7 @@ import "rxjs/add/operator/catch";
 import {User} from "./user.model";
 import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
+import {NewUser} from "./NewUser.model";
 
 @Injectable()
 export class AuthService {
@@ -30,6 +31,18 @@ export class AuthService {
       .map((prince: UserPrincipal) => {
         self.isLoggedIn = true;
         return self.isLoggedIn;
+      });
+  }
+
+  createPrincipal(user: NewUser): Observable<boolean> {
+    let self = this;
+    return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
+      .map((response: Response) => {
+        return response && response.json ?
+          response.json() : ''
+      })
+      .map(json => {
+        return true;
       });
   }
 

@@ -38,6 +38,17 @@ var AuthService = (function () {
             return self.isLoggedIn;
         });
     };
+    AuthService.prototype.createPrincipal = function (user) {
+        var self = this;
+        return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
+            .map(function (response) {
+            return response && response.json ?
+                response.json() : '';
+        })
+            .map(function (json) {
+            return true;
+        });
+    };
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
         return new Promise(function (res) { return res(true); });
