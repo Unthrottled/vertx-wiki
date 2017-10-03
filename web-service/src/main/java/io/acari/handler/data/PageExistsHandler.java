@@ -28,7 +28,7 @@ public class PageExistsHandler implements Handler<Message<JsonObject>> {
               .stream()
               .findFirst()
               .map(jsonArray -> new JsonObject()
-                .put("exists", jsonArray.getInteger("id") > 0))
+                .put("exists", !jsonArray.getString("_id").isEmpty()))
               .orElse(new JsonObject()
                 .put("exists", false)));
           })
