@@ -52,6 +52,7 @@ var RegisterComponent = (function () {
         var self = this;
         this.authService.createPrincipal(this.getNewUser())
             .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
+            console.log(succeded);
             if (succeded) {
                 self.authService.login(self.getUser())
                     .subscribe(Subscriber_1.Subscriber.create(function (succeded) {

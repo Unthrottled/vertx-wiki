@@ -38,11 +38,7 @@ export class AuthService {
     let self = this;
     return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
       .map((response: Response) => {
-        return response && response.json ?
-          response.json() : ''
-      })
-      .map(json => {
-        return true;
+        return true
       });
   }
 

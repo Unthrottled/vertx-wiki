@@ -42,10 +42,6 @@ var AuthService = (function () {
         var self = this;
         return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
             .map(function (response) {
-            return response && response.json ?
-                response.json() : '';
-        })
-            .map(function (json) {
             return true;
         });
     };
