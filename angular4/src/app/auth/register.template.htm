@@ -27,25 +27,24 @@
              class="help-block">Password is required
         </div>
       </div>
-      <div class="form-group">
+        <label>Creation Permission</label>
         <input type="checkbox"
                class="form-control"
                placeholder="Creation"
                name="canCreate"
                [(ngModel)]="model.canCreate" #password="ngModel" required/>
-      </div>
+        <label>Update Permission</label>
         <input type="checkbox"
                class="form-control"
                placeholder="Update"
                name="canUpdate"
                [(ngModel)]="model.canUpdate" #password="ngModel" required/>
-      </div>
+        <label>Deletion Permission</label>
         <input type="checkbox"
                class="form-control"
                placeholder="Delete"
                name="canDelete"
                [(ngModel)]="model.canDelete" #password="ngModel" required/>
-      </div>
       <button [disabled]="!f.form.valid"
               class="btn btn-lg btn-primary btn-block">Register
       </button>

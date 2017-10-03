@@ -39,13 +39,15 @@ import {HexRowComponent} from "./pages/hex/hex-row.component";
 import {HexListComponent} from "./pages/hex/HexList.component";
 import {HexComponent} from "./pages/hex/HexComponent";
 import {SearchComponent} from "./pages/search/Search.component";
+import {RegisterComponent} from "./auth/register.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
   {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
   {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 
@@ -71,6 +73,7 @@ const appRoutes = [
     SwitchComponent,
     BaseComponent,
     LoginComponent,
+    RegisterComponent,
     LogoutComponent,
     PagesComponent,
     EditPageComponent,
