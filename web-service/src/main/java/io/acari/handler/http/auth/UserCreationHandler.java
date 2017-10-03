@@ -1,7 +1,9 @@
 package io.acari.handler.http.auth;
 
+import io.acari.util.ChainableOptional;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
@@ -21,13 +23,35 @@ public class UserCreationHandler implements Handler<RoutingContext> {
 
   @Override
   public void handle(RoutingContext routingContext) {
-    List<String> permissions = new JsonArray().stream().map(s->(String)s).collect(Collectors.toList());
-    mongoAuth.insertUser("steve",
-      "passy",
-      Collections.emptyList(),
-      permissions,
-      stringAsyncResult -> {
+    JsonObject body = routingContext.getBodyAsJson();
+    ChainableOptional.ofNullable(body.getString("login"))
+      .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
+        .ifPresent(password -> ChainableOptional.ofNullable(body.getJsonArray("permissions"))
+          .ifPresent(permissionArray -> {
+            List<String> permissions = permissionArray.stream().map(s -> (String) s).collect(Collectors.toList());
+            mongoAuth.insertUser(login,
+              password,
+              Collections.emptyList(),
+              permissions,
+              stringAsyncResult -> ChainableOptional.of(stringAsyncResult)
+                .filter(AsyncResult::succeeded)
+                .map(AsyncResult::result)
+                .ifPresent(result -> {
+                  routingContext.response().setStatusCode(201).end(result);
+                })
+                .orElseDo(() -> {
+                  LOGGER.warn("Ohhhhh sheeeeeeit", stringAsyncResult.cause());
+                  routingContext.response().setStatusCode(500).end("Shits Broke, yo");
+                }));
+          }))
+        .orElseDo(() -> fourHundred(routingContext, "password")))
+      .orElseDo(() -> fourHundred(routingContext, "login"));
 
-      });
+  }
+
+  private void fourHundred(RoutingContext routingContext, String name) {
+    routingContext.response()
+      .setStatusCode(400)
+      .end("No " + name + " Provided, bruv.");
   }
 }

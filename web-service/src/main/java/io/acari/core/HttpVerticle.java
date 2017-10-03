@@ -69,12 +69,13 @@ public class HttpVerticle extends AbstractVerticle {
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
     router.route().handler(UserSessionHandler.create(mongoAuth));
+    router.post().handler(BodyHandler.create());
+    router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
+    Router apiRouter = Router.router(vertx);
 
     AuthHandler authHandler = RedirectAuthHandler.create(mongoAuth, "/");
     router.route("/wiki/*").handler(authHandler);
     router.route("/action/*").handler(authHandler);
-
-    Router apiRouter = Router.router(vertx);
 
     JWTAuth jwtAuth = JWTAuth.create(vertx, new JsonObject()
       .put("keyStore", new JsonObject()//dis needs to be camel case
@@ -91,7 +92,6 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
-    apiRouter.post("/user/create").handler(new UserCreationHandler(mongoAuth));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
     apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
