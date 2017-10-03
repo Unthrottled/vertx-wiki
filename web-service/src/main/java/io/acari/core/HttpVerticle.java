@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
+import io.acari.handler.http.auth.UserCreationHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.Json;
@@ -90,6 +91,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
     apiRouter.post("/pages").handler(apiCreationHandler.applyConfiguration(config));
+    apiRouter.post("/user/create").handler(new UserCreationHandler(mongoAuth));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
     apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
