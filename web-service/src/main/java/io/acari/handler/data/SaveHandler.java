@@ -27,7 +27,7 @@ public class SaveHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(request.getString("name"))
       .ifPresent(id -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content -> {
-          JsonObject query = new JsonObject().put("name", "name");
+          JsonObject query = new JsonObject().put("name", id);
           JsonObject update = new JsonObject().put("$set", new JsonObject().put("content", content));
           mongoClient.updateCollection("pages", query, update, aConn -> {
             ChainableOptional.of(aConn)
