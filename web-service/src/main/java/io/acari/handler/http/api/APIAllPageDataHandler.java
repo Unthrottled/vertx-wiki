@@ -28,20 +28,20 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
 
   public void handle(RoutingContext routingContext) {
     ChainableOptional.of(routingContext.user().principal().getBoolean("canView", false))
-        .filter(b->b)
-        .ifPresent(canView ->
-          vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-            new JsonObject(),
-            Config.createDeliveryOptions("all-pages-data"), ar -> {
-              JsonObject responseGuy = new JsonObject();
-              getRoutingContext(responseGuy, routingContext, ar)
-                .putHeader("Cache-Control", "no-store, no-cache")
-                .putHeader("Content-Type", "application/json")
-                .end(responseGuy.encode());
-            }))
-        .orElseDo(() -> routingContext.response()
-          .setStatusCode(401)
-          .end());
+      .filter(b -> b)
+      .ifPresent(canView ->
+        vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+          new JsonObject(),
+          Config.createDeliveryOptions("all-pages-data"), ar -> {
+            JsonObject responseGuy = new JsonObject();
+            getRoutingContext(responseGuy, routingContext, ar)
+              .putHeader("Cache-Control", "no-store, no-cache")
+              .putHeader("Content-Type", "application/json")
+              .end(responseGuy.encode());
+          }))
+      .orElseDo(() -> routingContext.response()
+        .setStatusCode(401)
+        .end());
   }
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {

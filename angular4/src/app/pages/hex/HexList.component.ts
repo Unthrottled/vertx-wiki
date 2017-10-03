@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component, ElementRef, Input, OnInit, Output, EventEmitter, NgZone} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, NgZone, Output} from "@angular/core";
 
 import "./hex-list.htm";
 import {PageMin} from "../Page.min.model";
@@ -21,10 +21,10 @@ export class HexListComponent {
   constructor(private disElement: ElementRef, private ngZone: NgZone) {
     let self = this;
     window.onresize = (e) => {
-        self.ngZone.run(()=> {
-          self.layoutRows();
-        })
-      }
+      self.ngZone.run(() => {
+        self.layoutRows();
+      })
+    }
   }
 
   ngAfterViewInit(): void {

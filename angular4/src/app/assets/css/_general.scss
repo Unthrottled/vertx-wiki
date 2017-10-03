@@ -8,11 +8,10 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
 body {
-  font-family:Tahoma, Geneva, sans-serif;
-  font-size:16px;
-  line-height:1.5;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
   font-weight: 300;
   background: url('../images/stripe.png');
   -webkit-text-size-adjust: 100%;
@@ -22,7 +21,6 @@ body {
   margin: auto;
   padding: 40px 50px;
 }
-
 
 .page-content {
   flex-grow: 1;

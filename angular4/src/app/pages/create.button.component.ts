@@ -4,7 +4,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Permissions} from "../auth/Permissions.component";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
-import './create.button.template.htm'
+import "./create.button.template.htm";
 import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'create-butt',
@@ -21,6 +21,6 @@ export class CreateComponent implements OnInit {
 
   get cantCreate(): Observable<boolean> {
     return Permissions.canActivate(this.userToken, 'create')
-      .map((canCreate: boolean)=>!canCreate);
+      .map((canCreate: boolean) => !canCreate);
   }
 }

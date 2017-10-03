@@ -7,9 +7,10 @@ import {StatusPayload} from "./StatusPayload.model";
 
 export class PagePayload extends StatusPayload {
   private _pages: PageMin[] = [];
-  constructor(payload: any){
+
+  constructor(payload: any) {
     super(payload);
-    this._pages = payload.pages.map((pageMin: any)=> new PageMin(pageMin));
+    this._pages = payload.pages.map((pageMin: any) => new PageMin(pageMin));
   }
 
   get pages(): PageMin[] {

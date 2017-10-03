@@ -9,11 +9,11 @@ interface DooDad { data: String;
 }
 
 declare class EventSource {
-    onmessage: Callback;
-    onerror: Callback;
-    close: () => {};
+  onmessage: Callback;
+  onerror: Callback;
+  close: () => {};
 
-    addEventListener(event: string, cb: Callback): void;
+  addEventListener(event: string, cb: Callback): void;
 
-    constructor(name: string);
+  constructor(name: string);
 }

@@ -9,7 +9,7 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class Permissions {
 
-  constructor(private userPrince: UserPrincipal){
+  constructor(private userPrince: UserPrincipal) {
 
   }
 

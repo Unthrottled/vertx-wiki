@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import './hex.htm';
+import "./hex.htm";
 @Component({
   selector: 'hex',
   templateUrl: './templates/hex.htm'
@@ -38,7 +38,7 @@ export class HexComponent {
     this._name = value;
   }
 
-  clicked(name: string): void{
+  clicked(name: string): void {
     this.onClick.emit(name);
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by alex on 6/7/17.
  */
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import "./switch.component.htm";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 import {Permissions} from "../auth/Permissions.component";

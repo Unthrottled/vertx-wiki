@@ -7,7 +7,7 @@ import "./page.htm";
 import {PageFull} from "./Page.full.model";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
-import {Observable} from 'rxjs/Observable';
+import {Observable} from "rxjs/Observable";
 import {EditOptions} from "./EditOptions.model";
 
 
@@ -33,6 +33,7 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
   }
 
   abstract save(): Observable<boolean>;
+
   abstract reset(): void;
 
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
     });
   }
 
-  protected load(page: PageFull) : Observable<boolean>{
+  protected load(page: PageFull): Observable<boolean> {
     this.title = page.name;
     this.htmlContent = page.html;
     this.content = page.markdown;

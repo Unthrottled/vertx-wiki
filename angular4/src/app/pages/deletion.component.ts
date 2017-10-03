@@ -5,7 +5,7 @@ import {Component, EventEmitter, Output} from "@angular/core";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 import {Permissions} from "../auth/Permissions.component";
 import {Observable} from "rxjs/Observable";
-import './deletion.component.htm';
+import "./deletion.component.htm";
 
 
 @Component({

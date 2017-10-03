@@ -8,7 +8,7 @@ export class PageFull {
   private _markdown: string;
   private _html: string;
 
-  constructor(pageMin: any){
+  constructor(pageMin: any) {
     this._id = pageMin.id;
     this._name = pageMin.name;
     this._markdown = pageMin.markdown;
