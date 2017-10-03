@@ -58,18 +58,18 @@ public class HttpVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
-    mongoClient = mongoClient = MongoClient.createShared(vertx, getConfig());
+    mongoClient = MongoClient.createShared(vertx, getConfig());
     JsonObject authProps = new JsonObject();
-    MongoAuth authProvider = MongoAuth.create(mongoClient, authProps);
+    MongoAuth mongoAuth = MongoAuth.create(mongoClient, authProps);
 
     Router router = Router.router(vertx);
 
     router.route().handler(CookieHandler.create());
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-    router.route().handler(UserSessionHandler.create(authProvider));
+    router.route().handler(UserSessionHandler.create(mongoAuth));
 
-    AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/");
+    AuthHandler authHandler = RedirectAuthHandler.create(mongoAuth, "/");
     router.route("/wiki/*").handler(authHandler);
     router.route("/action/*").handler(authHandler);
 
@@ -84,7 +84,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/token").handler(tokenHandler
       .applyConfiguration(jwtAuth)
-      .applyConfiguration(authProvider));
+      .applyConfiguration(mongoAuth));
 
     apiRouter.get("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
