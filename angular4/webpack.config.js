@@ -20,6 +20,14 @@ var proxyPeel = proxy('/api', {
     agent: keepAliveAgent
 });
 
+
+var proxyPeel2 = proxy('/user/*', {
+    target: 'http://web-service:8989',
+    changeOrigin: true,               // needed for virtual hosted sites
+    ws: true,
+    agent: keepAliveAgent
+});
+
 module.exports = {
     entry: {
         'app': './src/main.ts',
@@ -143,7 +151,7 @@ module.exports = {
             host: 'localhost',
             port: 3000,
             server: {baseDir: ['dist']},
-            middleware: [proxyPeel]
+            middleware: [proxyPeel, proxyPeel2]
         })
     ]
 };

@@ -14,6 +14,8 @@ services:
   web-service:
     build: ./web-service
     image: alexsimons/vertx-web-service
+  mongo:
+    image: mongo:latest
 
 #Use this compose file to run both the vertx web server and
 #Take advantage having a browersync server to watch and automagically

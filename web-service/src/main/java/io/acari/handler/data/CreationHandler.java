@@ -1,23 +1,21 @@
 package io.acari.handler.data;
 
-import io.acari.core.Queries;
 import io.acari.util.ChainableOptional;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.ext.sql.SQLConnection;
+import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CreationHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(CreationHandler.class);
 
-  private final JDBCClient jdbcClient;
+  private final MongoClient mongoClient;
 
-  public CreationHandler(JDBCClient jdbcClient) {
-    this.jdbcClient = jdbcClient;
+  public CreationHandler(MongoClient mongoClient) {
+    this.mongoClient = mongoClient;
   }
 
   @Override
@@ -26,24 +24,18 @@ public class CreationHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(request.getString("name"))
       .ifPresent(name -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content ->
-          jdbcClient.getConnection(aConn -> {
-            if (aConn.succeeded()) {
-              SQLConnection connection = aConn.result();
-              connection.updateWithParams(Queries.SqlQueries.CREATE_PAGE.getValue(),
-                new JsonArray().add(name).add(content),
-                aRes -> {
-                  if (aRes.succeeded()) {
-                    message.reply(new JsonObject().put("status", "gewd"));
-                  } else {
-                    message.fail(ErrorCodes.DB_ERROR.ordinal(), aRes.cause().getMessage());
-                  }
-                })
-                .commit(voidAsyncResult -> LOGGER.info("Save page commit!"))
-                .close(v -> connection.close());
-            } else {
-              message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
-            }
-          }))
+          mongoClient.save("pages", new JsonObject()
+              .put("name", name)
+              .put("content", content),
+            aConn -> {
+              ChainableOptional.of(aConn)
+                .filter(AsyncResult::succeeded)
+                .ifPresent(ares -> message.reply(new JsonObject().put("status", "gewd")))
+                .orElseDo(() -> {
+                  LOGGER.warn("Ohhh shit", aConn.cause().getMessage());
+                  message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
+                });
+            }))
         .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
       ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }

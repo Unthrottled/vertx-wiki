@@ -63,8 +63,8 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
       .stream()
       .map(b -> (JsonObject) b)
       .map(pageData -> new JsonObject()
-        .put("id", pageData.getInteger("ID"))
-        .put("name", pageData.getString("NAME")))
+        .put("id", pageData.getString("_id"))
+        .put("name", pageData.getString("name")))
       .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
   }
 

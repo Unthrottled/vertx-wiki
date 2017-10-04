@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class APIPageHandler extends BaseAPIPageHandler {
-  private static final int NOT_FOUND = -1;
+  private static final String NOT_FOUND = "lulNup";
   private static final Logger LOGGER = LoggerFactory.getLogger(APIPageHandler.class);
 
 
@@ -21,7 +21,7 @@ public class APIPageHandler extends BaseAPIPageHandler {
       "get-page",
       (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
         JsonObject message = connectionResult.result().body();
-        if (message.getInteger("id") == NOT_FOUND) {
+        if (NOT_FOUND.equals(message.getString("_id"))) {
           routingContext.response().setStatusCode(404);
           return getFailure();
         } else {
@@ -29,7 +29,7 @@ public class APIPageHandler extends BaseAPIPageHandler {
           String content = message.getString("content");
           return new JsonObject()
             .put("success", true)
-            .put("id", message.getInteger("id"))
+            .put("id", message.getString("_id"))
             .put("markdown", content)
             .put("html", Processor.process(content))
             .put("name", pageName);

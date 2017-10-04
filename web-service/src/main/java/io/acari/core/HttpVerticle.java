@@ -4,19 +4,25 @@ import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
+import io.acari.handler.http.auth.UserCreationHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.auth.jwt.JWTAuth;
+import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.auth.shiro.ShiroAuth;
 import io.vertx.ext.auth.shiro.ShiroAuthOptions;
 import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
+import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.*;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static io.acari.util.MongoConfig.getConfig;
 
 public class HttpVerticle extends AbstractVerticle {
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpVerticle.class);
@@ -30,6 +36,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APIDeletionHandler apiDeletionHandler;
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
+  private MongoClient mongoClient;
 
   @Inject
   public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -52,24 +59,23 @@ public class HttpVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
-    AuthProvider authProvider = ShiroAuth.create(vertx,
-      new ShiroAuthOptions()
-        .setType(ShiroAuthRealmType.PROPERTIES)
-        .setConfig(new JsonObject()
-          .put("properties_path", "classpath:user.properties")));
+    mongoClient = MongoClient.createShared(vertx, getConfig());
+    JsonObject authProps = new JsonObject();
+    MongoAuth mongoAuth = MongoAuth.create(mongoClient, authProps);
 
     Router router = Router.router(vertx);
 
     router.route().handler(CookieHandler.create());
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-    router.route().handler(UserSessionHandler.create(authProvider));
+    router.route().handler(UserSessionHandler.create(mongoAuth));
+    router.post().handler(BodyHandler.create());
+    router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
+    Router apiRouter = Router.router(vertx);
 
-    AuthHandler authHandler = RedirectAuthHandler.create(authProvider, "/");
+    AuthHandler authHandler = RedirectAuthHandler.create(mongoAuth, "/");
     router.route("/wiki/*").handler(authHandler);
     router.route("/action/*").handler(authHandler);
-
-    Router apiRouter = Router.router(vertx);
 
     JWTAuth jwtAuth = JWTAuth.create(vertx, new JsonObject()
       .put("keyStore", new JsonObject()//dis needs to be camel case
@@ -80,7 +86,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/token").handler(tokenHandler
       .applyConfiguration(jwtAuth)
-      .applyConfiguration(authProvider));
+      .applyConfiguration(mongoAuth));
 
     apiRouter.get("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
     apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
