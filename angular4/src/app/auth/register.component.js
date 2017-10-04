@@ -67,7 +67,7 @@ var RegisterComponent = (function () {
                     else {
                         _this.failure();
                     }
-                }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
+                }, function (e) { return _this.failure(); }));
             }
             else {
                 _this.failure();
