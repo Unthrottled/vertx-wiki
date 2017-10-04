@@ -32,7 +32,8 @@ public class PageHandler implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     ChainableOptional.ofNullable(message.body().getString("page"))
-      .ifPresent(pago -> mongoClient.find("pages", new JsonObject(), asyncResultHandler -> {
+      .ifPresent(pago -> mongoClient.find("pages", new JsonObject()
+        .put("name", pago), asyncResultHandler -> {
         if (asyncResultHandler.succeeded()) {
           List<JsonObject> result = asyncResultHandler.result();
           message.reply(result

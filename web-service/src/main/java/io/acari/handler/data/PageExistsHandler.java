@@ -20,7 +20,8 @@ public class PageExistsHandler implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     ChainableOptional.ofNullable(message.body().getString("page"))
-      .ifPresent(pago -> mongoClient.find("pages", new JsonObject(), asyncResultHandler -> {
+      .ifPresent(pago -> mongoClient.find("pages", new JsonObject()
+        .put("name", pago), asyncResultHandler -> {
         ChainableOptional.of(asyncResultHandler)
           .filter(AsyncResult::succeeded)
           .ifPresent(result -> {
