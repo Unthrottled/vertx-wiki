@@ -18,13 +18,13 @@ var auth_service_1 = require("./auth.service");
 var user_model_1 = require("./user.model");
 require("./register.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
-var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var NewUser_model_1 = require("./NewUser.model");
+var dist_1 = require("angular2-notifications/dist");
 var RegisterComponent = (function () {
-    function RegisterComponent(authService, router, prince) {
+    function RegisterComponent(authService, router, notifService) {
         this.authService = authService;
         this.router = router;
-        this.prince = prince;
+        this.notifService = notifService;
         this.model = {
             permissions: {
                 view: true
@@ -52,7 +52,6 @@ var RegisterComponent = (function () {
         var self = this;
         this.authService.createPrincipal(this.getNewUser())
             .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
-            console.log(succeded);
             if (succeded) {
                 self.authService.login(self.getUser())
                     .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
@@ -65,12 +64,20 @@ var RegisterComponent = (function () {
                         };
                         _this.router.navigate(['/'], navigationExtras);
                     }
+                    else {
+                        _this.failure();
+                    }
                 }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
             }
             else {
+                _this.failure();
             }
         }, function (error) {
+            _this.failure();
         }));
+    };
+    RegisterComponent.prototype.failure = function () {
+        this.notifService.error("Unable to create user!", "Please try another username.", { timeOut: 3000 });
     };
     RegisterComponent.prototype.ngOnInit = function () {
         this.authService.logout();
@@ -85,7 +92,7 @@ RegisterComponent = __decorate([
         selector: 'register-form-guy',
         templateUrl: 'templates/register.template.htm'
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, dist_1.NotificationsService])
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map

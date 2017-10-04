@@ -28,7 +28,9 @@ public class UserCreationHandler implements Handler<RoutingContext> {
       .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
         .ifPresent(password -> ChainableOptional.ofNullable(body.getJsonArray("permissions"))
           .ifPresent(permissionArray -> {
-            List<String> permissions = permissionArray.stream().map(s -> (String) s).collect(Collectors.toList());
+            List<String> permissions =  permissionArray.stream()
+              .map(s -> (String) s)
+              .collect(Collectors.toList());
             mongoAuth.insertUser(login,
               password,
               Collections.emptyList(),
@@ -41,7 +43,9 @@ public class UserCreationHandler implements Handler<RoutingContext> {
                 })
                 .orElseDo(() -> {
                   LOGGER.warn("Ohhhhh sheeeeeeit", stringAsyncResult.cause());
-                  routingContext.response().setStatusCode(500).end("Shits Broke, yo");
+                  routingContext.response()
+                    .setStatusCode(400)
+                    .end("You can't do dat \n ¯\\_(ツ)_/¯");
                 }));
           }))
         .orElseDo(() -> fourHundred(routingContext, "password")))

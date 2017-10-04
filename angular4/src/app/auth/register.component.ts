@@ -7,8 +7,8 @@ import {AuthService} from "./auth.service";
 import {User} from "./user.model";
 import "./register.template.htm";
 import {Subscriber} from "rxjs/Subscriber";
-import {UserPrincipal} from "./UserPrincipal.model";
 import {NewUser} from "./NewUser.model";
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'register-form-guy',
@@ -17,12 +17,12 @@ import {NewUser} from "./NewUser.model";
 export class RegisterComponent implements OnInit {
   message: string;
   model: any = {
-    permissions : {
+    permissions: {
       view: true
     }
   };
 
-  constructor(public authService: AuthService, public router: Router, private prince: UserPrincipal) {
+  constructor(public authService: AuthService, public router: Router, private notifService: NotificationsService) {
 
   }
 
@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
     return new User(this.model.username, this.model.password);
   }
 
-  get permissions(): string[]{
+  get permissions(): string[] {
     return Object.keys(this.model.permissions)
-      .filter((key: string)=> this.model.permissions[key])
-      .map((key: string)=> key.toLowerCase());
+      .filter((key: string) => this.model.permissions[key])
+      .map((key: string) => key.toLowerCase());
   }
 
   getNewUser(): NewUser {
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     let self = this;
     this.authService.createPrincipal(this.getNewUser())
       .subscribe(Subscriber.create((succeded: boolean) => {
-        if(succeded){
+        if (succeded) {
           self.authService.login(self.getUser())
             .subscribe(Subscriber.create((succeded: boolean) => {
               if (succeded) {
@@ -56,15 +56,21 @@ export class RegisterComponent implements OnInit {
                 };
 
                 this.router.navigate(['/'], navigationExtras);
+              } else {
+                this.failure();
               }
-            }, (e) => console.log("OHHHH SHIIIITTTTTTTT" + e)));
+            }, (e) => this.failure()));
         } else {
-
+          this.failure();
         }
-      }, (error: any)=> {
-
+      }, (error: any) => {
+        this.failure();
       }));
-}
+  }
+
+  private failure() {
+    this.notifService.error("Unable to create user!", "Please try another username.", {timeOut: 3000})
+  }
 
   ngOnInit(): void {
     this.authService.logout();
