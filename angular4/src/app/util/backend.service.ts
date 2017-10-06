@@ -43,6 +43,11 @@ export class BackendService {
       .map((response: Response) => new ExistsPayload(response.json()));
   }
 
+  userExists(userName: String): Observable<ExistsPayload> {
+    return this.httpGet("user/exists/" + userName)
+      .map((response: Response) => new ExistsPayload(response.json()));
+  }
+
   updatePage(pageName: String, pageBody: String): Observable<StatusPayload> {
     return this.httpPut("api/pages",
       {"name": pageName, "markdown": pageBody})

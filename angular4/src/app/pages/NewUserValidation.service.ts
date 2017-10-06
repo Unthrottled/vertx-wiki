@@ -7,7 +7,7 @@ import {BackendService} from "../util/backend.service";
 import {ExistsPayload} from "./ExistsPayload.model";
 
 @Injectable()
-export class UserValidationService {
+export class NewUserValidationService {
 
   constructor(private backendService: BackendService) {
 
@@ -15,7 +15,7 @@ export class UserValidationService {
 
   isValid(pageName: String): Observable<boolean> {
     return this.backendService
-      .pageExists(pageName)
+      .userExists(pageName)
       .map((statusPayload: ExistsPayload) => !statusPayload.exists);
   }
 
