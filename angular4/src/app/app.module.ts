@@ -40,6 +40,7 @@ import {HexListComponent} from "./pages/hex/HexList.component";
 import {HexComponent} from "./pages/hex/HexComponent";
 import {SearchComponent} from "./pages/search/Search.component";
 import {RegisterComponent} from "./auth/register.component";
+import {NewUserValidationService} from "./pages/NewUserValidation.service";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -101,6 +102,7 @@ const appRoutes = [
     PagesService,
     NewPageResolve,
     TitleValidationService,
+    NewUserValidationService,
     BackendService,]
 })
 export class AppModule {
