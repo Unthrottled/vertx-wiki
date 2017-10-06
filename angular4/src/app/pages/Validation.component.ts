@@ -27,7 +27,7 @@ export abstract class ValidationComponent {
     return this._content;
   }
 
-  validate(title: String): void {
+  validate(title: string): void {
     let self = this;
     this.validateContent(title)
       .subscribe((valid: boolean) => self.zone.run(() => self.validTitle = valid),
