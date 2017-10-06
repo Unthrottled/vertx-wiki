@@ -41,6 +41,7 @@ import {HexComponent} from "./pages/hex/HexComponent";
 import {SearchComponent} from "./pages/search/Search.component";
 import {RegisterComponent} from "./auth/register.component";
 import {NewUserValidationService} from "./pages/NewUserValidation.service";
+import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -79,6 +80,7 @@ const appRoutes = [
     PagesComponent,
     EditPageComponent,
     TitleCreationComponent,
+    NewUserCreationComponent,
     CreatePageComponent,
     DeletionComponent,
     CreateComponent,

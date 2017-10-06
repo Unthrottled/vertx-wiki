@@ -47,34 +47,39 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.getNewUser = function () {
         return new NewUser_model_1.NewUser(this.model.username, this.model.password, this.permissions);
     };
+    RegisterComponent.prototype.userNameValidationChange = function (delta) {
+        this.validName = delta;
+    };
     RegisterComponent.prototype.login = function () {
         var _this = this;
         var self = this;
-        this.authService.createPrincipal(this.getNewUser())
-            .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
-            if (succeded) {
-                self.authService.login(self.getUser())
-                    .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
-                    if (succeded) {
-                        // Set our navigation extras object
-                        // that passes on our global query params and fragment
-                        var navigationExtras = {
-                            queryParamsHandling: 'preserve',
-                            preserveFragment: true
-                        };
-                        _this.router.navigate(['/'], navigationExtras);
-                    }
-                    else {
-                        _this.failure();
-                    }
-                }, function (e) { return _this.failure(); }));
-            }
-            else {
+        if (this.validName) {
+            this.authService.createPrincipal(this.getNewUser())
+                .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
+                if (succeded) {
+                    self.authService.login(self.getUser())
+                        .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
+                        if (succeded) {
+                            // Set our navigation extras object
+                            // that passes on our global query params and fragment
+                            var navigationExtras = {
+                                queryParamsHandling: 'preserve',
+                                preserveFragment: true
+                            };
+                            _this.router.navigate(['/'], navigationExtras);
+                        }
+                        else {
+                            _this.failure();
+                        }
+                    }, function (e) { return _this.failure(); }));
+                }
+                else {
+                    _this.failure();
+                }
+            }, function (error) {
                 _this.failure();
-            }
-        }, function (error) {
-            _this.failure();
-        }));
+            }));
+        }
     };
     RegisterComponent.prototype.failure = function () {
         this.notifService.error("Unable to create user!", "Please try another username.", { timeOut: 3000 });
@@ -85,6 +90,16 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.logout = function () {
         this.authService.logout();
     };
+    Object.defineProperty(RegisterComponent.prototype, "validName", {
+        get: function () {
+            return this._validName;
+        },
+        set: function (value) {
+            this._validName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return RegisterComponent;
 }());
 RegisterComponent = __decorate([

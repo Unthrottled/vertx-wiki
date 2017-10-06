@@ -42,6 +42,10 @@ var BackendService = (function () {
         return this.httpGet("api/exists/" + pageName)
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
+    BackendService.prototype.userExists = function (userName) {
+        return this.httpGet("user/exists/" + userName)
+            .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
+    };
     BackendService.prototype.updatePage = function (pageName, pageBody) {
         return this.httpPut("api/pages", { "name": pageName, "markdown": pageBody })
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });

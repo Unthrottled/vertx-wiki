@@ -47,6 +47,8 @@ var HexList_component_1 = require("./pages/hex/HexList.component");
 var HexComponent_1 = require("./pages/hex/HexComponent");
 var Search_component_1 = require("./pages/search/Search.component");
 var register_component_1 = require("./auth/register.component");
+var NewUserValidation_service_1 = require("./pages/NewUserValidation.service");
+var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -86,6 +88,7 @@ AppModule = __decorate([
             Pages_component_1.PagesComponent,
             EditPage_component_1.EditPageComponent,
             TitleCreation_component_1.TitleCreationComponent,
+            NewUserCreation_component_1.NewUserCreationComponent,
             CreatePage_component_1.CreatePageComponent,
             deletion_component_1.DeletionComponent,
             create_button_component_1.CreateComponent,
@@ -109,6 +112,7 @@ AppModule = __decorate([
             Pages_service_1.PagesService,
             new_page_resolve_service_1.NewPageResolve,
             TitleValidation_service_1.TitleValidationService,
+            NewUserValidation_service_1.NewUserValidationService,
             backend_service_1.BackendService,]
     })
 ], AppModule);

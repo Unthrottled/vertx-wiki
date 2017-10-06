@@ -3,15 +3,13 @@
     <form name="form-signin"
           (ngSubmit)="f.form.valid && login()"
           #f="ngForm" novalidate>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !validName }">
         <h2 class="form-signin-heading">Please fill out the forms!</h2>
         <label for="username" class="sr-only">Username</label>
-        <input type="text" class="form-control"
-               name="username"
-               placeholder="User Name"
-               [(ngModel)]="model.username"
-               #username="ngModel" required/>
-        <div *ngIf="f.submitted && !username.valid"
+        <user-name-creation (onValidate)="userNameValidationChange($event)"
+                        (onChange)="model.username = $event"
+                        [content]="model.username"></user-name-creation>
+        <div *ngIf="f.submitted && !validName"
              class="help-block">Username is required
         </div>
       </div>
@@ -48,7 +46,7 @@
                [(ngModel)]="model.permissions.Delete" #Delete="ngModel"/>
       </div>
 
-      <button [disabled]="!f.form.valid"
+      <button [disabled]="!(f.form.valid || validName)"
               class="btn btn-lg btn-primary btn-block">Register
       </button>
     </form>

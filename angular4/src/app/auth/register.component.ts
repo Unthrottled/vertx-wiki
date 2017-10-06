@@ -16,6 +16,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 })
 export class RegisterComponent implements OnInit {
   message: string;
+  private _validName: boolean;
   model: any = {
     permissions: {
       view: true
@@ -40,32 +41,38 @@ export class RegisterComponent implements OnInit {
     return new NewUser(this.model.username, this.model.password, this.permissions);
   }
 
+  userNameValidationChange(delta: boolean): void {
+    this.validName = delta;
+  }
+
   login() {
     let self = this;
-    this.authService.createPrincipal(this.getNewUser())
-      .subscribe(Subscriber.create((succeded: boolean) => {
-        if (succeded) {
-          self.authService.login(self.getUser())
-            .subscribe(Subscriber.create((succeded: boolean) => {
-              if (succeded) {
-                // Set our navigation extras object
-                // that passes on our global query params and fragment
-                let navigationExtras: NavigationExtras = {
-                  queryParamsHandling: 'preserve',
-                  preserveFragment: true
-                };
+    if(this.validName){
+      this.authService.createPrincipal(this.getNewUser())
+        .subscribe(Subscriber.create((succeded: boolean) => {
+          if (succeded) {
+            self.authService.login(self.getUser())
+              .subscribe(Subscriber.create((succeded: boolean) => {
+                if (succeded) {
+                  // Set our navigation extras object
+                  // that passes on our global query params and fragment
+                  let navigationExtras: NavigationExtras = {
+                    queryParamsHandling: 'preserve',
+                    preserveFragment: true
+                  };
 
-                this.router.navigate(['/'], navigationExtras);
-              } else {
-                this.failure();
-              }
-            }, (e) => this.failure()));
-        } else {
+                  this.router.navigate(['/'], navigationExtras);
+                } else {
+                  this.failure();
+                }
+              }, (e) => this.failure()));
+          } else {
+            this.failure();
+          }
+        }, (error: any) => {
           this.failure();
-        }
-      }, (error: any) => {
-        this.failure();
-      }));
+        }));
+    }
   }
 
   private failure() {
@@ -78,5 +85,14 @@ export class RegisterComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+
+  get validName(): boolean {
+    return this._validName;
+  }
+
+  set validName(value: boolean) {
+    this._validName = value;
   }
 }
