@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/20/17.
  */
 var core_1 = require("@angular/core");
-require("./titleCreation.htm");
+require("./validation-field.htm");
 var TitleValidation_service_1 = require("./TitleValidation.service");
 var Validation_component_1 = require("./Validation.component");
 var TitleCreationComponent = (function (_super) {
@@ -42,7 +42,7 @@ var TitleCreationComponent = (function (_super) {
 TitleCreationComponent = __decorate([
     core_1.Component({
         selector: 'title-creation',
-        templateUrl: './templates/titleCreation.htm'
+        templateUrl: './templates/validation-field.htm'
     }),
     __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, core_1.NgZone])
 ], TitleCreationComponent);
