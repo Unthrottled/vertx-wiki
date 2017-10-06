@@ -4,7 +4,7 @@
           (ngSubmit)="f.form.valid && login()"
           #f="ngForm" novalidate>
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Welcome, Please sign in!</h2>
         <label for="username" class="sr-only">Username</label>
         <input type="text" class="form-control"
                name="username"
