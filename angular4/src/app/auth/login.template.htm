@@ -1,5 +1,5 @@
 <div class="app-container">
-  <div class="container">
+  <div class="container content-container">
     <form name="form-signin"
           (ngSubmit)="f.form.valid && login()"
           #f="ngForm" novalidate>
@@ -32,7 +32,10 @@
       </button>
     </form>
     <div class="container">
-      <button class="btn btn-outline-light" routerLink="/register">Register</button>
+      <div class="register-container">
+        <label>New User?</label>
+        <button class="btn btn-sm btn-outline-info" routerLink="/register">Register!</button>
+      </div>
     </div>
   </div>
 </div>
