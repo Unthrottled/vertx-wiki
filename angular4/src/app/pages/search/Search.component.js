@@ -19,12 +19,14 @@ var angular2_notifications_1 = require("angular2-notifications");
 var TitleValidation_service_1 = require("../TitleValidation.service");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
+var auth_service_1 = require("../../auth/auth.service");
 var SearchComponent = (function () {
-    function SearchComponent(pagesService, notificationService, actualRouter, userToken) {
+    function SearchComponent(pagesService, notificationService, actualRouter, userToken, authService) {
         this.pagesService = pagesService;
         this.notificationService = notificationService;
         this.actualRouter = actualRouter;
         this.userToken = userToken;
+        this.authService = authService;
         this._model = {};
     }
     SearchComponent.prototype.search = function (searchedTitle) {
@@ -66,8 +68,9 @@ var SearchComponent = (function () {
     });
     Object.defineProperty(SearchComponent.prototype, "cantSearch", {
         get: function () {
+            var _this = this;
             return Permissions_component_1.Permissions.canActivate(this.userToken, 'view')
-                .map(function (canCreate) { return !canCreate; });
+                .map(function (canCreate) { return !(canCreate && _this.authService.isLoggedIn); });
         },
         enumerable: true,
         configurable: true
@@ -79,7 +82,11 @@ SearchComponent = __decorate([
         selector: 'page-search',
         templateUrl: './templates/search.htm'
     }),
-    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, angular2_notifications_1.NotificationsService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService,
+        angular2_notifications_1.NotificationsService,
+        router_1.Router,
+        UserPrincipal_model_1.UserPrincipal,
+        auth_service_1.AuthService])
 ], SearchComponent);
 exports.SearchComponent = SearchComponent;
 //# sourceMappingURL=Search.component.js.map

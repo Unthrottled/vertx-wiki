@@ -9,6 +9,7 @@ import {Observable} from "rxjs/Observable";
 import {TitleValidationService} from "../TitleValidation.service";
 import {Permissions} from "../../auth/Permissions.component";
 import {UserPrincipal} from "../../auth/UserPrincipal.model";
+import {AuthService} from "../../auth/auth.service";
 @Component({
   selector: 'page-search',
   templateUrl: './templates/search.htm'
@@ -16,7 +17,11 @@ import {UserPrincipal} from "../../auth/UserPrincipal.model";
 export class SearchComponent {
   private _model: any = {};
 
-  constructor(private pagesService: TitleValidationService, private notificationService: NotificationsService, private actualRouter: Router, private userToken: UserPrincipal) {
+  constructor(private pagesService: TitleValidationService,
+              private notificationService: NotificationsService,
+              private actualRouter: Router,
+              private userToken: UserPrincipal,
+              private authService: AuthService) {
   }
 
   search(searchedTitle: string) {
@@ -57,6 +62,6 @@ export class SearchComponent {
 
   get cantSearch(): Observable<boolean> {
     return Permissions.canActivate(this.userToken, 'view')
-      .map((canCreate: boolean) => !canCreate);
+      .map((canCreate: boolean) => !(canCreate && this.authService.isLoggedIn));
   }
 }
