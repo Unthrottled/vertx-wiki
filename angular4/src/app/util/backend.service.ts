@@ -44,7 +44,7 @@ export class BackendService {
   }
 
   userExists(userName: String): Observable<ExistsPayload> {
-    return this.httpGet("user/exists/" + userName)
+    return this.httpPost("user/exists/" + userName, {})
       .map((response: Response) => new ExistsPayload(response.json()));
   }
 

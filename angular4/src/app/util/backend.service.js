@@ -43,7 +43,7 @@ var BackendService = (function () {
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
     BackendService.prototype.userExists = function (userName) {
-        return this.httpGet("user/exists/" + userName)
+        return this.httpPost("user/exists/" + userName, {})
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
     BackendService.prototype.updatePage = function (pageName, pageBody) {
