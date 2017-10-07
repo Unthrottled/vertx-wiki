@@ -16,8 +16,10 @@ var core_1 = require("@angular/core");
 var Permissions_component_1 = require("../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 require("./create.button.template.htm");
+var auth_service_1 = require("../auth/auth.service");
 var CreateComponent = (function () {
-    function CreateComponent(userToken) {
+    function CreateComponent(authService, userToken) {
+        this.authService = authService;
         this.userToken = userToken;
     }
     CreateComponent.prototype.ngOnInit = function () {
@@ -30,6 +32,13 @@ var CreateComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(CreateComponent.prototype, "hideButton", {
+        get: function () {
+            return !this.authService.isLoggedIn;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return CreateComponent;
 }());
 CreateComponent = __decorate([
@@ -37,7 +46,7 @@ CreateComponent = __decorate([
         selector: 'create-butt',
         templateUrl: 'templates/create.button.template.htm'
     }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [auth_service_1.AuthService, UserPrincipal_model_1.UserPrincipal])
 ], CreateComponent);
 exports.CreateComponent = CreateComponent;
 //# sourceMappingURL=create.button.component.js.map

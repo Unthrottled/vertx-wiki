@@ -6,12 +6,13 @@ import {Permissions} from "../auth/Permissions.component";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 import "./create.button.template.htm";
 import {Observable} from "rxjs/Observable";
+import {AuthService} from "../auth/auth.service";
 @Component({
   selector: 'create-butt',
   templateUrl: 'templates/create.button.template.htm'
 })
 export class CreateComponent implements OnInit {
-  constructor(public userToken: UserPrincipal) {
+  constructor(public authService: AuthService,public userToken: UserPrincipal) {
 
   }
 
@@ -22,5 +23,9 @@ export class CreateComponent implements OnInit {
   get cantCreate(): Observable<boolean> {
     return Permissions.canActivate(this.userToken, 'create')
       .map((canCreate: boolean) => !canCreate);
+  }
+
+  get hideButton(): boolean {
+    return !this.authService.isLoggedIn;
   }
 }
