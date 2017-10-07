@@ -42,6 +42,7 @@ import {SearchComponent} from "./pages/search/Search.component";
 import {RegisterComponent} from "./auth/register.component";
 import {NewUserValidationService} from "./pages/NewUserValidation.service";
 import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
+import {AboutComponent} from "./pages/about/about.component";
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -49,7 +50,8 @@ const appRoutes = [
   {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'about', component: AboutComponent}
 ];
 
 
@@ -88,6 +90,7 @@ const appRoutes = [
     HexListComponent,
     HexComponent,
     SearchComponent,
+    AboutComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],
