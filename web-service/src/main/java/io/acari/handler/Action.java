@@ -10,6 +10,7 @@ public enum Action {
   ALL_PAGES_DATA("all-pages-data"),
   GET_PAGE("get-page"),
   PAGE_EXISTS("page-exists"),
+  USER_EXISTS("user-exists"),
   CREATE_PAGE("create-page"),
   SAVE_PAGE("save-page"),
   DELETE_PAGE("delete-page"),

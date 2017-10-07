@@ -18,6 +18,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private final CreationHandler creationHandler;
   private final AllPageDataHandler allPageDataHandler;
   private final PageExistsHandler pageExistsHandler;
+  private final UserExistsHandler userExistsHandler;
 
   public DataMessageConsumer(PageHandler pageHandler,
                              DeletionHandler deletionHandler,
@@ -25,7 +26,8 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
                              AllPageHandler allPageHandler,
                              CreationHandler creationHandler,
                              AllPageDataHandler allPageDataHandler,
-                             PageExistsHandler pageExistsHandler) {
+                             PageExistsHandler pageExistsHandler,
+                             UserExistsHandler userExistsHandler) {
 
     this.pageHandler = pageHandler;
     this.deletionHandler = deletionHandler;
@@ -34,6 +36,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
     this.creationHandler = creationHandler;
     this.allPageDataHandler = allPageDataHandler;
     this.pageExistsHandler = pageExistsHandler;
+    this.userExistsHandler = userExistsHandler;
   }
 
   @Override
@@ -49,6 +52,9 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
             break;
           case PAGE_EXISTS:
             pageExistsHandler.handle(message);
+            break;
+          case USER_EXISTS:
+            userExistsHandler.handle(message);
             break;
           case ALL_PAGES:
             allPageHandler.handle(message);

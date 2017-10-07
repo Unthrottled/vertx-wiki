@@ -1,7 +1,6 @@
 package io.acari.core;
 
 import com.google.inject.Singleton;
-import io.acari.auth.AuthConfigs;
 import io.acari.handler.data.*;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.AbstractVerticle;
@@ -115,7 +114,8 @@ public class DatabaseVerticle extends AbstractVerticle {
       new AllPageHandler(mongoClient),
       new CreationHandler(mongoClient),
       new AllPageDataHandler(mongoClient),
-      new PageExistsHandler(mongoClient));
+      new PageExistsHandler(mongoClient),
+      new UserExistsHandler(mongoClient));
   }
 
 
