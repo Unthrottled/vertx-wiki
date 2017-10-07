@@ -21,7 +21,7 @@ var proxyPeel = proxy('/api', {
 });
 
 
-var proxyPeel2 = proxy('/user/*', {
+var proxyPeel2 = proxy('/user', {
     target: 'http://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
