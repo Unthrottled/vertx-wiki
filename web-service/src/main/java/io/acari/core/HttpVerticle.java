@@ -5,16 +5,12 @@ import io.acari.handler.Config;
 import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
 import io.acari.handler.http.auth.UserCreationHandler;
+import io.acari.handler.http.auth.UserExistsHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.mongo.MongoAuth;
-import io.vertx.ext.auth.shiro.ShiroAuth;
-import io.vertx.ext.auth.shiro.ShiroAuthOptions;
-import io.vertx.ext.auth.shiro.ShiroAuthRealmType;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.*;
@@ -36,6 +32,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final APIDeletionHandler apiDeletionHandler;
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
+  private final UserExistsHandler userExistsHandler;
   private MongoClient mongoClient;
 
   @Inject
@@ -45,7 +42,8 @@ public class HttpVerticle extends AbstractVerticle {
                       APIUpdateHandler apiUpdateHandler,
                       APIDeletionHandler apiDeletionHandler,
                       TokenHandler tokenHandler,
-                      APIPageExistsHandler apiPageExistsHandler) {
+                      APIPageExistsHandler apiPageExistsHandler,
+                      UserExistsHandler userExistsHandler) {
     this.APIAllPageDataHandler = APIAllPageDataHandler;
     this.apiPageHandler = apiPageHandler;
     this.apiCreationHandler = apiCreationHandler;
@@ -53,6 +51,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.apiDeletionHandler = apiDeletionHandler;
     this.tokenHandler = tokenHandler;
     this.apiPageExistsHandler = apiPageExistsHandler;
+    this.userExistsHandler = userExistsHandler;
   }
 
 
@@ -71,6 +70,10 @@ public class HttpVerticle extends AbstractVerticle {
     router.route().handler(UserSessionHandler.create(mongoAuth));
     router.post().handler(BodyHandler.create());
     router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
+
+    //It's page because I just want to reuse code :)
+    router.post("/user/exists/:page").handler(new UserCreationHandler(mongoAuth));
+
     Router apiRouter = Router.router(vertx);
 
     AuthHandler authHandler = RedirectAuthHandler.create(mongoAuth, "/");
