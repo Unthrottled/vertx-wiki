@@ -18,6 +18,8 @@ export class NewUserCreationComponent extends ValidationComponent {
 
   constructor(private newUserValidationService: NewUserValidationService, private ngZone: NgZone) {
     super(ngZone);
+    this.hideContent = true;
+    this.placeHolder = "Username"
   }
 
 }

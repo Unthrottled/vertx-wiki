@@ -8,6 +8,8 @@ import {Observable} from "rxjs/Observable";
 export abstract class ValidationComponent {
   private _content: string;
   private _validTitle: boolean = false;
+  private _hideContent: boolean =false;
+  private _placeHolder: string;
 
   @Output()
   private onValidate = new EventEmitter();
@@ -44,5 +46,23 @@ export abstract class ValidationComponent {
   set validTitle(value: boolean) {
     this._validTitle = value;
     this.onValidate.emit(this._validTitle);
+  }
+
+
+  get hideContent(): boolean {
+    return this._hideContent;
+  }
+
+  set hideContent(value: boolean) {
+    this._hideContent = value;
+  }
+
+
+  get placeHolder(): string {
+    return this._placeHolder;
+  }
+
+  set placeHolder(value: string) {
+    this._placeHolder = value;
   }
 }

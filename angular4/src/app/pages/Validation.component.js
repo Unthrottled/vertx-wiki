@@ -18,6 +18,7 @@ var ValidationComponent = (function () {
     function ValidationComponent(zone) {
         this.zone = zone;
         this._validTitle = false;
+        this._hideContent = false;
         this.onValidate = new core_1.EventEmitter();
         this.onChange = new core_1.EventEmitter();
     }
@@ -44,6 +45,26 @@ var ValidationComponent = (function () {
         set: function (value) {
             this._validTitle = value;
             this.onValidate.emit(this._validTitle);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValidationComponent.prototype, "hideContent", {
+        get: function () {
+            return this._hideContent;
+        },
+        set: function (value) {
+            this._hideContent = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ValidationComponent.prototype, "placeHolder", {
+        get: function () {
+            return this._placeHolder;
+        },
+        set: function (value) {
+            this._placeHolder = value;
         },
         enumerable: true,
         configurable: true

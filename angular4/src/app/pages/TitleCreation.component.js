@@ -32,6 +32,7 @@ var TitleCreationComponent = (function (_super) {
         var _this = _super.call(this, ngZone) || this;
         _this.titleValidationService = titleValidationService;
         _this.ngZone = ngZone;
+        _this.placeHolder = "Enter Page Title";
         return _this;
     }
     TitleCreationComponent.prototype.validateContent = function (content) {

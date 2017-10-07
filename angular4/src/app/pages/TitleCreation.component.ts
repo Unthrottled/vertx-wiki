@@ -17,6 +17,7 @@ export class TitleCreationComponent extends ValidationComponent {
   }
   constructor(private titleValidationService: TitleValidationService, private ngZone: NgZone) {
     super(ngZone);
+    this.placeHolder = "Enter Page Title";
   }
 
 }

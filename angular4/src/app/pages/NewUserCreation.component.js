@@ -32,6 +32,8 @@ var NewUserCreationComponent = (function (_super) {
         var _this = _super.call(this, ngZone) || this;
         _this.newUserValidationService = newUserValidationService;
         _this.ngZone = ngZone;
+        _this.hideContent = true;
+        _this.placeHolder = "Username";
         return _this;
     }
     NewUserCreationComponent.prototype.validateContent = function (content) {

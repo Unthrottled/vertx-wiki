@@ -1,8 +1,9 @@
-<div [ngClass]="{'worked': validTitle, 'failed': !validTitle }">{{content}}</div>
+<div [hidden]="hideContent"
+  [ngClass]="{'worked': validTitle, 'failed': !validTitle }">{{content}}</div>
 <input type="text"
        pattern="[a-zA-Z0-9._%+-]+"
        [ngClass]="{'is-valid': validTitle, 'is-invalid': !validTitle  }"
        class="form-control"
-       placeholder="Enter Page Title"
+       placeholder="{{placeHolder}}"
        [(ngModel)]="content"
        (ngModelChange)="validate(content)">
