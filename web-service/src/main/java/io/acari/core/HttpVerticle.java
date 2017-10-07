@@ -72,7 +72,7 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
 
     //It's page because I just want to reuse code :)
-    router.post("/user/exists/:page").handler(new UserCreationHandler(mongoAuth));
+    router.post("/user/exists/:page").handler(userExistsHandler.applyConfiguration(config));
 
     Router apiRouter = Router.router(vertx);
 
