@@ -8,6 +8,8 @@ public class MongoConfig {
     return new JsonObject()
       .put("host", AuthConfigs.Configs.HOST.getValue())
       .put("port", Integer.parseInt(AuthConfigs.Configs.PORT.getValue()))
+      .put("maxPoolSize", 30)
       ;
   }
+
 }

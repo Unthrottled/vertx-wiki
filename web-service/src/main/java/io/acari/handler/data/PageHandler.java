@@ -1,20 +1,14 @@
 package io.acari.handler.data;
 
-import com.google.inject.Inject;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.ext.sql.SQLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-
-import static io.acari.core.Queries.SqlQueries.GET_PAGE;
 
 public class PageHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(PageHandler.class);
