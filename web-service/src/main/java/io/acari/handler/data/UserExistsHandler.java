@@ -19,13 +19,14 @@ public class UserExistsHandler implements Handler<Message<JsonObject>> {
 
   @Override
   public void handle(Message<JsonObject> message) {
-    ChainableOptional.ofNullable(message.body().getString("user"))
+    ChainableOptional.ofNullable(message.body().getString("page"))//it's page cuz I'm a slob
       .ifPresent(pago -> mongoClient.find("user", new JsonObject()
         .put("username", pago), asyncResultHandler -> {
         ChainableOptional.of(asyncResultHandler)
           .filter(AsyncResult::succeeded)
           .ifPresent(result -> message.reply(result.result()
             .stream()
+            .peek(a-> LOGGER.info(result.result().toString()))
             .findFirst()
             .map(jsonArray -> new JsonObject()
               .put("exists", !jsonArray.getString("_id").isEmpty()))
