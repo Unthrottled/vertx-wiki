@@ -14,8 +14,6 @@ services:
   web-service:
     build: ./web-service
     image: alexsimons/vertx-web-service
-    ports:
-      - "9000:8989"
   mongo:
     image: mongo:latest
 
