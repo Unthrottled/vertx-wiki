@@ -49,9 +49,9 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {
     if (ar.succeeded()) {
-      JsonArray pages = createPagesData(ar);
       responseGuy.put("success", true);
-      responseGuy.put("pages", pages);
+      responseGuy.put("pages", getBody(ar).getJsonArray("pages"));
+      responseGuy.put("metaData", getBody(ar).getJsonObject("metaData"));
       return routingContext.response()
         .setStatusCode(200);
     } else {
@@ -61,14 +61,14 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
     }
   }
 
+  private JsonObject getBody(AsyncResult<Message<JsonObject>> ar) {
+    return ar.result().body();
+  }
+
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
       .setStatusCode(400)
       .end("No " + name + " Provided, bruv.");
-  }
-
-  private JsonArray createPagesData(AsyncResult<Message<JsonObject>> ar) {
-    return ar.result().body().getJsonArray("pages");
   }
 
   @Override

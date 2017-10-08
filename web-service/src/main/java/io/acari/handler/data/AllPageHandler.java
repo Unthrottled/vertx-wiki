@@ -29,23 +29,33 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
         new FindOptions()
           .setLimit(PAGES_PER_PAGE)
           .setSkip(getSkipCount(pageNumber)),
-        ar -> {
-          ChainableOptional.of(ar)
-            .filter(AsyncResult::succeeded)
-            .ifPresent(listAsyncResult -> {
-              JsonArray pages = listAsyncResult.result()
-                .stream()
-                .map(json -> json.getString("name"))
-                .collect(JsonArray::new, JsonArray::add, JsonArray::add);
-              message.reply(new JsonObject()
-                .put("pages", pages));
-            })
-            .orElseDo(() -> {
-              LOGGER.warn("Ohh shit", ar.cause().getMessage());
-              message.fail(ErrorCodes.DB_ERROR.ordinal(), ar.cause().getMessage());
-            });
-        }))
+        ar -> ChainableOptional.of(ar)
+          .filter(AsyncResult::succeeded)
+          .ifPresent(listAsyncResult -> {
+            JsonArray pages = listAsyncResult.result()
+              .stream()
+              .map(json -> json.getString("name"))
+              .collect(JsonArray::new, JsonArray::add, JsonArray::add);
+            mongoClient.count("pages",
+              new JsonObject(), arc -> ChainableOptional.of(arc)
+                .filter(AsyncResult::succeeded)
+                .map(AsyncResult::result)
+                .ifPresent(county ->
+                  message.reply(new JsonObject()
+                    .put("pages", pages)
+                    .put("metaData", new JsonObject()
+                      .put("currentPageNumber", pageNumber)
+                      .put("maxPage", (int) Math.ceil((double) county / (double) PAGES_PER_PAGE)))))
+                .orElseDo(() -> logFail(message, arc.cause().getMessage())
+                ));
+          })
+          .orElseDo(() -> logFail(message, ar.cause().getMessage()))))
       .orElseDo(() -> message.fail(ErrorCodes.BAD_ACTION.ordinal(), "No page number"));
+  }
+
+  private void logFail(Message<JsonObject> message, String message2) {
+    LOGGER.warn("Ohh shit", message2);
+    message.fail(ErrorCodes.DB_ERROR.ordinal(), message2);
   }
 
   private Integer getSkipCount(Integer pageNumber) {
