@@ -54,7 +54,6 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.login = function () {
         var _this = this;
-        console.log(this.permissions);
         var self = this;
         if (this.validName) {
             this.authService.createPrincipal(this.getNewUser())

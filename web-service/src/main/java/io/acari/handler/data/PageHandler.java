@@ -34,10 +34,8 @@ public class PageHandler implements Handler<Message<JsonObject>> {
             .stream()
             .findFirst()
             .map(jsonArray -> new JsonObject()
-              .put("_id", jsonArray.getString("_id"))
               .put("content", jsonArray.getString("content")))
             .orElse(new JsonObject()
-              .put("_id", "lulNup")
               .put("content", EMPTY_PAGE_MARKDOWN)));
         } else {
           message.fail(500, asyncResultHandler.cause().getMessage());

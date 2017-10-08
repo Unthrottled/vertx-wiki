@@ -29,7 +29,6 @@ public class APIPageHandler extends BaseAPIPageHandler {
           String content = message.getString("content");
           return new JsonObject()
             .put("success", true)
-            .put("id", message.getString("_id"))
             .put("markdown", content)
             .put("html", Processor.process(content))
             .put("name", pageName);
