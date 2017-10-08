@@ -17,10 +17,15 @@ import {NotificationsService} from "angular2-notifications/dist";
 export class RegisterComponent implements OnInit {
   message: string;
   private _validName: boolean;
+  private roleMap = {
+    "admin": "view create delete update".split(' '),
+    "editor": "view create delete update".split(' '),
+    "writer": "view create".split(' '),
+    "reader": "viewe".split(' '),
+  };
+  roles: string[] = ["admin", "editor","writer","reader"];
   model: any = {
-    permissions: {
-      view: true
-    }
+    options: 'reader'
   };
 
   constructor(public authService: AuthService, public router: Router, private notifService: NotificationsService) {
@@ -32,10 +37,9 @@ export class RegisterComponent implements OnInit {
   }
 
   get permissions(): string[] {
-    return Object.keys(this.model.permissions)
-      .filter((key: string) => this.model.permissions[key])
-      .map((key: string) => key.toLowerCase());
+    return this.roleMap[this.model.options];
   }
+
 
   getNewUser(): NewUser {
     return new NewUser(this.model.username, this.model.password, this.permissions);

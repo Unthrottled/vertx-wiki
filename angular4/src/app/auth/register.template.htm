@@ -25,26 +25,20 @@
              class="help-block">Password is required
         </div>
       </div>
-      <div>
-        <label>Creation Permission</label>
-        <input type="checkbox"
-               class="form-control"
-               placeholder="Creation"
-               name="Create"
-               [(ngModel)]="model.permissions.Create" #Create="ngModel"/>
-        <label>Update Permission</label>
-        <input type="checkbox"
-               class="form-control"
-               placeholder="Update"
-               name="Update"
-               [(ngModel)]="model.permissions.Update" #Update="ngModel"/>
-        <label>Deletion Permission</label>
-        <input type="checkbox"
-               class="form-control"
-               placeholder="Delete"
-               name="Delete"
-               [(ngModel)]="model.permissions.Delete" #Delete="ngModel"/>
+
+      <div class="nav-pills">
+        <h3>User Role</h3>
+        <label
+          class="role-label"
+          *ngFor="let role of roles">
+          <input type="radio"
+                 name="options"
+                 (click)="model.options = role"
+                 [checked]="role === model.options">
+          {{role}}
+        </label>`
       </div>
+
 
       <button [disabled]="!(f.form.valid || validName)"
               class="btn btn-lg btn-primary btn-block">Register

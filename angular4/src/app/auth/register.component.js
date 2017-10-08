@@ -25,10 +25,15 @@ var RegisterComponent = (function () {
         this.authService = authService;
         this.router = router;
         this.notifService = notifService;
+        this.roleMap = {
+            "admin": "view create delete update".split(' '),
+            "editor": "view create delete update".split(' '),
+            "writer": "view create".split(' '),
+            "reader": "viewe".split(' '),
+        };
+        this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {
-            permissions: {
-                view: true
-            }
+            options: 'reader'
         };
     }
     RegisterComponent.prototype.getUser = function () {
@@ -36,10 +41,7 @@ var RegisterComponent = (function () {
     };
     Object.defineProperty(RegisterComponent.prototype, "permissions", {
         get: function () {
-            var _this = this;
-            return Object.keys(this.model.permissions)
-                .filter(function (key) { return _this.model.permissions[key]; })
-                .map(function (key) { return key.toLowerCase(); });
+            return this.roleMap[this.model.options];
         },
         enumerable: true,
         configurable: true
@@ -52,6 +54,7 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.login = function () {
         var _this = this;
+        console.log(this.permissions);
         var self = this;
         if (this.validName) {
             this.authService.createPrincipal(this.getNewUser())
