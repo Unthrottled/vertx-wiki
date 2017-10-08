@@ -4,10 +4,10 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PageMin} from "./Page.min.model";
-import "./pages.list.htm";
+import "./paginator.html";
 @Component({
-  selector: 'pages-list',
-  templateUrl: './templates/pages.list.htm'
+  selector: 'paginator',
+  templateUrl: './templates/paginator.html'
 })
 export class PagesComponent implements OnInit {
   pages: PageMin[] = [];
