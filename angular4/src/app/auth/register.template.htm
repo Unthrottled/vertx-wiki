@@ -33,7 +33,7 @@
           *ngFor="let role of roles">
           <input type="radio"
                  name="options"
-                 (click)="model.options = item"
+                 (click)="model.options = role"
                  [checked]="role === model.options">
           {{role}}
         </label>`
