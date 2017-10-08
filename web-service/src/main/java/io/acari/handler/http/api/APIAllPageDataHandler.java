@@ -59,15 +59,6 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
   }
 
   private JsonArray createPagesData(AsyncResult<Message<JsonObject>> ar) {
-    return getBody(ar)
-      .stream()
-      .map(b -> (JsonObject) b)
-      .map(pageData -> new JsonObject()
-        .put("name", pageData.getString("name")))
-      .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
-  }
-
-  private JsonArray getBody(AsyncResult<Message<JsonObject>> ar) {
     return ar.result().body().getJsonArray("pages");
   }
 
