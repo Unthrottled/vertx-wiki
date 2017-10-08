@@ -5,16 +5,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var PageMin = (function () {
     function PageMin(pageMin) {
-        this._id = pageMin.id;
-        this._name = pageMin.name;
+        this._name = pageMin;
     }
-    Object.defineProperty(PageMin.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(PageMin.prototype, "name", {
         get: function () {
             return this._name;

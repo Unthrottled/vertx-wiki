@@ -30,15 +30,18 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
     ChainableOptional.of(routingContext.user().principal().getBoolean("canView", false))
       .filter(b -> b)
       .ifPresent(canView ->
-        vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-          new JsonObject(),
-          Config.createDeliveryOptions("all-pages-data"), ar -> {
-            JsonObject responseGuy = new JsonObject();
-            getRoutingContext(responseGuy, routingContext, ar)
-              .putHeader("Cache-Control", "no-store, no-cache")
-              .putHeader("Content-Type", "application/json")
-              .end(responseGuy.encode());
-          }))
+        ChainableOptional.ofNullable(routingContext.getBodyAsJson().getInteger("pageNumber"))
+          .ifPresent(pageNumber -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+            new JsonObject()
+              .put("pageNumber", pageNumber),
+            Config.createDeliveryOptions("all-pages"), ar -> {
+              JsonObject responseGuy = new JsonObject();
+              getRoutingContext(responseGuy, routingContext, ar)
+                .putHeader("Cache-Control", "no-store, no-cache")
+                .putHeader("Content-Type", "application/json")
+                .end(responseGuy.encode());
+            }))
+          .orElseDo(() -> fourHundred(routingContext, "pageNumber")))
       .orElseDo(() -> routingContext.response()
         .setStatusCode(401)
         .end());
@@ -56,6 +59,12 @@ public class APIAllPageDataHandler implements Handler<RoutingContext>, Configura
       return routingContext.response()
         .setStatusCode(500);
     }
+  }
+
+  private void fourHundred(RoutingContext routingContext, String name) {
+    routingContext.response()
+      .setStatusCode(400)
+      .end("No " + name + " Provided, bruv.");
   }
 
   private JsonArray createPagesData(AsyncResult<Message<JsonObject>> ar) {

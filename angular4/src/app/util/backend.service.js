@@ -27,7 +27,7 @@ var BackendService = (function () {
         this.hostService = hostService;
     }
     BackendService.prototype.fetchAllPages = function () {
-        return this.httpPost("api/pages", {})
+        return this.httpPost("api/pages", { pageNumber: 1 })
             .map(function (response) { return new PagePayload_model_1.PagePayload(response.json()); });
     };
     BackendService.prototype.fetchPage = function (pageName) {

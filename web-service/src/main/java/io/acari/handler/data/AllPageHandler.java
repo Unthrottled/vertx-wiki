@@ -22,21 +22,23 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
 
   @Override
   public void handle(Message<JsonObject> message) {
-    mongoClient.find("pages", new JsonObject(), ar -> {
-      ChainableOptional.of(ar)
-        .filter(AsyncResult::succeeded)
-        .ifPresent(listAsyncResult -> {
-          JsonArray pages = listAsyncResult.result()
-            .stream()
-            .map(json -> json.getString("name"))
-            .collect(JsonArray::new, JsonArray::add, JsonArray::add);
-          message.reply(new JsonObject()
-            .put("pages", pages));
-        })
-        .orElseDo(() -> {
-          LOGGER.warn("Ohh shit", ar.cause().getMessage());
-          message.fail(ErrorCodes.DB_ERROR.ordinal(), ar.cause().getMessage());
-        });
-    });
+    ChainableOptional.ofNullable(message.body().getInteger("pageNumber"))
+      .ifPresent(pageNumber -> mongoClient.find("pages", new JsonObject(), ar -> {
+        ChainableOptional.of(ar)
+          .filter(AsyncResult::succeeded)
+          .ifPresent(listAsyncResult -> {
+            JsonArray pages = listAsyncResult.result()
+              .stream()
+              .map(json -> json.getString("name"))
+              .collect(JsonArray::new, JsonArray::add, JsonArray::add);
+            message.reply(new JsonObject()
+              .put("pages", pages));
+          })
+          .orElseDo(() -> {
+            LOGGER.warn("Ohh shit", ar.cause().getMessage());
+            message.fail(ErrorCodes.DB_ERROR.ordinal(), ar.cause().getMessage());
+          });
+      }))
+      .orElseDo(() -> message.fail(ErrorCodes.BAD_ACTION.ordinal(), "No page number"));
   }
 }
