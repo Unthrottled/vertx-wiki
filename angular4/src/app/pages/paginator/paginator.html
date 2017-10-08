@@ -1,6 +1,4 @@
-<div #p="paginationApi"
-                     (pageChange)="pageChange.emit($event)">
-
+<div>
   <div class="pagination-previous"
        [class.disabled]="previousPage === currentPage">
     <a *ngIf="previousPage !== currentPage"

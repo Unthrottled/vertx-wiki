@@ -51,6 +51,7 @@ var NewUserValidation_service_1 = require("./pages/NewUserValidation.service");
 var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
 var about_component_1 = require("./pages/about/about.component");
 var ngx_pagination_1 = require("ngx-pagination");
+var Pagination_component_1 = require("./pages/paginator/Pagination.component");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -101,6 +102,7 @@ AppModule = __decorate([
             HexComponent_1.HexComponent,
             Search_component_1.SearchComponent,
             about_component_1.AboutComponent,
+            Pagination_component_1.PaginatorComponent,
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],
