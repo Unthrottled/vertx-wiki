@@ -36,8 +36,10 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
               .stream()
               .map(json -> json.getString("name"))
               .collect(JsonArray::new, JsonArray::add, JsonArray::add);
+            //TODO: It would be nice if this could be done concurrently :)
             mongoClient.count("pages",
-              new JsonObject(), arc -> ChainableOptional.of(arc)
+              new JsonObject(),
+              arc -> ChainableOptional.of(arc)
                 .filter(AsyncResult::succeeded)
                 .map(AsyncResult::result)
                 .ifPresent(county ->
