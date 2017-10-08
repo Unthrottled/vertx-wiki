@@ -3,13 +3,13 @@
  */
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PageMin} from "./Page.min.model";
+import {PageMin} from "../Page.min.model";
 import "./paginator.html";
 @Component({
   selector: 'paginator',
   templateUrl: './templates/paginator.html'
 })
-export class PagesComponent implements OnInit {
+export class PaginatorComponent implements OnInit {
   pages: PageMin[] = [];
 
   constructor(private router: ActivatedRoute, private realRouter: Router) {
