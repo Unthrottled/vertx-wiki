@@ -26,7 +26,7 @@ public class UserExistsHandler implements Handler<Message<JsonObject>> {
           .filter(AsyncResult::succeeded)
           .ifPresent(result -> message.reply(result.result()
             .stream()
-            .peek(a-> LOGGER.info(result.result().toString()))
+            .peek(a -> LOGGER.info(result.result().toString()))
             .findFirst()
             .map(jsonArray -> new JsonObject()
               .put("exists", !jsonArray.getString("_id").isEmpty()))

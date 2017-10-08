@@ -28,7 +28,7 @@ public class UserCreationHandler implements Handler<RoutingContext> {
       .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
         .ifPresent(password -> ChainableOptional.ofNullable(body.getJsonArray("permissions"))
           .ifPresent(permissionArray -> {
-            List<String> permissions =  permissionArray.stream()
+            List<String> permissions = permissionArray.stream()
               .map(s -> (String) s)
               .collect(Collectors.toList());
             mongoAuth.insertUser(login,
