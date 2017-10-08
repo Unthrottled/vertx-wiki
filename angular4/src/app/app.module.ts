@@ -43,6 +43,7 @@ import {RegisterComponent} from "./auth/register.component";
 import {NewUserValidationService} from "./pages/NewUserValidation.service";
 import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
+import {NgxPaginationModule} from 'ngx-pagination'
 
 const appRoutes = [
   {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
@@ -64,6 +65,7 @@ const appRoutes = [
     MarkdownModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(
       appRoutes
     )

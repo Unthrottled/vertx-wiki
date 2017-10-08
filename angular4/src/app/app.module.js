@@ -50,6 +50,7 @@ var register_component_1 = require("./auth/register.component");
 var NewUserValidation_service_1 = require("./pages/NewUserValidation.service");
 var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
 var about_component_1 = require("./pages/about/about.component");
+var ngx_pagination_1 = require("ngx-pagination");
 var appRoutes = [
     { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
@@ -74,6 +75,7 @@ AppModule = __decorate([
             angular2_markdown_1.MarkdownModule.forRoot(),
             angular2_notifications_1.SimpleNotificationsModule.forRoot(),
             animations_1.BrowserAnimationsModule,
+            ngx_pagination_1.NgxPaginationModule,
             router_1.RouterModule.forRoot(appRoutes)
         ],
         exports: [
