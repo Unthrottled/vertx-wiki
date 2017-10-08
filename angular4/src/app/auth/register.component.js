@@ -25,10 +25,12 @@ var RegisterComponent = (function () {
         this.authService = authService;
         this.router = router;
         this.notifService = notifService;
+        this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {
             permissions: {
                 view: true
-            }
+            },
+            options: 'reader'
         };
     }
     RegisterComponent.prototype.getUser = function () {
