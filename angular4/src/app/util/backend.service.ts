@@ -55,7 +55,7 @@ export class BackendService {
   }
 
   createPage(pageName: String, pageBody: String): Observable<StatusPayload> {
-    return this.httpPost("api/pages",
+    return this.httpPost("api/pages/create",
       {"name": pageName, "markdown": pageBody})
       .map((response: Response) => new StatusPayload(response.json()));
   }

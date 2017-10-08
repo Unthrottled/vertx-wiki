@@ -51,7 +51,7 @@ var BackendService = (function () {
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.createPage = function (pageName, pageBody) {
-        return this.httpPost("api/pages", { "name": pageName, "markdown": pageBody })
+        return this.httpPost("api/pages/create", { "name": pageName, "markdown": pageBody })
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.httpGet = function (s) {
