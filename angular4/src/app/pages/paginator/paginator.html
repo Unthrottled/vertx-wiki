@@ -1,25 +1,25 @@
-<div>
+<div class="d-inline-flex">
   <div class="pagination-previous"
        [class.disabled]="previousPage === currentPage">
     <a *ngIf="previousPage !== currentPage"
-       (click)="paginator.setCurrent(previousPage)"> < </a>
+       (click)="setCurrent(previousPage)"> < </a>
   </div>
 
-  <div *ngFor="let page of pages"
-       [class.current]="page === currentPage">
-    <a (click)="paginator.setCurrent(page)"
+  <div
+    *ngFor="let page of pages">
+    <a (click)="setCurrent(page)"
        *ngIf="page !== currentPage">
-      <span>{{ page.label }}</span>
+      <span>{{ page.pageId }}</span>
     </a>
     <div *ngIf="page === currentPage">
-      <span>{{ page.label }}</span>
+      <span>{{ page.pageId }}</span>
     </div>
   </div>
 
   <div class="pagination-next"
-       [class.disabled]="currentPage === nextPage">
-    <a *ngIf="currentPage !== nextPage"
-       (click)="paginator.setCurrent(nextPage)"> > </a>
+       [class.disabled]="nextPage === currentPage">
+    <a *ngIf="nextPage !== currentPage"
+       (click)="setCurrent(nextPage)"> > </a>
   </div>
 
 </div>

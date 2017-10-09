@@ -5,4 +5,12 @@
 
 export class PaginationPage {
 
+  constructor(private _pageId: number) {
+
+  }
+
+
+  get pageId(): number {
+    return this._pageId;
+  }
 }
