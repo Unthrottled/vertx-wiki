@@ -20,8 +20,8 @@ var PagesService = (function () {
     function PagesService(backendService) {
         this.backendService = backendService;
     }
-    PagesService.prototype.fetchAllMinPages = function () {
-        return this.backendService.fetchAllPages()
+    PagesService.prototype.fetchAllMinPages = function (pageNumber) {
+        return this.backendService.fetchAllPages(pageNumber)
             .map(function (payload) { return payload.pages; });
     };
     PagesService.prototype.fetchPage = function (pageName) {

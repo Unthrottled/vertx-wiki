@@ -18,7 +18,7 @@ export class PagesResolve implements Resolve<PageMin[]> {
     return this.permissons.canView
       .flatMap(canView => {
         if (canView) {
-          return this.pagesService.fetchAllMinPages();
+          return this.pagesService.fetchAllMinPages(route.params['pageNumber']);
         } else {
           return Observable.of([]);
         }

@@ -23,8 +23,8 @@ export class BackendService {
 
   }
 
-  fetchAllPages(): Observable<PagePayload> {
-    return this.httpPost("api/pages",{pageNumber:1})
+  fetchAllPages(pageNumber: number): Observable<PagePayload> {
+    return this.httpPost("api/pages",{pageNumber:pageNumber})
       .map((response: Response) => new PagePayload(response.json()));
   }
 

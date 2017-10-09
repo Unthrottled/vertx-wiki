@@ -17,8 +17,8 @@ export class PagesService {
 
   }
 
-  fetchAllMinPages(): Observable<PageMin[]> {
-    return this.backendService.fetchAllPages()
+  fetchAllMinPages(pageNumber: number): Observable<PageMin[]> {
+    return this.backendService.fetchAllPages(pageNumber)
       .map((payload: PagePayload) => payload.pages);
   }
 
