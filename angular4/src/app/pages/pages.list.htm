@@ -1,6 +1,10 @@
 <div>
   <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
   <div class="paginator-container">
-  <paginator></paginator>
+  <paginator
+    [currentPageNumber]="metaData.currentPageNumber"
+    [itemsPerPage]="metaData.itemsPerPage"
+    [totalItems]="metaData.totalItems"
+  ></paginator>
   </div>
 </div>

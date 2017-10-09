@@ -48,7 +48,7 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
                     .put("metaData", new JsonObject()
                       .put("itemsPerPage", PAGES_PER_PAGE)
                       .put("currentPageNumber", pageNumber)
-                      .put("totalPages", county))))
+                      .put("totalItems", county))))
                 .orElseDo(() -> logFail(message, arc.cause().getMessage())
                 ));
           })

@@ -14,7 +14,7 @@ export class PaginatorComponent implements OnInit {
   private _currentPageNumber: number = 1;
 
   private _totalItems: number;
-  private _itemsPerPage: number = 100;
+  private _itemsPerPage: number;
   private _currentPage: PaginationPage;
   private _maxPagesDisplayed: number = 8;
 
