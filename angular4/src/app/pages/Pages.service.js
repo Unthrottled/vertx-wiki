@@ -21,8 +21,7 @@ var PagesService = (function () {
         this.backendService = backendService;
     }
     PagesService.prototype.fetchAllMinPages = function (pageNumber) {
-        return this.backendService.fetchAllPages(pageNumber)
-            .map(function (payload) { return payload.pages; });
+        return this.backendService.fetchAllPages(pageNumber);
     };
     PagesService.prototype.fetchPage = function (pageName) {
         return this.backendService.fetchPage(pageName)
