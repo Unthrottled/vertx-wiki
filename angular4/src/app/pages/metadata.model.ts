@@ -3,6 +3,8 @@
  */
 
 
-export class PageMetaData {
-
+export interface PageMetaData {
+  itemsPerPage: number;
+  currentPagNumber: number;
+  totalPages: number;
 }

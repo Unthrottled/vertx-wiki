@@ -6,5 +6,5 @@
 export interface PagePayloadMetaData {
   itemsPerPage: number;
   currentPagNumber: number;
-  maxPage
+  totalPages: number;
 }

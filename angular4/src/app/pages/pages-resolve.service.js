@@ -26,7 +26,7 @@ var PagesResolve = (function () {
         return this.permissons.canView
             .flatMap(function (canView) {
             if (canView) {
-                return _this.pagesService.fetchAllMinPages(route.params['pageNumber']);
+                return _this.pagesService.fetchAllMinPages(parseInt(route.params['pageNumber']));
             }
             else {
                 return Observable_1.Observable.of([]);
