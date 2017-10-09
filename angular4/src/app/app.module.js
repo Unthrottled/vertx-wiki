@@ -53,7 +53,8 @@ var about_component_1 = require("./pages/about/about.component");
 var ngx_pagination_1 = require("ngx-pagination");
 var Pagination_component_1 = require("./pages/paginator/Pagination.component");
 var appRoutes = [
-    { path: '', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
+    { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
+    { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
