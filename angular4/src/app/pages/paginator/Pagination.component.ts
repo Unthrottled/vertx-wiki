@@ -87,11 +87,10 @@ export class PaginatorComponent implements OnInit {
 
   set currentPage(value: PaginationPage) {
     this._currentPage = value;
-    this.onPageChanged.emit(value.pageId);
   }
 
   setCurrent(page: PaginationPage):void{
-    this.currentPage = page;
+    this.onPageChanged.emit(page.pageId);
   }
 
   ngOnInit(): void {
