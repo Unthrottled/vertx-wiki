@@ -31,6 +31,9 @@ var PagesComponent = (function () {
     PagesComponent.prototype.reRoute = function (pageName) {
         this.realRouter.navigate(['/page/' + pageName]);
     };
+    PagesComponent.prototype.reRouteMain = function (pageNumber) {
+        this.realRouter.navigate(['/pages/' + pageNumber]);
+    };
     return PagesComponent;
 }());
 PagesComponent = __decorate([

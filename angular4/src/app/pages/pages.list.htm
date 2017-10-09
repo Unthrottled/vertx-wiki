@@ -5,6 +5,7 @@
     [currentPageNumber]="metaData.currentPageNumber"
     [itemsPerPage]="metaData.itemsPerPage"
     [totalItems]="metaData.totalItems"
+    (onPageChanged)="reRouteMain($event)"
   ></paginator>
   </div>
 </div>

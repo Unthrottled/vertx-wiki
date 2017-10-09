@@ -28,4 +28,8 @@ export class PagesComponent implements OnInit {
   reRoute(pageName: string): void {
     this.realRouter.navigate(['/page/' + pageName]);
   }
+
+  reRouteMain(pageNumber: number): void {
+    this.realRouter.navigate(['/pages/' + pageNumber]);
+  }
 }
