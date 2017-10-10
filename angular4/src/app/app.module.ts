@@ -43,8 +43,6 @@ import {RegisterComponent} from "./auth/register.component";
 import {NewUserValidationService} from "./pages/NewUserValidation.service";
 import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
-import {NgxPaginationModule} from 'ngx-pagination'
-import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 
 const appRoutes = [
   {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -67,7 +65,6 @@ const appRoutes = [
     MarkdownModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
-    NgxPaginationModule,
     RouterModule.forRoot(
       appRoutes
     )
@@ -95,7 +92,6 @@ const appRoutes = [
     HexComponent,
     SearchComponent,
     AboutComponent,
-    PaginatorComponent,
     EditComponent
   ],
   bootstrap: [AppComponent],
