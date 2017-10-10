@@ -33,6 +33,7 @@ export class PaginatorComponent implements OnInit {
 
   set currentPageNumber(value: number) {
     this._currentPageNumber = value;
+    this.recalculate();
   }
 
   @Input()
@@ -94,6 +95,11 @@ export class PaginatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.recalculate();
+  }
+
+  private recalculate() {
+    this._pages = [];
     let totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     let pagesToShow = this.maxPagesDisplayed - 1;
     let halfPagesToShow = Math.ceil(pagesToShow / 2);
@@ -111,6 +117,5 @@ export class PaginatorComponent implements OnInit {
     let currentPagePlusOne = this.currentPageNumber + 1;
     this.nextPage = currentPagePlusOne === totalPages ?
       this.currentPage : new PaginationPage(currentPagePlusOne);
-
   }
 }
