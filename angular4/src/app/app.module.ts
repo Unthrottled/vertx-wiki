@@ -43,6 +43,7 @@ import {RegisterComponent} from "./auth/register.component";
 import {NewUserValidationService} from "./pages/NewUserValidation.service";
 import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
+import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 
 const appRoutes = [
   {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -90,6 +91,7 @@ const appRoutes = [
     HexRowComponent,
     HexListComponent,
     HexComponent,
+    PaginatorComponent,
     SearchComponent,
     AboutComponent,
     EditComponent
