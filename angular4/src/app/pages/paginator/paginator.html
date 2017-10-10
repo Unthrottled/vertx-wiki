@@ -19,8 +19,8 @@
   </li>
 
   <li class="pagination-next"
-       [class.disabled]="nextPage === currentPage">
-    <a *ngIf="nextPage !== currentPage"
+       [class.disabled]="nextPage.equals(currentPage)">
+    <a *ngIf="!nextPage.equals(currentPage)"
        (click)="setCurrent(nextPage)"> > </a>
   </li>
 

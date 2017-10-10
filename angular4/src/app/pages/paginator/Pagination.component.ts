@@ -115,7 +115,7 @@ export class PaginatorComponent implements OnInit {
     this.previousPage = this.currentPageNumber === 1 ?
       this.currentPage : new PaginationPage(this.currentPageNumber - 1);
     let currentPagePlusOne = this.currentPageNumber + 1;
-    this.nextPage = currentPagePlusOne === totalPages ?
+    this.nextPage = currentPagePlusOne > totalPages ?
       this.currentPage : new PaginationPage(currentPagePlusOne);
   }
 }
