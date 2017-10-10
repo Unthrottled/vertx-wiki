@@ -30,7 +30,8 @@ public class APIPageHandler extends BaseAPIPageHandler {
           return new JsonObject()
             .put("success", true)
             .put("markdown", content)
-            .put("html", Processor.process(content))
+            .put("lastModified", message.getJsonObject("lastModified"))
+            .put("html", Processor.process(content))//TODO: KEEL ME
             .put("name", pageName);
         }
       });
