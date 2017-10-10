@@ -1,0 +1,37 @@
+<ul
+  class="d-inline-flex ngx-pagination">
+  <li class="pagination-previous">
+    <a *ngIf="!firstPage.equals(currentPage)"
+       (click)="setCurrent(firstPage)">
+      <<
+    </a>
+  </li>
+  <li class="pagination-previous"
+      [class.disabled]="previousPage.equals(currentPage)">
+    <a *ngIf="!previousPage.equals(currentPage)"
+       (click)="setCurrent(previousPage)"> < </a>
+  </li>
+
+  <li
+    *ngFor="let page of pages"
+    [class.current]="page.equals(currentPage)">
+    <a (click)="setCurrent(page)"
+       *ngIf="!page.equals(currentPage)">
+      <span>{{ page.pageId }}</span>
+    </a>
+    <div *ngIf="page.equals(currentPage)">
+      <span>{{ page.pageId }}</span>
+    </div>
+  </li>
+
+  <li class="pagination-next"
+      [class.disabled]="nextPage.equals(currentPage)">
+    <a *ngIf="!nextPage.equals(currentPage)"
+       (click)="setCurrent(nextPage)"> > </a>
+  </li>
+  <li class="pagination-next">
+    <a *ngIf="!endPage.equals(currentPage)"
+       (click)="setCurrent(endPage)"> >> </a>
+  </li>
+
+</ul>

@@ -15,6 +15,7 @@ export class HexListComponent {
   private _hexRows: HexRowModel[];
   private _pages: PageMin[] = [];
   private _config: HexRowInput;
+  private pagesChange = new EventEmitter();
   @Output()
   private onClick = new EventEmitter();
 
@@ -65,6 +66,7 @@ export class HexListComponent {
 
   set pages(value: PageMin[]) {
     this._pages = value;
+    this.layoutRows();
   }
 
   @Input()

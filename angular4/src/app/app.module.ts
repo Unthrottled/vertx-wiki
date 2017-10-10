@@ -45,7 +45,8 @@ import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
 
 const appRoutes = [
-  {path: '', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
+  {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
+  {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
   {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
   {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
   {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},

@@ -24,11 +24,15 @@ var PagesComponent = (function () {
     PagesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
-            _this.pages = data.pages;
+            _this.pages = data.pages.pages;
+            _this.metaData = data.pages.metadata;
         });
     };
     PagesComponent.prototype.reRoute = function (pageName) {
         this.realRouter.navigate(['/page/' + pageName]);
+    };
+    PagesComponent.prototype.reRouteMain = function (pageNumber) {
+        this.realRouter.navigate(['/pages/' + pageNumber]);
     };
     return PagesComponent;
 }());

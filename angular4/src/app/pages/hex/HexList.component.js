@@ -20,6 +20,7 @@ var HexListComponent = (function () {
         this.disElement = disElement;
         this.ngZone = ngZone;
         this._pages = [];
+        this.pagesChange = new core_1.EventEmitter();
         this.onClick = new core_1.EventEmitter();
         var self = this;
         window.onresize = function (e) {
@@ -63,6 +64,7 @@ var HexListComponent = (function () {
         },
         set: function (value) {
             this._pages = value;
+            this.layoutRows();
         },
         enumerable: true,
         configurable: true
