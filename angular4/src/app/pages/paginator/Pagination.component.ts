@@ -22,6 +22,8 @@ export class PaginatorComponent implements OnInit {
   private _nextPage: PaginationPage;
   private _previousPage: PaginationPage;
   private _pages: PaginationPage[] = [];
+  private _endPage: PaginationPage;
+  private _firstPage: PaginationPage = new PaginationPage(1);
 
   constructor() {
   }
@@ -94,6 +96,19 @@ export class PaginatorComponent implements OnInit {
     this.onPageChanged.emit(page.pageId);
   }
 
+
+  get firstPage(): PaginationPage {
+    return this._firstPage;
+  }
+
+  get endPage(): PaginationPage {
+    return this._endPage;
+  }
+
+  set endPage(value: PaginationPage) {
+    this._endPage = value;
+  }
+
   ngOnInit(): void {
     this.recalculate();
   }
@@ -117,5 +132,6 @@ export class PaginatorComponent implements OnInit {
     let currentPagePlusOne = this.currentPageNumber + 1;
     this.nextPage = currentPagePlusOne > totalPages ?
       this.currentPage : new PaginationPage(currentPagePlusOne);
+    this.endPage = new PaginationPage(totalPages);
   }
 }

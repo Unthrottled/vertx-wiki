@@ -21,6 +21,7 @@ var PaginatorComponent = (function () {
         this._currentPageNumber = 1;
         this._maxPagesDisplayed = 9;
         this._pages = [];
+        this._firstPage = new PaginationPage_1.PaginationPage(1);
     }
     Object.defineProperty(PaginatorComponent.prototype, "currentPageNumber", {
         get: function () {
@@ -103,6 +104,23 @@ var PaginatorComponent = (function () {
     PaginatorComponent.prototype.setCurrent = function (page) {
         this.onPageChanged.emit(page.pageId);
     };
+    Object.defineProperty(PaginatorComponent.prototype, "firstPage", {
+        get: function () {
+            return this._firstPage;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PaginatorComponent.prototype, "endPage", {
+        get: function () {
+            return this._endPage;
+        },
+        set: function (value) {
+            this._endPage = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     PaginatorComponent.prototype.ngOnInit = function () {
         this.recalculate();
     };
@@ -124,6 +142,7 @@ var PaginatorComponent = (function () {
         var currentPagePlusOne = this.currentPageNumber + 1;
         this.nextPage = currentPagePlusOne > totalPages ?
             this.currentPage : new PaginationPage_1.PaginationPage(currentPagePlusOne);
+        this.endPage = new PaginationPage_1.PaginationPage(totalPages);
     };
     return PaginatorComponent;
 }());
