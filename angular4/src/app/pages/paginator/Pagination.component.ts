@@ -16,7 +16,7 @@ export class PaginatorComponent implements OnInit {
   private _totalItems: number;
   private _itemsPerPage: number;
   private _currentPage: PaginationPage;
-  private _maxPagesDisplayed: number = 8;
+  private _maxPagesDisplayed: number = 9;
 
 
   private _nextPage: PaginationPage;
@@ -103,9 +103,9 @@ export class PaginatorComponent implements OnInit {
     let totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
     let pagesToShow = this.maxPagesDisplayed - 1;
     let halfPagesToShow = Math.ceil(pagesToShow / 2);
-    let pagesBehindCurrent = this.currentPageNumber < halfPagesToShow ?
+    let pagesBehindCurrent = this.currentPageNumber <= halfPagesToShow ?
       1 : this.currentPageNumber - halfPagesToShow;
-    let pagesAhead = this.currentPageNumber + halfPagesToShow;
+    let pagesAhead = this.currentPageNumber + (pagesToShow - (this.currentPageNumber - pagesBehindCurrent));
     let pagesAheadCurrent = pagesAhead > totalPages ? totalPages : pagesAhead;
     this.currentPage = new PaginationPage(this.currentPageNumber);
     for (let i = pagesBehindCurrent; i <= pagesAheadCurrent; i++) {
