@@ -56,7 +56,6 @@
 }
 
 .ngx-pagination .ellipsis::after {
-  content: '\u2026';
   padding: 0.1875rem 0.625rem;
   color: #0a0a0a;
 }
@@ -67,14 +66,12 @@
 
 .ngx-pagination .pagination-previous a::before,
 .ngx-pagination .pagination-previous.disabled::before {
-  content: '\u00AB';
   display: inline-block;
   margin-right: 0.5rem;
 }
 
 .ngx-pagination .pagination-next a::after,
 .ngx-pagination .pagination-next.disabled::after {
-  content: '\u00BB';
   display: inline-block;
   margin-left: 0.5rem;
 }

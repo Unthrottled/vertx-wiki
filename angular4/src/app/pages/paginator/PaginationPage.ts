@@ -13,4 +13,8 @@ export class PaginationPage {
   get pageId(): number {
     return this._pageId;
   }
+
+  equals(otherPage:  PaginationPage): boolean{
+    return this._pageId === otherPage.pageId;
+  }
 }
