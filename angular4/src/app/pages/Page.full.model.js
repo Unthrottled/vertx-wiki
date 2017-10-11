@@ -1,15 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/17/17.
  */
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var LastModfied_model_1 = require("./LastModfied.model");
 var PageFull = (function () {
-    function PageFull(pageMin) {
-        this._id = pageMin.id;
-        this._name = pageMin.name;
-        this._markdown = pageMin.markdown;
-        this._html = pageMin.html;
+    function PageFull(pageFull) {
+        this._id = pageFull.id;
+        this._name = pageFull.name;
+        this._markdown = pageFull.markdown;
+        this._html = pageFull.html;
+        this._lastModifed = new LastModfied_model_1.LastModfied(pageFull.lastModifed);
     }
+    Object.defineProperty(PageFull.prototype, "lastModifed", {
+        get: function () {
+            return this._lastModifed;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(PageFull.prototype, "id", {
         get: function () {
             return this._id;
