@@ -1,25 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var LastModfied = (function () {
-    function LastModfied(response) {
+var LastModified = (function () {
+    function LastModified(response) {
         this._userName = response.userName;
         this._timeStamp = new Date(response.timeStamp);
     }
-    Object.defineProperty(LastModfied.prototype, "userName", {
+    Object.defineProperty(LastModified.prototype, "userName", {
         get: function () {
             return this._userName;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LastModfied.prototype, "timeStamp", {
+    Object.defineProperty(LastModified.prototype, "timeStamp", {
         get: function () {
             return this._timeStamp;
         },
         enumerable: true,
         configurable: true
     });
-    return LastModfied;
+    return LastModified;
 }());
-exports.LastModfied = LastModfied;
+exports.LastModified = LastModified;
 //# sourceMappingURL=LastModfied.model.js.map
