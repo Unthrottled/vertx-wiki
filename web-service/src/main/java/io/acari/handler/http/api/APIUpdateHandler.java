@@ -33,7 +33,7 @@ public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<C
               DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
               JsonObject params = new JsonObject()
                 .put("name", name)
-                .put("user", routingContext.user().principal().getString("username"))
+                .put("username", routingContext.user().principal().getString("username"))
                 .put("content", markdown);
               simpleResponseHandler.handle(routingContext, params, deliveryOptions);
             }).orElseDo(() -> fourHundred(routingContext, "markdown")))

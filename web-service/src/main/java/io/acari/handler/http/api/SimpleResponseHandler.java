@@ -7,8 +7,11 @@ import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SimpleResponseHandler {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SimpleResponseHandler.class);
 
   private final Config config;
   private final Vertx vertx;
@@ -32,6 +35,7 @@ public class SimpleResponseHandler {
       routingContext.response().setStatusCode(201);
       return new JsonObject().put("success", true);
     } else {
+      LOGGER.warn("Awwww Snap!", connectionResult.cause());
       routingContext.response().setStatusCode(500);
       return new JsonObject().put("success", false);
     }
