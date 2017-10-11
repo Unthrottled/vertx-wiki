@@ -1,5 +1,5 @@
 
-export class LastModfied {
+export class LastModified {
   private _userName: string;
   private _timeStamp: Date;
 

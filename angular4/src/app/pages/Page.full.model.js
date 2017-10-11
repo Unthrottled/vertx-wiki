@@ -10,7 +10,7 @@ var PageFull = (function () {
         this._name = pageFull.name;
         this._markdown = pageFull.markdown;
         this._html = pageFull.html;
-        this._lastModifed = new LastModfied_model_1.LastModfied(pageFull.lastModifed);
+        this._lastModifed = new LastModfied_model_1.LastModified(pageFull.lastModifed);
     }
     Object.defineProperty(PageFull.prototype, "lastModifed", {
         get: function () {
