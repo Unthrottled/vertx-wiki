@@ -43,8 +43,8 @@ public class CreationHandler implements Handler<Message<JsonObject>> {
                   });
               })))
         .orElseDo(() -> fourHundred(message, "No User Name Provided, Bruv."))
-        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
-      ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
+        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv.")))
+      .orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }
 
   private void fourHundred(Message routingContext, String errorMessage) {
