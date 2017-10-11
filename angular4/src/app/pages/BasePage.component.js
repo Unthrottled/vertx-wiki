@@ -23,12 +23,12 @@ var BasePageComponent = (function () {
             hideDelete: true
         };
     }
-    Object.defineProperty(BasePageComponent.prototype, "pageFull", {
+    Object.defineProperty(BasePageComponent.prototype, "page", {
         get: function () {
-            return this._pageFull;
+            return this._page;
         },
         set: function (value) {
-            this._pageFull = value;
+            this._page = value;
         },
         enumerable: true,
         configurable: true
@@ -43,7 +43,7 @@ var BasePageComponent = (function () {
         this.title = page.name;
         this.htmlContent = page.html;
         this.content = page.markdown;
-        this.pageFull = page;
+        this.page = page;
         return Observable_1.Observable.of(true);
     };
     Object.defineProperty(BasePageComponent.prototype, "title", {

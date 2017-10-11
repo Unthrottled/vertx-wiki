@@ -25,7 +25,7 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
   deleteMe(): Observable<boolean> {
     let self = this;
     let returnGuy = this.pagesService
-      .deletePage(this.pageFull.name);
+      .deletePage(this.page.name);
     returnGuy.subscribe((success: boolean) => {
       if (success) {
         self.actualRouter.navigate(['/']);
@@ -39,7 +39,7 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
   save(): Observable<boolean> {
     let self = this;
     let returnGuy = this.pagesService
-      .savePage(this.pageFull.name, self.content);
+      .savePage(this.page.name, self.content);
     returnGuy.subscribe((success: boolean) => {
       if (success) {
         this.notificationService.success('Page Saved!', ':)', {
@@ -66,7 +66,7 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
   reset(): void {
     let self = this;
     this.pagesService
-      .fetchPage(self.pageFull.name)
+      .fetchPage(self.page.name)
       .flatMap((pageFull: PageFull) => self.load(pageFull))
       .subscribe((result: boolean) => self.notificationService.success("Page Reloaded!", "Things might have changed!", {
           timeOut: 3000,

@@ -44,7 +44,7 @@ var EditPageComponent = (function (_super) {
     EditPageComponent.prototype.deleteMe = function () {
         var self = this;
         var returnGuy = this.pagesService
-            .deletePage(this.pageFull.name);
+            .deletePage(this.page.name);
         returnGuy.subscribe(function (success) {
             if (success) {
                 self.actualRouter.navigate(['/']);
@@ -59,7 +59,7 @@ var EditPageComponent = (function (_super) {
         var _this = this;
         var self = this;
         var returnGuy = this.pagesService
-            .savePage(this.pageFull.name, self.content);
+            .savePage(this.page.name, self.content);
         returnGuy.subscribe(function (success) {
             if (success) {
                 _this.notificationService.success('Page Saved!', ':)', {
@@ -84,7 +84,7 @@ var EditPageComponent = (function (_super) {
     EditPageComponent.prototype.reset = function () {
         var self = this;
         this.pagesService
-            .fetchPage(self.pageFull.name)
+            .fetchPage(self.page.name)
             .flatMap(function (pageFull) { return self.load(pageFull); })
             .subscribe(function (result) { return self.notificationService.success("Page Reloaded!", "Things might have changed!", {
             timeOut: 3000,
