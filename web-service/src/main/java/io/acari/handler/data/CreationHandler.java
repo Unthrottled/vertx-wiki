@@ -41,8 +41,8 @@ public class CreationHandler implements Handler<Message<JsonObject>> {
                     LOGGER.warn("Ohhh shit", aConn.cause().getMessage());
                     message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
                   });
-              })))
-        .orElseDo(() -> fourHundred(message, "No User Name Provided, Bruv."))
+              }))
+            .orElseDo(() -> fourHundred(message, "No User Name Provided, Bruv.")))
         .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv.")))
       .orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }
