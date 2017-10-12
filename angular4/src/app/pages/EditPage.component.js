@@ -73,6 +73,7 @@ var EditPageComponent = (function (_super) {
                     showProgressBar: true,
                     clickToClose: true
                 });
+                self.reset();
             }
             else {
                 self.failure();

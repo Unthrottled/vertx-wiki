@@ -52,7 +52,8 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
           timeOut: 3000,
           showProgressBar: true,
           clickToClose: true
-        })
+        });
+        self.reset();
       } else {
         self.failure()
       }
