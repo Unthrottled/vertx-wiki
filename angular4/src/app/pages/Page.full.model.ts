@@ -1,35 +1,19 @@
 /**
  * Created by alex on 9/17/17.
  */
+import {LastModified} from "./LastModfied.model";
+import {Page} from "./Page.model";
 
-export class PageFull {
-  private _id: string;
-  private _name: string;
-  private _markdown: string;
-  private _html: string;
+export class PageFull extends Page {
+  private _lastModified: LastModified;
 
-  constructor(pageMin: any) {
-    this._id = pageMin.id;
-    this._name = pageMin.name;
-    this._markdown = pageMin.markdown;
-    this._html = pageMin.html;
+  constructor(pageFull: any) {
+    super(pageFull);
+    this._lastModified = new LastModified(pageFull.lastModified);
   }
 
 
-  get id(): string {
-    return this._id;
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
-
-  get markdown(): string {
-    return this._markdown;
-  }
-
-  get html(): string {
-    return this._html;
+  get lastModified(): LastModified {
+    return this._lastModified;
   }
 }

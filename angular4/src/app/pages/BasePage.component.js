@@ -23,27 +23,21 @@ var BasePageComponent = (function () {
             hideDelete: true
         };
     }
-    Object.defineProperty(BasePageComponent.prototype, "pageFull", {
+    Object.defineProperty(BasePageComponent.prototype, "page", {
         get: function () {
-            return this._pageFull;
+            return this._page;
         },
         set: function (value) {
-            this._pageFull = value;
+            this._page = value;
         },
         enumerable: true,
         configurable: true
     });
-    BasePageComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.router.data.subscribe(function (data) {
-            _this.load(data.pages);
-        });
-    };
     BasePageComponent.prototype.load = function (page) {
         this.title = page.name;
         this.htmlContent = page.html;
         this.content = page.markdown;
-        this.pageFull = page;
+        this.page = page;
         return Observable_1.Observable.of(true);
     };
     Object.defineProperty(BasePageComponent.prototype, "title", {

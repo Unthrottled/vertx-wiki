@@ -30,13 +30,15 @@ public class PageHandler implements Handler<Message<JsonObject>> {
         .put("name", pago), asyncResultHandler -> {
         if (asyncResultHandler.succeeded()) {
           List<JsonObject> result = asyncResultHandler.result();
-          message.reply(result
+          ChainableOptional.of(result
             .stream()
             .findFirst()
             .map(jsonArray -> new JsonObject()
+              .put("lastModified", jsonArray.getJsonObject("lastModified"))
               .put("content", jsonArray.getString("content")))
-            .orElse(new JsonObject()
-              .put("content", EMPTY_PAGE_MARKDOWN)));
+            .orElse(null))
+            .ifPresent(message::reply)
+            .orElseDo(() -> message.fail(404, "This is no the page you are looking for"));
         } else {
           message.fail(500, asyncResultHandler.cause().getMessage());
         }

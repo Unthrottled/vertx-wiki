@@ -3,12 +3,12 @@
  */
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {PageMin} from "./Page.min.model";
 import {BackendService} from "../util/backend.service";
 import {PagePayload} from "./PagePayload.model";
 import {PageFull} from "./Page.full.model";
 import {FullPagePayload} from "./PageFullPayload.model";
 import {StatusPayload} from "./StatusPayload.model";
+import {Page} from "./Page.model";
 
 @Injectable()
 export class PagesService {
@@ -41,8 +41,8 @@ export class PagesService {
       .map((statusPayload: StatusPayload) => statusPayload.succeded);
   }
 
-  freshPage(): Observable<PageFull> {
-    return Observable.of(new PageFull(
+  freshPage(): Observable<Page> {
+    return Observable.of(new Page(
       {
         markdown: "# A new page\n" +
         "\n" +

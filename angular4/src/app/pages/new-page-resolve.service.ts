@@ -6,17 +6,18 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/rou
 import {Observable} from "rxjs/Observable";
 import {Permissions} from "../auth/Permissions.component";
 import {PagesService} from "./Pages.service";
-import {PageFull} from "./Page.full.model";
+import {Page} from "./Page.model";
 
 @Injectable()
-export class NewPageResolve implements Resolve<PageFull> {
+export class NewPageResolve implements Resolve<Page> {
   constructor(private permissons: Permissions, private pagesService: PagesService) {
 
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageFull> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page> {
     return this.permissons.canView
       .flatMap(canView => {
+        console.log(canView);
         if (canView) {
           return this.pagesService.freshPage();
         } else {

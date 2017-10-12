@@ -33,6 +33,7 @@ public class APICreationHandler implements Handler<RoutingContext>, Configurable
               DeliveryOptions deliveryOptions = Config.createDeliveryOptions("create-page");
               JsonObject params = new JsonObject()
                 .put("name", pago)
+                .put("userName", routingContext.user().principal().getString("username"))
                 .put("content", markdown);
               simpleResponseHandler.handle(routingContext, params, deliveryOptions);
             }).orElseDo(() -> fourHundred(routingContext, "markdown")))

@@ -9,6 +9,8 @@ import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
+
 public class CreationHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(CreationHandler.class);
 
@@ -24,20 +26,25 @@ public class CreationHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(request.getString("name"))
       .ifPresent(name -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content ->
-          mongoClient.save("pages", new JsonObject()
-              .put("name", name)
-              .put("content", content),
-            aConn -> {
-              ChainableOptional.of(aConn)
-                .filter(AsyncResult::succeeded)
-                .ifPresent(ares -> message.reply(new JsonObject().put("status", "gewd")))
-                .orElseDo(() -> {
-                  LOGGER.warn("Ohhh shit", aConn.cause().getMessage());
-                  message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
-                });
-            }))
-        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
-      ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
+          ChainableOptional.ofNullable(request.getString("userName"))
+            .ifPresent(userName -> mongoClient.save("pages", new JsonObject()
+                .put("name", name)
+                .put("content", content)
+                .put("lastModified", new JsonObject()
+                  .put("userName", userName)
+                  .put("timeStamp", Instant.now().toEpochMilli())),
+              aConn -> {
+                ChainableOptional.of(aConn)
+                  .filter(AsyncResult::succeeded)
+                  .ifPresent(ares -> message.reply(new JsonObject().put("status", "gewd")))
+                  .orElseDo(() -> {
+                    LOGGER.warn("Ohhh shit", aConn.cause().getMessage());
+                    message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
+                  });
+              }))
+            .orElseDo(() -> fourHundred(message, "No User Name Provided, Bruv.")))
+        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv.")))
+      .orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }
 
   private void fourHundred(Message routingContext, String errorMessage) {

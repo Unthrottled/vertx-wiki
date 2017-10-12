@@ -25,6 +25,7 @@ var NewPageResolve = (function () {
         var _this = this;
         return this.permissons.canView
             .flatMap(function (canView) {
+            console.log(canView);
             if (canView) {
                 return _this.pagesService.freshPage();
             }

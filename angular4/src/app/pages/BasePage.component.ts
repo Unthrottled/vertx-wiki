@@ -4,27 +4,27 @@
 import {Input, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import "./page.htm";
-import {PageFull} from "./Page.full.model";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
 import {Observable} from "rxjs/Observable";
 import {EditOptions} from "./EditOptions.model";
+import {Page} from "./Page.model";
 
 
 export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
-  get pageFull(): PageFull {
-    return this._pageFull;
+  get page(): Page {
+    return this._page;
   }
 
-  set pageFull(value: PageFull) {
-    this._pageFull = value;
+  set page(value: Page) {
+    this._page = value;
   }
 
   private _title: string;
   private _content: string;
   private _editMode: boolean = false;
   private _htmlContent: string;
-  private _pageFull: PageFull;
+  private _page: Page;
   protected _editOptions: EditOptions = {
     hideDelete: true
   };
@@ -36,17 +36,13 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
 
   abstract reset(): void;
 
-  ngOnInit(): void {
-    this.router.data.subscribe((data: { pages: PageFull }) => {
-      this.load(data.pages);
-    });
-  }
+  abstract ngOnInit(): void;
 
-  protected load(page: PageFull): Observable<boolean> {
+  protected load(page: Page): Observable<boolean> {
     this.title = page.name;
     this.htmlContent = page.html;
     this.content = page.markdown;
-    this.pageFull = page;
+    this.page = page;
     return Observable.of(true);
   }
 
