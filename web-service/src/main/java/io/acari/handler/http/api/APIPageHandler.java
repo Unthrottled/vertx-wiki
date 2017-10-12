@@ -21,18 +21,13 @@ public class APIPageHandler extends BaseAPIPageHandler {
       "get-page",
       (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
         JsonObject message = connectionResult.result().body();
-        if (NOT_FOUND.equals(message.getString("_id"))) {
-          routingContext.response().setStatusCode(404);
-          return getFailure();
-        } else {
-          routingContext.response().setStatusCode(200);
-          String content = message.getString("content");
-          return new JsonObject()
-            .put("success", true)
-            .put("markdown", content)
-            .put("lastModified", getLastModified(message))
-            .put("name", pageName);
-        }
+        routingContext.response().setStatusCode(200);
+        String content = message.getString("content");
+        return new JsonObject()
+          .put("success", true)
+          .put("markdown", content)
+          .put("lastModified", getLastModified(message))
+          .put("name", pageName);
       });
   }
 
