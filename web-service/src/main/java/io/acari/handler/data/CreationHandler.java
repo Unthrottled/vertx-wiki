@@ -26,7 +26,7 @@ public class CreationHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(request.getString("name"))
       .ifPresent(name -> ChainableOptional.ofNullable(request.getString("content"))
         .ifPresent(content ->
-          ChainableOptional.ofNullable(request.getString("username"))
+          ChainableOptional.ofNullable(request.getString("userName"))
             .ifPresent(userName -> mongoClient.save("pages", new JsonObject()
                 .put("name", name)
                 .put("content", content)
