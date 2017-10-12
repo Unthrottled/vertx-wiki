@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class AuthConfigs {
+public class DbConfigs {
   private static Properties properties;
 
   static {
-    try (InputStream is = AuthConfigs.class.getResourceAsStream("/auth-configs.properties")) {
+    try (InputStream is = DbConfigs.class.getResourceAsStream("/db-configs.properties")) {
       properties = new Properties();
       properties.load(is);
     } catch (IOException e) {
