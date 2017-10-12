@@ -1,7 +1,9 @@
 version: "3"
 services:
   web-content:
-    build: ./angular4
+    build:
+      dockerfile: Dockerfile-dev
+      context: .
     image: alexsimons/vertx-web-content
     ports:
       - "3000:3000"
