@@ -4,11 +4,14 @@
 
 #### Bare Minimum, to run the sample you will need:
  - Internet Connection (At least the first time it is run)
- - [Java 8 runtime](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
- - [Gradle 2.3+ ](http://blog.acari.io/jvm/2017/05/05/Gradle-Install.html)
+ - Docker
+ - Docker-compose (needs to support version 3 compose files)
 
-Needs docker, docker-compose (needs to support version 3 compose files)
-needs node, needs to install node modules locally. make note of node task that deploys minified code to the resources dir of web service.
+
+
+
+needs node, needs to install node modules locally. 
+make note of node task that deploys minified code to the resources dir of web service.
 
 
 
