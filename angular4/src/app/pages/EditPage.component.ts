@@ -22,6 +22,12 @@ export class EditPageComponent extends BasePageComponent implements Deleteable {
     };
   }
 
+  ngOnInit(){
+    this.router.data.subscribe((data: { pages: PageFull }) => {
+      this.load(data.pages);
+    });
+  }
+
   deleteMe(): Observable<boolean> {
     let self = this;
     let returnGuy = this.pagesService

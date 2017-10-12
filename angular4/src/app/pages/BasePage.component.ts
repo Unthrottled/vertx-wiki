@@ -36,11 +36,7 @@ export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
 
   abstract reset(): void;
 
-  ngOnInit(): void {
-    this.router.data.subscribe((data: { pages: Page }) => {
-      this.load(data.pages);
-    });
-  }
+  abstract ngOnInit(): void;
 
   protected load(page: Page): Observable<boolean> {
     this.title = page.name;

@@ -33,12 +33,6 @@ var BasePageComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    BasePageComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.router.data.subscribe(function (data) {
-            _this.load(data.pages);
-        });
-    };
     BasePageComponent.prototype.load = function (page) {
         this.title = page.name;
         this.htmlContent = page.html;

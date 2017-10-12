@@ -8,6 +8,7 @@ import {PagesService} from "./Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
+import {Page} from "./Page.model";
 @Component({
   selector: 'new-page',
   templateUrl: './templates/create.page.htm'
@@ -18,6 +19,12 @@ export class CreatePageComponent extends BasePageComponent {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
     super(router);
     this.editMode = true;
+  }
+
+  ngOnInit(){
+    this.router.data.subscribe((data: { pages: Page }) => {
+      this.load(data.pages);
+    });
   }
 
   save(): Observable<boolean> {

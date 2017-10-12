@@ -40,6 +40,12 @@ var CreatePageComponent = (function (_super) {
         _this.editMode = true;
         return _this;
     }
+    CreatePageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.router.data.subscribe(function (data) {
+            _this.load(data.pages);
+        });
+    };
     CreatePageComponent.prototype.save = function () {
         var self = this;
         if (self.validTitle) {

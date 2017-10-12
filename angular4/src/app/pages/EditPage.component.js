@@ -41,6 +41,12 @@ var EditPageComponent = (function (_super) {
         };
         return _this;
     }
+    EditPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.router.data.subscribe(function (data) {
+            _this.load(data.pages);
+        });
+    };
     EditPageComponent.prototype.deleteMe = function () {
         var self = this;
         var returnGuy = this.pagesService
