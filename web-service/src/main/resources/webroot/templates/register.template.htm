@@ -1,0 +1,49 @@
+<div class="app-container">
+  <div class="container content-container">
+    <form name="form-signin"
+          (ngSubmit)="f.form.valid && login()"
+          #f="ngForm" novalidate>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !validName }">
+        <h2 class="form-signin-heading">Please fill out the forms!</h2>
+        <label for="username" class="sr-only">Username</label>
+        <user-name-creation (onValidate)="userNameValidationChange($event)"
+                        (onChange)="model.username = $event"
+                        [content]="model.username"></user-name-creation>
+        <div *ngIf="f.submitted && !validName"
+             class="help-block">Username is required
+        </div>
+      </div>
+      <div class="form-group"
+           [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label for="password" class="sr-only">Password</label>
+        <input type="password"
+               class="form-control"
+               placeholder="Password"
+               name="password"
+               [(ngModel)]="model.password" #password="ngModel" required/>
+        <div *ngIf="f.submitted && !password.valid"
+             class="help-block">Password is required
+        </div>
+      </div>
+
+      <div class="nav-pills">
+        <h3>User Role</h3>
+        <label
+          class="role-label"
+          *ngFor="let role of roles">
+          <input type="radio"
+                 name="options"
+                 (click)="model.options = role"
+                 [checked]="role === model.options">
+          {{role}}
+        </label>`
+      </div>
+
+
+      <button [disabled]="!(f.form.valid || validName)"
+              class="btn btn-lg btn-primary btn-block">Register
+      </button>
+    </form>
+  </div>
+  <simple-notifications></simple-notifications>
+</div>

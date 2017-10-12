@@ -1,0 +1,7 @@
+<div class="hexoRow" [ngClass]="{'hexo-offset': needsOffset}">
+  <hex *ngFor="let page of pages"
+       [width]="hexWidth"
+       [height]="hexHeight"
+       [name]="page.name"
+       (onClick)="hexClicked($event)"></hex>
+</div>

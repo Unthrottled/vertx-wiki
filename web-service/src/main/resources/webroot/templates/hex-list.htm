@@ -1,0 +1,9 @@
+<div>
+  <div class="hexoGrid">
+    <div *ngFor="let hexRowModel of hexRows">
+      <hex-row [pages]="hexRowModel.pages"
+               [config]="hexRowModel.hexRowInput"
+               (onClick)="hexClicked($event)"></hex-row>
+    </div>
+  </div>
+</div>
