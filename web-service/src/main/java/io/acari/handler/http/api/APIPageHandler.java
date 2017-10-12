@@ -1,6 +1,5 @@
 package io.acari.handler.http.api;
 
-import com.github.rjeschke.txtmark.Processor;
 import com.google.inject.Inject;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.AsyncResult;
@@ -32,7 +31,6 @@ public class APIPageHandler extends BaseAPIPageHandler {
             .put("success", true)
             .put("markdown", content)
             .put("lastModified", getLastModified(message))
-            .put("html", Processor.process(content))//TODO: KEEL ME
             .put("name", pageName);
         }
       });
@@ -41,7 +39,7 @@ public class APIPageHandler extends BaseAPIPageHandler {
   private static JsonObject getLastModified(JsonObject message) {
     return ChainableOptional.ofNullable(message.getJsonObject("lastModified"))
       .orElse(new JsonObject()
-      .put("userName", "?????")
-      .put("timeStamp", 0));
+        .put("userName", "?????")
+        .put("timeStamp", 0));
   }
 }

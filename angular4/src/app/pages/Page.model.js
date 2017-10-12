@@ -8,7 +8,6 @@ var Page = (function () {
         this._id = pageFull.id;
         this._name = pageFull.name;
         this._markdown = pageFull.markdown;
-        this._html = pageFull.html;
     }
     Object.defineProperty(Page.prototype, "id", {
         get: function () {
@@ -27,13 +26,6 @@ var Page = (function () {
     Object.defineProperty(Page.prototype, "markdown", {
         get: function () {
             return this._markdown;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Page.prototype, "html", {
-        get: function () {
-            return this._html;
         },
         enumerable: true,
         configurable: true
