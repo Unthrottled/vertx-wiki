@@ -17,7 +17,7 @@ public class AuthConfigs {
   }
 
   public enum Configs {
-    HOST("host"), PORT("port");
+    PASSWORD("password"), TYPE("type"), KEYSTORE("keystore");
 
     private final String value;
 

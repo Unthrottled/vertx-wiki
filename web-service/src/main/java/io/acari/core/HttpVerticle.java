@@ -1,6 +1,7 @@
 package io.acari.core;
 
 import com.google.inject.Inject;
+import io.acari.auth.AuthConfigs;
 import io.acari.handler.Config;
 import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
@@ -33,7 +34,6 @@ public class HttpVerticle extends AbstractVerticle {
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
   private final UserExistsHandler userExistsHandler;
-  private MongoClient mongoClient;
 
   @Inject
   public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -58,7 +58,7 @@ public class HttpVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> future) {
     Config config = new Config(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE));
-    mongoClient = MongoClient.createShared(vertx, getConfig());
+    MongoClient mongoClient = MongoClient.createShared(vertx, getConfig());
     JsonObject authProps = new JsonObject();
     MongoAuth mongoAuth = MongoAuth.create(mongoClient, authProps);
 
@@ -82,9 +82,9 @@ public class HttpVerticle extends AbstractVerticle {
 
     JWTAuth jwtAuth = JWTAuth.create(vertx, new JsonObject()
       .put("keyStore", new JsonObject()//dis needs to be camel case
-        .put("path", "keystore.jceks")
-        .put("type", "jceks")
-        .put("password", "secret")));//TODO: DIS FEELS ICKY
+        .put("path", AuthConfigs.Configs.KEYSTORE.getValue())
+        .put("type", AuthConfigs.Configs.TYPE.getValue())
+        .put("password", AuthConfigs.Configs.PASSWORD.getValue())));
     apiRouter.route().handler(JWTAuthHandler.create(jwtAuth, "/api/token"));
     apiRouter.post().handler(BodyHandler.create());
     apiRouter.post("/token").handler(tokenHandler
