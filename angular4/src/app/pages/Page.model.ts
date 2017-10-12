@@ -6,13 +6,11 @@ export class Page {
   private _id: string;
   private _name: string;
   private _markdown: string;
-  private _html: string;
 
   constructor(pageFull: any) {
     this._id = pageFull.id;
     this._name = pageFull.name;
     this._markdown = pageFull.markdown;
-    this._html = pageFull.html;
   }
 
   get id(): string {
@@ -26,9 +24,5 @@ export class Page {
 
   get markdown(): string {
     return this._markdown;
-  }
-
-  get html(): string {
-    return this._html;
   }
 }

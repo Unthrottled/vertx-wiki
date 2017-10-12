@@ -58,20 +58,17 @@ public class DatabaseVerticle extends AbstractVerticle {
       .ifPresent(userCollectionNotExist -> mongoClient.createCollection(user, voidAsyncResult ->
         ChainableOptional.of(voidAsyncResult)
           .filter(AsyncResult::succeeded)
-          .ifPresent(vasr -> {
-            mongoClient.createIndexWithOptions(user, username,
-              //todo: setup page.
-              new IndexOptions(new JsonObject().put("unique", true)),
-              voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
-                .filter(AsyncResult::succeeded)
-                .ifPresent(res -> {
-                  LOGGER.info("created index on user collection");
-                })
-                .orElseDo(() -> {
-                  LOGGER.warn("Problem creating " + user + " index", voidAsyncResult1.cause());
-                  future.fail(voidAsyncResult1.cause());
-                }));
-          })
+          .ifPresent(vasr -> mongoClient.createIndexWithOptions(user, username,
+            new IndexOptions(new JsonObject().put("unique", true)),
+            voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
+              .filter(AsyncResult::succeeded)
+              .ifPresent(res -> {
+                LOGGER.info("created index on user collection");
+              })
+              .orElseDo(() -> {
+                LOGGER.warn("Problem creating " + user + " index", voidAsyncResult1.cause());
+                future.fail(voidAsyncResult1.cause());
+              })))
           .orElseDo(() -> {
             LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
             future.fail(voidAsyncResult.cause());
@@ -85,21 +82,18 @@ public class DatabaseVerticle extends AbstractVerticle {
       .ifPresent(userCollectionNotExist -> mongoClient.createCollection(user, voidAsyncResult ->
         ChainableOptional.of(voidAsyncResult)
           .filter(AsyncResult::succeeded)
-          .ifPresent(vasr -> {
-            mongoClient.createIndexWithOptions(user, username,
-              //todo: setup page.
-              new IndexOptions(new JsonObject().put("unique", true)),
-              voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
-                .filter(AsyncResult::succeeded)
-                .ifPresent(res -> {
-                  LOGGER.info("created index on user collection");
-                  future.complete();
-                })
-                .orElseDo(() -> {
-                  LOGGER.warn("Problem creating " + user + " index", voidAsyncResult1.cause());
-                  future.fail(voidAsyncResult1.cause());
-                }));
-          })
+          .ifPresent(vasr -> mongoClient.createIndexWithOptions(user, username,
+            new IndexOptions(new JsonObject().put("unique", true)),
+            voidAsyncResult1 -> ChainableOptional.of(voidAsyncResult1)
+              .filter(AsyncResult::succeeded)
+              .ifPresent(res -> {
+                LOGGER.info("created index on user collection");
+                future.complete();
+              })
+              .orElseDo(() -> {
+                LOGGER.warn("Problem creating " + user + " index", voidAsyncResult1.cause());
+                future.fail(voidAsyncResult1.cause());
+              })))
           .orElseDo(() -> {
             LOGGER.warn("Ohhhh shiiiiiiittttttt", voidAsyncResult.cause());
             future.fail(voidAsyncResult.cause());

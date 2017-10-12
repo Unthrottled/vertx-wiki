@@ -35,7 +35,6 @@ var BasePageComponent = (function () {
     });
     BasePageComponent.prototype.load = function (page) {
         this.title = page.name;
-        this.htmlContent = page.html;
         this.content = page.markdown;
         this.page = page;
         return Observable_1.Observable.of(true);
