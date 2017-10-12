@@ -9,10 +9,6 @@ services:
       - "3000:3000"
     volumes:
       - ./angular4:/app
-    entrypoint:
-      - npm
-      - run
-      - watch
   web-service:
     build: ./web-service
     image: alexsimons/vertx-web-service
