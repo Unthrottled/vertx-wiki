@@ -39,10 +39,7 @@ public class AllPageHandler implements Handler<Message<JsonObject>> {
                                             .put("currentPageNumber", pageNumber)
                                             .put("totalItems", countRes.getLong("result"))))
                             .subscribe(
-                                    json-> {
-                                        LOGGER.info("worked");
-                                        message.reply(json);
-                                    },
+                                    message::reply,
                                     throwable -> {
                                         LOGGER.warn("Aww snap", throwable.getMessage());
                                         logFail(message, throwable.getMessage());
