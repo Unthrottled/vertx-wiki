@@ -18,12 +18,12 @@ var auth_service_1 = require("./auth.service");
 var user_model_1 = require("./user.model");
 require("./login.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
-var UserPrincipal_model_1 = require("./UserPrincipal.model");
+var dist_1 = require("angular2-notifications/dist");
 var LoginComponent = (function () {
-    function LoginComponent(authService, router, prince) {
+    function LoginComponent(authService, router, notifService) {
         this.authService = authService;
         this.router = router;
-        this.prince = prince;
+        this.notifService = notifService;
         this.model = {};
     }
     LoginComponent.prototype.getUser = function () {
@@ -43,7 +43,10 @@ var LoginComponent = (function () {
                 };
                 _this.router.navigate(['/'], navigationExtras);
             }
-        }, function (e) { return console.log("OHHHH SHIIIITTTTTTTT" + e); }));
+        }, function (e) { return _this.notifService.error("Unable Login!", "Invalid User Credentials", {
+            timeOut: 6000,
+            clickToDismiss: true
+        }); }));
     };
     LoginComponent.prototype.ngOnInit = function () {
         this.authService.logout();
@@ -58,7 +61,9 @@ LoginComponent = __decorate([
         selector: 'login-form-guy',
         templateUrl: 'templates/login.template.htm'
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        router_1.Router,
+        dist_1.NotificationsService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map
