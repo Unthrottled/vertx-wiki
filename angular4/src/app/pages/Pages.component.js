@@ -15,10 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./pages.list.htm");
+var auth_service_1 = require("../auth/auth.service");
 var PagesComponent = (function () {
-    function PagesComponent(router, realRouter) {
+    function PagesComponent(router, realRouter, authService) {
         this.router = router;
         this.realRouter = realRouter;
+        this.authService = authService;
         this.pages = [];
     }
     PagesComponent.prototype.ngOnInit = function () {
@@ -34,6 +36,12 @@ var PagesComponent = (function () {
     PagesComponent.prototype.reRouteMain = function (pageNumber) {
         this.realRouter.navigate(['/pages/' + pageNumber]);
     };
+    PagesComponent.prototype.hasPages = function () {
+        return this.pages.length > 0;
+    };
+    PagesComponent.prototype.canCreate = function () {
+        return this.authService.canCreate();
+    };
     return PagesComponent;
 }());
 PagesComponent = __decorate([
@@ -41,7 +49,7 @@ PagesComponent = __decorate([
         selector: 'pages-list',
         templateUrl: './templates/pages.list.htm'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, auth_service_1.AuthService])
 ], PagesComponent);
 exports.PagesComponent = PagesComponent;
 //# sourceMappingURL=Pages.component.js.map

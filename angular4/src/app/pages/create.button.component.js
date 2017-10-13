@@ -13,20 +13,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/15/17.
  */
 var core_1 = require("@angular/core");
-var Permissions_component_1 = require("../auth/Permissions.component");
-var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 require("./create.button.template.htm");
 var auth_service_1 = require("../auth/auth.service");
 var CreateComponent = (function () {
-    function CreateComponent(authService, userToken) {
+    function CreateComponent(authService) {
         this.authService = authService;
-        this.userToken = userToken;
     }
     CreateComponent.prototype.ngOnInit = function () {
     };
     Object.defineProperty(CreateComponent.prototype, "cantCreate", {
         get: function () {
-            return Permissions_component_1.Permissions.canActivate(this.userToken, 'create')
+            return this.authService.canCreate()
                 .map(function (canCreate) { return !canCreate; });
         },
         enumerable: true,
@@ -46,7 +43,7 @@ CreateComponent = __decorate([
         selector: 'create-butt',
         templateUrl: 'templates/create.button.template.htm'
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService, UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], CreateComponent);
 exports.CreateComponent = CreateComponent;
 //# sourceMappingURL=create.button.component.js.map

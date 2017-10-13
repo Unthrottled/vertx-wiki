@@ -12,7 +12,7 @@ import {AuthService} from "../auth/auth.service";
   templateUrl: 'templates/create.button.template.htm'
 })
 export class CreateComponent implements OnInit {
-  constructor(public authService: AuthService,public userToken: UserPrincipal) {
+  constructor(public authService: AuthService) {
 
   }
 
@@ -21,7 +21,7 @@ export class CreateComponent implements OnInit {
   }
 
   get cantCreate(): Observable<boolean> {
-    return Permissions.canActivate(this.userToken, 'create')
+    return this.authService.canCreate()
       .map((canCreate: boolean) => !canCreate);
   }
 

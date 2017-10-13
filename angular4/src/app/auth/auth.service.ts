@@ -8,6 +8,7 @@ import {User} from "./user.model";
 import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
 import {NewUser} from "./NewUser.model";
+import {Permissions} from "./Permissions.component";
 
 @Injectable()
 export class AuthService {
@@ -53,5 +54,9 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
+  }
+
+  canCreate(): Observable<boolean> {
+    return Permissions.canActivate(this.userToken, 'create');
   }
 }

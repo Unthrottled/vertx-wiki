@@ -15,6 +15,7 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 var host_service_1 = require("../session/host.service");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
+var Permissions_component_1 = require("./Permissions.component");
 var AuthService = (function () {
     function AuthService(http, hostService, userToken) {
         this.http = http;
@@ -59,6 +60,9 @@ var AuthService = (function () {
         enumerable: true,
         configurable: true
     });
+    AuthService.prototype.canCreate = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'create');
+    };
     return AuthService;
 }());
 AuthService = __decorate([
