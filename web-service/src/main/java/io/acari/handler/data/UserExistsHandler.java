@@ -26,16 +26,14 @@ public class UserExistsHandler implements Handler<Message<JsonObject>> {
                     JsonObject username = new JsonObject()
                             .put("username", pago);
                     mongoClient.findOne("user", username, username,
-                            asyncResultHandler -> {
-                                ChainableOptional.of(asyncResultHandler)
-                                        .filter(AsyncResult::succeeded)
-                                        .map(AsyncResult::result)
-                                        .ifPresent(result -> ChainableOptional.ofNullable(result)
-                                                .filter(Objects::nonNull)
-                                                .ifPresent(res -> message.reply(getExists(true)))
-                                                .orElseDo(() -> lulNup(message)))
-                                        .orElseDo(() -> lulNup(message));
-                            });
+                            asyncResultHandler -> ChainableOptional.of(asyncResultHandler)
+                                    .filter(AsyncResult::succeeded)
+                                    .map(AsyncResult::result)
+                                    .ifPresent(result -> ChainableOptional.ofNullable(result)
+                                            .filter(Objects::nonNull)
+                                            .ifPresent(res -> message.reply(getExists(true)))
+                                            .orElseDo(() -> lulNup(message)))
+                                    .orElseDo(() -> lulNup(message)));
                 }).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
     }
 
