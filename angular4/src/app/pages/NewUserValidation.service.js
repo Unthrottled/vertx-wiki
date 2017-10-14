@@ -13,15 +13,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
+var Observable_1 = require("rxjs/Observable");
 var backend_service_1 = require("../util/backend.service");
 var NewUserValidationService = (function () {
     function NewUserValidationService(backendService) {
         this.backendService = backendService;
     }
     NewUserValidationService.prototype.isValid = function (pageName) {
-        return this.backendService
-            .userExists(pageName)
-            .map(function (statusPayload) { return !statusPayload.exists; });
+        return pageName.length < 1 ? Observable_1.Observable.create(false) :
+            this.backendService
+                .userExists(pageName)
+                .map(function (statusPayload) { return !statusPayload.exists; });
     };
     return NewUserValidationService;
 }());

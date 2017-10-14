@@ -13,8 +13,8 @@ export class NewUserValidationService {
 
   }
 
-  isValid(pageName: String): Observable<boolean> {
-    return pageName.length < 1 ? Observable.from(false) :
+  isValid(pageName: string): Observable<boolean> {
+    return pageName.length < 1 ? Observable.create(false) :
       this.backendService
       .userExists(pageName)
       .map((statusPayload: ExistsPayload) => !statusPayload.exists);

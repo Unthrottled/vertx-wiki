@@ -29,7 +29,7 @@ var RegisterComponent = (function () {
             "admin": "view create delete update".split(' '),
             "editor": "view create delete update".split(' '),
             "writer": "view create".split(' '),
-            "reader": "viewe".split(' '),
+            "reader": "view".split(' '),
         };
         this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {

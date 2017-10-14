@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     "admin": "view create delete update".split(' '),
     "editor": "view create delete update".split(' '),
     "writer": "view create".split(' '),
-    "reader": "viewe".split(' '),
+    "reader": "view".split(' '),
   };
   roles: string[] = ["admin", "editor","writer","reader"];
   model: any = {
