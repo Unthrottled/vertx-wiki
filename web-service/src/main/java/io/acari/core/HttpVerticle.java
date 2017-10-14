@@ -7,6 +7,7 @@ import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.TokenHandler;
 import io.acari.handler.http.auth.UserCreationHandler;
 import io.acari.handler.http.auth.UserExistsHandler;
+import io.acari.handler.http.auth.UserUpdateHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
@@ -34,6 +35,7 @@ public class HttpVerticle extends AbstractVerticle {
   private final TokenHandler tokenHandler;
   private final APIPageExistsHandler apiPageExistsHandler;
   private final UserExistsHandler userExistsHandler;
+  private final UserUpdateHandler userUpdateHandler;
 
   @Inject
   public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -43,7 +45,8 @@ public class HttpVerticle extends AbstractVerticle {
                       APIDeletionHandler apiDeletionHandler,
                       TokenHandler tokenHandler,
                       APIPageExistsHandler apiPageExistsHandler,
-                      UserExistsHandler userExistsHandler) {
+                      UserExistsHandler userExistsHandler,
+                      UserUpdateHandler userUpdateHandler) {
     this.APIAllPageDataHandler = APIAllPageDataHandler;
     this.apiPageHandler = apiPageHandler;
     this.apiCreationHandler = apiCreationHandler;
@@ -52,6 +55,7 @@ public class HttpVerticle extends AbstractVerticle {
     this.tokenHandler = tokenHandler;
     this.apiPageExistsHandler = apiPageExistsHandler;
     this.userExistsHandler = userExistsHandler;
+    this.userUpdateHandler = userUpdateHandler;
   }
 
 
@@ -72,6 +76,7 @@ public class HttpVerticle extends AbstractVerticle {
     router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
 
     //It's page because I just want to reuse code :)
+    //also this needs to be outside the realm of auth checks
     router.post("/user/exists/:page").handler(userExistsHandler.applyConfiguration(config));
 
     Router apiRouter = Router.router(vertx);
@@ -97,6 +102,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
+    router.put("/user").handler(userUpdateHandler.applyConfiguration(config));
     apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
     router.mountSubRouter("/api", apiRouter);
 
