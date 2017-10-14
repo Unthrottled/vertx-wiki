@@ -1,11 +1,19 @@
-<div>
-  <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
-  <div class="paginator-container">
-  <paginator
-    [currentPageNumber]="metaData.currentPageNumber"
-    [itemsPerPage]="metaData.itemsPerPage"
-    [totalItems]="metaData.totalItems"
-    (onPageChanged)="reRouteMain($event)"
-  ></paginator>
-  </div>
+<div *ngIf="hasPages()">
+    <div>
+        <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
+        <div class="paginator-container">
+            <paginator
+                    [currentPageNumber]="metaData.currentPageNumber"
+                    [itemsPerPage]="metaData.itemsPerPage"
+                    [totalItems]="metaData.totalItems"
+                    (onPageChanged)="reRouteMain($event)"
+            ></paginator>
+        </div>
+    </div>
+</div>
+<div *ngIf="!hasPages()" class="no-pages-container">
+    <h2>Hmmmm.... There appears to be no pages...</h2>
+    <div *ngIf="canCreate() | async" class="create-first">
+        <button class="btn-outline-success btn-lg" routerLink="/create">Create One!</button>
+    </div>
 </div>
