@@ -26,19 +26,7 @@
         </div>
       </div>
 
-      <div class="nav-pills">
-        <h3>User Role</h3>
-        <label
-          class="role-label"
-          *ngFor="let role of roles">
-          <input type="radio"
-                 name="options"
-                 (click)="model.options = role"
-                 [checked]="role === model.options">
-          {{role}}
-        </label>`
-      </div>
-
+      <roles-input></roles-input>
 
       <button [disabled]="!(f.form.valid || validName)"
               class="btn btn-lg btn-primary btn-block">Register
