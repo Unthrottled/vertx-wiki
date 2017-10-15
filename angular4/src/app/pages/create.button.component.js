@@ -29,13 +29,6 @@ var CreateComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CreateComponent.prototype, "hideButton", {
-        get: function () {
-            return !this.authService.isLoggedIn;
-        },
-        enumerable: true,
-        configurable: true
-    });
     return CreateComponent;
 }());
 CreateComponent = __decorate([
