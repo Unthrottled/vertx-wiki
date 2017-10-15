@@ -1,28 +1,28 @@
 package io.acari.handler.http.auth;
 
+import com.google.inject.Inject;
 import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
-import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTOptions;
-import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.rx.java.ObservableFuture;
-import io.vertx.rx.java.ObservableHandler;
-import io.vertx.rx.java.RxHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import rx.Observable;
-import rx.functions.Func1;
 
 public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthProvider, TokenHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(TokenHandler.class);
   private AuthProvider authProvider;
   private JWTAuth jwtAuth;
+  private final PrincipalGenerator principalGenerator;
+
+  @Inject
+  public TokenHandler(PrincipalGenerator principalGenerator) {
+    this.principalGenerator = principalGenerator;
+  }
 
   @Override
   public void handle(RoutingContext routingContext) {
@@ -39,8 +39,7 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                           .filter(AsyncResult::succeeded)
                           .map(AsyncResult::result)
                           .ifPresent(user ->
-                              getUserRole(user)
-                              .flatMap(this::getPermissions)
+                              principalGenerator.generate(user)
                               .subscribe(principal -> {
                                 String token = jwtAuth.generateToken(
                                     principal.put("username", username),
@@ -66,87 +65,10 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
         .orElseDo(() -> fourHundred(routingContext, "login"));
   }
 
-  //todo put in persistence.
-  private Observable<JsonObject> getPermissions(String userRole) {
-    return Observable.fromCallable(() -> new JsonObject()
-        .put("role", userRole)
-        .put("canView", canView(userRole))
-        .put("canCreate", canCreate(userRole))
-        .put("canDelete", canDelete(userRole))
-        .put("canUpdate", canUpdate(userRole)));
-  }
-
-  private Boolean canUpdate(String userRole) {
-    switch (userRole) {
-      case "admin":
-      case "editor":
-      case "writer":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  private Boolean canDelete(String userRole) {
-    switch (userRole) {
-      case "admin":
-      case "editor":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  private Boolean canCreate(String userRole) {
-    switch (userRole) {
-      case "admin":
-      case "editor":
-      case "writer":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  private Boolean canView(String userRole) {
-    switch (userRole) {
-      case "admin":
-      case "editor":
-      case "writer":
-      case "reader":
-        return true;
-      default:
-        return false;
-    }
-  }
-
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
         .setStatusCode(400)
         .end("No " + name + " Provided, bruv.");
-  }
-
-  private Observable<String> getUserRole(User user) {
-    ObservableFuture<Boolean> adminHandler = RxHelper.observableFuture();
-    user.isAuthorised(MongoAuth.ROLE_PREFIX + "admin", adminHandler.toHandler());
-    ObservableFuture<Boolean> editorHandler = RxHelper.observableFuture();
-    user.isAuthorised(MongoAuth.ROLE_PREFIX + "editor", editorHandler.toHandler());
-    ObservableFuture<Boolean> writerHandler = RxHelper.observableFuture();
-    user.isAuthorised(MongoAuth.ROLE_PREFIX + "writer", writerHandler.toHandler());
-    ObservableFuture<Boolean> readerHandler = RxHelper.observableFuture();
-    user.isAuthorised(MongoAuth.ROLE_PREFIX + "reader", readerHandler.toHandler());
-    return adminHandler.map(getMapper("admin"))
-        .zipWith(editorHandler.map(getMapper("editor")), (a, b) -> a == null ? b : a)
-        .zipWith(writerHandler.map(getMapper("writer")), (a, b) -> a == null ? b : a)
-        .zipWith(readerHandler.map(getMapper("reader")), (a, b) -> a == null ? "reader" : a);
-  }
-
-  private Func1<? super Boolean, ? extends String> getMapper(String role) {
-    return res ->
-        ChainableOptional.of(res)
-            .filter(hasRole->hasRole)
-            .map(has -> role)
-            .orElse(null);
   }
 
 
