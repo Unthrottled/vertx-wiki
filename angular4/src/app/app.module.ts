@@ -46,6 +46,7 @@ import {AboutComponent} from "./pages/about/about.component";
 import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 import {RolesComponent} from "./auth/Roles.component";
 import {UserAdjustmentComponent} from "./auth/UserAdjustment.component";
+import {LogoutHiderComponent} from "./auth/hideOnLogout.component";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -96,6 +97,7 @@ const appRoutes = [
         PaginatorComponent,
         SearchComponent,
         RolesComponent,
+        LogoutHiderComponent,
         UserAdjustmentComponent,
         AboutComponent,
         EditComponent
