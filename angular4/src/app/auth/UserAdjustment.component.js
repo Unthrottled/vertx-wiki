@@ -17,16 +17,24 @@ require("./userAdjustment.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var dist_1 = require("angular2-notifications/dist");
 var backend_service_1 = require("../util/backend.service");
+var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var UserAdjustmentComponent = (function () {
-    function UserAdjustmentComponent(backendService, notifService) {
+    function UserAdjustmentComponent(backendService, notifService, userPrinc) {
         this.backendService = backendService;
         this.notifService = notifService;
-        this.permissions = [];
+        this.userPrinc = userPrinc;
     }
+    Object.defineProperty(UserAdjustmentComponent.prototype, "currentRole", {
+        get: function () {
+            return this.userPrinc.role;
+        },
+        enumerable: true,
+        configurable: true
+    });
     UserAdjustmentComponent.prototype.login = function () {
         var _this = this;
         var self = this;
-        this.backendService.updateUser(this.permissions)
+        this.backendService.updateUser(this.role)
             .map(function (response) { return response.succeded; })
             .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
             self.notifService.success("User Permissions Updated!", "Good Job!", {
@@ -47,7 +55,9 @@ UserAdjustmentComponent = __decorate([
         selector: 'user-adjustment-guy',
         templateUrl: 'templates/userAdjustment.template.htm'
     }),
-    __metadata("design:paramtypes", [backend_service_1.BackendService, dist_1.NotificationsService])
+    __metadata("design:paramtypes", [backend_service_1.BackendService,
+        dist_1.NotificationsService,
+        UserPrincipal_model_1.UserPrincipal])
 ], UserAdjustmentComponent);
 exports.UserAdjustmentComponent = UserAdjustmentComponent;
 //# sourceMappingURL=UserAdjustment.component.js.map

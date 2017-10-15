@@ -28,14 +28,14 @@ public class UserUpdateHandler implements Handler<RoutingContext>, Configurable<
         .filter(b -> b)
         .ifPresent(canView -> {
           JsonObject bodyAsJson = routingContext.getBodyAsJson();
-          ChainableOptional.ofNullable(bodyAsJson.getJsonArray("permissions"))
-              .ifPresent(permissions -> {
+          ChainableOptional.ofNullable(bodyAsJson.getString("role"))
+              .ifPresent(role -> {
                 DeliveryOptions deliveryOptions = Config.createDeliveryOptions("user-update");
                 JsonObject params = new JsonObject()
                     .put("username", routingContext.user().principal().getString("username"))
-                    .put("permissions", permissions);
+                    .put("role", role);
                 simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-              }).orElseDo(() -> fourHundred(routingContext, "permissions"));
+              }).orElseDo(() -> fourHundred(routingContext, "role"));
         })
         .orElseDo(() -> routingContext
             .response()

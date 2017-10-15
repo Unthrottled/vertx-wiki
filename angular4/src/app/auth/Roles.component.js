@@ -13,30 +13,28 @@ var core_1 = require("@angular/core");
 require("./roles.template.htm");
 var RolesComponent = (function () {
     function RolesComponent() {
-        this.permission = new core_1.EventEmitter();
-        this.roleMap = {
-            "admin": "view create delete update".split(' '),
-            "editor": "view create delete update".split(' '),
-            "writer": "view create".split(' '),
-            "reader": "view".split(' '),
-        };
         this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {
-            options: 'reader'
+            role: 'reader'
         };
+        this.role = new core_1.EventEmitter();
+        this._selectedRole = 'reader';
     }
-    RolesComponent.prototype.ngOnInit = function () {
-        this.permission.emit(this.permissions);
-    };
-    Object.defineProperty(RolesComponent.prototype, "permissions", {
+    Object.defineProperty(RolesComponent.prototype, "selectedRole", {
         get: function () {
-            return this.roleMap[this.model.options];
+            return this._selectedRole;
+        },
+        set: function (value) {
+            this._selectedRole = value;
         },
         enumerable: true,
         configurable: true
     });
+    RolesComponent.prototype.ngOnInit = function () {
+        this.role.emit(this.selectedRole);
+    };
     RolesComponent.prototype.setRole = function (role) {
-        this.model.options = role;
+        this.selectedRole = role;
         this.ngOnInit();
     };
     return RolesComponent;
@@ -44,7 +42,12 @@ var RolesComponent = (function () {
 __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
-], RolesComponent.prototype, "permission", void 0);
+], RolesComponent.prototype, "role", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], RolesComponent.prototype, "selectedRole", null);
 RolesComponent = __decorate([
     core_1.Component({
         selector: 'roles-input',

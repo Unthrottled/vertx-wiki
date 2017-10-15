@@ -17,11 +17,9 @@ import {NotificationsService} from "angular2-notifications/dist";
 export class RegisterComponent implements OnInit {
   message: string;
   private _validName: boolean;
-  model: any = {
-    options: 'reader'
-  };
+  model: any = {};
 
-  permissions: string[] = [];
+  role: string = 'reader';
 
   constructor(public authService: AuthService, public router: Router, private notifService: NotificationsService) {
 
@@ -33,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
 
   getNewUser(): NewUser {
-    return new NewUser(this.model.username, this.model.password, this.permissions);
+    return new NewUser(this.model.username, this.model.password, this.role);
   }
 
   userNameValidationChange(delta: boolean): void {

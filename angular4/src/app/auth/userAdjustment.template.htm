@@ -10,7 +10,8 @@
                     Are you not satisfied with the current state of your account?
                     Well look no further! Feel free to adjust your account with the fields provided!</p>
                 </div>
-                <roles-input (permission)="permissions = $event"></roles-input>
+                <roles-input [selectedRole]="currentRole"
+                        (role)="role = $event"></roles-input>
                 <button [disabled]="!(f.form.valid)"
                         class="btn btn-lg btn-primary btn-block">Update!
                 </button>

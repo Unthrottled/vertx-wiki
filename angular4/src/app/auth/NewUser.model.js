@@ -4,10 +4,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewUser = (function () {
-    function NewUser(login, password, permissions) {
+    function NewUser(login, password, role) {
         this.login = login;
         this.password = password;
-        this.permissions = permissions;
+        this.role = role;
     }
     return NewUser;
 }());

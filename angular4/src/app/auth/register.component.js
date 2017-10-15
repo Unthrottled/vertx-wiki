@@ -25,16 +25,14 @@ var RegisterComponent = (function () {
         this.authService = authService;
         this.router = router;
         this.notifService = notifService;
-        this.model = {
-            options: 'reader'
-        };
-        this.permissions = [];
+        this.model = {};
+        this.role = 'reader';
     }
     RegisterComponent.prototype.getUser = function () {
         return new user_model_1.User(this.model.username, this.model.password);
     };
     RegisterComponent.prototype.getNewUser = function () {
-        return new NewUser_model_1.NewUser(this.model.username, this.model.password, this.permissions);
+        return new NewUser_model_1.NewUser(this.model.username, this.model.password, this.role);
     };
     RegisterComponent.prototype.userNameValidationChange = function (delta) {
         this.validName = delta;

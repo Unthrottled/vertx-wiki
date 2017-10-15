@@ -54,9 +54,9 @@ export class BackendService {
       .map((response: Response) => new StatusPayload(response.json()));
   }
 
-  updateUser(pageName: String[]): Observable<StatusPayload> {
+  updateUser(role: String): Observable<StatusPayload> {
     return this.httpPut("api/user",
-      {"permissions": pageName})
+      {"role": role})
       .map((response: Response) => new StatusPayload(response.json()));
   }
 

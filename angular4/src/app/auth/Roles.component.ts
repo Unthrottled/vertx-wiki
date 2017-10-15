@@ -6,12 +6,12 @@ import './roles.template.htm'
     templateUrl: 'templates/roles.template.htm'
 })
 export class RolesComponent implements OnInit {
+    roles: string[] = ["admin", "editor", "writer", "reader"];
+    model: any = {
+        role: 'reader'
+    };
     @Output()
-    private permission = new EventEmitter<String[]>();
-
-    ngOnInit(): void {
-        this.permission.emit(this.permissions);
-    }
+    private role = new EventEmitter<string>();
 
     private _selectedRole: string = 'reader';
 
@@ -24,23 +24,11 @@ export class RolesComponent implements OnInit {
         this._selectedRole = value;
     }
 
-    private roleMap = {
-        "admin": "view create delete update".split(' '),
-        "editor": "view create delete update".split(' '),
-        "writer": "view create".split(' '),
-        "reader": "view".split(' '),
-    };
-    roles: String[] = ["admin", "editor", "writer", "reader"];
-
-    get permissions(): String[] {
-        return this.roleMap[this.model.role];
+    ngOnInit(): void {
+        this.role.emit(this.selectedRole);
     }
 
-    model: any = {
-        role: 'reader'
-    };
-
-    setRole(role: String){
+    setRole(role: string) {
         this.selectedRole = role;
         this.ngOnInit();
     }

@@ -34,7 +34,6 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                   JsonObject credentials = new JsonObject()
                       .put("username", username)
                       .put("password", password);
-                  LOGGER.info("butt");
                   authProvider.authenticate(credentials,
                       authRes -> ChainableOptional.of(authRes)
                           .filter(AsyncResult::succeeded)

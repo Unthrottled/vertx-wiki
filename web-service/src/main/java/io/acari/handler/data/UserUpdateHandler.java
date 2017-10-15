@@ -10,8 +10,6 @@ import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Instant;
-
 public class UserUpdateHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserUpdateHandler.class);
 

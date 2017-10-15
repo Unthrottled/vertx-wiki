@@ -7,23 +7,28 @@ import {Subscriber} from "rxjs/Subscriber";
 import {NotificationsService} from "angular2-notifications/dist";
 import {BackendService} from "../util/backend.service";
 import {StatusPayload} from "../pages/StatusPayload.model";
+import {UserPrincipal} from "./UserPrincipal.model";
 
 @Component({
     selector: 'user-adjustment-guy',
     templateUrl: 'templates/userAdjustment.template.htm'
 })
 export class UserAdjustmentComponent {
-    message: string;
-    permissions: string[] = [];
-    private _validName: boolean;
+    role: string;
 
-    constructor(private backendService: BackendService, private notifService: NotificationsService) {
+    constructor(private backendService: BackendService,
+                private notifService: NotificationsService,
+                private userPrinc: UserPrincipal) {
 
+    }
+
+    get currentRole(): String {
+        return this.userPrinc.role;
     }
 
     login() {
         let self = this;
-        this.backendService.updateUser(this.permissions)
+        this.backendService.updateUser(this.role)
             .map((response: StatusPayload) => response.succeded)
             .subscribe(Subscriber.create((succeded: boolean) => {
                 self.notifService.success("User Permissions Updated!",
