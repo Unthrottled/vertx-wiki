@@ -52,6 +52,7 @@ var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
 var about_component_1 = require("./pages/about/about.component");
 var Pagination_component_1 = require("./pages/paginator/Pagination.component");
 var Roles_component_1 = require("./auth/Roles.component");
+var UserAdjustment_component_1 = require("./auth/UserAdjustment.component");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
@@ -103,6 +104,7 @@ AppModule = __decorate([
             Pagination_component_1.PaginatorComponent,
             Search_component_1.SearchComponent,
             Roles_component_1.RolesComponent,
+            UserAdjustment_component_1.UserAdjustmentComponent,
             about_component_1.AboutComponent,
             Edit_component_1.EditComponent
         ],

@@ -45,75 +45,77 @@ import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 import {RolesComponent} from "./auth/Roles.component";
+import {UserAdjustmentComponent} from "./auth/UserAdjustment.component";
 
 const appRoutes = [
-  {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
-  {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
-  {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
-  {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
-  {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'about', component: AboutComponent}
+    {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
+    {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
+    {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
+    {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
+    {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
+    {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent},
+    {path: 'about', component: AboutComponent}
 ];
 
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    UiSwitchModule,
-    MarkdownModule.forRoot(),
-    SimpleNotificationsModule.forRoot(),
-    BrowserAnimationsModule,
-    RouterModule.forRoot(
-      appRoutes
-    )
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: [
-    AppComponent,
-    MessageComponent,
-    SwitchComponent,
-    BaseComponent,
-    LoginComponent,
-    RegisterComponent,
-    LogoutComponent,
-    PagesComponent,
-    EditPageComponent,
-    TitleCreationComponent,
-    NewUserCreationComponent,
-    CreatePageComponent,
-    DeletionComponent,
-    CreateComponent,
-    HexRowComponent,
-    HexListComponent,
-    HexComponent,
-    PaginatorComponent,
-    SearchComponent,
-    RolesComponent,
-    AboutComponent,
-    EditComponent
-  ],
-  bootstrap: [AppComponent],
-  providers: [HostService,
-    SessionService,
-    MessageService,
-    WindowRef,
-    AuthService,
-    AuthGuard,
-    UserPrincipal,
-    Permissions,
-    PagesResolve,
-    PageResolve,
-    PagesService,
-    NewPageResolve,
-    TitleValidationService,
-    NewUserValidationService,
-    BackendService,]
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        UiSwitchModule,
+        MarkdownModule.forRoot(),
+        SimpleNotificationsModule.forRoot(),
+        BrowserAnimationsModule,
+        RouterModule.forRoot(
+            appRoutes
+        )
+    ],
+    exports: [
+        RouterModule
+    ],
+    declarations: [
+        AppComponent,
+        MessageComponent,
+        SwitchComponent,
+        BaseComponent,
+        LoginComponent,
+        RegisterComponent,
+        LogoutComponent,
+        PagesComponent,
+        EditPageComponent,
+        TitleCreationComponent,
+        NewUserCreationComponent,
+        CreatePageComponent,
+        DeletionComponent,
+        CreateComponent,
+        HexRowComponent,
+        HexListComponent,
+        HexComponent,
+        PaginatorComponent,
+        SearchComponent,
+        RolesComponent,
+        UserAdjustmentComponent,
+        AboutComponent,
+        EditComponent
+    ],
+    bootstrap: [AppComponent],
+    providers: [HostService,
+        SessionService,
+        MessageService,
+        WindowRef,
+        AuthService,
+        AuthGuard,
+        UserPrincipal,
+        Permissions,
+        PagesResolve,
+        PageResolve,
+        PagesService,
+        NewPageResolve,
+        TitleValidationService,
+        NewUserValidationService,
+        BackendService,]
 })
 export class AppModule {
 }
