@@ -28,7 +28,7 @@ public class UserUpdateHandler implements Handler<RoutingContext>, Configurable<
         .filter(b -> b)
         .ifPresent(canView -> {
           JsonObject bodyAsJson = routingContext.getBodyAsJson();
-          ChainableOptional.ofNullable(bodyAsJson.getString("permissions"))
+          ChainableOptional.ofNullable(bodyAsJson.getJsonArray("permissions"))
               .ifPresent(permissions -> {
                 DeliveryOptions deliveryOptions = Config.createDeliveryOptions("user-update");
                 JsonObject params = new JsonObject()

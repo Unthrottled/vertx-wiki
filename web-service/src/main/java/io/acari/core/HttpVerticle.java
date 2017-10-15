@@ -102,7 +102,7 @@ public class HttpVerticle extends AbstractVerticle {
     apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
-    router.put("/user").handler(userUpdateHandler.applyConfiguration(config));
+    apiRouter.put("/user").handler(userUpdateHandler.applyConfiguration(config));
     apiRouter.delete("/page/:page").handler(apiDeletionHandler.applyConfiguration(config));
     router.mountSubRouter("/api", apiRouter);
 
