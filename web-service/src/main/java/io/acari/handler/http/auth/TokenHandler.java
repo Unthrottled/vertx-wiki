@@ -11,6 +11,7 @@ import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTOptions;
 import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.rx.java.ObservableFuture;
 import io.vertx.rx.java.ObservableHandler;
 import io.vertx.rx.java.RxHelper;
 import org.slf4j.Logger;
@@ -127,13 +128,13 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
   }
 
   private Observable<String> getUserRole(User user) {
-    ObservableHandler<AsyncResult<Boolean>> adminHandler = RxHelper.observableHandler();
+    ObservableFuture<Boolean> adminHandler = RxHelper.observableFuture();
     user.isAuthorised(MongoAuth.ROLE_PREFIX + "admin", adminHandler.toHandler());
-    ObservableHandler<AsyncResult<Boolean>> editorHandler = RxHelper.observableHandler();
+    ObservableFuture<Boolean> editorHandler = RxHelper.observableFuture();
     user.isAuthorised(MongoAuth.ROLE_PREFIX + "editor", editorHandler.toHandler());
-    ObservableHandler<AsyncResult<Boolean>> writerHandler = RxHelper.observableHandler();
+    ObservableFuture<Boolean> writerHandler = RxHelper.observableFuture();
     user.isAuthorised(MongoAuth.ROLE_PREFIX + "writer", writerHandler.toHandler());
-    ObservableHandler<AsyncResult<Boolean>> readerHandler = RxHelper.observableHandler();
+    ObservableFuture<Boolean> readerHandler = RxHelper.observableFuture();
     user.isAuthorised(MongoAuth.ROLE_PREFIX + "reader", readerHandler.toHandler());
     return adminHandler.map(getMapper("admin"))
         .zipWith(editorHandler.map(getMapper("editor")), (a, b) -> a == null ? b : a)
@@ -141,10 +142,10 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
         .zipWith(readerHandler.map(getMapper("reader")), (a, b) -> a == null ? "reader" : a);
   }
 
-  private Func1<? super AsyncResult<Boolean>, ? extends String> getMapper(String role) {
+  private Func1<? super Boolean, ? extends String> getMapper(String role) {
     return res ->
         ChainableOptional.of(res)
-            .filter(AsyncResult::succeeded)
+            .filter(hasRole->hasRole)
             .map(has -> role)
             .orElse(null);
   }
