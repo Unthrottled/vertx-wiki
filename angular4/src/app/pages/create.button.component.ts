@@ -24,8 +24,4 @@ export class CreateComponent implements OnInit {
     return this.authService.canCreate()
       .map((canCreate: boolean) => !canCreate);
   }
-
-  get hideButton(): boolean {
-    return !this.authService.isLoggedIn;
-  }
 }
