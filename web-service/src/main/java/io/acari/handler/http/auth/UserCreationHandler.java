@@ -26,15 +26,12 @@ public class UserCreationHandler implements Handler<RoutingContext> {
     JsonObject body = routingContext.getBodyAsJson();
     ChainableOptional.ofNullable(body.getString("login"))
       .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
-        .ifPresent(password -> ChainableOptional.ofNullable(body.getJsonArray("permissions"))
-          .ifPresent(permissionArray -> {
-            List<String> permissions = permissionArray.stream()
-              .map(s -> (String) s)
-              .collect(Collectors.toList());
+        .ifPresent(password -> ChainableOptional.ofNullable(body.getString("role"))
+          .ifPresent(role -> {
             mongoAuth.insertUser(login,
               password,
+              Collections.singletonList(role),
               Collections.emptyList(),
-              permissions,
               stringAsyncResult -> ChainableOptional.of(stringAsyncResult)
                 .filter(AsyncResult::succeeded)
                 .map(AsyncResult::result)
