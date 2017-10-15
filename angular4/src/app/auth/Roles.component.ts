@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import './roles.template.htm'
 
 @Component({
     selector: 'roles-input',
@@ -18,14 +19,19 @@ export class RolesComponent implements OnInit {
         "writer": "view create".split(' '),
         "reader": "view".split(' '),
     };
-    roles: string[] = ["admin", "editor", "writer", "reader"];
+    roles: String[] = ["admin", "editor", "writer", "reader"];
 
-    get permissions(): string[] {
+    get permissions(): String[] {
         return this.roleMap[this.model.options];
     }
 
     model: any = {
         options: 'reader'
     };
+
+    setRole(role: String){
+        this.model.options = role;
+        this.ngOnInit();
+    }
 
 }

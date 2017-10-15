@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     options: 'reader'
   };
 
-  permissions: String[] = [];
+  permissions: string[] = [];
 
   constructor(public authService: AuthService, public router: Router, private notifService: NotificationsService) {
 

@@ -5,7 +5,7 @@
             *ngFor="let role of roles">
         <input type="radio"
                name="options"
-               (click)="model.options = role"
+               (click)="setRole(role)"
                [checked]="role === model.options">
         {{role}}
     </label>`

@@ -25,27 +25,14 @@ var RegisterComponent = (function () {
         this.authService = authService;
         this.router = router;
         this.notifService = notifService;
-        this.roleMap = {
-            "admin": "view create delete update".split(' '),
-            "editor": "view create delete update".split(' '),
-            "writer": "view create".split(' '),
-            "reader": "view".split(' '),
-        };
-        this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {
             options: 'reader'
         };
+        this.permissions = [];
     }
     RegisterComponent.prototype.getUser = function () {
         return new user_model_1.User(this.model.username, this.model.password);
     };
-    Object.defineProperty(RegisterComponent.prototype, "permissions", {
-        get: function () {
-            return this.roleMap[this.model.options];
-        },
-        enumerable: true,
-        configurable: true
-    });
     RegisterComponent.prototype.getNewUser = function () {
         return new NewUser_model_1.NewUser(this.model.username, this.model.password, this.permissions);
     };
