@@ -54,6 +54,7 @@ const appRoutes = [
     {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
     {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
     {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
+    {path: 'user/adjustment', component: UserAdjustmentComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'about', component: AboutComponent}

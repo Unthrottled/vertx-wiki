@@ -60,6 +60,7 @@ var appRoutes = [
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'user/adjustment', component: UserAdjustment_component_1.UserAdjustmentComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'about', component: about_component_1.AboutComponent }
