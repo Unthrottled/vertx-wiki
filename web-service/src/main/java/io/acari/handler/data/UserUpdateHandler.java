@@ -26,10 +26,10 @@ public class UserUpdateHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(request.getString("username"))
         .ifPresent(username -> ChainableOptional.ofNullable(request.getJsonArray("permissions"))
             .ifPresent(permissions -> {
-              JsonObject query = new JsonObject().put("name", username);
+              JsonObject query = new JsonObject().put("username", username);
               JsonObject update = new JsonObject().put("$set", new JsonObject()
                   .put("permissions", permissions));
-              mongoClient.findOneAndUpdate("pages", query, update, getAsyncResultHandler(message));
+              mongoClient.findOneAndUpdate("user", query, update, getAsyncResultHandler(message));
             }).orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
         ).orElseDo(() -> fourHundred(message, "No username Provided, Bruv."));
   }
