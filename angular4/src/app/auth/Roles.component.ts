@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import './roles.template.htm'
 
 @Component({
@@ -13,6 +13,17 @@ export class RolesComponent implements OnInit {
         this.permission.emit(this.permissions);
     }
 
+    private _selectedRole: string = 'reader';
+
+    @Input()
+    get selectedRole(): string {
+        return this._selectedRole;
+    }
+
+    set selectedRole(value: string) {
+        this._selectedRole = value;
+    }
+
     private roleMap = {
         "admin": "view create delete update".split(' '),
         "editor": "view create delete update".split(' '),
@@ -22,15 +33,15 @@ export class RolesComponent implements OnInit {
     roles: String[] = ["admin", "editor", "writer", "reader"];
 
     get permissions(): String[] {
-        return this.roleMap[this.model.options];
+        return this.roleMap[this.model.role];
     }
 
     model: any = {
-        options: 'reader'
+        role: 'reader'
     };
 
     setRole(role: String){
-        this.model.options = role;
+        this.selectedRole = role;
         this.ngOnInit();
     }
 
