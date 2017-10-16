@@ -15,6 +15,7 @@ import {UserPrincipal} from "./UserPrincipal.model";
 })
 export class UserAdjustmentComponent {
     role: string;
+    model: any = {};
 
     constructor(private backendService: BackendService,
                 private notifService: NotificationsService,
@@ -28,7 +29,7 @@ export class UserAdjustmentComponent {
 
     login() {
         let self = this;
-        this.backendService.updateUser(this.role)
+        this.backendService.updateUser(this.role, this.model.password)
             .map((response: StatusPayload) => response.succeded)
             .subscribe(Subscriber.create((succeded: boolean) => {
                 self.notifService.success("User Permissions Updated!",

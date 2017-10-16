@@ -23,6 +23,7 @@ var UserAdjustmentComponent = (function () {
         this.backendService = backendService;
         this.notifService = notifService;
         this.userPrinc = userPrinc;
+        this.model = {};
     }
     Object.defineProperty(UserAdjustmentComponent.prototype, "currentRole", {
         get: function () {
@@ -34,7 +35,7 @@ var UserAdjustmentComponent = (function () {
     UserAdjustmentComponent.prototype.login = function () {
         var _this = this;
         var self = this;
-        this.backendService.updateUser(this.role)
+        this.backendService.updateUser(this.role, this.model.password)
             .map(function (response) { return response.succeded; })
             .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
             self.notifService.success("User Permissions Updated!", "Good Job!", {
