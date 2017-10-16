@@ -25,7 +25,4 @@ export class LogoutComponent implements OnInit {
       .then(success => self.router.navigate(['/login']));
   }
 
-  get hideLogout(): boolean {
-    return !this.authService.isLoggedIn;
-  }
 }

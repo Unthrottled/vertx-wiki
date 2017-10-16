@@ -51,12 +51,16 @@ var NewUserValidation_service_1 = require("./pages/NewUserValidation.service");
 var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
 var about_component_1 = require("./pages/about/about.component");
 var Pagination_component_1 = require("./pages/paginator/Pagination.component");
+var Roles_component_1 = require("./auth/Roles.component");
+var UserAdjustment_component_1 = require("./auth/UserAdjustment.component");
+var hideOnLogout_component_1 = require("./auth/hideOnLogout.component");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'user/adjustment', component: UserAdjustment_component_1.UserAdjustmentComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'about', component: about_component_1.AboutComponent }
@@ -101,6 +105,9 @@ AppModule = __decorate([
             HexComponent_1.HexComponent,
             Pagination_component_1.PaginatorComponent,
             Search_component_1.SearchComponent,
+            Roles_component_1.RolesComponent,
+            hideOnLogout_component_1.LogoutHiderComponent,
+            UserAdjustment_component_1.UserAdjustmentComponent,
             about_component_1.AboutComponent,
             Edit_component_1.EditComponent
         ],

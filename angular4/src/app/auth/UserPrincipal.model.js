@@ -25,6 +25,7 @@ var UserPrincipal = (function () {
         this._canUpdate = principal.principal.canUpdate;
         this._canDelete = principal.principal.canDelete;
         this._token = principal.token;
+        this._role = principal.principal.role;
     };
     Object.defineProperty(UserPrincipal.prototype, "canView", {
         get: function () {
@@ -57,6 +58,13 @@ var UserPrincipal = (function () {
     Object.defineProperty(UserPrincipal.prototype, "token", {
         get: function () {
             return this._token;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UserPrincipal.prototype, "role", {
+        get: function () {
+            return this._role;
         },
         enumerable: true,
         configurable: true

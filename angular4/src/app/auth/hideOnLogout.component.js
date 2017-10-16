@@ -13,30 +13,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/15/17.
  */
 var core_1 = require("@angular/core");
-require("./create.button.template.htm");
-var auth_service_1 = require("../auth/auth.service");
-var CreateComponent = (function () {
-    function CreateComponent(authService) {
+var auth_service_1 = require("./auth.service");
+require("./logoutHider.template.htm");
+var LogoutHiderComponent = (function () {
+    function LogoutHiderComponent(authService) {
         this.authService = authService;
     }
-    CreateComponent.prototype.ngOnInit = function () {
-    };
-    Object.defineProperty(CreateComponent.prototype, "cantCreate", {
+    Object.defineProperty(LogoutHiderComponent.prototype, "hideLogout", {
         get: function () {
-            return this.authService.canCreate()
-                .map(function (canCreate) { return !canCreate; });
+            return !this.authService.isLoggedIn;
         },
         enumerable: true,
         configurable: true
     });
-    return CreateComponent;
+    return LogoutHiderComponent;
 }());
-CreateComponent = __decorate([
+LogoutHiderComponent = __decorate([
     core_1.Component({
-        selector: 'create-butt',
-        templateUrl: 'templates/create.button.template.htm'
+        selector: 'logout-hider',
+        templateUrl: 'templates/logoutHider.template.htm'
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
-], CreateComponent);
-exports.CreateComponent = CreateComponent;
-//# sourceMappingURL=create.button.component.js.map
+], LogoutHiderComponent);
+exports.LogoutHiderComponent = LogoutHiderComponent;
+//# sourceMappingURL=hideOnLogout.component.js.map
