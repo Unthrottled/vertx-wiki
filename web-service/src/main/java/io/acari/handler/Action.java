@@ -10,6 +10,7 @@ public enum Action {
   ALL_PAGES_ARCHIVE("all-pages-archive"),
   ALL_PAGES_DATA("all-pages-data"),
   GET_PAGE("get-page"),
+  GET_PAGE_ARCHIVE("get-page-archive"),
   PAGE_EXISTS("page-exists"),
   USER_EXISTS("user-exists"),
   USER_UPDATE("user-update"),

@@ -21,6 +21,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private final UserExistsHandler userExistsHandler;
   private final UserUpdateHandler userUpdateHandler;
   private final AllArchiveHandler allArchiveHandler;
+  private final ArchivePageHandler archivePageHandler;
 
   public DataMessageConsumer(PageHandler pageHandler,
                              DeletionHandler deletionHandler,
@@ -31,7 +32,8 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
                              PageExistsHandler pageExistsHandler,
                              UserExistsHandler userExistsHandler,
                              UserUpdateHandler userUpdateHandler,
-                             AllArchiveHandler allArchiveHandler) {
+                             AllArchiveHandler allArchiveHandler,
+                             ArchivePageHandler archivePageHandler) {
 
     this.pageHandler = pageHandler;
     this.deletionHandler = deletionHandler;
@@ -43,6 +45,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
     this.userExistsHandler = userExistsHandler;
     this.userUpdateHandler = userUpdateHandler;
     this.allArchiveHandler = allArchiveHandler;
+    this.archivePageHandler = archivePageHandler;
   }
 
   @Override
@@ -55,6 +58,9 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
             message.fail(ErrorCodes.BAD_ACTION.ordinal(), "Bad Action: " + action);
           case GET_PAGE:
             pageHandler.handle(message);
+            break;
+          case GET_PAGE_ARCHIVE:
+            archivePageHandler.handle(message);
             break;
           case PAGE_EXISTS:
             pageExistsHandler.handle(message);

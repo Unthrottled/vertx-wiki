@@ -111,6 +111,7 @@ public class DatabaseVerticle extends AbstractVerticle {
         new PageExistsHandler(mongoClient),
         new UserExistsHandler(mongoClient),
         new UserUpdateHandler(mongoClient),
-        new AllArchiveHandler(mongoClient));
+        new AllArchiveHandler(mongoClient),
+        new ArchivePageHandler(mongoClient));
   }
 }
