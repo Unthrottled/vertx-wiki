@@ -63,10 +63,9 @@
               <con:params/>
               <con:element>data</con:element>
             </con:representation>
-            <con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
+            <con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
               <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
-                </con:setting>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
               </con:settings>
               <con:endpoint>http://localhost:8989</con:endpoint>
               <con:request>{
@@ -602,7 +601,10 @@
       <con:resource name="user" path="user" id="3a067cf8-d7d2-4492-9735-6da768c2776c"><con:settings/><con:parameters/><con:method name="UPDATE" id="9230e975-5bd8-4bc0-aea2-05a471d33dc0" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201 200</con:status><con:params/><con:element xmlns:pag="http://sandwich/api/pages">pag:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="94fd935e-5418-4c04-a341-60231aabe540" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8989</con:endpoint><con:request>{
 	"role": "editor"
 }
-</con:request><con:originalUri>http://localhost/api/user</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource>
+</con:request><con:originalUri>http://localhost/api/user</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="page" path="page" id="c358635e-64f9-4013-a903-18a3904ffa4f"><con:settings/><con:parameters/><con:resource name="STEVE" path="STEVE" id="5421da22-6e31-475a-a426-e6e4b8e28a87"><con:settings/><con:parameters/><con:method name="Delete" id="eeb60b1f-b191-4f03-bd92-ec107effeee5" method="DELETE"><con:settings/><con:parameters/><con:request name="Request 1" id="0c91efa1-bd65-402e-af22-4090267fe380" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8989</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource><con:resource name="archive" path="archive" id="51c45717-87d8-4f40-bbaf-c0a673fbab2a"><con:settings/><con:parameters/><con:method name="POST" id="890d17ee-a7be-464f-8e0f-76ef09ca0ed2" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="305731a1-ebc2-48d2-8fa5-142da6d01081" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8989</con:endpoint><con:request>{
+                "pageNumber": 1
+             }
+              </con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource>
       <con:resource name="user" path="user" id="d36f1f7b-ec68-4d97-8267-e3772b77ed4d"><con:settings/><con:parameters/><con:resource name="create" path="create" id="230f7d82-6de7-4942-820a-d9974f0956d2"><con:settings/><con:parameters/><con:method name="create" id="976707c4-57f0-4655-8542-5f7cdb17353b" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>201</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="post" id="4f2ce1dd-9dba-4e35-9866-5c8808f26671" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8989</con:endpoint><con:request>{
 	"login":"jerry",
 	"password": "butts",
@@ -675,7 +677,7 @@
       <con:testStep type="restrequest" name="GET" id="5ba9b73f-5af1-48d7-bb3c-cadd472aeabd">
         <con:settings/>
         <con:config service="http://sandwich:8989" resourcePath="/api/pages" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="GET" id="857d6247-2e34-49a0-921d-5a8c18257e55" mediaType="application/json">
+          <con:restRequest name="GET" id="857d6247-2e34-49a0-921d-5a8c18257e55" mediaType="application/json" postQueryString="false">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -811,8 +813,56 @@
         </con:config>
       </con:testStep><con:testStep type="restrequest" name="GET-PAGE" id="5cc936c5-5bb2-4d21-b3e0-14de0cbda75a">
         <con:settings/>
-        <con:config service="http://sandwich:8989" resourcePath="/api/pages" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config service="http://sandwich:8989" resourcePath="/api/archive" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="GET-PAGE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://localhost:8989</con:endpoint>
+            <con:request>{
+	"pageNumber": 1
+}
+</con:request>
+            <con:originalUri>http://sandwich/api/pages</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
+              <con:configuration><codes>200         </codes></con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep><con:testStep type="restrequest" name="DELETE-STEVE" id="12122716-acef-442c-9524-008ee2524c10">
+        <con:settings/>
+        <con:config service="http://sandwich:8989" resourcePath="/api/page/STEVE" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="DELETE-STEVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://localhost:8989</con:endpoint>
+            <con:request>{
+	"pageNumber": 1
+}
+</con:request>
+            <con:originalUri>http://sandwich/api/pages</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
+              <con:configuration><codes>200         </codes></con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep><con:testStep type="restrequest" name="GET-ARCHIVE" id="47edf4fb-46a3-4ba8-9dd9-3291858dabd1">
+        <con:settings/>
+        <con:config service="http://sandwich:8989" resourcePath="/api/pages" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="GET-ARCHIVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>

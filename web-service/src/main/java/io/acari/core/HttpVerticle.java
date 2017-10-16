@@ -36,6 +36,7 @@ public class HttpVerticle extends AbstractVerticle {
     private final APIPageExistsHandler apiPageExistsHandler;
     private final UserExistsHandler userExistsHandler;
     private final UserUpdateHandler userUpdateHandler;
+    private final APIAllArchiveDataHandler apiAllArchiveDataHandler;
 
     @Inject
     public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -46,7 +47,8 @@ public class HttpVerticle extends AbstractVerticle {
                         TokenHandler tokenHandler,
                         APIPageExistsHandler apiPageExistsHandler,
                         UserExistsHandler userExistsHandler,
-                        UserUpdateHandler userUpdateHandler) {
+                        UserUpdateHandler userUpdateHandler,
+                        APIAllArchiveDataHandler apiAllArchiveDataHandler) {
         this.APIAllPageDataHandler = APIAllPageDataHandler;
         this.apiPageHandler = apiPageHandler;
         this.apiCreationHandler = apiCreationHandler;
@@ -56,6 +58,7 @@ public class HttpVerticle extends AbstractVerticle {
         this.apiPageExistsHandler = apiPageExistsHandler;
         this.userExistsHandler = userExistsHandler;
         this.userUpdateHandler = userUpdateHandler;
+        this.apiAllArchiveDataHandler = apiAllArchiveDataHandler;
     }
 
 
@@ -97,6 +100,7 @@ public class HttpVerticle extends AbstractVerticle {
                 .applyConfiguration(mongoAuth));
 
         apiRouter.post("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
+        apiRouter.post("/archive").handler(apiAllArchiveDataHandler.applyConfiguration(config));
         apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
         apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
         apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
