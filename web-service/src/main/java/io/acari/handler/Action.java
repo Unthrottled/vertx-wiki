@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public enum Action {
   ALL_PAGES("all-pages"),
+  ALL_PAGES_ARCHIVE("all-pages-archive"),
   ALL_PAGES_DATA("all-pages-data"),
   GET_PAGE("get-page"),
   PAGE_EXISTS("page-exists"),
