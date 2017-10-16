@@ -32,14 +32,14 @@ public class APIArchivePageHandler implements Handler<RoutingContext>, Configura
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.getBodyAsJson().getString("_id"))
         .ifPresent(archiveId -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-            new JsonObject().put("page", archiveId),
+            new JsonObject().put("_id", archiveId),
             Config.createDeliveryOptions("get-page-archive"),
             connectionResult -> routingContext.response()
                 .putHeader("Cache-Control", "no-store, no-cache")
                 .putHeader("Content-Type", "application/json")
                 .end(getPayLoad(connectionResult, routingContext, archiveId).encode()))).orElseDo(() -> routingContext.response()
         .setStatusCode(400)
-        .end("No Path Provided, bruv."));
+        .end("No _id Provided, bruv."));
   }
 
   private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) {
