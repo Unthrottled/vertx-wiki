@@ -6,7 +6,7 @@ public class AllPageHandler extends BaseAllPageHandler {
 
 
   public AllPageHandler(MongoClient mongoClient) {
-    super(mongoClient, "pages");
+    super(mongoClient, "pages", jsonObject -> jsonObject.getString("name"));
   }
 
 }

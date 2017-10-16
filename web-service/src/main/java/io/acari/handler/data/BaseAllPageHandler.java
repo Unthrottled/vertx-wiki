@@ -14,16 +14,21 @@ import org.slf4j.LoggerFactory;
 import rx.Observable;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class BaseAllPageHandler implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(BaseAllPageHandler.class);
   private static final int PAGES_PER_PAGE = 100;
   private final MongoClient mongoClient;
   private final String collection;
+  private final Function<JsonObject, Object> resultBuilder;
 
-  public BaseAllPageHandler(MongoClient mongoClient, String collection) {
+  public BaseAllPageHandler(MongoClient mongoClient,
+                            String collection,
+                            Function<JsonObject, Object> resultBuilder) {
     this.mongoClient = mongoClient;
     this.collection = collection;
+    this.resultBuilder = resultBuilder;
   }
 
 
@@ -59,7 +64,7 @@ public class BaseAllPageHandler implements Handler<Message<JsonObject>> {
             .setSkip(getSkipCount(pageNumber)), listObservableFuture.toHandler());
     return listObservableFuture.map(ar ->
         ar.stream()
-            .map(json -> json.getString("name"))
+            .map(resultBuilder)
             .collect(JsonArray::new, JsonArray::add, JsonArray::add))
         .map(list -> new JsonObject().put("result", list));
   }
