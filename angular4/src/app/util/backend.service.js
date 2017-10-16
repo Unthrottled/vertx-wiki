@@ -51,8 +51,7 @@ var BackendService = (function () {
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.updateUser = function (role, password) {
-        return this.httpPut("api/user", { "role": role, "password": password })
-            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
+        return this.httpPut("api/user", { "role": role, "password": password });
     };
     BackendService.prototype.createPage = function (pageName, pageBody) {
         return this.httpPost("api/pages/create", { "name": pageName, "markdown": pageBody })

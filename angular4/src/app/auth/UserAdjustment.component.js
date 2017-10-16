@@ -17,6 +17,7 @@ require("./userAdjustment.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var dist_1 = require("angular2-notifications/dist");
 var backend_service_1 = require("../util/backend.service");
+var StatusPayload_model_1 = require("../pages/StatusPayload.model");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var UserAdjustmentComponent = (function () {
     function UserAdjustmentComponent(backendService, notifService, userPrinc) {
@@ -36,17 +37,25 @@ var UserAdjustmentComponent = (function () {
         var _this = this;
         var self = this;
         this.backendService.updateUser(this.role, this.model.password)
-            .map(function (response) { return response.succeded; })
-            .subscribe(Subscriber_1.Subscriber.create(function (succeded) {
-            self.notifService.success("User Permissions Updated!", "Good Job!", {
-                timeOut: 3000,
-                clickToDismiss: true
-            });
+            .subscribe(Subscriber_1.Subscriber.create(function (response) {
+            if (new StatusPayload_model_1.StatusPayload(response.json()).succeded) {
+                self.userPrinc.newUserPrincipal(response.json());
+                self.notifService.success("User Permissions Updated!", "Good Job!", {
+                    timeOut: 3000,
+                    clickToDismiss: true
+                });
+                self.model.password = '';
+                self.success = true;
+            }
+            else {
+                self.failure();
+            }
         }, function (error) {
             _this.failure();
         }));
     };
     UserAdjustmentComponent.prototype.failure = function () {
+        this.success = false;
         this.notifService.error("Unable to update user!", "Please try again, or not.", { timeOut: 3000 });
     };
     return UserAdjustmentComponent;

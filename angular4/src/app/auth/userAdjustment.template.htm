@@ -20,7 +20,7 @@
                            placeholder="Password"
                            name="password"
                            [(ngModel)]="model.password" #password="ngModel" required/>
-                    <div *ngIf="f.submitted && !password.valid"
+                    <div *ngIf="f.submitted && !password.valid && !success"
                          class="help-block">Password is required
                     </div>
                 </div>
