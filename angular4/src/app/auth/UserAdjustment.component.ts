@@ -17,7 +17,7 @@ import {UserPrincipal} from "./UserPrincipal.model";
 export class UserAdjustmentComponent {
     role: string;
     model: any = {};
-    success: false;
+    success: boolean = false;
 
     constructor(private backendService: BackendService,
                 private notifService: NotificationsService,

@@ -25,6 +25,7 @@ var UserAdjustmentComponent = (function () {
         this.notifService = notifService;
         this.userPrinc = userPrinc;
         this.model = {};
+        this.success = false;
     }
     Object.defineProperty(UserAdjustmentComponent.prototype, "currentRole", {
         get: function () {
