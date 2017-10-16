@@ -100,7 +100,7 @@ public class HttpVerticle extends AbstractVerticle {
                 .applyConfiguration(mongoAuth));
 
         apiRouter.post("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
-        apiRouter.post("/archive").handler(apiAllArchiveDataHandler.applyConfiguration(config));
+        apiRouter.post("/archives").handler(apiAllArchiveDataHandler.applyConfiguration(config));
         apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
         apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
         apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
