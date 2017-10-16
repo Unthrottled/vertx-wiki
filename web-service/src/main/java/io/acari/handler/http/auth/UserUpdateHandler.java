@@ -3,24 +3,30 @@ package io.acari.handler.http.auth;
 import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
-import io.acari.handler.http.api.SimpleResponseHandler;
 import io.acari.util.ChainableOptional;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rx.Observable;
 
 public class UserUpdateHandler implements Handler<RoutingContext>, Configurable<Config, UserUpdateHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserUpdateHandler.class);
   private final Vertx vertx;
-  private SimpleResponseHandler simpleResponseHandler;
+  private final PrincipalGenerator principalGenerator;
+  private Config config;
+  private TokenGenerator tokenGenerator;
 
   @Inject
-  public UserUpdateHandler(Vertx vertx) {
+  public UserUpdateHandler(Vertx vertx, PrincipalGenerator principalGenerator) {
     this.vertx = vertx;
+    this.principalGenerator = principalGenerator;
   }
 
   public void handle(RoutingContext routingContext) {
@@ -34,13 +40,39 @@ public class UserUpdateHandler implements Handler<RoutingContext>, Configurable<
                 JsonObject params = new JsonObject()
                     .put("username", routingContext.user().principal().getString("username"))
                     .put("role", role);
-                simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+                handle(routingContext, params, deliveryOptions);
               }).orElseDo(() -> fourHundred(routingContext, "role"));
         })
         .orElseDo(() -> routingContext
             .response()
             .setStatusCode(401)
             .end());
+  }
+
+
+  public void handle(RoutingContext routingContext, JsonObject params, DeliveryOptions deliveryOptions) {
+    vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+        params,
+        deliveryOptions,
+        connectionResult -> getPayLoad(connectionResult, routingContext)
+            .subscribe(princ -> routingContext.response()
+                .putHeader("Content-Type", "application/json")
+                .end(princ.encode())));
+  }
+
+  private Observable<JsonObject> getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext) {
+    if (connectionResult.succeeded()) {
+      routingContext.response().setStatusCode(201);
+      return principalGenerator.generate(routingContext.user())
+          .map(princ -> new JsonObject()
+              .put("token", tokenGenerator.generate(princ))
+              .put("principal", princ)
+              .put("success", true));
+    } else {
+      LOGGER.warn("Awwww Snap!", connectionResult.cause());
+      routingContext.response().setStatusCode(500);
+      return Observable.fromCallable(() -> new JsonObject().put("success", false));
+    }
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {
@@ -51,7 +83,12 @@ public class UserUpdateHandler implements Handler<RoutingContext>, Configurable<
 
   @Override
   public UserUpdateHandler applyConfiguration(Config config) {
-    this.simpleResponseHandler = new SimpleResponseHandler(config, vertx);
+    this.config = config;
+    return this;
+  }
+
+  public UserUpdateHandler applyConfiguration(JWTAuth jwtAuth) {
+    this.tokenGenerator = new TokenGenerator(jwtAuth);
     return this;
   }
 }

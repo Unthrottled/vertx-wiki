@@ -8,7 +8,6 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.auth.jwt.JWTAuth;
-import io.vertx.ext.auth.jwt.JWTOptions;
 import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthProvider, TokenHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(TokenHandler.class);
   private AuthProvider authProvider;
-  private JWTAuth jwtAuth;
+  private TokenGenerator tokenGenerator;
   private final PrincipalGenerator principalGenerator;
 
   @Inject
@@ -41,11 +40,7 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                           .ifPresent(user ->
                               principalGenerator.generate(user)
                               .subscribe(principal -> {
-                                String token = jwtAuth.generateToken(
-                                    principal.put("username", username),
-                                    new JWTOptions()
-                                        .setSubject("Wiki API")
-                                        .setIssuer("Vert.x"));
+                                String token = tokenGenerator.generate(principal.put("username", username));
                                 routingContext.response()
                                     .putHeader("Content-Type", "application/json")
                                     .end(new JsonObject()
@@ -79,7 +74,7 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
   }
 
   public TokenHandler applyConfiguration(JWTAuth jwtAuth) {
-    this.jwtAuth = jwtAuth;
+    this.tokenGenerator = new TokenGenerator(jwtAuth);
     return this;
   }
 }
