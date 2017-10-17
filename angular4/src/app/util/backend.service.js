@@ -20,6 +20,7 @@ var PagePayload_model_1 = require("../pages/PagePayload.model");
 var PageFullPayload_model_1 = require("../pages/PageFullPayload.model");
 var StatusPayload_model_1 = require("../pages/StatusPayload.model");
 var ExistsPayload_model_1 = require("../pages/ExistsPayload.model");
+var ArchivesPayload_model_1 = require("../pages/archive/ArchivesPayload.model");
 var BackendService = (function () {
     function BackendService(http, userToken, hostService) {
         this.http = http;
@@ -30,8 +31,16 @@ var BackendService = (function () {
         return this.httpPost("api/pages", { pageNumber: pageNumber })
             .map(function (response) { return new PagePayload_model_1.PagePayload(response.json()); });
     };
+    BackendService.prototype.fetchAllArchives = function (pageNumber) {
+        return this.httpPost("api/archives", { pageNumber: pageNumber })
+            .map(function (response) { return new ArchivesPayload_model_1.ArchivesPayload(response.json()); });
+    };
     BackendService.prototype.fetchPage = function (pageName) {
         return this.httpGet("api/pages/" + pageName)
+            .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
+    };
+    BackendService.prototype.fetchArchivedPage = function (pageId) {
+        return this.httpPost("api/archive", { id: pageId })
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.deletePage = function (pageName) {

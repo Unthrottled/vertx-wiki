@@ -10,7 +10,7 @@ import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "../BasePage.component";
 @Component({
-  selector: 'wiki-page',
+  selector: 'wiki-page-archive',
   templateUrl: './templates/archived-page.htm'
 })
 export class ArchivePageComponent extends BasePageComponent {

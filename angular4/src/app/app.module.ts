@@ -50,11 +50,14 @@ import {LogoutHiderComponent} from "./auth/hideOnLogout.component";
 import {ArchivePageComponent} from "./pages/archive/ArchivePage.component";
 import {ArchivesComponent} from "./pages/archive/Archives.component";
 import {ArchivesResolve} from "./pages/archive/archives-resolve.service";
+import {ArchiveResolve} from "./pages/archive/archive-resolve.service";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
     {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
+    {path: 'archives/:pageNumber', component: ArchivesComponent, canActivate: [AuthGuard], resolve: {pages: ArchivesResolve}},
     {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
+    {path: 'archive/:name', component: ArchivePageComponent, canActivate: [AuthGuard], resolve: {pages: ArchiveResolve}},
     {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
     {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
     {path: 'user/adjustment', component: UserAdjustmentComponent, canActivate: [AuthGuard]},
@@ -122,6 +125,7 @@ const appRoutes = [
         PagesService,
         NewPageResolve,
         ArchivesResolve,
+        ArchiveResolve,
         TitleValidationService,
         NewUserValidationService,
         BackendService,]

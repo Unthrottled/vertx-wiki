@@ -9,7 +9,7 @@ import {ArchivePageMin} from "./ArchivePageMin";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 
 @Component({
-    selector: 'pages-list',
+    selector: 'pages-list-archive',
     templateUrl: './templates/archive.list.htm'
 })
 export class ArchivesComponent implements OnInit {

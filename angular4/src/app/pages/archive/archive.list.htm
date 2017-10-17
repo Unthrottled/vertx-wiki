@@ -1,16 +1,28 @@
-<div *ngIf="hasPages()">
-    <div>
-        <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
-        <div class="paginator-container">
-            <paginator
-                    [currentPageNumber]="metaData.currentPageNumber"
-                    [itemsPerPage]="metaData.itemsPerPage"
-                    [totalItems]="metaData.totalItems"
-                    (onPageChanged)="reRouteMain($event)"
-            ></paginator>
-        </div>
+<div class="app-container">
+    <div class="content-container">
+        <span class="app-control-container">
+          <main role="main" class="container">
+            <div class="jumbotron">
+              <h1>Archived Wiki Pages</h1>
+              <p class="lead">The land of the lost and unwanted.</p>
+            </div>
+          </main>
+          <div *ngIf="hasPages()">
+            <div>
+            <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
+            <div class="paginator-container">
+                <paginator
+                        [currentPageNumber]="metaData.currentPageNumber"
+                        [itemsPerPage]="metaData.itemsPerPage"
+                        [totalItems]="metaData.totalItems"
+                        (onPageChanged)="reRouteMain($event)"
+                ></paginator>
+            </div>
+            </div>
+            </div>
+            <div *ngIf="!hasPages()" class="no-pages-container">
+            <h2>Hmmmm.... There appears to be no deleted pages...</h2>
+            </div>
+        </span>
     </div>
-</div>
-<div *ngIf="!hasPages()" class="no-pages-container">
-    <h2>Hmmmm.... There appears to be no deleted pages...</h2>
 </div>

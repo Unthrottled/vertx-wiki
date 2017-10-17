@@ -54,6 +54,9 @@ var Pagination_component_1 = require("./pages/paginator/Pagination.component");
 var Roles_component_1 = require("./auth/Roles.component");
 var UserAdjustment_component_1 = require("./auth/UserAdjustment.component");
 var hideOnLogout_component_1 = require("./auth/hideOnLogout.component");
+var ArchivePage_component_1 = require("./pages/archive/ArchivePage.component");
+var Archives_component_1 = require("./pages/archive/Archives.component");
+var archives_resolve_service_1 = require("./pages/archive/archives-resolve.service");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
@@ -108,6 +111,8 @@ AppModule = __decorate([
             Roles_component_1.RolesComponent,
             hideOnLogout_component_1.LogoutHiderComponent,
             UserAdjustment_component_1.UserAdjustmentComponent,
+            ArchivePage_component_1.ArchivePageComponent,
+            Archives_component_1.ArchivesComponent,
             about_component_1.AboutComponent,
             Edit_component_1.EditComponent
         ],
@@ -124,6 +129,7 @@ AppModule = __decorate([
             page_resolve_service_1.PageResolve,
             Pages_service_1.PagesService,
             new_page_resolve_service_1.NewPageResolve,
+            archives_resolve_service_1.ArchivesResolve,
             TitleValidation_service_1.TitleValidationService,
             NewUserValidation_service_1.NewUserValidationService,
             backend_service_1.BackendService,]

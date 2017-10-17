@@ -23,8 +23,15 @@ var PagesService = (function () {
     PagesService.prototype.fetchAllMinPages = function (pageNumber) {
         return this.backendService.fetchAllPages(pageNumber);
     };
+    PagesService.prototype.fetchAllArchivedPages = function (pageNumber) {
+        return this.backendService.fetchAllArchives(pageNumber);
+    };
     PagesService.prototype.fetchPage = function (pageName) {
         return this.backendService.fetchPage(pageName)
+            .map(function (pagePayload) { return pagePayload.page; });
+    };
+    PagesService.prototype.fetchArchivedPage = function (pageId) {
+        return this.backendService.fetchArchivedPage(pageId)
             .map(function (pagePayload) { return pagePayload.page; });
     };
     PagesService.prototype.savePage = function (pageName, pageContent) {

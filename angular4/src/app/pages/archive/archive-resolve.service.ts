@@ -9,7 +9,7 @@ import {PagesService} from "../Pages.service";
 import {PageFull} from "../Page.full.model";
 
 @Injectable()
-export class PageResolve implements Resolve<PageFull> {
+export class ArchiveResolve implements Resolve<PageFull> {
   constructor(private permissons: Permissions, private pagesService: PagesService) {
 
   }
