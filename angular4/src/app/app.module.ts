@@ -47,6 +47,9 @@ import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 import {RolesComponent} from "./auth/Roles.component";
 import {UserAdjustmentComponent} from "./auth/UserAdjustment.component";
 import {LogoutHiderComponent} from "./auth/hideOnLogout.component";
+import {ArchivePageComponent} from "./pages/archive/ArchivePage.component";
+import {ArchivesComponent} from "./pages/archive/Archives.component";
+import {ArchivesResolve} from "./pages/archive/archives-resolve.service";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -100,6 +103,8 @@ const appRoutes = [
         RolesComponent,
         LogoutHiderComponent,
         UserAdjustmentComponent,
+        ArchivePageComponent,
+        ArchivesComponent,
         AboutComponent,
         EditComponent
     ],
@@ -116,6 +121,7 @@ const appRoutes = [
         PageResolve,
         PagesService,
         NewPageResolve,
+        ArchivesResolve,
         TitleValidationService,
         NewUserValidationService,
         BackendService,]
