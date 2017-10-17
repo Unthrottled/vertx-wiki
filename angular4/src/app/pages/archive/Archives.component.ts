@@ -3,14 +3,14 @@
  */
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import "./pages.list.htm";
+import "./archive.list.htm";
 import {PageMetaData} from "../metadata.model";
 import {ArchivePageMin} from "./ArchivePageMin";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 
 @Component({
     selector: 'pages-list',
-    templateUrl: './templates/pages.list.htm'
+    templateUrl: './templates/archive.list.htm'
 })
 export class ArchivesComponent implements OnInit {
     pages: ArchivePageMin[] = [];
