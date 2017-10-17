@@ -39,6 +39,11 @@ export class BackendService {
       .map((response: Response) => new FullPagePayload(response.json()));
   }
 
+  fetchArchivedPage(pageId: String): Observable<FullPagePayload> {
+    return this.httpPost("api/archive", {id: pageId})
+      .map((response: Response) => new FullPagePayload(response.json()));
+  }
+
   deletePage(pageName: String): Observable<StatusPayload> {
     return this.httpDelete("api/page/" + pageName)
       .map((response: Response) => new StatusPayload(response.json()));

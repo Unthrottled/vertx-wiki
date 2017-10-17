@@ -31,6 +31,11 @@ export class PagesService {
       .map((pagePayload: FullPagePayload) => pagePayload.page);
   }
 
+  fetchArchivedPage(pageId: String): Observable<PageFull> {
+    return this.backendService.fetchArchivedPage(pageId)
+      .map((pagePayload: FullPagePayload) => pagePayload.page);
+  }
+
   savePage(pageName: String, pageContent: String): Observable<boolean> {
     return this.backendService.updatePage(pageName, pageContent)
       .map((statusPayload: StatusPayload) => statusPayload.succeded);
