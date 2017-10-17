@@ -13,6 +13,7 @@ import {PagePayload} from "../pages/PagePayload.model";
 import {FullPagePayload} from "../pages/PageFullPayload.model";
 import {StatusPayload} from "../pages/StatusPayload.model";
 import {ExistsPayload} from "../pages/ExistsPayload.model";
+import {ArchivesPayload} from "../pages/archive/ArchivesPayload.model";
 
 @Injectable()
 export class BackendService {
@@ -26,6 +27,11 @@ export class BackendService {
   fetchAllPages(pageNumber: number): Observable<PagePayload> {
     return this.httpPost("api/pages",{pageNumber:pageNumber})
       .map((response: Response) => new PagePayload(response.json()));
+  }
+
+  fetchAllArchives(pageNumber: number): Observable<PagePayload> {
+    return this.httpPost("api/archives",{pageNumber:pageNumber})
+      .map((response: Response) => new ArchivesPayload(response.json()));
   }
 
   fetchPage(pageName: String): Observable<FullPagePayload> {
