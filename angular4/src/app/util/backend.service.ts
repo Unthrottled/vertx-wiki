@@ -29,7 +29,7 @@ export class BackendService {
       .map((response: Response) => new PagePayload(response.json()));
   }
 
-  fetchAllArchives(pageNumber: number): Observable<PagePayload> {
+  fetchAllArchives(pageNumber: number): Observable<ArchivesPayload> {
     return this.httpPost("api/archives",{pageNumber:pageNumber})
       .map((response: Response) => new ArchivesPayload(response.json()));
   }

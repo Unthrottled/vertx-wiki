@@ -9,6 +9,7 @@ import {PageFull} from "./Page.full.model";
 import {FullPagePayload} from "./PageFullPayload.model";
 import {StatusPayload} from "./StatusPayload.model";
 import {Page} from "./Page.model";
+import {ArchivesPayload} from "./archive/ArchivesPayload.model";
 
 @Injectable()
 export class PagesService {
@@ -19,6 +20,10 @@ export class PagesService {
 
   fetchAllMinPages(pageNumber: number): Observable<PagePayload> {
     return this.backendService.fetchAllPages(pageNumber);
+  }
+
+  fetchAllArchivedPages(pageNumber: number): Observable<ArchivesPayload> {
+    return this.backendService.fetchAllArchives(pageNumber);
   }
 
   fetchPage(pageName: String): Observable<PageFull> {
