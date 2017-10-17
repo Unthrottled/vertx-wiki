@@ -9,6 +9,7 @@ import {PagePayload} from "../PagePayload.model";
 import {PageMetaData} from "../metadata.model";
 import {AuthService} from "../../auth/auth.service";
 import {Observable} from "rxjs/Observable";
+import {ArchivePageMin} from "./ArchivePageMin";
 @Component({
   selector: 'pages-list',
   templateUrl: './templates/pages.list.htm'
@@ -27,12 +28,12 @@ export class ArchivesComponent implements OnInit {
     });
   }
 
-  reRoute(pageName: string): void {
-    this.realRouter.navigate(['/page/' + pageName]);
+  reRoute(pageArchive: ArchivePageMin): void {
+    this.realRouter.navigate(['/archive/' + pageArchive.id]);
   }
 
-  reRouteMain(pageNumber: number): void {
-    this.realRouter.navigate(['/pages/' + pageNumber]);
+  reRouteMain(pageArchive: ArchivePageMin): void {
+    this.realRouter.navigate(['/archive/' + pageArchive.id]);
   }
 
   hasPages(): boolean {
