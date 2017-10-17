@@ -9,7 +9,7 @@ import {PagesService} from "../Pages.service";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 
 @Injectable()
-export class PagesResolve implements Resolve<ArchivesPayload> {
+export class ArchivesResolve implements Resolve<ArchivesPayload> {
   constructor(private permissons: Permissions, private pagesService: PagesService) {
 
   }
