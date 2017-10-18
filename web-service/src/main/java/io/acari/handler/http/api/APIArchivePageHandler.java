@@ -38,12 +38,12 @@ public class APIArchivePageHandler implements Handler<RoutingContext>, Configura
                         connectionResult -> routingContext.response()
                                 .putHeader("Cache-Control", "no-store, no-cache")
                                 .putHeader("Content-Type", "application/json")
-                                .end(getPayLoad(connectionResult, routingContext, archiveId).encode()))).orElseDo(() -> routingContext.response()
+                                .end(getPayLoad(connectionResult, routingContext).encode()))).orElseDo(() -> routingContext.response()
                 .setStatusCode(400)
                 .end("No _id Provided, bruv."));
     }
 
-    private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) {
+    private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext) {
         if (connectionResult.succeeded()) {
             JsonObject message = connectionResult.result().body();
             routingContext.response().setStatusCode(200);
@@ -52,7 +52,7 @@ public class APIArchivePageHandler implements Handler<RoutingContext>, Configura
                     .put("success", true)
                     .put("markdown", content)
                     .put("lastModified", APIPageHandler.getLastModified(message))
-                    .put("name", pageName);
+                    .put("name", message.getString("name"));
         } else {
             routingContext.response().setStatusCode(ChainableOptional.ofNullable(connectionResult.cause())
                     .filter(throwable -> throwable instanceof ReplyException)
