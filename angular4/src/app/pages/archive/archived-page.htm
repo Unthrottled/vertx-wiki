@@ -7,7 +7,7 @@
     </div>
   </div>
   <div *ngIf="canCreate() | async" class="create-first">
-    <button class="btn-outline-success btn-lg">Restore!</button>
+    <button class="btn-outline-success btn-lg" (click)="save()">Restore!</button>
   </div>
   <small>
     Last modified by {{page.lastModified.userName}} @ {{page.lastModified.timeStamp}}

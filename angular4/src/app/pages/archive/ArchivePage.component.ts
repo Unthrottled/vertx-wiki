@@ -31,14 +31,13 @@ export class ArchivePageComponent extends BasePageComponent {
     ngOnInit() {
         this.router.data.subscribe((data: { pages: PageFull }) => {
             this.load(data.pages);
-            console.log(data.pages)
         });
     }
 
     save(): Observable<boolean> {
         let self = this;
         let returnGuy = this.pagesService
-            .savePage(this.page.name, self.content);
+            .createPage(this.page.name, self.content);
         returnGuy.subscribe((success: boolean) => {
             if (success) {
                 this.notificationService.success('Page R-R-Restored!', ':)', {
@@ -48,9 +47,15 @@ export class ArchivePageComponent extends BasePageComponent {
                 });
                 self.reset();
             } else {
-                self.failure()
+                self.failure('): try again.')
             }
-        }, (error: any) => self.failure());
+        }, (error: any) => {
+            if(error.status == 500){
+                self.failure('Page already exists!')
+            } else {
+                self.failure('): try again.')
+            }
+        });
         return returnGuy
 
     }
@@ -62,9 +67,9 @@ export class ArchivePageComponent extends BasePageComponent {
         return this.authService.canCreate()
     }
 
-    private failure() {
-        this.notificationService.error('Page NOT Restored!', ':( Try again.', {
-            timeOut: 3000,
+    private failure(message: string) {
+        this.notificationService.error('Page NOT Restored!', message || ':( Try again.', {
+            timeOut: 5000,
             showProgressBar: true,
             clickToClose: true
         })

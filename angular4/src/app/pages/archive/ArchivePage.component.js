@@ -47,14 +47,13 @@ var ArchivePageComponent = (function (_super) {
         var _this = this;
         this.router.data.subscribe(function (data) {
             _this.load(data.pages);
-            console.log(data.pages);
         });
     };
     ArchivePageComponent.prototype.save = function () {
         var _this = this;
         var self = this;
         var returnGuy = this.pagesService
-            .savePage(this.page.name, self.content);
+            .createPage(this.page.name, self.content);
         returnGuy.subscribe(function (success) {
             if (success) {
                 _this.notificationService.success('Page R-R-Restored!', ':)', {
@@ -65,9 +64,16 @@ var ArchivePageComponent = (function (_super) {
                 self.reset();
             }
             else {
-                self.failure();
+                self.failure('): try again.');
             }
-        }, function (error) { return self.failure(); });
+        }, function (error) {
+            if (error.status == 500) {
+                self.failure('Page already exists!');
+            }
+            else {
+                self.failure('): try again.');
+            }
+        });
         return returnGuy;
     };
     ArchivePageComponent.prototype.reset = function () {
@@ -75,9 +81,9 @@ var ArchivePageComponent = (function (_super) {
     ArchivePageComponent.prototype.canCreate = function () {
         return this.authService.canCreate();
     };
-    ArchivePageComponent.prototype.failure = function () {
-        this.notificationService.error('Page NOT Restored!', ':( Try again.', {
-            timeOut: 3000,
+    ArchivePageComponent.prototype.failure = function (message) {
+        this.notificationService.error('Page NOT Restored!', message || ':( Try again.', {
+            timeOut: 5000,
             showProgressBar: true,
             clickToClose: true
         });
