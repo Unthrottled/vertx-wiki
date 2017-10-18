@@ -38,6 +38,7 @@ public class HttpVerticle extends AbstractVerticle {
     private final UserUpdateHandler userUpdateHandler;
     private final APIAllArchiveDataHandler apiAllArchiveDataHandler;
     private final APIGetArchivePageHandler apiGetArchivePageHandler;
+    private final APIRestoreArchiveHandler apiRestoreArchiveHandler;
 
     @Inject
     public HttpVerticle(APIAllPageDataHandler APIAllPageDataHandler,
@@ -50,7 +51,8 @@ public class HttpVerticle extends AbstractVerticle {
                         UserExistsHandler userExistsHandler,
                         UserUpdateHandler userUpdateHandler,
                         APIAllArchiveDataHandler apiAllArchiveDataHandler,
-                        APIGetArchivePageHandler apiGetArchivePageHandler) {
+                        APIGetArchivePageHandler apiGetArchivePageHandler,
+                        APIRestoreArchiveHandler apiRestoreArchiveHandler) {
         this.APIAllPageDataHandler = APIAllPageDataHandler;
         this.apiPageHandler = apiPageHandler;
         this.apiCreationHandler = apiCreationHandler;
@@ -62,6 +64,7 @@ public class HttpVerticle extends AbstractVerticle {
         this.userUpdateHandler = userUpdateHandler;
         this.apiAllArchiveDataHandler = apiAllArchiveDataHandler;
         this.apiGetArchivePageHandler = apiGetArchivePageHandler;
+        this.apiRestoreArchiveHandler = apiRestoreArchiveHandler;
     }
 
 
@@ -109,6 +112,7 @@ public class HttpVerticle extends AbstractVerticle {
         apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
         apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
         apiRouter.put().handler(BodyHandler.create());
+        apiRouter.put("/archive/restore/:page").handler(apiRestoreArchiveHandler.applyConfiguration(config));
         apiRouter.put("/pages").handler(apiUpdateHandler.applyConfiguration(config));
         apiRouter.put("/user").handler(userUpdateHandler.applyConfiguration(config)
                 .applyConfiguration(jwtAuth)
