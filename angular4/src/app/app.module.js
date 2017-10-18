@@ -57,10 +57,13 @@ var hideOnLogout_component_1 = require("./auth/hideOnLogout.component");
 var ArchivePage_component_1 = require("./pages/archive/ArchivePage.component");
 var Archives_component_1 = require("./pages/archive/Archives.component");
 var archives_resolve_service_1 = require("./pages/archive/archives-resolve.service");
+var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
+    { path: 'archives/:pageNumber', component: Archives_component_1.ArchivesComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: archives_resolve_service_1.ArchivesResolve } },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
+    { path: 'archive/:name', component: ArchivePage_component_1.ArchivePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: archive_resolve_service_1.ArchiveResolve } },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'user/adjustment', component: UserAdjustment_component_1.UserAdjustmentComponent, canActivate: [auth_guard_1.AuthGuard] },
@@ -130,6 +133,7 @@ AppModule = __decorate([
             Pages_service_1.PagesService,
             new_page_resolve_service_1.NewPageResolve,
             archives_resolve_service_1.ArchivesResolve,
+            archive_resolve_service_1.ArchiveResolve,
             TitleValidation_service_1.TitleValidationService,
             NewUserValidation_service_1.NewUserValidationService,
             backend_service_1.BackendService,]

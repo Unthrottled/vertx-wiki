@@ -79,7 +79,7 @@ var ArchivePageComponent = (function (_super) {
 }(BasePage_component_1.BasePageComponent));
 ArchivePageComponent = __decorate([
     core_1.Component({
-        selector: 'wiki-page',
+        selector: 'wiki-page-archive',
         templateUrl: './templates/archived-page.htm'
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
