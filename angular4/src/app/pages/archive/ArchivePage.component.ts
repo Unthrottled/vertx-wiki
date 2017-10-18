@@ -37,7 +37,7 @@ export class ArchivePageComponent extends BasePageComponent {
     save(): Observable<boolean> {
         let self = this;
         let returnGuy = this.pagesService
-            .createPage(this.page.name, self.content);
+            .restorePage(this.page.id);
         returnGuy.subscribe((success: boolean) => {
             if (success) {
                 self.actualRouter.navigate(
@@ -47,7 +47,7 @@ export class ArchivePageComponent extends BasePageComponent {
                 self.failure('): try again.')
             }
         }, (error: any) => {
-            if(error.status == 500){
+            if(error.status == 500){//TODO: SHOULD REALLY BE A 400 BAD REQUEST
                 self.failure('Page already exists!')
             } else {
                 self.failure('): try again.')

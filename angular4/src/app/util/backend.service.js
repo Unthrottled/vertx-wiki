@@ -47,6 +47,10 @@ var BackendService = (function () {
         return this.httpDelete("api/page/" + pageName)
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
+    BackendService.prototype.restoreArchive = function (pageId) {
+        return this.httpPut("api/archive/restore/" + pageId, {})
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
+    };
     BackendService.prototype.pageExists = function (pageName) {
         return this.httpGet("api/exists/" + pageName)
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });

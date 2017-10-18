@@ -53,7 +53,7 @@ var ArchivePageComponent = (function (_super) {
         var _this = this;
         var self = this;
         var returnGuy = this.pagesService
-            .createPage(this.page.name, self.content);
+            .restorePage(this.page.id);
         returnGuy.subscribe(function (success) {
             if (success) {
                 self.actualRouter.navigate(['page/' + _this.page.name]);

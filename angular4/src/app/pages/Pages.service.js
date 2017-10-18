@@ -46,6 +46,10 @@ var PagesService = (function () {
         return this.backendService.deletePage(pageName)
             .map(function (statusPayload) { return statusPayload.succeded; });
     };
+    PagesService.prototype.restorePage = function (pageId) {
+        return this.backendService.deletePage(pageId)
+            .map(function (statusPayload) { return statusPayload.succeded; });
+    };
     PagesService.prototype.freshPage = function () {
         return Observable_1.Observable.of(new Page_model_1.Page({
             markdown: "# A new page\n" +
