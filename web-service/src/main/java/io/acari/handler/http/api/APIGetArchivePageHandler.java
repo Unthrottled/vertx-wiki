@@ -14,14 +14,14 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIArchivePageHandler implements Handler<RoutingContext>, Configurable<Config, APIArchivePageHandler> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(APIArchivePageHandler.class);
+public class APIGetArchivePageHandler implements Handler<RoutingContext>, Configurable<Config, APIGetArchivePageHandler> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(APIGetArchivePageHandler.class);
     private final Vertx vertx;
     private Config config;
 
 
     @Inject
-    public APIArchivePageHandler(Vertx vertx) {
+    public APIGetArchivePageHandler(Vertx vertx) {
         this.vertx = vertx;
     }
 
@@ -64,7 +64,7 @@ public class APIArchivePageHandler implements Handler<RoutingContext>, Configura
     }
 
     @Override
-    public APIArchivePageHandler applyConfiguration(Config config) {
+    public APIGetArchivePageHandler applyConfiguration(Config config) {
         this.config = config;
         return this;
     }
