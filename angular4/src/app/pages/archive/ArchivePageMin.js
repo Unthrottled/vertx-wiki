@@ -15,7 +15,7 @@ var ArchivePageMin = (function (_super) {
     __extends(ArchivePageMin, _super);
     function ArchivePageMin(pageMin) {
         var _this = _super.call(this, pageMin.name) || this;
-        _this._id = pageMin.id;
+        _this._id = pageMin._id;
         return _this;
     }
     Object.defineProperty(ArchivePageMin.prototype, "id", {

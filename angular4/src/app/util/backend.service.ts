@@ -40,7 +40,7 @@ export class BackendService {
   }
 
   fetchArchivedPage(pageId: String): Observable<FullPagePayload> {
-    return this.httpPost("api/archive", {id: pageId})
+    return this.httpPost("api/archive", {_id: pageId})
       .map((response: Response) => new FullPagePayload(response.json()));
   }
 

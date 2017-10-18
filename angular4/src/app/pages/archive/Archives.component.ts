@@ -27,12 +27,12 @@ export class ArchivesComponent implements OnInit {
         });
     }
 
-    reRoute(pageArchive: ArchivePageMin): void {
-        this.router.navigate(['/archive/' + pageArchive.id]);
+    reRoute(pageArchiveId: String): void {
+        this.router.navigate(['/archive/' + pageArchiveId]);
     }
 
-    reRouteMain(pageArchive: ArchivePageMin): void {
-        this.router.navigate(['/archive/' + pageArchive.id]);
+    reRouteMain(pageNumber: Number): void {
+        this.router.navigate(['/archives/' + pageNumber]);
     }
 
     hasPages(): boolean {

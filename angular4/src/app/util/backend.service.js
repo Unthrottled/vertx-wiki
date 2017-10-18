@@ -40,7 +40,7 @@ var BackendService = (function () {
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.fetchArchivedPage = function (pageId) {
-        return this.httpPost("api/archive", { id: pageId })
+        return this.httpPost("api/archive", { _id: pageId })
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.deletePage = function (pageName) {

@@ -29,11 +29,11 @@ var ArchivesComponent = (function () {
             _this.metaData = data.pages.metadata;
         });
     };
-    ArchivesComponent.prototype.reRoute = function (pageArchive) {
-        this.router.navigate(['/archive/' + pageArchive.id]);
+    ArchivesComponent.prototype.reRoute = function (pageArchiveId) {
+        this.router.navigate(['/archive/' + pageArchiveId]);
     };
-    ArchivesComponent.prototype.reRouteMain = function (pageArchive) {
-        this.router.navigate(['/archive/' + pageArchive.id]);
+    ArchivesComponent.prototype.reRouteMain = function (pageNumber) {
+        this.router.navigate(['/archives/' + pageNumber]);
     };
     ArchivesComponent.prototype.hasPages = function () {
         return this.pages.length > 0;

@@ -28,13 +28,15 @@ require("./archived-page.htm");
 var Pages_service_1 = require("../Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var BasePage_component_1 = require("../BasePage.component");
+var auth_service_1 = require("../../auth/auth.service");
 var ArchivePageComponent = (function (_super) {
     __extends(ArchivePageComponent, _super);
-    function ArchivePageComponent(router, pagesService, notificationService, actualRouter) {
+    function ArchivePageComponent(router, pagesService, notificationService, authService, actualRouter) {
         var _this = _super.call(this, router) || this;
         _this.router = router;
         _this.pagesService = pagesService;
         _this.notificationService = notificationService;
+        _this.authService = authService;
         _this.actualRouter = actualRouter;
         _this.editOptions = {
             hideDelete: false
@@ -45,6 +47,7 @@ var ArchivePageComponent = (function (_super) {
         var _this = this;
         this.router.data.subscribe(function (data) {
             _this.load(data.pages);
+            console.log(data.pages);
         });
     };
     ArchivePageComponent.prototype.save = function () {
@@ -67,6 +70,11 @@ var ArchivePageComponent = (function (_super) {
         }, function (error) { return self.failure(); });
         return returnGuy;
     };
+    ArchivePageComponent.prototype.reset = function () {
+    };
+    ArchivePageComponent.prototype.canCreate = function () {
+        return this.authService.canCreate();
+    };
     ArchivePageComponent.prototype.failure = function () {
         this.notificationService.error('Page NOT Restored!', ':( Try again.', {
             timeOut: 3000,
@@ -74,7 +82,6 @@ var ArchivePageComponent = (function (_super) {
             clickToClose: true
         });
     };
-    ArchivePageComponent.prototype.reset = function () { };
     return ArchivePageComponent;
 }(BasePage_component_1.BasePageComponent));
 ArchivePageComponent = __decorate([
@@ -85,6 +92,7 @@ ArchivePageComponent = __decorate([
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         Pages_service_1.PagesService,
         angular2_notifications_1.NotificationsService,
+        auth_service_1.AuthService,
         router_1.Router])
 ], ArchivePageComponent);
 exports.ArchivePageComponent = ArchivePageComponent;
