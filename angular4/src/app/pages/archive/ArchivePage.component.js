@@ -56,12 +56,7 @@ var ArchivePageComponent = (function (_super) {
             .createPage(this.page.name, self.content);
         returnGuy.subscribe(function (success) {
             if (success) {
-                _this.notificationService.success('Page R-R-Restored!', ':)', {
-                    timeOut: 3000,
-                    showProgressBar: true,
-                    clickToClose: true
-                });
-                self.reset();
+                self.actualRouter.navigate(['page/' + _this.page.name]);
             }
             else {
                 self.failure('): try again.');

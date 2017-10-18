@@ -40,12 +40,9 @@ export class ArchivePageComponent extends BasePageComponent {
             .createPage(this.page.name, self.content);
         returnGuy.subscribe((success: boolean) => {
             if (success) {
-                this.notificationService.success('Page R-R-Restored!', ':)', {
-                    timeOut: 3000,
-                    showProgressBar: true,
-                    clickToClose: true
-                });
-                self.reset();
+                self.actualRouter.navigate(
+                    ['page/'+ this.page.name]
+                )
             } else {
                 self.failure('): try again.')
             }
