@@ -9,7 +9,6 @@ import io.vertx.ext.mongo.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -36,22 +35,23 @@ public class BasePageHandler implements Handler<Message<JsonObject>> {
     ChainableOptional.ofNullable(idFunct.apply(message.body()))
         .ifPresent(id -> mongoClient.find(collection, queryFunction.apply(id),
             asyncResultHandler -> ChainableOptional.of(asyncResultHandler)
-                    .filter(AsyncResult::succeeded)
-                    .map(AsyncResult::result)
-                    .filter(Objects::nonNull)
-                    .map(result -> result
-                            .stream()
-                            .findFirst()
-                            .map(jsonArray -> new JsonObject()
-                                    .put("lastModified", jsonArray.getJsonObject("lastModified"))
-                                    .put("content", jsonArray.getString("content"))
-                                    .put("name", jsonArray.getString("name")))
-                            .orElse(null))
-                    .filter(Objects::nonNull)
-                    .ifPresent(message::reply)
-                    .orElseDo(()->{
-                      ChainableOptional.ofNullable(asyncResultHandler.cause()).ifPresent(throwable -> LOGGER.warn("Aww snape!", throwable));
-                      message.fail(404, "This is no the page you are looking for");
-                    }))).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
+                .filter(AsyncResult::succeeded)
+                .map(AsyncResult::result)
+                .filter(Objects::nonNull)
+                .map(result -> result
+                    .stream()
+                    .findFirst()
+                    .map(jsonArray -> new JsonObject()
+                        .put("lastModified", jsonArray.getJsonObject("lastModified"))
+                        .put("content", jsonArray.getString("content"))
+                        .put("name", jsonArray.getString("name"))
+                        .put("_id", jsonArray.getString("_id")))
+                    .orElse(null))
+                .filter(Objects::nonNull)
+                .ifPresent(message::reply)
+                .orElseDo(() -> {
+                  ChainableOptional.ofNullable(asyncResultHandler.cause()).ifPresent(throwable -> LOGGER.warn("Aww snape!", throwable));
+                  message.fail(404, "This is no the page you are looking for");
+                }))).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
   }
 }
