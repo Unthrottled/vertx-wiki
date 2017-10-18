@@ -49,6 +49,11 @@ export class BackendService {
       .map((response: Response) => new StatusPayload(response.json()));
   }
 
+  restoreArchive(pageId: String): Observable<StatusPayload> {
+    return this.httpPut("api/archive/restore/" + pageId,{})
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
   pageExists(pageName: String): Observable<ExistsPayload> {
     return this.httpGet("api/exists/" + pageName)
       .map((response: Response) => new ExistsPayload(response.json()));
