@@ -7,13 +7,14 @@ import "./archive.list.htm";
 import {PageMetaData} from "../metadata.model";
 import {ArchivePageMin} from "./ArchivePageMin";
 import {ArchivesPayload} from "./ArchivesPayload.model";
+import {Pair} from "../hex/Pair.model";
 
 @Component({
     selector: 'pages-list-archive',
     templateUrl: './templates/archive.list.htm'
 })
 export class ArchivesComponent implements OnInit {
-    pages: ArchivePageMin[] = [];
+    pages: Pair<String, String>[] = [];
     metaData: PageMetaData;
 
     constructor(private activatedRoute: ActivatedRoute, private router: Router) {
@@ -21,7 +22,7 @@ export class ArchivesComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe((data: { pages: ArchivesPayload }) => {
-            this.pages = data.pages.pages;
+            this.pages = data.pages.pages.map(pageMin => new Pair<String, String>(pageMin.name, pageMin.id));
             this.metaData = data.pages.metadata;
         });
     }

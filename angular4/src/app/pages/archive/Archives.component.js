@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./archive.list.htm");
+var Pair_model_1 = require("../hex/Pair.model");
 var ArchivesComponent = (function () {
     function ArchivesComponent(activatedRoute, router) {
         this.activatedRoute = activatedRoute;
@@ -24,7 +25,7 @@ var ArchivesComponent = (function () {
     ArchivesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.data.subscribe(function (data) {
-            _this.pages = data.pages.pages;
+            _this.pages = data.pages.pages.map(function (pageMin) { return new Pair_model_1.Pair(pageMin.name, pageMin.id); });
             _this.metaData = data.pages.metadata;
         });
     };

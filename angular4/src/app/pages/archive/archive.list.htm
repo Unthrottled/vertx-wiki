@@ -9,7 +9,7 @@
           </main>
           <div *ngIf="hasPages()">
             <div>
-            <hex-list [pages]="pages" (onClick)="reRoute($event)"></hex-list>
+            <hex-list [keyValues]="pages" (onClick)="reRoute($event)"></hex-list>
             <div class="paginator-container">
                 <paginator
                         [currentPageNumber]="metaData.currentPageNumber"
