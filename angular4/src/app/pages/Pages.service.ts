@@ -51,6 +51,11 @@ export class PagesService {
       .map((statusPayload: StatusPayload) => statusPayload.succeded);
   }
 
+  restorePage(pageId: String): Observable<boolean> {
+    return this.backendService.deletePage(pageId)
+      .map((statusPayload: StatusPayload) => statusPayload.succeded);
+  }
+
   freshPage(): Observable<Page> {
     return Observable.of(new Page(
       {
