@@ -22,6 +22,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private final UserUpdateHandler userUpdateHandler;
   private final AllArchiveHandler allArchiveHandler;
   private final ArchivePageHandler archivePageHandler;
+  private final ArchiveRestorationHandler archiveRestorationHandler;
 
   public DataMessageConsumer(PageHandler pageHandler,
                              ArchiveHandler archiveHandler,
@@ -33,7 +34,8 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
                              UserExistsHandler userExistsHandler,
                              UserUpdateHandler userUpdateHandler,
                              AllArchiveHandler allArchiveHandler,
-                             ArchivePageHandler archivePageHandler) {
+                             ArchivePageHandler archivePageHandler,
+                             ArchiveRestorationHandler archiveRestorationHandler) {
 
     this.pageHandler = pageHandler;
     this.archiveHandler = archiveHandler;
@@ -46,6 +48,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
     this.userUpdateHandler = userUpdateHandler;
     this.allArchiveHandler = allArchiveHandler;
     this.archivePageHandler = archivePageHandler;
+    this.archiveRestorationHandler = archiveRestorationHandler;
   }
 
   @Override
@@ -90,6 +93,8 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
             archiveHandler.handle(message);
             break;
           case RESTORE_ARCHIVE:
+            archiveRestorationHandler.handle(message);
+            break;
         }
       })
       .orElseDo(() -> {
