@@ -31,7 +31,7 @@ public class HttpVerticle extends AbstractVerticle {
     private final APIPageHandler apiPageHandler;
     private final APICreationHandler apiCreationHandler;
     private final APIUpdateHandler apiUpdateHandler;
-    private final APIArchiveHandler apiArchiveHandler;
+    private final APIPageArchiveHandler apiPageArchiveHandler;
     private final TokenHandler tokenHandler;
     private final APIPageExistsHandler apiPageExistsHandler;
     private final UserExistsHandler userExistsHandler;
@@ -44,7 +44,7 @@ public class HttpVerticle extends AbstractVerticle {
                         APIPageHandler apiPageHandler,
                         APICreationHandler apiCreationHandler,
                         APIUpdateHandler apiUpdateHandler,
-                        APIArchiveHandler apiArchiveHandler,
+                        APIPageArchiveHandler apiPageArchiveHandler,
                         TokenHandler tokenHandler,
                         APIPageExistsHandler apiPageExistsHandler,
                         UserExistsHandler userExistsHandler,
@@ -55,7 +55,7 @@ public class HttpVerticle extends AbstractVerticle {
         this.apiPageHandler = apiPageHandler;
         this.apiCreationHandler = apiCreationHandler;
         this.apiUpdateHandler = apiUpdateHandler;
-        this.apiArchiveHandler = apiArchiveHandler;
+        this.apiPageArchiveHandler = apiPageArchiveHandler;
         this.tokenHandler = tokenHandler;
         this.apiPageExistsHandler = apiPageExistsHandler;
         this.userExistsHandler = userExistsHandler;
@@ -113,7 +113,7 @@ public class HttpVerticle extends AbstractVerticle {
         apiRouter.put("/user").handler(userUpdateHandler.applyConfiguration(config)
                 .applyConfiguration(jwtAuth)
                 .applyConfiguration(mongoAuth));
-        apiRouter.delete("/page/:page").handler(apiArchiveHandler.applyConfiguration(config));
+        apiRouter.delete("/page/:page").handler(apiPageArchiveHandler.applyConfiguration(config));
         router.mountSubRouter("/api", apiRouter);
 
         StaticHandler requestHandler = StaticHandler.create();
