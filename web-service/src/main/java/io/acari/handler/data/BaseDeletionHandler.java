@@ -1,5 +1,7 @@
 package io.acari.handler.data;
 
+import com.mongodb.MongoWriteException;
+import com.mongodb.WriteError;
 import io.acari.util.ChainableOptional;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
@@ -48,8 +50,17 @@ public class BaseDeletionHandler implements Handler<Message<JsonObject>> {
                     LOGGER.warn("Ohh shit", message1);
                     message.fail(500, message1);
                   })), error -> {
-            LOGGER.warn("aww snap", error);
-            message.fail(500, error.getMessage());
+            ChainableOptional.of(error)
+                .filter(e -> e instanceof MongoWriteException)
+                .map(e -> (MongoWriteException) e)
+                .map(MongoWriteException::getError)
+                .map(WriteError::getCode)
+                .filter(code -> code == 11000)
+                .ifPresent(code -> message.fail(400, "Dup Key!"))
+                .orElseDo(() -> {
+                  LOGGER.warn("aww snap", error);
+                  message.fail(500, error.getMessage());
+                });
           });
         })
         .orElseDo(() -> message.fail(400, "No " + identifier + " entered bruv!"));
