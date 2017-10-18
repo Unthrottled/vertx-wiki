@@ -19,8 +19,7 @@ var HexListComponent = (function () {
     function HexListComponent(disElement, ngZone) {
         this.disElement = disElement;
         this.ngZone = ngZone;
-        this._pages = [];
-        this.pagesChange = new core_1.EventEmitter();
+        this._keyValues = [];
         this.onClick = new core_1.EventEmitter();
         var self = this;
         window.onresize = function (e) {
@@ -38,10 +37,10 @@ var HexListComponent = (function () {
         var hexsPerOddRow = this.getHexesPerOddRow();
         var start = 0, end = hexsPerEvenRow;
         var odd = false;
-        var hexs = this.pages.length;
+        var hexs = this.keyValues.length;
         while (hexs >= 0) {
             if (odd = !odd) {
-                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
+                this.hexRows.push(new HexRow_model_1.HexRowModel(this.keyValues.slice(start, end), {
                     even: false
                 }));
                 start = end;
@@ -49,7 +48,7 @@ var HexListComponent = (function () {
                 hexs -= hexsPerOddRow;
             }
             else {
-                this.hexRows.push(new HexRow_model_1.HexRowModel(this.pages.slice(start, end), {
+                this.hexRows.push(new HexRow_model_1.HexRowModel(this.keyValues.slice(start, end), {
                     even: true
                 }));
                 start = end;
@@ -58,12 +57,12 @@ var HexListComponent = (function () {
             }
         }
     };
-    Object.defineProperty(HexListComponent.prototype, "pages", {
+    Object.defineProperty(HexListComponent.prototype, "keyValues", {
         get: function () {
-            return this._pages;
+            return this._keyValues;
         },
         set: function (value) {
-            this._pages = value;
+            this._keyValues = value;
             this.layoutRows();
         },
         enumerable: true,
@@ -117,7 +116,7 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Array),
     __metadata("design:paramtypes", [Array])
-], HexListComponent.prototype, "pages", null);
+], HexListComponent.prototype, "keyValues", null);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object),

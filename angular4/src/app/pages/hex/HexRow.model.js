@@ -4,14 +4,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/27/17.
  */
 var HexRowModel = (function () {
-    function HexRowModel(pages, hexRowInput) {
-        this._pages = [];
-        this._pages = pages;
+    function HexRowModel(keyValues, hexRowInput) {
+        this._keyValues = [];
+        this._keyValues = keyValues;
         this._hexRowInput = hexRowInput;
     }
-    Object.defineProperty(HexRowModel.prototype, "pages", {
+    Object.defineProperty(HexRowModel.prototype, "keyValues", {
         get: function () {
-            return this._pages;
+            return this._keyValues;
         },
         enumerable: true,
         configurable: true

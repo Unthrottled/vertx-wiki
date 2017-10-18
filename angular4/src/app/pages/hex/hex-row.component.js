@@ -16,17 +16,17 @@ var core_1 = require("@angular/core");
 require("./hex-row.htm");
 var HexRowComponent = HexRowComponent_1 = (function () {
     function HexRowComponent() {
-        this._pages = [];
+        this._keyValues = [];
         this._hexWidth = 104;
         this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
         this.onClick = new core_1.EventEmitter();
     }
-    Object.defineProperty(HexRowComponent.prototype, "pages", {
+    Object.defineProperty(HexRowComponent.prototype, "keyValues", {
         get: function () {
-            return this._pages;
+            return this._keyValues;
         },
         set: function (value) {
-            this._pages = value;
+            this._keyValues = value;
         },
         enumerable: true,
         configurable: true
@@ -82,7 +82,7 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Array),
     __metadata("design:paramtypes", [Array])
-], HexRowComponent.prototype, "pages", null);
+], HexRowComponent.prototype, "keyValues", null);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object),
