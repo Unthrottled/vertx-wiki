@@ -12,13 +12,13 @@ import io.vertx.ext.web.RoutingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class APIDeletionHandler implements Handler<RoutingContext>, Configurable<Config, APIDeletionHandler> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(APIDeletionHandler.class);
+public class APIArchiveHandler implements Handler<RoutingContext>, Configurable<Config, APIArchiveHandler> {
+  private static final Logger LOGGER = LoggerFactory.getLogger(APIArchiveHandler.class);
   private final Vertx vertx;
   private SimpleResponseHandler simpleResponseHandler;
 
   @Inject
-  public APIDeletionHandler(Vertx vertx) {
+  public APIArchiveHandler(Vertx vertx) {
     this.vertx = vertx;
   }
 
@@ -27,7 +27,7 @@ public class APIDeletionHandler implements Handler<RoutingContext>, Configurable
       .filter(b -> b)
       .ifPresent(canDelete -> ChainableOptional.ofNullable(routingContext.pathParam("page"))
         .ifPresent(name -> {
-          DeliveryOptions deliveryOptions = Config.createDeliveryOptions("delete-page");
+          DeliveryOptions deliveryOptions = Config.createDeliveryOptions("archive-page");
           JsonObject params = new JsonObject()
             .put("name", name);
           simpleResponseHandler.handle(routingContext, params, deliveryOptions);
@@ -45,7 +45,7 @@ public class APIDeletionHandler implements Handler<RoutingContext>, Configurable
   }
 
   @Override
-  public APIDeletionHandler applyConfiguration(Config config) {
+  public APIArchiveHandler applyConfiguration(Config config) {
     this.simpleResponseHandler = new SimpleResponseHandler(config, vertx);
     return this;
   }

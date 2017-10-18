@@ -16,7 +16,8 @@ public enum Action {
   USER_UPDATE("user-update"),
   CREATE_PAGE("create-page"),
   SAVE_PAGE("save-page"),
-  DELETE_PAGE("delete-page"),
+  ARCHIVE_PAGE("archive-page"),
+  RESTORE_ARCHIVE("restore-page"),
   UNKNOWN("WE-AINT-FOUND-SHIT");
 
   private static Map<String, Action> ref;
