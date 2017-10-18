@@ -52,7 +52,7 @@ export class PagesService {
   }
 
   restorePage(pageId: String): Observable<boolean> {
-    return this.backendService.deletePage(pageId)
+    return this.backendService.restoreArchive(pageId)
       .map((statusPayload: StatusPayload) => statusPayload.succeded);
   }
 

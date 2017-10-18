@@ -47,7 +47,7 @@ var PagesService = (function () {
             .map(function (statusPayload) { return statusPayload.succeded; });
     };
     PagesService.prototype.restorePage = function (pageId) {
-        return this.backendService.deletePage(pageId)
+        return this.backendService.restoreArchive(pageId)
             .map(function (statusPayload) { return statusPayload.succeded; });
     };
     PagesService.prototype.freshPage = function () {

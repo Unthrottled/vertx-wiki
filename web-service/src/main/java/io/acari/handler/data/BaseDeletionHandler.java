@@ -30,8 +30,8 @@ public class BaseDeletionHandler implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     ChainableOptional.ofNullable(message.body().getString(identifier))
-        .ifPresent(name -> {
-          JsonObject query = new JsonObject().put(identifier, name);
+        .ifPresent(identifier -> {
+          JsonObject query = new JsonObject().put(this.identifier, identifier);
           ObservableFuture<JsonObject> jsonObjectObservableFuture = RxHelper.observableFuture();
           mongoClient.findOne(collectionToRemoveFrom, query, new JsonObject(), jsonObjectObservableFuture.toHandler());
           jsonObjectObservableFuture.flatMap(page -> {

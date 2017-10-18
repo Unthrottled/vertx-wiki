@@ -1,6 +1,5 @@
 package io.acari.handler.http.api;
 
-import com.google.inject.Inject;
 import io.acari.handler.Config;
 import io.acari.handler.Configurable;
 import io.acari.util.ChainableOptional;
@@ -15,12 +14,11 @@ import org.slf4j.LoggerFactory;
 public class APIBaseArchiveHandler implements Handler<RoutingContext>, Configurable<Config, APIBaseArchiveHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(APIBaseArchiveHandler.class);
   private final Vertx vertx;
-  private SimpleResponseHandler simpleResponseHandler;
   private final String permission;
   private final String deliveryOption;
   private final String identifier;
+  private SimpleResponseHandler simpleResponseHandler;
 
-  @Inject
   public APIBaseArchiveHandler(Vertx vertx, String permission, String deliveryOption, String identifier) {
     this.vertx = vertx;
     this.permission = permission;
@@ -30,24 +28,24 @@ public class APIBaseArchiveHandler implements Handler<RoutingContext>, Configura
 
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.user().principal().getBoolean(permission, false))
-      .filter(b -> b)
-      .ifPresent(canDelete -> ChainableOptional.ofNullable(routingContext.pathParam("page"))
-        .ifPresent(name -> {
-          DeliveryOptions deliveryOptions = Config.createDeliveryOptions(deliveryOption);
-          JsonObject params = new JsonObject()
-            .put(identifier, name);
-          simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-        }).orElseDo(() -> fourHundred(routingContext, identifier)))
-      .orElseDo(() -> routingContext
-        .response()
-        .setStatusCode(401)
-        .end());
+        .filter(b -> b)
+        .ifPresent(canDelete -> ChainableOptional.ofNullable(routingContext.pathParam("page"))
+            .ifPresent(name -> {
+              DeliveryOptions deliveryOptions = Config.createDeliveryOptions(deliveryOption);
+              JsonObject params = new JsonObject()
+                  .put(identifier, name);
+              simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+            }).orElseDo(() -> fourHundred(routingContext, identifier)))
+        .orElseDo(() -> routingContext
+            .response()
+            .setStatusCode(401)
+            .end());
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
-      .setStatusCode(400)
-      .end("No " + name + " Provided, bruv.");
+        .setStatusCode(400)
+        .end("No " + name + " Provided, bruv.");
   }
 
   @Override
