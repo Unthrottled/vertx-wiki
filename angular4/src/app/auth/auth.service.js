@@ -48,6 +48,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.logout = function () {
         this.isLoggedIn = false;
+        this.userToken.newUserPrincipal({ principal: {} });
         return new Promise(function (res) { return res(true); });
     };
     Object.defineProperty(AuthService.prototype, "isLoggedIn", {
