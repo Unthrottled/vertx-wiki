@@ -65,4 +65,12 @@ export class AuthService {
     canCreate(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'create');
     }
+
+    canDelete(): Observable<boolean> {
+        return Permissions.canActivate(this.userToken, 'delete');
+    }
+
+    canUpdate(): Observable<boolean> {
+        return Permissions.canActivate(this.userToken, 'update');
+    }
 }
