@@ -28,6 +28,16 @@ var RegisterComponent = (function () {
         this.model = {};
         this.role = 'reader';
     }
+    Object.defineProperty(RegisterComponent.prototype, "validName", {
+        get: function () {
+            return this._validName;
+        },
+        set: function (value) {
+            this._validName = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     RegisterComponent.prototype.getUser = function () {
         return new user_model_1.User(this.model.username, this.model.password);
     };
@@ -68,25 +78,18 @@ var RegisterComponent = (function () {
             }));
         }
     };
-    RegisterComponent.prototype.failure = function () {
-        this.notifService.error("Unable to create user!", "Please try another username.", { timeOut: 3000 });
-    };
     RegisterComponent.prototype.ngOnInit = function () {
         this.authService.logout();
     };
     RegisterComponent.prototype.logout = function () {
         this.authService.logout();
     };
-    Object.defineProperty(RegisterComponent.prototype, "validName", {
-        get: function () {
-            return this._validName;
-        },
-        set: function (value) {
-            this._validName = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    RegisterComponent.prototype.setUsername = function (newUsername) {
+        this.model.username = newUsername;
+    };
+    RegisterComponent.prototype.failure = function () {
+        this.notifService.error("Unable to create user!", "Please try another username.", { timeOut: 3000 });
+    };
     return RegisterComponent;
 }());
 RegisterComponent = __decorate([
