@@ -10,8 +10,8 @@ ENV GRADLE_USER_HOME=/opt/gradle/.gradle
 ADD ./build.gradle ./
 ADD ./grade.properties ./
 ADD ./settings.gradle ./
-RUN gradle --refresh-dependencies dependencies
-
+#RUN gradle --refresh-dependencies dependencies
+#TODO ACTUALLY MAKE CACHE WORK
 
 #Add rest of source code :)
 ADD . .
