@@ -5,7 +5,6 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import "./archive.list.htm";
 import {PageMetaData} from "../metadata.model";
-import {ArchivePageMin} from "./ArchivePageMin";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 import {Pair} from "../hex/Pair.model";
 
