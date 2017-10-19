@@ -33,4 +33,15 @@ export class BaseComponent {
     return this.authService.canCreate();
   }
 
+  get cantDelete(): Observable<boolean> {
+    return this.authService.cantDelete();
+  }
+
+  get cantUpdate(): Observable<boolean> {
+    return this.authService.cantUpdate();
+  }
+
+  get cantCreate(): Observable<boolean> {
+    return this.authService.cantCreate();
+  }
 }

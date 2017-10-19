@@ -68,6 +68,24 @@ var AuthService = (function () {
     AuthService.prototype.canCreate = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'create');
     };
+    AuthService.prototype.cantCreate = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'create')
+            .map(function (b) { return !b; });
+    };
+    AuthService.prototype.canDelete = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'delete');
+    };
+    AuthService.prototype.cantDelete = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'delete')
+            .map(function (b) { return !b; });
+    };
+    AuthService.prototype.canUpdate = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'update');
+    };
+    AuthService.prototype.cantUpdate = function () {
+        return Permissions_component_1.Permissions.canActivate(this.userToken, 'update')
+            .map(function (b) { return !b; });
+    };
     return AuthService;
 }());
 AuthService = __decorate([

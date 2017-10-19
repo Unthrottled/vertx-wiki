@@ -15,13 +15,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./base.component.htm");
 var UserPrincipal_model_1 = require("./auth/UserPrincipal.model");
+var auth_service_1 = require("./auth/auth.service");
 var BaseComponent = (function () {
-    function BaseComponent(userPrince) {
+    function BaseComponent(userPrince, authService) {
         this.userPrince = userPrince;
+        this.authService = authService;
     }
     Object.defineProperty(BaseComponent.prototype, "userName", {
         get: function () {
             return this.userPrince.username;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "canDelete", {
+        get: function () {
+            return this.authService.canDelete();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "canUpdate", {
+        get: function () {
+            return this.authService.canUpdate();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "canCreate", {
+        get: function () {
+            return this.authService.canCreate();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "cantDelete", {
+        get: function () {
+            return this.authService.cantDelete();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "cantUpdate", {
+        get: function () {
+            return this.authService.cantUpdate();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BaseComponent.prototype, "cantCreate", {
+        get: function () {
+            return this.authService.cantCreate();
         },
         enumerable: true,
         configurable: true
@@ -33,7 +77,7 @@ BaseComponent = __decorate([
         selector: 'base-view',
         templateUrl: './templates/base.component.htm'
     }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService])
 ], BaseComponent);
 exports.BaseComponent = BaseComponent;
 //# sourceMappingURL=base.component.js.map
