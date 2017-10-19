@@ -7,7 +7,7 @@
         <h2 class="form-signin-heading">Please fill out the forms!</h2>
         <label for="username" class="sr-only">Username</label>
         <user-name-creation (onValidate)="userNameValidationChange($event)"
-                        (onChange)="model.username = $event"
+                        (onChange)="setUsername($event)"
                         [content]="model.username"></user-name-creation>
         <div *ngIf="f.submitted && !validName"
              class="help-block">Username is required

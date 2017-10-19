@@ -8,7 +8,7 @@ export class Page {
   private _markdown: string;
 
   constructor(pageFull: any) {
-    this._id = pageFull.id;
+    this._id = pageFull._id;
     this._name = pageFull.name;
     this._markdown = pageFull.markdown;
   }

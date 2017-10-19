@@ -16,6 +16,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./pages.list.htm");
 var auth_service_1 = require("../auth/auth.service");
+var Pair_model_1 = require("./hex/Pair.model");
 var PagesComponent = (function () {
     function PagesComponent(router, realRouter, authService) {
         this.router = router;
@@ -26,7 +27,7 @@ var PagesComponent = (function () {
     PagesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.router.data.subscribe(function (data) {
-            _this.pages = data.pages.pages;
+            _this.pages = data.pages.pages.map(function (pageMin) { return new Pair_model_1.Pair(pageMin.name, pageMin.name); });
             _this.metaData = data.pages.metadata;
         });
     };

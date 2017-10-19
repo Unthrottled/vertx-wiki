@@ -4,14 +4,14 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 import "./hex-row.htm";
-import {PageMin} from "../Page.min.model";
 import {HexRowInput} from "./Hex-Row.input";
+import {Pair} from "./Pair.model";
 @Component({
   selector: 'hex-row',
   templateUrl: './templates/hex-row.htm'
 })
 export class HexRowComponent {
-  private _pages: PageMin[] = [];
+  private _keyValues: Pair<String, any>[] = [];
   private _config: HexRowInput;
 
   private static goldenRatio: number = 0.576923077;
@@ -26,12 +26,12 @@ export class HexRowComponent {
 
 
   @Input()
-  get pages(): PageMin[] {
-    return this._pages;
+  get keyValues(): Pair<String, any>[] {
+    return this._keyValues;
   }
 
-  set pages(value: PageMin[]) {
-    this._pages = value;
+  set keyValues(value: Pair<String, any>[]) {
+    this._keyValues = value;
   }
 
   @Input()

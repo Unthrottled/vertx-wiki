@@ -26,7 +26,7 @@ var LogoutComponent = (function () {
     LogoutComponent.prototype.logout = function () {
         var self = this;
         this.authService.logout()
-            .then(function (success) { return self.router.navigate(['/login']); });
+            .subscribe(function (success) { return self.router.navigate(['/login']); });
     };
     return LogoutComponent;
 }());

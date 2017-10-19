@@ -1,44 +1,59 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import "./hex.htm";
+
 @Component({
-  selector: 'hex',
-  templateUrl: './templates/hex.htm'
+    selector: 'hex',
+    templateUrl: './templates/hex.htm'
 })
 export class HexComponent {
-  private _width: number;
-  private _height: number;
-  private _name: number;
-  @Output()
-  private onClick = new EventEmitter();
+    @Output()
+    private onClick = new EventEmitter();
 
-  @Input()
-  get width(): number {
-    return this._width;
-  }
+    private _width: number;
 
-  set width(value: number) {
-    this._width = value;
-  }
+    @Input()
+    get width(): number {
+        return this._width;
+    }
 
-  @Input()
-  get height(): number {
-    return this._height;
-  }
+    set width(value: number) {
+        this._width = value;
+    }
 
-  set height(value: number) {
-    this._height = value;
-  }
+    private _height: number;
 
-  @Input()
-  get name(): number {
-    return this._name;
-  }
+    @Input()
+    get height(): number {
+        return this._height;
+    }
 
-  set name(value: number) {
-    this._name = value;
-  }
+    set height(value: number) {
+        this._height = value;
+    }
 
-  clicked(name: string): void {
-    this.onClick.emit(name);
-  }
+    private _name: String;
+
+    @Input()
+    get name(): String {
+        return this._name;
+    }
+
+    set name(value: String) {
+        this._name = value;
+    }
+
+    private _value: any;
+
+    @Input()
+    get value(): any {
+        return this._value;
+    }
+
+    set value(value: any) {
+        this._value = value;
+    }
+
+    clicked(name: string): void {
+        this.onClick.emit(name);
+    }
 }
