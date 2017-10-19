@@ -16,10 +16,12 @@ var core_1 = require("@angular/core");
 require("./base.component.htm");
 var UserPrincipal_model_1 = require("./auth/UserPrincipal.model");
 var auth_service_1 = require("./auth/auth.service");
+var router_1 = require("@angular/router");
 var BaseComponent = (function () {
-    function BaseComponent(userPrince, authService) {
+    function BaseComponent(userPrince, authService, activatedRoute) {
         this.userPrince = userPrince;
         this.authService = authService;
+        this.activatedRoute = activatedRoute;
     }
     Object.defineProperty(BaseComponent.prototype, "userName", {
         get: function () {
@@ -70,6 +72,13 @@ var BaseComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    BaseComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) { return _this.pageNumber = params['pageNumber']; });
+    };
+    BaseComponent.prototype.firstPage = function () {
+        return this.pageNumber.localeCompare("1") == 0;
+    };
     return BaseComponent;
 }());
 BaseComponent = __decorate([
@@ -77,7 +86,7 @@ BaseComponent = __decorate([
         selector: 'base-view',
         templateUrl: './templates/base.component.htm'
     }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService])
+    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService, router_1.ActivatedRoute])
 ], BaseComponent);
 exports.BaseComponent = BaseComponent;
 //# sourceMappingURL=base.component.js.map

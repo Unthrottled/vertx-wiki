@@ -4,32 +4,34 @@
           <main role="main" class="container">
             <div class="jumbotron">
               <h1>Wiki Pages</h1>
-              <p class="lead">Hey {{userName}}! Good news, if you are reading this then you have the proper permissions to view/read pages on this site!</p>
-              <div>
-                <p *ngIf="canCreate | async">
-                  You are also an esteemed writer who has the powers to forge interesting wiki pages from the hot fires of Valhalla.
-                </p>
-                <p *ngIf="cantCreate | async">
-                  While you cannot create any pages.
-                  You have the ability to enjoy all of the wiki pages that our writers have forged from the burning fires of Valhalla.
-                </p>
-                <p *ngIf="canUpdate | async">
-                  You may also choose to go back and fully modify a page you and fellow writers have created.
-                  May pages never wear to a dull boring edge.
-                </p>
-                <p *ngIf="cantUpdate | async">
-                  Once the steel, to which a page is created, it lie there, until a craftsman above your currnt skills, may place it back into the forge.
-                  To which it may be modified again.
-                </p>
-                <p *ngIf="canDelete | async">
-                  Lastly, here you are, the mighty "Archiver." Wielding the power to cast created pages down, into the archive.
-                  Where they may wait patiently and forever, until you deem they may one day see the light of mainstream.
-                </p>
-                <p *ngIf="cantDelete | async">
-                  The page keepers of this site have the ability to cast created pages into the archive.
-                  Where the pages may lie outside of the realm of active pages.
-                  Hoping one day they may be restored.
-                </p>
+              <div *ngIf="firstPage()">
+                <p class="lead">Hey {{userName}}! Good news, if you are reading this then you have the proper permissions to view/read pages on this site!</p>
+                <div>
+                  <p *ngIf="canCreate | async">
+                    You are also an esteemed writer who has the powers to forge interesting wiki pages from the hot fires of Valhalla.
+                  </p>
+                  <p *ngIf="cantCreate | async">
+                    While you cannot create any pages.
+                    You have the ability to enjoy all of the wiki pages that our writers have forged from the burning fires of Valhalla.
+                  </p>
+                  <p *ngIf="canUpdate | async">
+                    You may also choose to go back and fully modify a page you and fellow writers have created.
+                    May pages never wear to a dull boring edge.
+                  </p>
+                  <p *ngIf="cantUpdate | async">
+                    Once the steel, to which a page is created, it lie there, until a craftsman above your currnt skills, may place it back into the forge.
+                    To which it may be modified again.
+                  </p>
+                  <p *ngIf="canDelete | async">
+                    Lastly, here you are, the mighty "Archiver." Wielding the power to cast created pages down, into the archive.
+                    Where they may wait patiently and forever, until you deem they may one day see the light of mainstream.
+                  </p>
+                  <p *ngIf="cantDelete | async">
+                    The page keepers of this site have the ability to cast created pages into the archive.
+                    Where the pages may lie outside of the realm of active pages.
+                    Hoping one day they may be restored.
+                  </p>
+                </div>
               </div>
             </div>
           </main>
