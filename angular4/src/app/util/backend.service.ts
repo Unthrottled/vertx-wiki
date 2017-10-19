@@ -55,7 +55,7 @@ export class BackendService {
   }
 
   logoutUser(): Observable<StatusPayload> {
-    return this.httpPut("user/logout",{})
+    return this.httpPost("user/logout",{})
       .map((response: Response) => new StatusPayload(response.json()));
   }
 
