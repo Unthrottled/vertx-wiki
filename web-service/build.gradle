@@ -9,7 +9,7 @@ apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 
-version = '0.0.1'
+version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
@@ -25,7 +25,8 @@ repositories {
 mainClassName = 'io.acari.VertxLauncher'
 
 shadowJar {
-  classifier = 'fat'
+  baseName = "wiki"
+  archiveName ="${baseName}-${version}.${extension}"
   mergeServiceFiles {
     include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
   }

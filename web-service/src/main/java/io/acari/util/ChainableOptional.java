@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unchecked")
 public class ChainableOptional<T> {
   private static final ChainableOptional<?> EMPTY = new ChainableOptional();
 
@@ -24,7 +25,6 @@ public class ChainableOptional<T> {
     ChainableOptional var0 = EMPTY;
     return var0;
   }
-
 
   public static <T> ChainableOptional<T> of(T var0) {
     return new ChainableOptional(var0);

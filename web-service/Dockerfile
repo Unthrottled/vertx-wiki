@@ -3,17 +3,30 @@ MAINTAINER Alex Simons "alexsimons9999@gmail.com"
 USER root
 WORKDIR /app
 
+RUN mkdir -p /opt/gradle/.gradle
+ENV GRADLE_USER_HOME=/opt/gradle/.gradle
+
 #Cache gradle dependencies, will only run if any of these files changes
 ADD ./build.gradle ./
 ADD ./grade.properties ./
 ADD ./settings.gradle ./
-RUN gradle --refresh-dependencies
+RUN gradle --refresh-dependencies dependencies
 
 
 #Add rest of source code :)
 ADD . .
 
-ENTRYPOINT ["gradle", "clean", "run"]
+RUN gradle clean shadowJar
+
+FROM java:8u111-alpine
+
+WORKDIR /app
+
+COPY --from=packager /app/build/libs /app
+
+ENTRYPOINT ["java", "-jar", "wiki-1.0.0.jar"]
+
+
 
 
 
