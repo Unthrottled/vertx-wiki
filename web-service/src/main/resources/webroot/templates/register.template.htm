@@ -7,7 +7,7 @@
         <h2 class="form-signin-heading">Please fill out the forms!</h2>
         <label for="username" class="sr-only">Username</label>
         <user-name-creation (onValidate)="userNameValidationChange($event)"
-                        (onChange)="model.username = $event"
+                        (onChange)="setUsername($event)"
                         [content]="model.username"></user-name-creation>
         <div *ngIf="f.submitted && !validName"
              class="help-block">Username is required
@@ -26,19 +26,7 @@
         </div>
       </div>
 
-      <div class="nav-pills">
-        <h3>User Role</h3>
-        <label
-          class="role-label"
-          *ngFor="let role of roles">
-          <input type="radio"
-                 name="options"
-                 (click)="model.options = role"
-                 [checked]="role === model.options">
-          {{role}}
-        </label>`
-      </div>
-
+      <roles-input (role)="role = $event"></roles-input>
 
       <button [disabled]="!(f.form.valid || validName)"
               class="btn btn-lg btn-primary btn-block">Register

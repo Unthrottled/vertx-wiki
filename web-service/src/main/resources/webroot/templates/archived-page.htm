@@ -1,0 +1,16 @@
+<div class="content-container">
+  <div class="view-container">
+    <div class="page-content">
+      <h1>{{title}}</h1>
+      <markdown [data]="content">
+      </markdown>
+    </div>
+  </div>
+  <div *ngIf="canCreate() | async" class="create-first">
+    <button class="btn-outline-success btn-lg" (click)="save()">Restore!</button>
+  </div>
+  <small>
+    Last modified by {{page.lastModified.userName}} @ {{page.lastModified.timeStamp}}
+  </small>
+  <simple-notifications></simple-notifications>
+</div>
