@@ -12,7 +12,7 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private static final Logger LOGGER = LoggerFactory.getLogger(DataMessageConsumer.class);
 
   private final PageHandler pageHandler;
-  private final DeletionHandler deletionHandler;
+  private final ArchiveHandler archiveHandler;
   private final SaveHandler saveHandler;
   private final AllPageHandler allPageHandler;
   private final CreationHandler creationHandler;
@@ -20,19 +20,25 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   private final PageExistsHandler pageExistsHandler;
   private final UserExistsHandler userExistsHandler;
   private final UserUpdateHandler userUpdateHandler;
+  private final AllArchiveHandler allArchiveHandler;
+  private final ArchivePageHandler archivePageHandler;
+  private final ArchiveRestorationHandler archiveRestorationHandler;
 
   public DataMessageConsumer(PageHandler pageHandler,
-                             DeletionHandler deletionHandler,
+                             ArchiveHandler archiveHandler,
                              SaveHandler saveHandler,
                              AllPageHandler allPageHandler,
                              CreationHandler creationHandler,
                              AllPageDataHandler allPageDataHandler,
                              PageExistsHandler pageExistsHandler,
                              UserExistsHandler userExistsHandler,
-                             UserUpdateHandler userUpdateHandler) {
+                             UserUpdateHandler userUpdateHandler,
+                             AllArchiveHandler allArchiveHandler,
+                             ArchivePageHandler archivePageHandler,
+                             ArchiveRestorationHandler archiveRestorationHandler) {
 
     this.pageHandler = pageHandler;
-    this.deletionHandler = deletionHandler;
+    this.archiveHandler = archiveHandler;
     this.saveHandler = saveHandler;
     this.allPageHandler = allPageHandler;
     this.creationHandler = creationHandler;
@@ -40,6 +46,9 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
     this.pageExistsHandler = pageExistsHandler;
     this.userExistsHandler = userExistsHandler;
     this.userUpdateHandler = userUpdateHandler;
+    this.allArchiveHandler = allArchiveHandler;
+    this.archivePageHandler = archivePageHandler;
+    this.archiveRestorationHandler = archiveRestorationHandler;
   }
 
   @Override
@@ -53,6 +62,9 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case GET_PAGE:
             pageHandler.handle(message);
             break;
+          case GET_PAGE_ARCHIVE:
+            archivePageHandler.handle(message);
+            break;
           case PAGE_EXISTS:
             pageExistsHandler.handle(message);
             break;
@@ -65,6 +77,9 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case ALL_PAGES:
             allPageHandler.handle(message);
             break;
+          case ALL_PAGES_ARCHIVE:
+            allArchiveHandler.handle(message);
+            break;
           case ALL_PAGES_DATA:
             allPageDataHandler.handle(message);
             break;
@@ -74,8 +89,11 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
           case CREATE_PAGE:
             creationHandler.handle(message);
             break;
-          case DELETE_PAGE:
-            deletionHandler.handle(message);
+          case ARCHIVE_PAGE:
+            archiveHandler.handle(message);
+            break;
+          case RESTORE_ARCHIVE:
+            archiveRestorationHandler.handle(message);
             break;
         }
       })

@@ -4,18 +4,17 @@
 import {Component, ElementRef, EventEmitter, Input, NgZone, Output} from "@angular/core";
 
 import "./hex-list.htm";
-import {PageMin} from "../Page.min.model";
 import {HexRowInput} from "./Hex-Row.input";
 import {HexRowModel} from "./HexRow.model";
+import {Pair} from "./Pair.model";
 @Component({
   selector: 'hex-list',
   templateUrl: './templates/hex-list.htm'
 })
 export class HexListComponent {
   private _hexRows: HexRowModel[];
-  private _pages: PageMin[] = [];
+  private _keyValues: Pair<String, any>[] = [];
   private _config: HexRowInput;
-  private pagesChange = new EventEmitter();
   @Output()
   private onClick = new EventEmitter();
 
@@ -38,17 +37,17 @@ export class HexListComponent {
     let hexsPerOddRow = this.getHexesPerOddRow();
     let start = 0, end = hexsPerEvenRow;
     let odd = false;
-    let hexs = this.pages.length;
+    let hexs = this.keyValues.length;
     while (hexs >= 0) {
       if (odd = !odd) {
-        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
+        this.hexRows.push(new HexRowModel(this.keyValues.slice(start, end), {
           even: false
         }));
         start = end;
         end += hexsPerOddRow;
         hexs -= hexsPerOddRow;
       } else {
-        this.hexRows.push(new HexRowModel(this.pages.slice(start, end), {
+        this.hexRows.push(new HexRowModel(this.keyValues.slice(start, end), {
           even: true
         }));
         start = end;
@@ -60,12 +59,12 @@ export class HexListComponent {
 
 
   @Input()
-  get pages(): PageMin[] {
-    return this._pages;
+  get keyValues(): Pair<String, any>[] {
+    return this._keyValues;
   }
 
-  set pages(value: PageMin[]) {
-    this._pages = value;
+  set keyValues(value: Pair<String, any>[]) {
+    this._keyValues = value;
     this.layoutRows();
   }
 

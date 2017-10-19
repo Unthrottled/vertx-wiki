@@ -45,6 +45,16 @@ var HexComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(HexComponent.prototype, "value", {
+        get: function () {
+            return this._value;
+        },
+        set: function (value) {
+            this._value = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     HexComponent.prototype.clicked = function (name) {
         this.onClick.emit(name);
     };
@@ -66,9 +76,14 @@ __decorate([
 ], HexComponent.prototype, "height", null);
 __decorate([
     core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
 ], HexComponent.prototype, "name", null);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [Object])
+], HexComponent.prototype, "value", null);
 HexComponent = __decorate([
     core_1.Component({
         selector: 'hex',

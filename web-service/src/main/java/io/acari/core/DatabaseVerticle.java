@@ -103,13 +103,16 @@ public class DatabaseVerticle extends AbstractVerticle {
   private DataMessageConsumer getHandler() {
     return new DataMessageConsumer(
         new PageHandler(mongoClient),
-        new DeletionHandler(mongoClient),
+        new ArchiveHandler(mongoClient),
         new SaveHandler(mongoClient),
         new AllPageHandler(mongoClient),
         new CreationHandler(mongoClient),
         new AllPageDataHandler(mongoClient),
         new PageExistsHandler(mongoClient),
         new UserExistsHandler(mongoClient),
-        new UserUpdateHandler(mongoClient));
+        new UserUpdateHandler(mongoClient),
+        new AllArchiveHandler(mongoClient),
+        new ArchivePageHandler(mongoClient),
+        new ArchiveRestorationHandler(mongoClient));
   }
 }

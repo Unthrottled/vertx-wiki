@@ -16,13 +16,25 @@ require("rxjs/add/operator/catch");
 var host_service_1 = require("../session/host.service");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var Permissions_component_1 = require("./Permissions.component");
+var backend_service_1 = require("../util/backend.service");
 var AuthService = (function () {
-    function AuthService(http, hostService, userToken) {
+    function AuthService(http, hostService, userToken, backendService) {
         this.http = http;
         this.hostService = hostService;
         this.userToken = userToken;
+        this.backendService = backendService;
         this._isLoggedIn = false;
     }
+    Object.defineProperty(AuthService.prototype, "isLoggedIn", {
+        get: function () {
+            return this._isLoggedIn;
+        },
+        set: function (val) {
+            this._isLoggedIn = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
     AuthService.prototype.login = function (user) {
         var self = this;
         return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
@@ -47,19 +59,12 @@ var AuthService = (function () {
         });
     };
     AuthService.prototype.logout = function () {
-        this.isLoggedIn = false;
-        return new Promise(function (res) { return res(true); });
+        var _this = this;
+        var observable = this.backendService.logoutUser()
+            .map(function (payload) { return payload.succeded; });
+        observable.subscribe(function (success) { return _this.isLoggedIn = false; });
+        return observable;
     };
-    Object.defineProperty(AuthService.prototype, "isLoggedIn", {
-        get: function () {
-            return this._isLoggedIn;
-        },
-        set: function (val) {
-            this._isLoggedIn = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
     AuthService.prototype.canCreate = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'create');
     };
@@ -67,7 +72,10 @@ var AuthService = (function () {
 }());
 AuthService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, host_service_1.HostService, UserPrincipal_model_1.UserPrincipal])
+    __metadata("design:paramtypes", [http_1.Http,
+        host_service_1.HostService,
+        UserPrincipal_model_1.UserPrincipal,
+        backend_service_1.BackendService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

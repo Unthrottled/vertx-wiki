@@ -22,7 +22,7 @@ export class LogoutComponent implements OnInit {
   logout() {
     let self = this;
     this.authService.logout()
-      .then(success => self.router.navigate(['/login']));
+      .subscribe(success => self.router.navigate(['/login']));
   }
 
 }

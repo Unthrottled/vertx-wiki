@@ -9,12 +9,13 @@ import {PagePayload} from "./PagePayload.model";
 import {PageMetaData} from "./metadata.model";
 import {AuthService} from "../auth/auth.service";
 import {Observable} from "rxjs/Observable";
+import {Pair} from "./hex/Pair.model";
 @Component({
   selector: 'pages-list',
   templateUrl: './templates/pages.list.htm'
 })
 export class PagesComponent implements OnInit {
-  pages: PageMin[] = [];
+  pages: Pair<String, String>[] = [];
   metaData: PageMetaData;
 
   constructor(private router: ActivatedRoute, private realRouter: Router, private authService: AuthService) {
@@ -22,7 +23,7 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.data.subscribe((data: { pages: PagePayload }) => {
-      this.pages = data.pages.pages;
+      this.pages = data.pages.pages.map(pageMin => new Pair<String, String>(pageMin.name, pageMin.name));
       this.metaData = data.pages.metadata;
     });
   }

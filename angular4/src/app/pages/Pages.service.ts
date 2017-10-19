@@ -9,6 +9,7 @@ import {PageFull} from "./Page.full.model";
 import {FullPagePayload} from "./PageFullPayload.model";
 import {StatusPayload} from "./StatusPayload.model";
 import {Page} from "./Page.model";
+import {ArchivesPayload} from "./archive/ArchivesPayload.model";
 
 @Injectable()
 export class PagesService {
@@ -21,8 +22,17 @@ export class PagesService {
     return this.backendService.fetchAllPages(pageNumber);
   }
 
+  fetchAllArchivedPages(pageNumber: number): Observable<ArchivesPayload> {
+    return this.backendService.fetchAllArchives(pageNumber);
+  }
+
   fetchPage(pageName: String): Observable<PageFull> {
     return this.backendService.fetchPage(pageName)
+      .map((pagePayload: FullPagePayload) => pagePayload.page);
+  }
+
+  fetchArchivedPage(pageId: String): Observable<PageFull> {
+    return this.backendService.fetchArchivedPage(pageId)
       .map((pagePayload: FullPagePayload) => pagePayload.page);
   }
 
@@ -38,6 +48,11 @@ export class PagesService {
 
   deletePage(pageName: String): Observable<boolean> {
     return this.backendService.deletePage(pageName)
+      .map((statusPayload: StatusPayload) => statusPayload.succeded);
+  }
+
+  restorePage(pageId: String): Observable<boolean> {
+    return this.backendService.restoreArchive(pageId)
       .map((statusPayload: StatusPayload) => statusPayload.succeded);
   }
 

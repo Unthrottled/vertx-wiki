@@ -9,54 +9,60 @@ import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
 import {NewUser} from "./NewUser.model";
 import {Permissions} from "./Permissions.component";
+import {BackendService} from "../util/backend.service";
 
 @Injectable()
 export class AuthService {
-  private _isLoggedIn = false;
+    constructor(private http: Http,
+                private hostService: HostService,
+                private userToken: UserPrincipal,
+                private backendService: BackendService) {
 
-  constructor(private http: Http, private hostService: HostService, private userToken: UserPrincipal) {
+    }
 
-  }
+    private _isLoggedIn = false;
 
-  login(user: User): Observable<boolean> {
-    let self = this;
-    return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
-      .map((response: Response) => {
-        return response && response.json ?
-          response.json() : ''
-      })
-      .map(json => {
-        self.userToken.newUserPrincipal(json);
-        return self.userToken;
-      })
-      .map((prince: UserPrincipal) => {
-        self.isLoggedIn = true;
-        return self.isLoggedIn;
-      });
-  }
+    get isLoggedIn(): boolean {
+        return this._isLoggedIn;
+    }
 
-  createPrincipal(user: NewUser): Observable<boolean> {
-    let self = this;
-    return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
-      .map((response: Response) => {
-        return true
-      });
-  }
+    set isLoggedIn(val: boolean) {
+        this._isLoggedIn = val;
+    }
 
-  logout(): Promise<boolean> {
-    this.isLoggedIn = false;
-    return new Promise((res) => res(true))
-  }
+    login(user: User): Observable<boolean> {
+        let self = this;
+        return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+            .map((response: Response) => {
+                return response && response.json ?
+                    response.json() : ''
+            })
+            .map(json => {
+                self.userToken.newUserPrincipal(json);
+                return self.userToken;
+            })
+            .map((prince: UserPrincipal) => {
+                self.isLoggedIn = true;
+                return self.isLoggedIn;
+            });
+    }
 
-  set isLoggedIn(val: boolean) {
-    this._isLoggedIn = val;
-  }
+    createPrincipal(user: NewUser): Observable<boolean> {
+        let self = this;
+        return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
+            .map((response: Response) => {
+                return true
+            });
+    }
 
-  get isLoggedIn(): boolean {
-    return this._isLoggedIn;
-  }
+    logout(): Observable<boolean> {
+        let observable = this.backendService.logoutUser()
+            .map(payload => payload.succeded);
+        observable.subscribe(success => this.isLoggedIn = false);
+        return observable;
+    }
 
-  canCreate(): Observable<boolean> {
-    return Permissions.canActivate(this.userToken, 'create');
-  }
+    canCreate(): Observable<boolean> {
+        return Permissions.canActivate(this.userToken, 'create');
+    }
 }

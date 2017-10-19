@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Page = (function () {
     function Page(pageFull) {
-        this._id = pageFull.id;
+        this._id = pageFull._id;
         this._name = pageFull.name;
         this._markdown = pageFull.markdown;
     }

@@ -17,23 +17,24 @@ public class APIPageHandler extends BaseAPIPageHandler {
   @Inject
   public APIPageHandler(Vertx vertx) {
     super(vertx,
-      "get-page",
-      (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
-        JsonObject message = connectionResult.result().body();
-        routingContext.response().setStatusCode(200);
-        String content = message.getString("content");
-        return new JsonObject()
-          .put("success", true)
-          .put("markdown", content)
-          .put("lastModified", getLastModified(message))
-          .put("name", pageName);
-      });
+        "get-page",
+        (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
+          JsonObject message = connectionResult.result().body();
+          routingContext.response().setStatusCode(200);
+          String content = message.getString("content");
+          return new JsonObject()
+              .put("success", true)
+              .put("markdown", content)
+              .put("lastModified", getLastModified(message))
+              .put("_id", message.getString("_id"))
+              .put("name", pageName);
+        });
   }
 
-  private static JsonObject getLastModified(JsonObject message) {
+  static JsonObject getLastModified(JsonObject message) {
     return ChainableOptional.ofNullable(message.getJsonObject("lastModified"))
-      .orElse(new JsonObject()
-        .put("userName", "?????")
-        .put("timeStamp", 0));
+        .orElse(new JsonObject()
+            .put("userName", "?????")
+            .put("timeStamp", 0));
   }
 }

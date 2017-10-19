@@ -13,6 +13,7 @@ import {PagePayload} from "../pages/PagePayload.model";
 import {FullPagePayload} from "../pages/PageFullPayload.model";
 import {StatusPayload} from "../pages/StatusPayload.model";
 import {ExistsPayload} from "../pages/ExistsPayload.model";
+import {ArchivesPayload} from "../pages/archive/ArchivesPayload.model";
 
 @Injectable()
 export class BackendService {
@@ -28,13 +29,33 @@ export class BackendService {
       .map((response: Response) => new PagePayload(response.json()));
   }
 
+  fetchAllArchives(pageNumber: number): Observable<ArchivesPayload> {
+    return this.httpPost("api/archives",{pageNumber:pageNumber})
+      .map((response: Response) => new ArchivesPayload(response.json()));
+  }
+
   fetchPage(pageName: String): Observable<FullPagePayload> {
     return this.httpGet("api/pages/" + pageName)
       .map((response: Response) => new FullPagePayload(response.json()));
   }
 
+  fetchArchivedPage(pageId: String): Observable<FullPagePayload> {
+    return this.httpPost("api/archive", {_id: pageId})
+      .map((response: Response) => new FullPagePayload(response.json()));
+  }
+
   deletePage(pageName: String): Observable<StatusPayload> {
     return this.httpDelete("api/page/" + pageName)
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
+  restoreArchive(pageId: String): Observable<StatusPayload> {
+    return this.httpPut("api/archive/restore/" + pageId,{})
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
+  logoutUser(): Observable<StatusPayload> {
+    return this.httpPost("user/logout",{})
       .map((response: Response) => new StatusPayload(response.json()));
   }
 

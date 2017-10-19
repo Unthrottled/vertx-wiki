@@ -7,14 +7,17 @@ import java.util.stream.Collectors;
 
 public enum Action {
   ALL_PAGES("all-pages"),
+  ALL_PAGES_ARCHIVE("all-pages-archive"),
   ALL_PAGES_DATA("all-pages-data"),
   GET_PAGE("get-page"),
+  GET_PAGE_ARCHIVE("get-page-archive"),
   PAGE_EXISTS("page-exists"),
   USER_EXISTS("user-exists"),
   USER_UPDATE("user-update"),
   CREATE_PAGE("create-page"),
   SAVE_PAGE("save-page"),
-  DELETE_PAGE("delete-page"),
+  ARCHIVE_PAGE("archive-page"),
+  RESTORE_ARCHIVE("restore-page"),
   UNKNOWN("WE-AINT-FOUND-SHIT");
 
   private static Map<String, Action> ref;
