@@ -54,6 +54,11 @@ export class BackendService {
       .map((response: Response) => new StatusPayload(response.json()));
   }
 
+  logoutUser(): Observable<StatusPayload> {
+    return this.httpPut("user/logout",{})
+      .map((response: Response) => new StatusPayload(response.json()));
+  }
+
   pageExists(pageName: String): Observable<ExistsPayload> {
     return this.httpGet("api/exists/" + pageName)
       .map((response: Response) => new ExistsPayload(response.json()));
