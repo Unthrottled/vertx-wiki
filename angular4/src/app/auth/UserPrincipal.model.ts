@@ -11,7 +11,7 @@ export class UserPrincipal {
   private _canUpdate: boolean;
   private _token: String;
   private _role: String;
-
+  private _username: String;
 
   constructor() {
 
@@ -28,6 +28,7 @@ export class UserPrincipal {
     this._canDelete = principal.principal.canDelete;
     this._token = principal.token;
     this._role = principal.principal.role;
+    this._username = principal.principal.username;
   }
 
   get canView(): boolean {
@@ -53,5 +54,10 @@ export class UserPrincipal {
 
     get role(): String {
         return this._role;
+    }
+
+
+    get username(): String {
+        return this._username;
     }
 }
