@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
-require("./paginator.html");
+require("./paginator.htm");
 var PaginationPage_1 = require("./PaginationPage");
 var PaginatorComponent = (function () {
     function PaginatorComponent() {
@@ -168,7 +168,7 @@ __decorate([
 PaginatorComponent = __decorate([
     core_1.Component({
         selector: 'paginator',
-        template: require('./paginator.html')
+        template: require('./paginator.htm')
     }),
     __metadata("design:paramtypes", [])
 ], PaginatorComponent);

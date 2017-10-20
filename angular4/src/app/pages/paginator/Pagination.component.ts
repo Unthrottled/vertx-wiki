@@ -2,11 +2,11 @@
  * Created by alex on 9/17/17.
  */
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import "./paginator.html";
+import "./paginator.htm";
 import {PaginationPage} from "./PaginationPage";
 @Component({
   selector: 'paginator',
-  template: require('./paginator.html')
+  template: require('./paginator.htm')
 })
 export class PaginatorComponent implements OnInit {
   @Output()

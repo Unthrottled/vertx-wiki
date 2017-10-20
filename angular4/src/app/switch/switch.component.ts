@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'dead-mans-switch',
-  template: `./templates/switch.component.htm`,
+  template: require('./switch.component.htm'),
   styleUrls: []
 })
 export class SwitchComponent implements OnInit {

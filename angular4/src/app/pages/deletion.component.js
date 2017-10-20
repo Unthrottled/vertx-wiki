@@ -41,7 +41,7 @@ __decorate([
 DeletionComponent = __decorate([
     core_1.Component({
         selector: 'deletion-component',
-        template: "./templates/deletion.component.htm",
+        template: require('./deletion.component.htm'),
         styleUrls: []
     }),
     __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
