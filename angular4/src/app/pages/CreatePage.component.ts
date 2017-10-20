@@ -11,7 +11,7 @@ import {BasePageComponent} from "./BasePage.component";
 import {Page} from "./Page.model";
 @Component({
   selector: 'new-page',
-  templateUrl: './templates/create.page.htm'
+  template: require('./create.page.htm')
 })
 export class CreatePageComponent extends BasePageComponent {
   private _validTitle: boolean;

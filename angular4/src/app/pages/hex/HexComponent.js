@@ -87,7 +87,7 @@ __decorate([
 HexComponent = __decorate([
     core_1.Component({
         selector: 'hex',
-        templateUrl: './templates/hex.htm'
+        template: require('./hex.htm')
     })
 ], HexComponent);
 exports.HexComponent = HexComponent;

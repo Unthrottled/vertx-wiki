@@ -80,7 +80,7 @@ var SearchComponent = (function () {
 SearchComponent = __decorate([
     core_1.Component({
         selector: 'page-search',
-        templateUrl: './templates/search.htm'
+        template: require('./search.htm')
     }),
     __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService,
         angular2_notifications_1.NotificationsService,

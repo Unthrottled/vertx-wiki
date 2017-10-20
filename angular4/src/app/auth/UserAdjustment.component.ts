@@ -12,7 +12,7 @@ import {UserPrincipal} from "./UserPrincipal.model";
 
 @Component({
     selector: 'user-adjustment-guy',
-    templateUrl: 'templates/userAdjustment.template.htm'
+    template: require('./userAdjustment.template.htm')
 })
 export class UserAdjustmentComponent {
     role: string;

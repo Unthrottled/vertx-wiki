@@ -168,7 +168,7 @@ __decorate([
 PaginatorComponent = __decorate([
     core_1.Component({
         selector: 'paginator',
-        templateUrl: './templates/paginator.html'
+        template: require('./paginator.html')
     }),
     __metadata("design:paramtypes", [])
 ], PaginatorComponent);

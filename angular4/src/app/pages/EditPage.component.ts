@@ -12,7 +12,7 @@ import {BasePageComponent} from "./BasePage.component";
 import {Deleteable} from "../objects/Deleteable";
 @Component({
   selector: 'wiki-page',
-  templateUrl: './templates/page.htm'
+  template: require('./page.htm')
 })
 export class EditPageComponent extends BasePageComponent implements Deleteable {
   constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {

@@ -95,7 +95,7 @@ var RegisterComponent = (function () {
 RegisterComponent = __decorate([
     core_1.Component({
         selector: 'register-form-guy',
-        templateUrl: 'templates/register.template.htm'
+        template: require('./register.template.htm')
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, dist_1.NotificationsService])
 ], RegisterComponent);

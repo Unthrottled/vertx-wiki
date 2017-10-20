@@ -12,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 import {Pair} from "./hex/Pair.model";
 @Component({
   selector: 'pages-list',
-  templateUrl: './templates/pages.list.htm'
+  template: require('./pages.list.htm')
 })
 export class PagesComponent implements OnInit {
   pages: Pair<String, String>[] = [];

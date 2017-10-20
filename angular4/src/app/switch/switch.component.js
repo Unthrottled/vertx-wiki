@@ -59,7 +59,7 @@ __decorate([
 SwitchComponent = __decorate([
     core_1.Component({
         selector: 'dead-mans-switch',
-        templateUrl: "./templates/switch.component.htm",
+        template: "./templates/switch.component.htm",
         styleUrls: []
     }),
     __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])

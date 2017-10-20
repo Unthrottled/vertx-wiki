@@ -12,7 +12,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
     selector: 'login-form-guy',
-    templateUrl: 'templates/login.template.htm'
+    template: require('./login.template.htm')
 })
 export class LoginComponent implements OnInit {
     message: string;

@@ -48,7 +48,7 @@ var PagesComponent = (function () {
 PagesComponent = __decorate([
     core_1.Component({
         selector: 'pages-list',
-        templateUrl: './templates/pages.list.htm'
+        template: require('./pages.list.htm')
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, auth_service_1.AuthService])
 ], PagesComponent);

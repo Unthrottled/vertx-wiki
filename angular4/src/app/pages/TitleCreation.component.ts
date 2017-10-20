@@ -8,7 +8,7 @@ import {ValidationComponent} from "./Validation.component";
 import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'title-creation',
-  templateUrl: './templates/validation-field.htm'
+  template: require('./validation-field.htm')
 })
 export class TitleCreationComponent extends ValidationComponent {
 

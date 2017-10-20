@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'base-view',
-    templateUrl: './templates/base.component.htm'
+    template: require('./base.component.htm')
 })
 export class BaseComponent implements OnInit {
     private pageNumber: string;

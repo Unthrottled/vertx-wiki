@@ -7,7 +7,7 @@ import "./logoutHider.template.htm";
 
 @Component({
   selector: 'logout-hider',
-  templateUrl: 'templates/logoutHider.template.htm'
+  template: require('./logoutHider.template.htm')
 })
 export class LogoutHiderComponent {
   constructor(public authService: AuthService) {

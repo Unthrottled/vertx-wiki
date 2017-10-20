@@ -5,6 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var proxy = require('http-proxy-middleware');
+var htmlLoader = require('raw-loader');
 var http = require('http');
 var keepAliveAgent = new http.Agent({keepAlive: true});
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
@@ -50,7 +51,7 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        loaders: [
+        loaders: ['awesome-typescript-loader', 'angular2-template-loader',
           {
             loader: 'awesome-typescript-loader',
             options: {configFileName: path.resolve(__dirname, 'src', 'tsconfig.json')}
@@ -63,9 +64,13 @@ module.exports = {
         exclude: [/node_modules/, /build/, /dist/, /angular-project/, /app/]
       },
       {
-        test: /\.(html?)$/,
+        test: /\.(html)$/,
         exclude: [/index\.html/],
-        loader: "file-loader?name=templates/[name].[ext]"
+        loader: "file-loader?name=[name].[hash:6].[ext]"
+      },
+      {
+        test: /\.(htm)$/,
+        loader: "raw-loader"
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,

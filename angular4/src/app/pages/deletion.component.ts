@@ -10,7 +10,7 @@ import "./deletion.component.htm";
 
 @Component({
   selector: 'deletion-component',
-  templateUrl: `./templates/deletion.component.htm`,
+  template: `./templates/deletion.component.htm`,
   styleUrls: []
 })
 export class DeletionComponent {

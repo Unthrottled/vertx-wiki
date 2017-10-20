@@ -108,7 +108,7 @@ var EditPageComponent = (function (_super) {
 EditPageComponent = __decorate([
     core_1.Component({
         selector: 'wiki-page',
-        templateUrl: './templates/page.htm'
+        template: require('./page.htm')
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
 ], EditPageComponent);

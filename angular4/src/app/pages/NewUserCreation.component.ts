@@ -8,7 +8,7 @@ import {Observable} from "rxjs/Observable";
 import {NewUserValidationService} from "./NewUserValidation.service";
 @Component({
   selector: 'user-name-creation',
-  templateUrl: './templates/validation-field.htm'
+  template: require('./validation-field.htm')
 })
 export class NewUserCreationComponent extends ValidationComponent {
 

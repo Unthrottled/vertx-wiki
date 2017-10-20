@@ -13,7 +13,7 @@ import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'wiki-page-archive',
-    templateUrl: './templates/archived-page.htm'
+    template: require('./archived-page.htm')
 })
 export class ArchivePageComponent extends BasePageComponent {
     constructor(protected router: ActivatedRoute,

@@ -117,7 +117,7 @@ __decorate([
 EditComponent = __decorate([
     core_1.Component({
         selector: 'edit-page',
-        templateUrl: './templates/edit.htm'
+        template: require('./edit.htm')
     }),
     __metadata("design:paramtypes", [router_1.Router])
 ], EditComponent);

@@ -19,7 +19,7 @@ var AboutComponent = (function () {
 AboutComponent = __decorate([
     core_1.Component({
         selector: 'about-view',
-        templateUrl: './templates/about.htm'
+        template: require('./about.htm')
     })
 ], AboutComponent);
 exports.AboutComponent = AboutComponent;

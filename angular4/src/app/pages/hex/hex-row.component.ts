@@ -8,7 +8,7 @@ import {HexRowInput} from "./Hex-Row.input";
 import {Pair} from "./Pair.model";
 @Component({
   selector: 'hex-row',
-  templateUrl: './templates/hex-row.htm'
+  template: require('./hex-row.htm')
 })
 export class HexRowComponent {
   private _keyValues: Pair<String, any>[] = [];

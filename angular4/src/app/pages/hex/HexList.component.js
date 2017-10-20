@@ -125,7 +125,7 @@ __decorate([
 HexListComponent = __decorate([
     core_1.Component({
         selector: 'hex-list',
-        templateUrl: './templates/hex-list.htm'
+        template: require('./hex-list.htm')
     }),
     __metadata("design:paramtypes", [core_1.ElementRef, core_1.NgZone])
 ], HexListComponent);

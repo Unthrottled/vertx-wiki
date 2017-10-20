@@ -51,7 +51,7 @@ __decorate([
 RolesComponent = __decorate([
     core_1.Component({
         selector: 'roles-input',
-        templateUrl: 'templates/roles.template.htm'
+        template: require('./roles.template.htm')
     })
 ], RolesComponent);
 exports.RolesComponent = RolesComponent;

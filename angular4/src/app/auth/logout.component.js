@@ -33,7 +33,7 @@ var LogoutComponent = (function () {
 LogoutComponent = __decorate([
     core_1.Component({
         selector: 'logout-butt',
-        templateUrl: 'templates/logout.template.htm'
+        template: require('./logout.template.htm')
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
 ], LogoutComponent);

@@ -84,7 +84,7 @@ var BaseComponent = (function () {
 BaseComponent = __decorate([
     core_1.Component({
         selector: 'base-view',
-        templateUrl: './templates/base.component.htm'
+        template: require('./base.component.htm')
     }),
     __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService, router_1.ActivatedRoute])
 ], BaseComponent);

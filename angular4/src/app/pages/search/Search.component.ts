@@ -12,7 +12,7 @@ import {UserPrincipal} from "../../auth/UserPrincipal.model";
 import {AuthService} from "../../auth/auth.service";
 @Component({
   selector: 'page-search',
-  templateUrl: './templates/search.htm'
+  template: require('./search.htm')
 })
 export class SearchComponent {
   private _model: any = {};

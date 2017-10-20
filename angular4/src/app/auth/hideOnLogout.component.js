@@ -31,7 +31,7 @@ var LogoutHiderComponent = (function () {
 LogoutHiderComponent = __decorate([
     core_1.Component({
         selector: 'logout-hider',
-        templateUrl: 'templates/logoutHider.template.htm'
+        template: require('./logoutHider.template.htm')
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], LogoutHiderComponent);

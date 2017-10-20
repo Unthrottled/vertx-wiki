@@ -97,7 +97,7 @@ var CreatePageComponent = (function (_super) {
 CreatePageComponent = __decorate([
     core_1.Component({
         selector: 'new-page',
-        templateUrl: './templates/create.page.htm'
+        template: require('./create.page.htm')
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
 ], CreatePageComponent);

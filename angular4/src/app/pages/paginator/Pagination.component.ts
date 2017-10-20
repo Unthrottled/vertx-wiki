@@ -6,7 +6,7 @@ import "./paginator.html";
 import {PaginationPage} from "./PaginationPage";
 @Component({
   selector: 'paginator',
-  templateUrl: './templates/paginator.html'
+  template: require('./paginator.html')
 })
 export class PaginatorComponent implements OnInit {
   @Output()

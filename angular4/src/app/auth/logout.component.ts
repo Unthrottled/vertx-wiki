@@ -8,7 +8,7 @@ import "./logout.template.htm";
 
 @Component({
   selector: 'logout-butt',
-  templateUrl: 'templates/logout.template.htm'
+  template: require('./logout.template.htm')
 })
 export class LogoutComponent implements OnInit {
   constructor(public authService: AuthService, public router: Router) {

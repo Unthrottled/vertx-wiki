@@ -3,7 +3,7 @@ import "./hex.htm";
 
 @Component({
     selector: 'hex',
-    templateUrl: './templates/hex.htm'
+    template: require('./hex.htm')
 })
 export class HexComponent {
     @Output()

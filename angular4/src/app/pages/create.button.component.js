@@ -34,7 +34,7 @@ var CreateComponent = (function () {
 CreateComponent = __decorate([
     core_1.Component({
         selector: 'create-butt',
-        templateUrl: 'templates/create.button.template.htm'
+        template: require('./create.button.template.htm')
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], CreateComponent);

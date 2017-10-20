@@ -3,7 +3,7 @@ import './roles.template.htm'
 
 @Component({
     selector: 'roles-input',
-    templateUrl: 'templates/roles.template.htm'
+    template: require('./roles.template.htm')
 })
 export class RolesComponent implements OnInit {
     roles: string[] = ["admin", "editor", "writer", "reader"];

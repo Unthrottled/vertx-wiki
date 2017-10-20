@@ -10,7 +10,7 @@ import {Pair} from "../hex/Pair.model";
 
 @Component({
     selector: 'pages-list-archive',
-    templateUrl: './templates/archive.list.htm'
+    template: require('./archive.list.htm')
 })
 export class ArchivesComponent implements OnInit {
     pages: Pair<String, String>[] = [];

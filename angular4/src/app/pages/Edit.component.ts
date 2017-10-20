@@ -7,7 +7,7 @@ import "./edit.htm";
 import {EditOptions} from "./EditOptions.model";
 @Component({
   selector: 'edit-page',
-  templateUrl: './templates/edit.htm'
+  template: require('./edit.htm')
 })
 export class EditComponent {
   private _enabled: boolean;

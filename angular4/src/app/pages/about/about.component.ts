@@ -6,7 +6,7 @@ import "./about.htm";
 
 @Component({
   selector: 'about-view',
-  templateUrl: './templates/about.htm'
+  template: require('./about.htm')
 })
 export class AboutComponent {
 

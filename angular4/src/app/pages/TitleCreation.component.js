@@ -43,7 +43,7 @@ var TitleCreationComponent = (function (_super) {
 TitleCreationComponent = __decorate([
     core_1.Component({
         selector: 'title-creation',
-        templateUrl: './templates/validation-field.htm'
+        template: require('./validation-field.htm')
     }),
     __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, core_1.NgZone])
 ], TitleCreationComponent);

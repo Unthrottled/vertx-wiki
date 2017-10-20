@@ -9,7 +9,7 @@ import {HexRowModel} from "./HexRow.model";
 import {Pair} from "./Pair.model";
 @Component({
   selector: 'hex-list',
-  templateUrl: './templates/hex-list.htm'
+  template: require('./hex-list.htm')
 })
 export class HexListComponent {
   private _hexRows: HexRowModel[];

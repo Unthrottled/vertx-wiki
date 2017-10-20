@@ -64,7 +64,7 @@ var UserAdjustmentComponent = (function () {
 UserAdjustmentComponent = __decorate([
     core_1.Component({
         selector: 'user-adjustment-guy',
-        templateUrl: 'templates/userAdjustment.template.htm'
+        template: require('./userAdjustment.template.htm')
     }),
     __metadata("design:paramtypes", [backend_service_1.BackendService,
         dist_1.NotificationsService,

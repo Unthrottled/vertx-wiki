@@ -12,7 +12,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
     selector: 'register-form-guy',
-    templateUrl: 'templates/register.template.htm'
+    template: require('./register.template.htm')
 })
 export class RegisterComponent implements OnInit {
     message: string;

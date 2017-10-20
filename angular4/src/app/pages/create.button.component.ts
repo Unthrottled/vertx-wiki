@@ -9,7 +9,7 @@ import {Observable} from "rxjs/Observable";
 import {AuthService} from "../auth/auth.service";
 @Component({
   selector: 'create-butt',
-  templateUrl: 'templates/create.button.template.htm'
+  template: require('./create.button.template.htm')
 })
 export class CreateComponent implements OnInit {
   constructor(public authService: AuthService) {

@@ -43,7 +43,7 @@ var ArchivesComponent = (function () {
 ArchivesComponent = __decorate([
     core_1.Component({
         selector: 'pages-list-archive',
-        templateUrl: './templates/archive.list.htm'
+        template: require('./archive.list.htm')
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
 ], ArchivesComponent);
