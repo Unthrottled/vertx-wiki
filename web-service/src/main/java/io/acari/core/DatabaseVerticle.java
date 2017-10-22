@@ -23,6 +23,7 @@ public class DatabaseVerticle extends AbstractVerticle {
 
   @Override
   public void start(Future<Void> future) {
+    LOGGER.warn(getConfig().encode());
     mongoClient = MongoClient.createShared(vertx, getConfig());
     vertx.eventBus()
         .consumer(config().getString(CONFIG_WIKIDB_QUEUE, CONFIG_WIKIDB_QUEUE),
