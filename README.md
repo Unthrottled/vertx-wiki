@@ -17,7 +17,7 @@ When you see something like
      web-service_1  | 2017-10-12 20:48:20 INFO  HttpVerticle:112 - Server listening on port 8989
      web-service_1  | 2017-10-12 20:48:20 INFO  VertxLauncher:30 - STARTED
 
-Point your browser at http://localhost:8989
+Point your browser at http://localhost
 
 Now you should be able to add a user!
 Provided your user has the proper permissions, you should be able to create a page!

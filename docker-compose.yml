@@ -3,7 +3,7 @@ services:
   web-service:
     build: ./web-service
     ports:
-      - 8989:8989
+      - 80:8989
     image: alexsimons/vertx-web-service
   mongo:
     image: mongo:latest
