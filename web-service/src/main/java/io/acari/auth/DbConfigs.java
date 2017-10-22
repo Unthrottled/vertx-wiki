@@ -17,7 +17,7 @@ public class DbConfigs {
   }
 
   public enum Configs {
-    HOST("host"), PORT("port");
+    HOST("host"), PORT("port"), PASSWORD("password"), USERNAME("username");
 
     private final String value;
 
