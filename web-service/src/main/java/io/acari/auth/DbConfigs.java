@@ -21,8 +21,8 @@ public class DbConfigs {
 
     private final String value;
 
-    Configs(String butt) {
-      this.value = properties.getProperty(butt);
+    Configs(String propertyKey) {
+      this.value = properties.getProperty(propertyKey);
     }
 
     public String getValue() {
