@@ -1,6 +1,5 @@
 package io.acari.util;
 
-import io.acari.auth.AuthConfigs;
 import io.acari.auth.DbConfigs;
 import io.vertx.core.json.JsonObject;
 
