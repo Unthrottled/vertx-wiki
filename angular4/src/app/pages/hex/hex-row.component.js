@@ -1,7 +1,6 @@
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
@@ -9,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/17/17.
  */
@@ -17,12 +16,11 @@ var core_1 = require("@angular/core");
 require("./hex-row.htm");
 var HexRowComponent = HexRowComponent_1 = (function () {
     function HexRowComponent() {
+        this.onClick = new core_1.EventEmitter();
         this._keyValues = [];
         this._hexWidth = 104;
         this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
-        this.onClick = new core_1.EventEmitter();
     }
-
     Object.defineProperty(HexRowComponent.prototype, "keyValues", {
         get: function () {
             return this._keyValues;
@@ -43,13 +41,6 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
-        get: function () {
-            return this.config ? !this.config.even : false;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(HexRowComponent.prototype, "hexHeight", {
         get: function () {
             return this._hexHeight;
@@ -66,6 +57,13 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         },
         set: function (value) {
             this._hexWidth = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
+        get: function () {
+            return this.config ? !this.config.even : false;
         },
         enumerable: true,
         configurable: true

@@ -1,7 +1,6 @@
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
@@ -9,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/17/17.
  */
@@ -24,7 +23,6 @@ var PaginatorComponent = (function () {
         this._pages = [];
         this._firstPage = new PaginationPage_1.PaginationPage(1);
     }
-
     Object.defineProperty(PaginatorComponent.prototype, "currentPageNumber", {
         get: function () {
             return this._currentPageNumber;
@@ -56,6 +54,26 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(PaginatorComponent.prototype, "currentPage", {
+        get: function () {
+            return this._currentPage;
+        },
+        set: function (value) {
+            this._currentPage = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PaginatorComponent.prototype, "maxPagesDisplayed", {
+        get: function () {
+            return this._maxPagesDisplayed;
+        },
+        set: function (value) {
+            this._maxPagesDisplayed = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(PaginatorComponent.prototype, "nextPage", {
         get: function () {
             return this._nextPage;
@@ -83,36 +101,6 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PaginatorComponent.prototype, "maxPagesDisplayed", {
-        get: function () {
-            return this._maxPagesDisplayed;
-        },
-        set: function (value) {
-            this._maxPagesDisplayed = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PaginatorComponent.prototype, "currentPage", {
-        get: function () {
-            return this._currentPage;
-        },
-        set: function (value) {
-            this._currentPage = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PaginatorComponent.prototype.setCurrent = function (page) {
-        this.onPageChanged.emit(page.pageId);
-    };
-    Object.defineProperty(PaginatorComponent.prototype, "firstPage", {
-        get: function () {
-            return this._firstPage;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(PaginatorComponent.prototype, "endPage", {
         get: function () {
             return this._endPage;
@@ -123,6 +111,16 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(PaginatorComponent.prototype, "firstPage", {
+        get: function () {
+            return this._firstPage;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PaginatorComponent.prototype.setCurrent = function (page) {
+        this.onPageChanged.emit(page.pageId);
+    };
     PaginatorComponent.prototype.ngOnInit = function () {
         this.recalculate();
     };

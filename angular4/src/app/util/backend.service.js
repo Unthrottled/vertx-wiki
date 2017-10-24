@@ -3,8 +3,7 @@
  */
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
@@ -12,7 +11,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
@@ -28,75 +27,52 @@ var BackendService = (function () {
         this.userToken = userToken;
         this.hostService = hostService;
     }
-
     BackendService.prototype.fetchAllPages = function (pageNumber) {
-        return this.httpPost("api/pages", {pageNumber: pageNumber})
-            .map(function (response) {
-                return new PagePayload_model_1.PagePayload(response.json());
-            });
+        return this.httpPost("api/pages", { pageNumber: pageNumber })
+            .map(function (response) { return new PagePayload_model_1.PagePayload(response.json()); });
     };
     BackendService.prototype.fetchAllArchives = function (pageNumber) {
-        return this.httpPost("api/archives", {pageNumber: pageNumber})
-            .map(function (response) {
-                return new ArchivesPayload_model_1.ArchivesPayload(response.json());
-            });
+        return this.httpPost("api/archives", { pageNumber: pageNumber })
+            .map(function (response) { return new ArchivesPayload_model_1.ArchivesPayload(response.json()); });
     };
     BackendService.prototype.fetchPage = function (pageName) {
         return this.httpGet("api/pages/" + pageName)
-            .map(function (response) {
-                return new PageFullPayload_model_1.FullPagePayload(response.json());
-            });
+            .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.fetchArchivedPage = function (pageId) {
-        return this.httpPost("api/archive", {_id: pageId})
-            .map(function (response) {
-                return new PageFullPayload_model_1.FullPagePayload(response.json());
-            });
+        return this.httpPost("api/archive", { _id: pageId })
+            .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.deletePage = function (pageName) {
         return this.httpDelete("api/page/" + pageName)
-            .map(function (response) {
-                return new StatusPayload_model_1.StatusPayload(response.json());
-            });
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.restoreArchive = function (pageId) {
         return this.httpPut("api/archive/restore/" + pageId, {})
-            .map(function (response) {
-                return new StatusPayload_model_1.StatusPayload(response.json());
-            });
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.logoutUser = function () {
         return this.httpPost("user/logout", {})
-            .map(function (response) {
-                return new StatusPayload_model_1.StatusPayload(response.json());
-            });
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.pageExists = function (pageName) {
         return this.httpGet("api/exists/" + pageName)
-            .map(function (response) {
-                return new ExistsPayload_model_1.ExistsPayload(response.json());
-            });
+            .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
     BackendService.prototype.userExists = function (userName) {
         return this.httpPost("user/exists/" + userName, {})
-            .map(function (response) {
-                return new ExistsPayload_model_1.ExistsPayload(response.json());
-            });
+            .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
     BackendService.prototype.updatePage = function (pageName, pageBody) {
-        return this.httpPut("api/pages", {"name": pageName, "markdown": pageBody})
-            .map(function (response) {
-                return new StatusPayload_model_1.StatusPayload(response.json());
-            });
+        return this.httpPut("api/pages", { "name": pageName, "markdown": pageBody })
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.updateUser = function (role, password) {
-        return this.httpPut("api/user", {"role": role, "password": password});
+        return this.httpPut("api/user", { "role": role, "password": password });
     };
     BackendService.prototype.createPage = function (pageName, pageBody) {
-        return this.httpPost("api/pages/create", {"name": pageName, "markdown": pageBody})
-            .map(function (response) {
-                return new StatusPayload_model_1.StatusPayload(response.json());
-            });
+        return this.httpPost("api/pages/create", { "name": pageName, "markdown": pageBody })
+            .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.httpGet = function (s) {
         return this.http.get(this.hostService.fetchUrl() + s, this.getRequestOptions());
@@ -111,9 +87,9 @@ var BackendService = (function () {
         return this.http.post(this.hostService.fetchUrl() + s, body, this.getRequestOptions());
     };
     BackendService.prototype.getRequestOptions = function () {
-        var headers = new http_1.Headers({'Content-Type': 'application/json'});
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         headers.append('Authorization', 'Bearer ' + this.userToken.token);
-        var returnVal = {headers: headers};
+        var returnVal = { headers: headers };
         return returnVal;
     };
     return BackendService;

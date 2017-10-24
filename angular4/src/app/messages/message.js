@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 6/13/17.
  */
@@ -10,7 +10,6 @@ var Message = (function () {
         this.message = msg;
         this.success = Message.didSucced(this.message);
     }
-
     Message.didSucced = function (msg) {
         return msg.indexOf('Succeeded') >= 0;
     };

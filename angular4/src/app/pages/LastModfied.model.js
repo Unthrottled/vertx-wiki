@@ -1,11 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 var LastModified = (function () {
     function LastModified(response) {
         this._userName = response.userName;
         this._timeStamp = new Date(response.timeStamp);
     }
-
     Object.defineProperty(LastModified.prototype, "userName", {
         get: function () {
             return this._userName;

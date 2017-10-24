@@ -17,10 +17,10 @@ require("./validation-field.htm");
 var ValidationComponent = (function () {
     function ValidationComponent(zone) {
         this.zone = zone;
-        this._validTitle = false;
-        this._hideContent = false;
         this.onValidate = new core_1.EventEmitter();
         this.onChange = new core_1.EventEmitter();
+        this._validTitle = false;
+        this._hideContent = false;
     }
     Object.defineProperty(ValidationComponent.prototype, "content", {
         get: function () {
@@ -33,11 +33,6 @@ var ValidationComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    ValidationComponent.prototype.validate = function (title) {
-        var self = this;
-        this.validateContent(title)
-            .subscribe(function (valid) { return self.zone.run(function () { return self.validTitle = valid; }); }, function (error) { return console.warn('OOHHHHH SHIT ' + error); });
-    };
     Object.defineProperty(ValidationComponent.prototype, "validTitle", {
         get: function () {
             return this._validTitle;
@@ -69,6 +64,11 @@ var ValidationComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    ValidationComponent.prototype.validate = function (title) {
+        var self = this;
+        this.validateContent(title)
+            .subscribe(function (valid) { return self.zone.run(function () { return self.validTitle = valid; }); }, function (error) { return console.warn('OOHHHHH SHIT ' + error); });
+    };
     return ValidationComponent;
 }());
 __decorate([

@@ -3,9 +3,9 @@
  */
 import {Component, OnInit} from "@angular/core";
 import "./base.component.htm";
-import {UserPrincipal} from "./auth/UserPrincipal.model";
+import {UserPrincipal} from "../../auth/UserPrincipal.model";
 import {Observable} from "rxjs/Observable";
-import {AuthService} from "./auth/auth.service";
+import {AuthService} from "../../auth/auth.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

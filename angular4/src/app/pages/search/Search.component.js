@@ -1,7 +1,6 @@
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
@@ -9,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", {value: true});
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/17/17.
  */
@@ -30,40 +29,6 @@ var SearchComponent = (function () {
         this.authService = authService;
         this._model = {};
     }
-
-    SearchComponent.prototype.search = function (searchedTitle) {
-        var _this = this;
-        var self = this;
-        this.cantSearch
-            .map(function (cantCreate) {
-                return !cantCreate;
-            })
-            .subscribe(function (canCreate) {
-                if (searchedTitle) {
-                    _this.pagesService.isValid(searchedTitle)
-                        .map(function (doesNotExist) {
-                            return !doesNotExist;
-                        })
-                        .subscribe(function (success) {
-                            if (success) {
-                                self.actualRouter.navigate(['/page/' + searchedTitle]);
-                            }
-                            else {
-                                self.failure();
-                            }
-                        }, function (error) {
-                            return self.failure();
-                        });
-                }
-            });
-    };
-    SearchComponent.prototype.failure = function () {
-        this.notificationService.warn('Page not found!', 'Create one, maybe?', {
-            timeOut: 3000,
-            showProgressBar: true,
-            clickToClose: true
-        });
-    };
     Object.defineProperty(SearchComponent.prototype, "model", {
         get: function () {
             return this._model;
@@ -78,13 +43,38 @@ var SearchComponent = (function () {
         get: function () {
             var _this = this;
             return Permissions_component_1.Permissions.canActivate(this.userToken, 'view')
-                .map(function (canCreate) {
-                    return !(canCreate && _this.authService.isLoggedIn);
-                });
+                .map(function (canCreate) { return !(canCreate && _this.authService.isLoggedIn); });
         },
         enumerable: true,
         configurable: true
     });
+    SearchComponent.prototype.search = function (searchedTitle) {
+        var _this = this;
+        var self = this;
+        this.cantSearch
+            .map(function (cantCreate) { return !cantCreate; })
+            .subscribe(function (canCreate) {
+            if (searchedTitle) {
+                _this.pagesService.isValid(searchedTitle)
+                    .map(function (doesNotExist) { return !doesNotExist; })
+                    .subscribe(function (success) {
+                    if (success) {
+                        self.actualRouter.navigate(['/page/' + searchedTitle]);
+                    }
+                    else {
+                        self.failure();
+                    }
+                }, function (error) { return self.failure(); });
+            }
+        });
+    };
+    SearchComponent.prototype.failure = function () {
+        this.notificationService.warn('Page not found!', 'Create one, maybe?', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        });
+    };
     return SearchComponent;
 }());
 SearchComponent = __decorate([

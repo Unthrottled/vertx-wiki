@@ -17,7 +17,7 @@ import {WindowRef} from "./util/window";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth.guard";
 import {LoginComponent} from "./auth/login.component";
-import {BaseComponent} from "./base.component";
+import {BaseComponent} from "./pages/base/base.component";
 import {LogoutComponent} from "./auth/logout.component";
 import {UserPrincipal} from "./auth/UserPrincipal.model";
 import {PagesComponent} from "./pages/Pages.component";
