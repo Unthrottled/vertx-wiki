@@ -7,7 +7,7 @@ import "./page.htm";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
 import {Observable} from "rxjs/Observable";
-import {EditOptions} from "./EditOptions.model";
+import {EditOptions} from "./edit/EditOptions.model";
 import {Page} from "./Page.model";
 
 

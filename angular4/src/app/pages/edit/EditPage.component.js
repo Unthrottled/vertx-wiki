@@ -24,10 +24,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-require("./page.htm");
-var Pages_service_1 = require("./Pages.service");
+require("../page.htm");
+var Pages_service_1 = require("../Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
-var BasePage_component_1 = require("./BasePage.component");
+var BasePage_component_1 = require("../BasePage.component");
 var EditPageComponent = (function (_super) {
     __extends(EditPageComponent, _super);
     function EditPageComponent(router, pagesService, notificationService, actualRouter) {
@@ -107,8 +107,8 @@ var EditPageComponent = (function (_super) {
 }(BasePage_component_1.BasePageComponent));
 EditPageComponent = __decorate([
     core_1.Component({
-        selector: 'wiki-page',
-        template: require('./page.htm')
+        selector: 'edit-wiki-page',
+        template: require('../page.htm')
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
 ], EditPageComponent);

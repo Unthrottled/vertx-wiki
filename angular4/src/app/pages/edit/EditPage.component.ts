@@ -3,17 +3,17 @@
  */
 import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import "./page.htm";
-import {PageFull} from "./Page.full.model";
-import {PagesService} from "./Pages.service";
+import "../page.htm";
+import {PageFull} from "../Page.full.model";
+import {PagesService} from "../Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
-import {BasePageComponent} from "./BasePage.component";
-import {Deleteable} from "../objects/Deleteable";
+import {BasePageComponent} from "../BasePage.component";
+import {Deleteable} from "../../objects/Deleteable";
 
 @Component({
-    selector: 'wiki-page',
-    template: require('./page.htm')
+    selector: 'edit-wiki-page',
+    template: require('../page.htm')
 })
 export class EditPageComponent extends BasePageComponent implements Deleteable {
     constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
