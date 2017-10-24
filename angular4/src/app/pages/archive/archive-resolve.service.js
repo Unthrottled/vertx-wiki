@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var Permissions_component_1 = require("../../auth/Permissions.component");
-var Pages_service_1 = require("../Pages.service");
+var Pages_service_1 = require("../services/Pages.service");
 var ArchiveResolve = (function () {
     function ArchiveResolve(permissons, pagesService) {
         this.permissons = permissons;

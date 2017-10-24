@@ -14,30 +14,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
-var Permissions_component_1 = require("../auth/Permissions.component");
+var Permissions_component_1 = require("../../auth/Permissions.component");
 var Pages_service_1 = require("./Pages.service");
-var PageResolve = (function () {
-    function PageResolve(permissons, pagesService) {
+var NewPageResolve = (function () {
+    function NewPageResolve(permissons, pagesService) {
         this.permissons = permissons;
         this.pagesService = pagesService;
     }
-    PageResolve.prototype.resolve = function (route, state) {
+    NewPageResolve.prototype.resolve = function (route, state) {
         var _this = this;
         return this.permissons.canView
             .flatMap(function (canView) {
+            console.log(canView);
             if (canView) {
-                return _this.pagesService.fetchPage(route.params["name"]);
+                return _this.pagesService.freshPage();
             }
             else {
                 return Observable_1.Observable.empty();
             }
         });
     };
-    return PageResolve;
+    return NewPageResolve;
 }());
-PageResolve = __decorate([
+NewPageResolve = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [Permissions_component_1.Permissions, Pages_service_1.PagesService])
-], PageResolve);
-exports.PageResolve = PageResolve;
-//# sourceMappingURL=page-resolve.service.js.map
+], NewPageResolve);
+exports.NewPageResolve = NewPageResolve;
+//# sourceMappingURL=new-page-resolve.service.js.map

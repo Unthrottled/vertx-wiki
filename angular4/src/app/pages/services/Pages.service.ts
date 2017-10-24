@@ -3,13 +3,13 @@
  */
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {BackendService} from "../util/backend.service";
-import {PagePayload} from "./models/PagePayload.model";
-import {PageFull} from "./models/Page.full.model";
-import {FullPagePayload} from "./models/PageFullPayload.model";
-import {StatusPayload} from "./models/StatusPayload.model";
-import {Page} from "./models/Page.model";
-import {ArchivesPayload} from "./archive/ArchivesPayload.model";
+import {BackendService} from "../../util/backend.service";
+import {PagePayload} from "../models/PagePayload.model";
+import {PageFull} from "../models/Page.full.model";
+import {FullPagePayload} from "../models/PageFullPayload.model";
+import {StatusPayload} from "../models/StatusPayload.model";
+import {Page} from "../models/Page.model";
+import {ArchivesPayload} from "../archive/ArchivesPayload.model";
 
 @Injectable()
 export class PagesService {

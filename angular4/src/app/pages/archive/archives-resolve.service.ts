@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Permissions} from "../../auth/Permissions.component";
-import {PagesService} from "../Pages.service";
+import {PagesService} from "../services/Pages.service";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 
 @Injectable()
