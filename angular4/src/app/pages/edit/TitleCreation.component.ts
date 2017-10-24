@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/20/17.
  */
-import {Component, EventEmitter, Input, NgZone, Output} from "@angular/core";
+import {Component, NgZone} from "@angular/core";
 import "../../common/validation-field.htm";
 import {TitleValidationService} from "./TitleValidation.service";
 import {ValidationComponent} from "../../common/Validation.component";

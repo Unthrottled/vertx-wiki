@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
-var backend_service_1 = require("../util/backend.service");
+var backend_service_1 = require("../../util/backend.service");
 var NewUserValidationService = (function () {
     function NewUserValidationService(backendService) {
         this.backendService = backendService;

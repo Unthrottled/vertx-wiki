@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/20/17.
  */
 var core_1 = require("@angular/core");
-require("../common/validation-field.htm");
+require("../../common/validation-field.htm");
 var Validation_component_1 = require("../common/Validation.component");
 var NewUserValidation_service_1 = require("./NewUserValidation.service");
 var NewUserCreationComponent = (function (_super) {

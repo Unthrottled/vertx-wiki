@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from "@angular/core";
 import {NavigationExtras, Router} from "@angular/router";
-import {AuthService} from "./auth.service";
+import {AuthService} from "../auth.service";
 import {User} from "./user.model";
 import "./register.template.htm";
 import {Subscriber} from "rxjs/Subscriber";

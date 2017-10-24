@@ -4,7 +4,7 @@
 import {Component, OnInit} from "@angular/core";
 import {NavigationExtras, Router} from "@angular/router";
 import {AuthService} from "./auth.service";
-import {User} from "./user.model";
+import {User} from "./user/user.model";
 import "./login.template.htm";
 import {Subscriber} from "rxjs/Subscriber";
 import {UserPrincipal} from "./UserPrincipal.model";

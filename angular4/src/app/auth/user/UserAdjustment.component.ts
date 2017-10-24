@@ -6,9 +6,9 @@ import {Response} from "@angular/http";
 import "./userAdjustment.template.htm";
 import {Subscriber} from "rxjs/Subscriber";
 import {NotificationsService} from "angular2-notifications/dist";
-import {BackendService} from "../util/backend.service";
-import {StatusPayload} from "../pages/models/StatusPayload.model";
-import {UserPrincipal} from "./UserPrincipal.model";
+import {BackendService} from "../../util/backend.service";
+import {StatusPayload} from "../../pages/models/StatusPayload.model";
+import {UserPrincipal} from "../UserPrincipal.model";
 
 @Component({
     selector: 'user-adjustment-guy',

@@ -4,10 +4,10 @@ import {Observable} from "rxjs/Observable";
 import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {User} from "./user.model";
+import {User} from "./user/user.model";
 import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
-import {NewUser} from "./NewUser.model";
+import {NewUser} from "./user/NewUser.model";
 import {Permissions} from "./Permissions.component";
 import {BackendService} from "../util/backend.service";
 
