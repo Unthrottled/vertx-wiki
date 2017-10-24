@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./create.button.template.htm");
-var auth_service_1 = require("../auth/auth.service");
+var auth_service_1 = require("../../auth/auth.service");
 var CreateComponent = (function () {
     function CreateComponent(authService) {
         this.authService = authService;

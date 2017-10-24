@@ -25,10 +25,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./create.page.htm");
-var Pages_service_1 = require("./Pages.service");
+var Pages_service_1 = require("../Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var Observable_1 = require("rxjs/Observable");
-var BasePage_component_1 = require("./BasePage.component");
+var BasePage_component_1 = require("../BasePage.component");
 var CreatePageComponent = (function (_super) {
     __extends(CreatePageComponent, _super);
     function CreatePageComponent(router, pagesService, notificationService, actualRouter) {
