@@ -23,22 +23,6 @@ var BasePageComponent = (function () {
             hideDelete: true
         };
     }
-    Object.defineProperty(BasePageComponent.prototype, "page", {
-        get: function () {
-            return this._page;
-        },
-        set: function (value) {
-            this._page = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    BasePageComponent.prototype.load = function (page) {
-        this.title = page.name;
-        this.content = page.markdown;
-        this.page = page;
-        return Observable_1.Observable.of(true);
-    };
     Object.defineProperty(BasePageComponent.prototype, "title", {
         get: function () {
             return this._title;
@@ -79,6 +63,16 @@ var BasePageComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(BasePageComponent.prototype, "page", {
+        get: function () {
+            return this._page;
+        },
+        set: function (value) {
+            this._page = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(BasePageComponent.prototype, "editOptions", {
         get: function () {
             return this._editOptions;
@@ -89,6 +83,12 @@ var BasePageComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    BasePageComponent.prototype.load = function (page) {
+        this.title = page.name;
+        this.content = page.markdown;
+        this.page = page;
+        return Observable_1.Observable.of(true);
+    };
     return BasePageComponent;
 }());
 __decorate([

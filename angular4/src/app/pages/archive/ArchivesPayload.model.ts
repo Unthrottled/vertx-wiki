@@ -1,5 +1,5 @@
-import {StatusPayload} from "../StatusPayload.model";
-import {PageMetaData} from "../metadata.model";
+import {StatusPayload} from "../models/StatusPayload.model";
+import {PageMetaData} from "../models/metadata.model";
 import {ArchivePageMin} from "./ArchivePageMin";
 
 /**

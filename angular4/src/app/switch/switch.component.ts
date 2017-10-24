@@ -9,39 +9,39 @@ import {Observable} from "rxjs/Observable";
 
 
 @Component({
-  selector: 'dead-mans-switch',
-  template: require('./switch.component.htm'),
-  styleUrls: []
+    selector: 'dead-mans-switch',
+    template: require('./switch.component.htm'),
+    styleUrls: []
 })
 export class SwitchComponent implements OnInit {
-  private _liveness: Boolean = false;
-  @Output()
-  private livenessChange = new EventEmitter();
+    @Output()
+    private livenessChange = new EventEmitter();
 
-  constructor(private token: UserPrincipal) {
-  }
+    constructor(private token: UserPrincipal) {
+    }
 
-  get enabled(): Observable<boolean> {
-    return Permissions.canActivate(this.token, 'update')
-      .map(canDo => !canDo);
-  }
+    private _liveness: Boolean = false;
 
-  ngOnInit(): void {
+    @Input()
+    get liveness(): Boolean {
+        return this._liveness;
+    }
 
-  }
+    set liveness(value: Boolean) {
+        this._liveness = value;
+        this.livenessChange.emit(this._liveness);
+    }
 
-  change(value: any): void {
+    get enabled(): Observable<boolean> {
+        return Permissions.canActivate(this.token, 'update')
+            .map(canDo => !canDo);
+    }
 
-  }
+    ngOnInit(): void {
 
+    }
 
-  @Input()
-  get liveness(): Boolean {
-    return this._liveness;
-  }
+    change(value: any): void {
 
-  set liveness(value: Boolean) {
-    this._liveness = value;
-    this.livenessChange.emit(this._liveness);
-  }
+    }
 }

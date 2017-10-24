@@ -37,8 +37,8 @@ public class VerticalOrchestratorTest {
     onDeploy = dbDeploy.compose(id -> {
       Future<String> httpDeploy = Future.future();
       vertx.deployVerticle("io.acari.core.HttpVerticle",
-        new DeploymentOptions().setInstances(2),
-        httpDeploy);
+          new DeploymentOptions().setInstances(2),
+          httpDeploy);
       return httpDeploy;
     });
   }
@@ -52,18 +52,18 @@ public class VerticalOrchestratorTest {
   public void testThatTheServerIsStarted(TestContext tc) {
     onDeploy.setHandler(result -> {
       ChainableOptional.of(result)
-        .filter(AsyncResult::succeeded)
-        .ifPresent(deployStatus -> {
-          Async async = tc.async();
-          provider.get().createHttpClient().getNow(8989, "localhost", "/login", response -> {
-            tc.assertEquals(response.statusCode(), 200);
-            response.bodyHandler(body -> {
-              tc.assertTrue(body.length() > 0);
-              async.complete();
+          .filter(AsyncResult::succeeded)
+          .ifPresent(deployStatus -> {
+            Async async = tc.async();
+            provider.get().createHttpClient().getNow(8989, "localhost", "/login", response -> {
+              tc.assertEquals(response.statusCode(), 200);
+              response.bodyHandler(body -> {
+                tc.assertTrue(body.length() > 0);
+                async.complete();
+              });
             });
-          });
-        })
-        .orElseDo(tc::fail);
+          })
+          .orElseDo(tc::fail);
     });
   }
 

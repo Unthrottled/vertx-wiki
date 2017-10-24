@@ -19,6 +19,13 @@ var Permissions = Permissions_1 = (function () {
     function Permissions(userPrince) {
         this.userPrince = userPrince;
     }
+    Object.defineProperty(Permissions.prototype, "canView", {
+        get: function () {
+            return Permissions_1.canActivate(this.userPrince, 'view');
+        },
+        enumerable: true,
+        configurable: true
+    });
     Permissions.canActivate = function (userToken, path) {
         return Observable_1.Observable.of(Permissions_1.findPermisson(path, userToken));
     };
@@ -34,13 +41,6 @@ var Permissions = Permissions_1 = (function () {
                 return userToken.canView;
         }
     };
-    Object.defineProperty(Permissions.prototype, "canView", {
-        get: function () {
-            return Permissions_1.canActivate(this.userPrince, 'view');
-        },
-        enumerable: true,
-        configurable: true
-    });
     return Permissions;
 }());
 Permissions = Permissions_1 = __decorate([

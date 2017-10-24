@@ -16,10 +16,10 @@ var core_1 = require("@angular/core");
 require("./hex-row.htm");
 var HexRowComponent = HexRowComponent_1 = (function () {
     function HexRowComponent() {
+        this.onClick = new core_1.EventEmitter();
         this._keyValues = [];
         this._hexWidth = 104;
         this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
-        this.onClick = new core_1.EventEmitter();
     }
     Object.defineProperty(HexRowComponent.prototype, "keyValues", {
         get: function () {
@@ -41,13 +41,6 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
-        get: function () {
-            return this.config ? !this.config.even : false;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(HexRowComponent.prototype, "hexHeight", {
         get: function () {
             return this._hexHeight;
@@ -64,6 +57,13 @@ var HexRowComponent = HexRowComponent_1 = (function () {
         },
         set: function (value) {
             this._hexWidth = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HexRowComponent.prototype, "needsOffset", {
+        get: function () {
+            return this.config ? !this.config.even : false;
         },
         enumerable: true,
         configurable: true

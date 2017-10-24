@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 
 public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthProvider, TokenHandler> {
   private static final Logger LOGGER = LoggerFactory.getLogger(TokenHandler.class);
+  private final PrincipalGenerator principalGenerator;
   private AuthProvider authProvider;
   private TokenGenerator tokenGenerator;
-  private final PrincipalGenerator principalGenerator;
 
   @Inject
   public TokenHandler(PrincipalGenerator principalGenerator) {
@@ -39,17 +39,17 @@ public class TokenHandler implements Handler<RoutingContext>, Configurable<AuthP
                           .map(AsyncResult::result)
                           .ifPresent(user ->
                               principalGenerator.generate(user)
-                              .subscribe(principal -> {
-                                String token = tokenGenerator.generate(principal.put("username", username));
-                                routingContext.response()
-                                    .putHeader("Content-Type", "application/json")
-                                    .end(new JsonObject()
-                                        .put("token", token)
-                                        .put("principal", principal).encode());
-                              }, error -> {
-                                LOGGER.warn("Thing Broke in Token Handler -> ", error);
-                                routingContext.response().setStatusCode(500).end();
-                              })
+                                  .subscribe(principal -> {
+                                    String token = tokenGenerator.generate(principal.put("username", username));
+                                    routingContext.response()
+                                        .putHeader("Content-Type", "application/json")
+                                        .end(new JsonObject()
+                                            .put("token", token)
+                                            .put("principal", principal).encode());
+                                  }, error -> {
+                                    LOGGER.warn("Thing Broke in Token Handler -> ", error);
+                                    routingContext.response().setStatusCode(500).end();
+                                  })
                           )
                           .orElseDo(() -> {
                             LOGGER.warn("Thing Broke in Token Handler -> ", authRes.cause());

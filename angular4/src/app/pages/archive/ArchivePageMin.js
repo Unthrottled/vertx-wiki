@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Page_min_model_1 = require("../Page.min.model");
+var Page_min_model_1 = require("../models/Page.min.model");
 var ArchivePageMin = (function (_super) {
     __extends(ArchivePageMin, _super);
     function ArchivePageMin(pageMin) {

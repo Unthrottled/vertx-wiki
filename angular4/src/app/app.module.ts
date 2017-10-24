@@ -17,35 +17,35 @@ import {WindowRef} from "./util/window";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth.guard";
 import {LoginComponent} from "./auth/login.component";
-import {BaseComponent} from "./base.component";
+import {BaseComponent} from "./pages/base/base.component";
 import {LogoutComponent} from "./auth/logout.component";
 import {UserPrincipal} from "./auth/UserPrincipal.model";
 import {PagesComponent} from "./pages/Pages.component";
 import {Permissions} from "./auth/Permissions.component";
-import {PagesResolve} from "./pages/pages-resolve.service";
-import {PagesService} from "./pages/Pages.service";
+import {PagesResolve} from "./pages/services/pages-resolve.service";
+import {PagesService} from "./pages/services/Pages.service";
 import {BackendService} from "./util/backend.service";
-import {PageResolve} from "./pages/page-resolve.service";
-import {EditComponent} from "./pages/Edit.component";
+import {PageResolve} from "./pages/services/page-resolve.service";
+import {EditComponent} from "./pages/edit/Edit.component";
 import {SimpleNotificationsModule} from "angular2-notifications";
-import {EditPageComponent} from "./pages/EditPage.component";
-import {NewPageResolve} from "./pages/new-page-resolve.service";
-import {TitleCreationComponent} from "./pages/TitleCreation.component";
-import {CreatePageComponent} from "./pages/CreatePage.component";
-import {TitleValidationService} from "./pages/TitleValidation.service";
-import {DeletionComponent} from "./pages/deletion.component";
-import {CreateComponent} from "./pages/create.button.component";
+import {EditPageComponent} from "./pages/edit/EditPage.component";
+import {NewPageResolve} from "./pages/services/new-page-resolve.service";
+import {TitleCreationComponent} from "./pages/edit/TitleCreation.component";
+import {CreatePageComponent} from "./pages/create/CreatePage.component";
+import {TitleValidationService} from "./pages/edit/TitleValidation.service";
+import {DeletionComponent} from "./pages/archive/deletion.component";
+import {CreateComponent} from "./pages/create/create.button.component";
 import {HexRowComponent} from "./pages/hex/hex-row.component";
 import {HexListComponent} from "./pages/hex/HexList.component";
 import {HexComponent} from "./pages/hex/HexComponent";
 import {SearchComponent} from "./pages/search/Search.component";
-import {RegisterComponent} from "./auth/register.component";
-import {NewUserValidationService} from "./pages/NewUserValidation.service";
-import {NewUserCreationComponent} from "./pages/NewUserCreation.component";
+import {RegisterComponent} from "./auth/user/register.component";
+import {NewUserValidationService} from "./auth/user/NewUserValidation.service";
+import {NewUserCreationComponent} from "./auth/user/NewUserCreation.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {PaginatorComponent} from "./pages/paginator/Pagination.component";
 import {RolesComponent} from "./auth/Roles.component";
-import {UserAdjustmentComponent} from "./auth/UserAdjustment.component";
+import {UserAdjustmentComponent} from "./auth/user/UserAdjustment.component";
 import {LogoutHiderComponent} from "./auth/hideOnLogout.component";
 import {ArchivePageComponent} from "./pages/archive/ArchivePage.component";
 import {ArchivesComponent} from "./pages/archive/Archives.component";
@@ -55,9 +55,19 @@ import {ArchiveResolve} from "./pages/archive/archive-resolve.service";
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
     {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
-    {path: 'archives/:pageNumber', component: ArchivesComponent, canActivate: [AuthGuard], resolve: {pages: ArchivesResolve}},
+    {
+        path: 'archives/:pageNumber',
+        component: ArchivesComponent,
+        canActivate: [AuthGuard],
+        resolve: {pages: ArchivesResolve}
+    },
     {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
-    {path: 'archive/:name', component: ArchivePageComponent, canActivate: [AuthGuard], resolve: {pages: ArchiveResolve}},
+    {
+        path: 'archive/:name',
+        component: ArchivePageComponent,
+        canActivate: [AuthGuard],
+        resolve: {pages: ArchiveResolve}
+    },
     {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
     {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
     {path: 'user/adjustment', component: UserAdjustmentComponent, canActivate: [AuthGuard]},

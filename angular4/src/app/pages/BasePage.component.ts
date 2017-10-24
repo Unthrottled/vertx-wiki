@@ -7,83 +7,87 @@ import "./page.htm";
 import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
 import {Observable} from "rxjs/Observable";
-import {EditOptions} from "./EditOptions.model";
-import {Page} from "./Page.model";
+import {EditOptions} from "./edit/EditOptions.model";
+import {Page} from "./models/Page.model";
 
 
 export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
-  get page(): Page {
-    return this._page;
-  }
+    constructor(protected router: ActivatedRoute) {
+    }
 
-  set page(value: Page) {
-    this._page = value;
-  }
+    private _title: string;
 
-  private _title: string;
-  private _content: string;
-  private _editMode: boolean = false;
-  private _htmlContent: string;
-  private _page: Page;
-  protected _editOptions: EditOptions = {
-    hideDelete: true
-  };
+    get title(): string {
+        return this._title;
+    }
 
-  constructor(protected router: ActivatedRoute) {
-  }
+    set title(value: string) {
+        this._title = value;
+    }
 
-  abstract save(): Observable<boolean>;
+    private _content: string;
 
-  abstract reset(): void;
+    get content(): string {
+        return this._content;
+    }
 
-  abstract ngOnInit(): void;
+    set content(value: string) {
+        this._content = value;
+    }
 
-  protected load(page: Page): Observable<boolean> {
-    this.title = page.name;
-    this.content = page.markdown;
-    this.page = page;
-    return Observable.of(true);
-  }
+    private _editMode: boolean = false;
 
+    @Input()
+    get editMode(): boolean {
+        return this._editMode;
+    }
 
-  get title(): string {
-    return this._title;
-  }
+    set editMode(value: boolean) {
+        this._editMode = value;
+    }
 
-  set title(value: string) {
-    this._title = value;
-  }
+    private _htmlContent: string;
 
-  get content(): string {
-    return this._content;
-  }
+    get htmlContent(): string {
+        return this._htmlContent;
+    }
 
-  set content(value: string) {
-    this._content = value;
-  }
+    set htmlContent(value: string) {
+        this._htmlContent = value;
+    }
 
-  @Input()
-  get editMode(): boolean {
-    return this._editMode;
-  }
+    private _page: Page;
 
-  set editMode(value: boolean) {
-    this._editMode = value;
-  }
+    get page(): Page {
+        return this._page;
+    }
 
-  get htmlContent(): string {
-    return this._htmlContent;
-  }
+    set page(value: Page) {
+        this._page = value;
+    }
 
-  set htmlContent(value: string) {
-    this._htmlContent = value;
-  }
+    protected _editOptions: EditOptions = {
+        hideDelete: true
+    };
 
-  get editOptions(): EditOptions {
-    return this._editOptions;
-  }
+    get editOptions(): EditOptions {
+        return this._editOptions;
+    }
 
-  set editOptions(value: EditOptions) {
-    this._editOptions = value;
-  }
+    set editOptions(value: EditOptions) {
+        this._editOptions = value;
+    }
+
+    abstract save(): Observable<boolean>;
+
+    abstract reset(): void;
+
+    abstract ngOnInit(): void;
+
+    protected load(page: Page): Observable<boolean> {
+        this.title = page.name;
+        this.content = page.markdown;
+        this.page = page;
+        return Observable.of(true);
+    }
 }

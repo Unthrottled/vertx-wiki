@@ -6,15 +6,15 @@ import {AuthService} from "./auth.service";
 import "./logoutHider.template.htm";
 
 @Component({
-  selector: 'logout-hider',
-  template: require('./logoutHider.template.htm')
+    selector: 'logout-hider',
+    template: require('./logoutHider.template.htm')
 })
 export class LogoutHiderComponent {
-  constructor(public authService: AuthService) {
+    constructor(public authService: AuthService) {
 
-  }
+    }
 
-  get hideLogout(): boolean {
-    return !this.authService.isLoggedIn;
-  }
+    get hideLogout(): boolean {
+        return !this.authService.isLoggedIn;
+    }
 }

@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./archived-page.htm");
-var Pages_service_1 = require("../Pages.service");
+var Pages_service_1 = require("../services/Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var BasePage_component_1 = require("../BasePage.component");
 var auth_service_1 = require("../../auth/auth.service");

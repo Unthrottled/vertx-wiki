@@ -24,31 +24,31 @@ public class APIUpdateHandler implements Handler<RoutingContext>, Configurable<C
 
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.user().principal().getBoolean("canUpdate", false))
-      .filter(b -> b)
-      .ifPresent(canUpdate -> {
-        JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        ChainableOptional.ofNullable(bodyAsJson.getString("name"))
-          .ifPresent(name -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
-            .ifPresent(markdown -> {
-              DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
-              JsonObject params = new JsonObject()
-                .put("name", name)
-                .put("username", routingContext.user().principal().getString("username"))
-                .put("content", markdown);
-              simpleResponseHandler.handle(routingContext, params, deliveryOptions);
-            }).orElseDo(() -> fourHundred(routingContext, "markdown")))
-          .orElseDo(() -> fourHundred(routingContext, "name"));
-      })
-      .orElseDo(() -> routingContext
-        .response()
-        .setStatusCode(401)
-        .end());
+        .filter(b -> b)
+        .ifPresent(canUpdate -> {
+          JsonObject bodyAsJson = routingContext.getBodyAsJson();
+          ChainableOptional.ofNullable(bodyAsJson.getString("name"))
+              .ifPresent(name -> ChainableOptional.ofNullable(bodyAsJson.getString("markdown"))
+                  .ifPresent(markdown -> {
+                    DeliveryOptions deliveryOptions = Config.createDeliveryOptions("save-page");
+                    JsonObject params = new JsonObject()
+                        .put("name", name)
+                        .put("username", routingContext.user().principal().getString("username"))
+                        .put("content", markdown);
+                    simpleResponseHandler.handle(routingContext, params, deliveryOptions);
+                  }).orElseDo(() -> fourHundred(routingContext, "markdown")))
+              .orElseDo(() -> fourHundred(routingContext, "name"));
+        })
+        .orElseDo(() -> routingContext
+            .response()
+            .setStatusCode(401)
+            .end());
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
-      .setStatusCode(400)
-      .end("No " + name + " Provided, bruv.");
+        .setStatusCode(400)
+        .end("No " + name + " Provided, bruv.");
   }
 
   @Override

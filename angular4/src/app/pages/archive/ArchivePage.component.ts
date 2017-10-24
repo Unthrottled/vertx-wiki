@@ -4,8 +4,8 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import "./archived-page.htm";
-import {PageFull} from "../Page.full.model";
-import {PagesService} from "../Pages.service";
+import {PageFull} from "../models/Page.full.model";
+import {PagesService} from "../services/Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "../BasePage.component";
@@ -41,13 +41,13 @@ export class ArchivePageComponent extends BasePageComponent {
         returnGuy.subscribe((success: boolean) => {
             if (success) {
                 self.actualRouter.navigate(
-                    ['page/'+ this.page.name]
+                    ['page/' + this.page.name]
                 )
             } else {
                 self.failure('): try again.')
             }
         }, (error: any) => {
-            if(error.status == 500){//TODO: SHOULD REALLY BE A 400 BAD REQUEST
+            if (error.status == 500) {//TODO: SHOULD REALLY BE A 400 BAD REQUEST
                 self.failure('Page already exists!')
             } else {
                 self.failure('): try again.')

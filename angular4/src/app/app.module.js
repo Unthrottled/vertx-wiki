@@ -24,35 +24,35 @@ var window_1 = require("./util/window");
 var auth_service_1 = require("./auth/auth.service");
 var auth_guard_1 = require("./auth/auth.guard");
 var login_component_1 = require("./auth/login.component");
-var base_component_1 = require("./base.component");
+var base_component_1 = require("./pages/base/base.component");
 var logout_component_1 = require("./auth/logout.component");
 var UserPrincipal_model_1 = require("./auth/UserPrincipal.model");
 var Pages_component_1 = require("./pages/Pages.component");
 var Permissions_component_1 = require("./auth/Permissions.component");
-var pages_resolve_service_1 = require("./pages/pages-resolve.service");
-var Pages_service_1 = require("./pages/Pages.service");
+var pages_resolve_service_1 = require("./pages/services/pages-resolve.service");
+var Pages_service_1 = require("./pages/services/Pages.service");
 var backend_service_1 = require("./util/backend.service");
-var page_resolve_service_1 = require("./pages/page-resolve.service");
-var Edit_component_1 = require("./pages/Edit.component");
+var page_resolve_service_1 = require("./pages/services/page-resolve.service");
+var Edit_component_1 = require("./pages/edit/Edit.component");
 var angular2_notifications_1 = require("angular2-notifications");
-var EditPage_component_1 = require("./pages/EditPage.component");
-var new_page_resolve_service_1 = require("./pages/new-page-resolve.service");
-var TitleCreation_component_1 = require("./pages/TitleCreation.component");
-var CreatePage_component_1 = require("./pages/CreatePage.component");
-var TitleValidation_service_1 = require("./pages/TitleValidation.service");
-var deletion_component_1 = require("./pages/deletion.component");
-var create_button_component_1 = require("./pages/create.button.component");
+var EditPage_component_1 = require("./pages/edit/EditPage.component");
+var new_page_resolve_service_1 = require("./pages/services/new-page-resolve.service");
+var TitleCreation_component_1 = require("./pages/edit/TitleCreation.component");
+var CreatePage_component_1 = require("./pages/create/CreatePage.component");
+var TitleValidation_service_1 = require("./pages/edit/TitleValidation.service");
+var deletion_component_1 = require("./pages/archive/deletion.component");
+var create_button_component_1 = require("./pages/create/create.button.component");
 var hex_row_component_1 = require("./pages/hex/hex-row.component");
 var HexList_component_1 = require("./pages/hex/HexList.component");
 var HexComponent_1 = require("./pages/hex/HexComponent");
 var Search_component_1 = require("./pages/search/Search.component");
-var register_component_1 = require("./auth/register.component");
-var NewUserValidation_service_1 = require("./pages/NewUserValidation.service");
-var NewUserCreation_component_1 = require("./pages/NewUserCreation.component");
+var register_component_1 = require("./auth/user/register.component");
+var NewUserValidation_service_1 = require("./auth/user/NewUserValidation.service");
+var NewUserCreation_component_1 = require("./auth/user/NewUserCreation.component");
 var about_component_1 = require("./pages/about/about.component");
 var Pagination_component_1 = require("./pages/paginator/Pagination.component");
 var Roles_component_1 = require("./auth/Roles.component");
-var UserAdjustment_component_1 = require("./auth/UserAdjustment.component");
+var UserAdjustment_component_1 = require("./auth/user/UserAdjustment.component");
 var hideOnLogout_component_1 = require("./auth/hideOnLogout.component");
 var ArchivePage_component_1 = require("./pages/archive/ArchivePage.component");
 var Archives_component_1 = require("./pages/archive/Archives.component");
@@ -61,9 +61,19 @@ var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
-    { path: 'archives/:pageNumber', component: Archives_component_1.ArchivesComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: archives_resolve_service_1.ArchivesResolve } },
+    {
+        path: 'archives/:pageNumber',
+        component: Archives_component_1.ArchivesComponent,
+        canActivate: [auth_guard_1.AuthGuard],
+        resolve: { pages: archives_resolve_service_1.ArchivesResolve }
+    },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
-    { path: 'archive/:name', component: ArchivePage_component_1.ArchivePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: archive_resolve_service_1.ArchiveResolve } },
+    {
+        path: 'archive/:name',
+        component: ArchivePage_component_1.ArchivePageComponent,
+        canActivate: [auth_guard_1.AuthGuard],
+        resolve: { pages: archive_resolve_service_1.ArchiveResolve }
+    },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
     { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'user/adjustment', component: UserAdjustment_component_1.UserAdjustmentComponent, canActivate: [auth_guard_1.AuthGuard] },

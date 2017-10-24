@@ -24,7 +24,7 @@ public enum Action {
 
   static {
     ref = Arrays.stream(Action.values())
-      .collect(Collectors.toMap(Action::getAction, Function.identity()));
+        .collect(Collectors.toMap(Action::getAction, Function.identity()));
   }
 
   private String action;

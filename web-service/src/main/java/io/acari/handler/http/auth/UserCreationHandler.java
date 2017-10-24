@@ -23,34 +23,34 @@ public class UserCreationHandler implements Handler<RoutingContext> {
   public void handle(RoutingContext routingContext) {
     JsonObject body = routingContext.getBodyAsJson();
     ChainableOptional.ofNullable(body.getString("login"))
-      .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
-        .ifPresent(password -> ChainableOptional.ofNullable(body.getString("role"))
-          .ifPresent(role -> {
-            mongoAuth.insertUser(login,
-              password,
-              Collections.singletonList(role),
-              Collections.emptyList(),
-              stringAsyncResult -> ChainableOptional.of(stringAsyncResult)
-                .filter(AsyncResult::succeeded)
-                .map(AsyncResult::result)
-                .ifPresent(result -> {
-                  routingContext.response().setStatusCode(201).end(result);
-                })
-                .orElseDo(() -> {
-                  LOGGER.warn("Ohhhhh sheeeeeeit", stringAsyncResult.cause());
-                  routingContext.response()
-                    .setStatusCode(400)
-                    .end("You can't do dat \n ¯\\_(ツ)_/¯");
-                }));
-          }))
-        .orElseDo(() -> fourHundred(routingContext, "password")))
-      .orElseDo(() -> fourHundred(routingContext, "login"));
+        .ifPresent(login -> ChainableOptional.ofNullable(body.getString("password"))
+            .ifPresent(password -> ChainableOptional.ofNullable(body.getString("role"))
+                .ifPresent(role -> {
+                  mongoAuth.insertUser(login,
+                      password,
+                      Collections.singletonList(role),
+                      Collections.emptyList(),
+                      stringAsyncResult -> ChainableOptional.of(stringAsyncResult)
+                          .filter(AsyncResult::succeeded)
+                          .map(AsyncResult::result)
+                          .ifPresent(result -> {
+                            routingContext.response().setStatusCode(201).end(result);
+                          })
+                          .orElseDo(() -> {
+                            LOGGER.warn("Ohhhhh sheeeeeeit", stringAsyncResult.cause());
+                            routingContext.response()
+                                .setStatusCode(400)
+                                .end("You can't do dat \n ¯\\_(ツ)_/¯");
+                          }));
+                }))
+            .orElseDo(() -> fourHundred(routingContext, "password")))
+        .orElseDo(() -> fourHundred(routingContext, "login"));
 
   }
 
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
-      .setStatusCode(400)
-      .end("No " + name + " Provided, bruv.");
+        .setStatusCode(400)
+        .end("No " + name + " Provided, bruv.");
   }
 }

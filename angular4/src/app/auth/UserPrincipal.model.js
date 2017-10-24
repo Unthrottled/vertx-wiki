@@ -16,18 +16,6 @@ var core_1 = require("@angular/core");
 var UserPrincipal = (function () {
     function UserPrincipal() {
     }
-    UserPrincipal.prototype.newUserPrincipal = function (principal) {
-        this.setFields(principal);
-    };
-    UserPrincipal.prototype.setFields = function (principal) {
-        this._canView = principal.principal.canView;
-        this._canCreate = principal.principal.canCreate;
-        this._canUpdate = principal.principal.canUpdate;
-        this._canDelete = principal.principal.canDelete;
-        this._token = principal.token;
-        this._role = principal.principal.role;
-        this._username = principal.principal.username;
-    };
     Object.defineProperty(UserPrincipal.prototype, "canView", {
         get: function () {
             return this._canView;
@@ -35,16 +23,16 @@ var UserPrincipal = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(UserPrincipal.prototype, "canCreate", {
+    Object.defineProperty(UserPrincipal.prototype, "canDelete", {
         get: function () {
-            return this._canCreate;
+            return this._canDelete;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(UserPrincipal.prototype, "canDelete", {
+    Object.defineProperty(UserPrincipal.prototype, "canCreate", {
         get: function () {
-            return this._canDelete;
+            return this._canCreate;
         },
         enumerable: true,
         configurable: true
@@ -77,6 +65,18 @@ var UserPrincipal = (function () {
         enumerable: true,
         configurable: true
     });
+    UserPrincipal.prototype.newUserPrincipal = function (principal) {
+        this.setFields(principal);
+    };
+    UserPrincipal.prototype.setFields = function (principal) {
+        this._canView = principal.principal.canView;
+        this._canCreate = principal.principal.canCreate;
+        this._canUpdate = principal.principal.canUpdate;
+        this._canDelete = principal.principal.canDelete;
+        this._token = principal.token;
+        this._role = principal.principal.role;
+        this._username = principal.principal.username;
+    };
     return UserPrincipal;
 }());
 UserPrincipal = __decorate([

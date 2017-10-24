@@ -4,10 +4,10 @@ import {Observable} from "rxjs/Observable";
 import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {User} from "./user.model";
+import {User} from "./user/user.model";
 import {HostService} from "../session/host.service";
 import {UserPrincipal} from "./UserPrincipal.model";
-import {NewUser} from "./NewUser.model";
+import {NewUser} from "./user/NewUser.model";
 import {Permissions} from "./Permissions.component";
 import {BackendService} from "../util/backend.service";
 
@@ -68,7 +68,7 @@ export class AuthService {
 
     cantCreate(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'create')
-            .map(b=>!b);
+            .map(b => !b);
     }
 
     canDelete(): Observable<boolean> {
@@ -77,7 +77,7 @@ export class AuthService {
 
     cantDelete(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'delete')
-            .map(b=>!b);
+            .map(b => !b);
     }
 
     canUpdate(): Observable<boolean> {
@@ -86,6 +86,6 @@ export class AuthService {
 
     cantUpdate(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'update')
-            .map(b=>!b);
+            .map(b => !b);
     }
 }

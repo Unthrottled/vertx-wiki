@@ -11,7 +11,7 @@ public class TokenGenerator {
     this.jwtAuth = jwtAuth;
   }
 
-  public String generate(JsonObject principal){
+  public String generate(JsonObject principal) {
     return jwtAuth.generateToken(
         principal,
         new JWTOptions()

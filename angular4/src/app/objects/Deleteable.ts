@@ -4,5 +4,5 @@
 import {Observable} from "rxjs/Observable";
 
 export interface Deleteable {
-  deleteMe(): Observable<boolean>;
+    deleteMe(): Observable<boolean>;
 }

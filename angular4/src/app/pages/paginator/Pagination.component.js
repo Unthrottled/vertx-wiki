@@ -54,6 +54,26 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(PaginatorComponent.prototype, "currentPage", {
+        get: function () {
+            return this._currentPage;
+        },
+        set: function (value) {
+            this._currentPage = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PaginatorComponent.prototype, "maxPagesDisplayed", {
+        get: function () {
+            return this._maxPagesDisplayed;
+        },
+        set: function (value) {
+            this._maxPagesDisplayed = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(PaginatorComponent.prototype, "nextPage", {
         get: function () {
             return this._nextPage;
@@ -81,36 +101,6 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PaginatorComponent.prototype, "maxPagesDisplayed", {
-        get: function () {
-            return this._maxPagesDisplayed;
-        },
-        set: function (value) {
-            this._maxPagesDisplayed = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PaginatorComponent.prototype, "currentPage", {
-        get: function () {
-            return this._currentPage;
-        },
-        set: function (value) {
-            this._currentPage = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PaginatorComponent.prototype.setCurrent = function (page) {
-        this.onPageChanged.emit(page.pageId);
-    };
-    Object.defineProperty(PaginatorComponent.prototype, "firstPage", {
-        get: function () {
-            return this._firstPage;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(PaginatorComponent.prototype, "endPage", {
         get: function () {
             return this._endPage;
@@ -121,6 +111,16 @@ var PaginatorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(PaginatorComponent.prototype, "firstPage", {
+        get: function () {
+            return this._firstPage;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PaginatorComponent.prototype.setCurrent = function (page) {
+        this.onPageChanged.emit(page.pageId);
+    };
     PaginatorComponent.prototype.ngOnInit = function () {
         this.recalculate();
     };

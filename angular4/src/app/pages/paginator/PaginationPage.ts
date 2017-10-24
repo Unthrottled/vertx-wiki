@@ -5,16 +5,16 @@
 
 export class PaginationPage {
 
-  constructor(private _pageId: number) {
+    constructor(private _pageId: number) {
 
-  }
+    }
 
 
-  get pageId(): number {
-    return this._pageId;
-  }
+    get pageId(): number {
+        return this._pageId;
+    }
 
-  equals(otherPage:  PaginationPage): boolean{
-    return this._pageId === otherPage.pageId;
-  }
+    equals(otherPage: PaginationPage): boolean {
+        return this._pageId === otherPage.pageId;
+    }
 }

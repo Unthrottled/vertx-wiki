@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./search.htm");
 var angular2_notifications_1 = require("angular2-notifications");
-var TitleValidation_service_1 = require("../TitleValidation.service");
+var TitleValidation_service_1 = require("../edit/TitleValidation.service");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
 var auth_service_1 = require("../../auth/auth.service");
@@ -29,6 +29,25 @@ var SearchComponent = (function () {
         this.authService = authService;
         this._model = {};
     }
+    Object.defineProperty(SearchComponent.prototype, "model", {
+        get: function () {
+            return this._model;
+        },
+        set: function (value) {
+            this._model = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SearchComponent.prototype, "cantSearch", {
+        get: function () {
+            var _this = this;
+            return Permissions_component_1.Permissions.canActivate(this.userToken, 'view')
+                .map(function (canCreate) { return !(canCreate && _this.authService.isLoggedIn); });
+        },
+        enumerable: true,
+        configurable: true
+    });
     SearchComponent.prototype.search = function (searchedTitle) {
         var _this = this;
         var self = this;
@@ -56,25 +75,6 @@ var SearchComponent = (function () {
             clickToClose: true
         });
     };
-    Object.defineProperty(SearchComponent.prototype, "model", {
-        get: function () {
-            return this._model;
-        },
-        set: function (value) {
-            this._model = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SearchComponent.prototype, "cantSearch", {
-        get: function () {
-            var _this = this;
-            return Permissions_component_1.Permissions.canActivate(this.userToken, 'view')
-                .map(function (canCreate) { return !(canCreate && _this.authService.isLoggedIn); });
-        },
-        enumerable: true,
-        configurable: true
-    });
     return SearchComponent;
 }());
 SearchComponent = __decorate([

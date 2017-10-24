@@ -31,20 +31,20 @@ public class BaseAPIPageHandler implements Handler<RoutingContext>, Configurable
 
   protected static JsonObject getFailure() {
     return new JsonObject()
-      .put("success", false);
+        .put("success", false);
   }
 
   public void handle(RoutingContext routingContext) {
     ChainableOptional.ofNullable(routingContext.request().getParam("page"))
-      .ifPresent(pago -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-        new JsonObject().put("page", pago),
-        Config.createDeliveryOptions(action),
-        connectionResult -> routingContext.response()
-          .putHeader("Cache-Control", "no-store, no-cache")
-          .putHeader("Content-Type", "application/json")
-          .end(getPayLoad(connectionResult, routingContext, pago).encode()))).orElseDo(() -> routingContext.response()
-      .setStatusCode(400)
-      .end("No Path Provided, bruv."));
+        .ifPresent(pago -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+            new JsonObject().put("page", pago),
+            Config.createDeliveryOptions(action),
+            connectionResult -> routingContext.response()
+                .putHeader("Cache-Control", "no-store, no-cache")
+                .putHeader("Content-Type", "application/json")
+                .end(getPayLoad(connectionResult, routingContext, pago).encode()))).orElseDo(() -> routingContext.response()
+        .setStatusCode(400)
+        .end("No Path Provided, bruv."));
   }
 
   private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) {

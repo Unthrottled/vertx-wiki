@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_service_1 = require("./auth.service");
-var user_model_1 = require("./user.model");
+var user_model_1 = require("./user/user.model");
 require("./login.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var dist_1 = require("angular2-notifications/dist");

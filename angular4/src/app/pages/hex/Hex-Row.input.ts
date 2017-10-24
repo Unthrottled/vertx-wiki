@@ -3,6 +3,6 @@
  */
 
 export interface HexRowInput {
-  even?: boolean;
-  space?: number;
+    even?: boolean;
+    space?: number;
 }

@@ -6,65 +6,66 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import "./hex-row.htm";
 import {HexRowInput} from "./Hex-Row.input";
 import {Pair} from "./Pair.model";
+
 @Component({
-  selector: 'hex-row',
-  template: require('./hex-row.htm')
+    selector: 'hex-row',
+    template: require('./hex-row.htm')
 })
 export class HexRowComponent {
-  private _keyValues: Pair<String, any>[] = [];
-  private _config: HexRowInput;
+    private static goldenRatio: number = 0.576923077;
+    @Output()
+    private onClick = new EventEmitter();
 
-  private static goldenRatio: number = 0.576923077;
+    constructor() {
+    }
 
-  private _hexWidth: number = 104;
-  private _hexHeight: number = HexRowComponent.goldenRatio * this._hexWidth;
-  @Output()
-  private onClick = new EventEmitter();
+    private _keyValues: Pair<String, any>[] = [];
 
-  constructor() {
-  }
+    @Input()
+    get keyValues(): Pair<String, any>[] {
+        return this._keyValues;
+    }
 
+    set keyValues(value: Pair<String, any>[]) {
+        this._keyValues = value;
+    }
 
-  @Input()
-  get keyValues(): Pair<String, any>[] {
-    return this._keyValues;
-  }
+    private _config: HexRowInput;
 
-  set keyValues(value: Pair<String, any>[]) {
-    this._keyValues = value;
-  }
+    @Input()
+    get config(): HexRowInput {
+        return this._config;
+    }
 
-  @Input()
-  get config(): HexRowInput {
-    return this._config;
-  }
+    set config(value: HexRowInput) {
+        this._config = value;
+    }
 
-  get needsOffset(): boolean {
-    return this.config ? !this.config.even : false;
-  }
+    private _hexWidth: number = 104;
 
-  set config(value: HexRowInput) {
-    this._config = value;
-  }
+    private _hexHeight: number = HexRowComponent.goldenRatio * this._hexWidth;
 
+    get hexHeight(): number {
+        return this._hexHeight;
+    }
 
-  get hexHeight(): number {
-    return this._hexHeight;
-  }
+    set hexHeight(value: number) {
+        this._hexHeight = value;
+    }
 
-  set hexHeight(value: number) {
-    this._hexHeight = value;
-  }
+    get hexWidth(): number {
+        return this._hexWidth;
+    }
 
-  get hexWidth(): number {
-    return this._hexWidth;
-  }
+    set hexWidth(value: number) {
+        this._hexWidth = value;
+    }
 
-  set hexWidth(value: number) {
-    this._hexWidth = value;
-  }
+    get needsOffset(): boolean {
+        return this.config ? !this.config.even : false;
+    }
 
-  hexClicked(name: string): void {
-    this.onClick.emit(name);
-  }
+    hexClicked(name: string): void {
+        this.onClick.emit(name);
+    }
 }

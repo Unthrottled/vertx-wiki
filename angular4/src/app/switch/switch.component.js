@@ -19,9 +19,20 @@ var Permissions_component_1 = require("../auth/Permissions.component");
 var SwitchComponent = (function () {
     function SwitchComponent(token) {
         this.token = token;
-        this._liveness = false;
         this.livenessChange = new core_1.EventEmitter();
+        this._liveness = false;
     }
+    Object.defineProperty(SwitchComponent.prototype, "liveness", {
+        get: function () {
+            return this._liveness;
+        },
+        set: function (value) {
+            this._liveness = value;
+            this.livenessChange.emit(this._liveness);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SwitchComponent.prototype, "enabled", {
         get: function () {
             return Permissions_component_1.Permissions.canActivate(this.token, 'update')
@@ -34,17 +45,6 @@ var SwitchComponent = (function () {
     };
     SwitchComponent.prototype.change = function (value) {
     };
-    Object.defineProperty(SwitchComponent.prototype, "liveness", {
-        get: function () {
-            return this._liveness;
-        },
-        set: function (value) {
-            this._liveness = value;
-            this.livenessChange.emit(this._liveness);
-        },
-        enumerable: true,
-        configurable: true
-    });
     return SwitchComponent;
 }());
 __decorate([

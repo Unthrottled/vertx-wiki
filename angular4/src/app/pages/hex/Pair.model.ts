@@ -1,7 +1,6 @@
+export class Pair<T, V> {
 
-export class Pair <T, V> {
-
-    constructor(private key: T, private value: V){
+    constructor(private key: T, private value: V) {
 
     }
 }

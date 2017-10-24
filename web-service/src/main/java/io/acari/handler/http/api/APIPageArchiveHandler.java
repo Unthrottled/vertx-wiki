@@ -11,7 +11,7 @@ public class APIPageArchiveHandler extends APIBaseArchiveHandler {
 
   @Inject
   public APIPageArchiveHandler(Vertx vertx) {
-    super(vertx, "canDelete","archive-page","name");
+    super(vertx, "canDelete", "archive-page", "name");
   }
 
 }

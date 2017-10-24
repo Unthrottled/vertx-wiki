@@ -1,27 +1,27 @@
 <div class="content-container">
-  <div class="view-container">
-    <div class="page-content">
-      <h1>{{title}}</h1>
-      <markdown [data]="content">
-      </markdown>
+    <div class="view-container">
+        <div class="page-content">
+            <h1>{{title}}</h1>
+            <markdown [data]="content">
+            </markdown>
+        </div>
+        <div class="edit-content">
+            <label class="dead-mans-switch">
+                EDIT
+                <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
+            </label>
+            <div>
+                <edit-page [id]="title"
+                           [enabled]="!editMode"
+                           [(content)]="content"
+                           [options]="editOptions"
+                           (onReset)="reset()"
+                           (onSave)="save()"
+                           (onDelete)="deleteMe()"></edit-page>
+            </div>
+        </div>
     </div>
-    <div class="edit-content">
-      <label class="dead-mans-switch">
-        EDIT
-        <dead-mans-switch [(liveness)]="editMode"></dead-mans-switch>
-      </label>
-      <div>
-        <edit-page [id]="title"
-                   [enabled]="!editMode"
-                   [(content)]="content"
-                   [options]="editOptions"
-                   (onReset)="reset()"
-                   (onSave)="save()"
-                   (onDelete)="deleteMe()"></edit-page>
-      </div>
-    </div>
-  </div>
-  <small>
-    Last modified by {{page.lastModified.userName}} @ {{page.lastModified.timeStamp}}
-  </small>
+    <small>
+        Last modified by {{page.lastModified.userName}} @ {{page.lastModified.timeStamp}}
+    </small>
 </div>
