@@ -2,14 +2,14 @@
  * Created by alex on 9/20/17.
  */
 import {Component, NgZone} from "@angular/core";
-import "./validation-field.htm";
+import "../common/validation-field.htm";
 import {ValidationComponent} from "../common/Validation.component";
 import {Observable} from "rxjs/Observable";
 import {NewUserValidationService} from "./NewUserValidation.service";
 
 @Component({
     selector: 'user-name-creation',
-    template: require('./validation-field.htm')
+    template: require('../common/validation-field.htm')
 })
 export class NewUserCreationComponent extends ValidationComponent {
 

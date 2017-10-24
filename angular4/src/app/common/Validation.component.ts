@@ -2,7 +2,7 @@
  * Created by alex on 9/20/17.
  */
 import {EventEmitter, Input, NgZone, Output} from "@angular/core";
-import "../pages/validation-field.htm";
+import "./validation-field.htm";
 import {Observable} from "rxjs/Observable";
 
 export abstract class ValidationComponent {

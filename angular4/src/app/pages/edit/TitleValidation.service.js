@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/17/17.
  */
 var core_1 = require("@angular/core");
-var backend_service_1 = require("../util/backend.service");
+var backend_service_1 = require("../../util/backend.service");
 var TitleValidationService = (function () {
     function TitleValidationService(backendService) {
         this.backendService = backendService;

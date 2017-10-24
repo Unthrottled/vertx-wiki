@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./search.htm");
 var angular2_notifications_1 = require("angular2-notifications");
-var TitleValidation_service_1 = require("../TitleValidation.service");
+var TitleValidation_service_1 = require("../edit/TitleValidation.service");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
 var auth_service_1 = require("../../auth/auth.service");

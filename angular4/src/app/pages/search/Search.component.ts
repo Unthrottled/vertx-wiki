@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import "./search.htm";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
-import {TitleValidationService} from "../TitleValidation.service";
+import {TitleValidationService} from "../edit/TitleValidation.service";
 import {Permissions} from "../../auth/Permissions.component";
 import {UserPrincipal} from "../../auth/UserPrincipal.model";
 import {AuthService} from "../../auth/auth.service";
