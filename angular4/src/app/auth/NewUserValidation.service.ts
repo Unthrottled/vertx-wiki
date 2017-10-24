@@ -4,7 +4,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {BackendService} from "../util/backend.service";
-import {ExistsPayload} from "./models/ExistsPayload.model";
+import {ExistsPayload} from "../pages/models/ExistsPayload.model";
 
 @Injectable()
 export class NewUserValidationService {
