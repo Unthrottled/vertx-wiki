@@ -3,10 +3,10 @@
  */
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PageMin} from "./Page.min.model";
+import {PageMin} from "./models/Page.min.model";
 import "./pages.list.htm";
-import {PagePayload} from "./PagePayload.model";
-import {PageMetaData} from "./metadata.model";
+import {PagePayload} from "./models/PagePayload.model";
+import {PageMetaData} from "./models/metadata.model";
 import {AuthService} from "../auth/auth.service";
 import {Observable} from "rxjs/Observable";
 import {Pair} from "./hex/Pair.model";

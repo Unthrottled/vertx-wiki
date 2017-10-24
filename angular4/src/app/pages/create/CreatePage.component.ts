@@ -8,7 +8,7 @@ import {PagesService} from "../Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "../BasePage.component";
-import {Page} from "../Page.model";
+import {Page} from "../models/Page.model";
 
 @Component({
     selector: 'new-page',

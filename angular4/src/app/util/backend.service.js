@@ -16,10 +16,10 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 var host_service_1 = require("../session/host.service");
-var PagePayload_model_1 = require("../pages/PagePayload.model");
-var PageFullPayload_model_1 = require("../pages/PageFullPayload.model");
-var StatusPayload_model_1 = require("../pages/StatusPayload.model");
-var ExistsPayload_model_1 = require("../pages/ExistsPayload.model");
+var PagePayload_model_1 = require("../pages/models/PagePayload.model");
+var PageFullPayload_model_1 = require("../pages/models/PageFullPayload.model");
+var StatusPayload_model_1 = require("../pages/models/StatusPayload.model");
+var ExistsPayload_model_1 = require("../pages/models/ExistsPayload.model");
 var ArchivesPayload_model_1 = require("../pages/archive/ArchivesPayload.model");
 var BackendService = (function () {
     function BackendService(http, userToken, hostService) {

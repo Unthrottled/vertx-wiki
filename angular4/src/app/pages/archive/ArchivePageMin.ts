@@ -1,4 +1,4 @@
-import {PageMin} from "../Page.min.model";
+import {PageMin} from "../models/Page.min.model";
 
 export class ArchivePageMin extends PageMin {
 

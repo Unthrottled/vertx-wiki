@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var StatusPayload_model_1 = require("../StatusPayload.model");
+var StatusPayload_model_1 = require("../models/StatusPayload.model");
 var ArchivePageMin_1 = require("./ArchivePageMin");
 /**
  * Created by alex on 9/17/17.

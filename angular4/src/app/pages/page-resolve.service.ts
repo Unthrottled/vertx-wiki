@@ -6,7 +6,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/rou
 import {Observable} from "rxjs/Observable";
 import {Permissions} from "../auth/Permissions.component";
 import {PagesService} from "./Pages.service";
-import {PageFull} from "./Page.full.model";
+import {PageFull} from "./models/Page.full.model";
 
 @Injectable()
 export class PageResolve implements Resolve<PageFull> {

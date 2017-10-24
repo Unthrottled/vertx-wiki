@@ -4,7 +4,7 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import "../page.htm";
-import {PageFull} from "../Page.full.model";
+import {PageFull} from "../models/Page.full.model";
 import {PagesService} from "../Pages.service";
 import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";

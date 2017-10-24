@@ -4,7 +4,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {BackendService} from "../util/backend.service";
-import {ExistsPayload} from "./ExistsPayload.model";
+import {ExistsPayload} from "./models/ExistsPayload.model";
 
 @Injectable()
 export class TitleValidationService {

@@ -4,7 +4,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import "./archive.list.htm";
-import {PageMetaData} from "../metadata.model";
+import {PageMetaData} from "../models/metadata.model";
 import {ArchivesPayload} from "./ArchivesPayload.model";
 import {Pair} from "../hex/Pair.model";
 

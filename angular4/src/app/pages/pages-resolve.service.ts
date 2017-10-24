@@ -5,9 +5,9 @@ import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Permissions} from "../auth/Permissions.component";
-import {PageMin} from "./Page.min.model";
+import {PageMin} from "./models/Page.min.model";
 import {PagesService} from "./Pages.service";
-import {PagePayload} from "./PagePayload.model";
+import {PagePayload} from "./models/PagePayload.model";
 
 @Injectable()
 export class PagesResolve implements Resolve<PagePayload> {

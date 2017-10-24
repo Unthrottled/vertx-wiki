@@ -4,11 +4,11 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {BackendService} from "../util/backend.service";
-import {PagePayload} from "./PagePayload.model";
-import {PageFull} from "./Page.full.model";
-import {FullPagePayload} from "./PageFullPayload.model";
-import {StatusPayload} from "./StatusPayload.model";
-import {Page} from "./Page.model";
+import {PagePayload} from "./models/PagePayload.model";
+import {PageFull} from "./models/Page.full.model";
+import {FullPagePayload} from "./models/PageFullPayload.model";
+import {StatusPayload} from "./models/StatusPayload.model";
+import {Page} from "./models/Page.model";
 import {ArchivesPayload} from "./archive/ArchivesPayload.model";
 
 @Injectable()

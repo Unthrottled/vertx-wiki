@@ -17,7 +17,7 @@ require("./userAdjustment.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var dist_1 = require("angular2-notifications/dist");
 var backend_service_1 = require("../util/backend.service");
-var StatusPayload_model_1 = require("../pages/StatusPayload.model");
+var StatusPayload_model_1 = require("../pages/models/StatusPayload.model");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var UserAdjustmentComponent = (function () {
     function UserAdjustmentComponent(backendService, notifService, userPrinc) {

@@ -9,10 +9,10 @@ import {Observable} from "rxjs/Observable";
 import {UserPrincipal} from "../auth/UserPrincipal.model";
 
 import {HostService} from "../session/host.service";
-import {PagePayload} from "../pages/PagePayload.model";
-import {FullPagePayload} from "../pages/PageFullPayload.model";
-import {StatusPayload} from "../pages/StatusPayload.model";
-import {ExistsPayload} from "../pages/ExistsPayload.model";
+import {PagePayload} from "../pages/models/PagePayload.model";
+import {FullPagePayload} from "../pages/models/PageFullPayload.model";
+import {StatusPayload} from "../pages/models/StatusPayload.model";
+import {ExistsPayload} from "../pages/models/ExistsPayload.model";
 import {ArchivesPayload} from "../pages/archive/ArchivesPayload.model";
 
 @Injectable()

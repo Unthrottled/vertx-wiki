@@ -8,7 +8,7 @@ import {Resetable} from "../objects/Resetable";
 import {Saveable} from "../objects/Saveable";
 import {Observable} from "rxjs/Observable";
 import {EditOptions} from "./edit/EditOptions.model";
-import {Page} from "./Page.model";
+import {Page} from "./models/Page.model";
 
 
 export abstract class BasePageComponent implements OnInit, Resetable, Saveable {
