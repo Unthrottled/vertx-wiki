@@ -2,8 +2,8 @@
  * Created by alex on 6/7/17.
  */
 import {Component, EventEmitter, Output} from "@angular/core";
-import {UserPrincipal} from "../auth/UserPrincipal.model";
-import {Permissions} from "../auth/Permissions.component";
+import {UserPrincipal} from "../../auth/UserPrincipal.model";
+import {Permissions} from "../../auth/Permissions.component";
 import {Observable} from "rxjs/Observable";
 import "./deletion.component.htm";
 

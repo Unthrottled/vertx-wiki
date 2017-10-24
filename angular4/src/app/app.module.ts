@@ -33,7 +33,7 @@ import {NewPageResolve} from "./pages/new-page-resolve.service";
 import {TitleCreationComponent} from "./pages/TitleCreation.component";
 import {CreatePageComponent} from "./pages/CreatePage.component";
 import {TitleValidationService} from "./pages/TitleValidation.service";
-import {DeletionComponent} from "./pages/deletion.component";
+import {DeletionComponent} from "./pages/archive/deletion.component";
 import {CreateComponent} from "./pages/create.button.component";
 import {HexRowComponent} from "./pages/hex/hex-row.component";
 import {HexListComponent} from "./pages/hex/HexList.component";

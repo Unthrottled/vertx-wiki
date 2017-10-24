@@ -13,8 +13,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 6/7/17.
  */
 var core_1 = require("@angular/core");
-var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
-var Permissions_component_1 = require("../auth/Permissions.component");
+var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
+var Permissions_component_1 = require("../../auth/Permissions.component");
 require("./deletion.component.htm");
 var DeletionComponent = (function () {
     function DeletionComponent(token) {
