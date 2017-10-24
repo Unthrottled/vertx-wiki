@@ -27,23 +27,23 @@ public class BaseAllPageDataHandler implements Handler<RoutingContext>, Configur
 
   public void handle(RoutingContext routingContext) {
     ChainableOptional.of(routingContext.user().principal().getBoolean("canView", false))
-      .filter(b -> b)
-      .ifPresent(canView ->
-        ChainableOptional.ofNullable(routingContext.getBodyAsJson().getInteger("pageNumber"))
-          .ifPresent(pageNumber -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-            new JsonObject()
-              .put("pageNumber", pageNumber),
-            Config.createDeliveryOptions(action), ar -> {
-              JsonObject responseGuy = new JsonObject();
-              getRoutingContext(responseGuy, routingContext, ar)
-                .putHeader("Cache-Control", "no-store, no-cache")
-                .putHeader("Content-Type", "application/json")
-                .end(responseGuy.encode());
-            }))
-          .orElseDo(() -> fourHundred(routingContext, "pageNumber")))
-      .orElseDo(() -> routingContext.response()
-        .setStatusCode(401)
-        .end());
+        .filter(b -> b)
+        .ifPresent(canView ->
+            ChainableOptional.ofNullable(routingContext.getBodyAsJson().getInteger("pageNumber"))
+                .ifPresent(pageNumber -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+                    new JsonObject()
+                        .put("pageNumber", pageNumber),
+                    Config.createDeliveryOptions(action), ar -> {
+                      JsonObject responseGuy = new JsonObject();
+                      getRoutingContext(responseGuy, routingContext, ar)
+                          .putHeader("Cache-Control", "no-store, no-cache")
+                          .putHeader("Content-Type", "application/json")
+                          .end(responseGuy.encode());
+                    }))
+                .orElseDo(() -> fourHundred(routingContext, "pageNumber")))
+        .orElseDo(() -> routingContext.response()
+            .setStatusCode(401)
+            .end());
   }
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {
@@ -52,11 +52,11 @@ public class BaseAllPageDataHandler implements Handler<RoutingContext>, Configur
       responseGuy.put("pages", getBody(ar).getJsonArray("pages"));
       responseGuy.put("metaData", getBody(ar).getJsonObject("metaData"));
       return routingContext.response()
-        .setStatusCode(200);
+          .setStatusCode(200);
     } else {
       responseGuy.put("success", false);
       return routingContext.response()
-        .setStatusCode(500);
+          .setStatusCode(500);
     }
   }
 
@@ -66,8 +66,8 @@ public class BaseAllPageDataHandler implements Handler<RoutingContext>, Configur
 
   private void fourHundred(RoutingContext routingContext, String name) {
     routingContext.response()
-      .setStatusCode(400)
-      .end("No " + name + " Provided, bruv.");
+        .setStatusCode(400)
+        .end("No " + name + " Provided, bruv.");
   }
 
   @Override

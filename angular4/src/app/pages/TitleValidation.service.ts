@@ -9,14 +9,14 @@ import {ExistsPayload} from "./ExistsPayload.model";
 @Injectable()
 export class TitleValidationService {
 
-  constructor(private backendService: BackendService) {
+    constructor(private backendService: BackendService) {
 
-  }
+    }
 
-  isValid(pageName: String): Observable<boolean> {
-    return this.backendService
-      .pageExists(pageName)
-      .map((statusPayload: ExistsPayload) => !statusPayload.exists);
-  }
+    isValid(pageName: String): Observable<boolean> {
+        return this.backendService
+            .pageExists(pageName)
+            .map((statusPayload: ExistsPayload) => !statusPayload.exists);
+    }
 
 }

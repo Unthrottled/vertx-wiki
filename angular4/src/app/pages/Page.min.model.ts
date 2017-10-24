@@ -3,13 +3,13 @@
  */
 
 export class PageMin {
-  private _name: string;
+    constructor(pageMin: any) {
+        this._name = pageMin
+    }
 
-  constructor(pageMin: any) {
-    this._name = pageMin
-  }
+    private _name: string;
 
-  get name(): string {
-    return this._name;
-  }
+    get name(): string {
+        return this._name;
+    }
 }

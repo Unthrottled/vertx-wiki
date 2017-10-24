@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {value: true});
 /**
  * Created by alex on 9/27/17.
  */
@@ -9,6 +9,7 @@ var HexRowModel = (function () {
         this._keyValues = keyValues;
         this._hexRowInput = hexRowInput;
     }
+
     Object.defineProperty(HexRowModel.prototype, "keyValues", {
         get: function () {
             return this._keyValues;

@@ -4,5 +4,5 @@
 import {Observable} from "rxjs/Observable";
 
 export interface Saveable {
-  save(): Observable<boolean>;
+    save(): Observable<boolean>;
 }

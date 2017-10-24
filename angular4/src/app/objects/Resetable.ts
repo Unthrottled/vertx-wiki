@@ -3,5 +3,5 @@
  */
 
 export interface Resetable {
-  reset(): void;
+    reset(): void;
 }

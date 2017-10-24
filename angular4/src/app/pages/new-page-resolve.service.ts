@@ -10,20 +10,20 @@ import {Page} from "./Page.model";
 
 @Injectable()
 export class NewPageResolve implements Resolve<Page> {
-  constructor(private permissons: Permissions, private pagesService: PagesService) {
+    constructor(private permissons: Permissions, private pagesService: PagesService) {
 
-  }
+    }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page> {
-    return this.permissons.canView
-      .flatMap(canView => {
-        console.log(canView);
-        if (canView) {
-          return this.pagesService.freshPage();
-        } else {
-          return Observable.empty();
-        }
-      });
-  }
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page> {
+        return this.permissons.canView
+            .flatMap(canView => {
+                console.log(canView);
+                if (canView) {
+                    return this.pagesService.freshPage();
+                } else {
+                    return Observable.empty();
+                }
+            });
+    }
 
 }

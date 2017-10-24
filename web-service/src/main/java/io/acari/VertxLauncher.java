@@ -22,8 +22,8 @@ public class VertxLauncher {
     dbDeploy.compose(id -> {
       Future<String> httpDeploy = Future.future();
       vertx.deployVerticle("io.acari.core.HttpVerticle",
-        new DeploymentOptions().setInstances(2),
-        httpDeploy);
+          new DeploymentOptions().setInstances(2),
+          httpDeploy);
       return httpDeploy;
     }).setHandler(stringAsyncResult -> {
       if (stringAsyncResult.succeeded()) {

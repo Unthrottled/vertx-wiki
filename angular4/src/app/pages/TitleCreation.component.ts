@@ -6,18 +6,20 @@ import "./validation-field.htm";
 import {TitleValidationService} from "./TitleValidation.service";
 import {ValidationComponent} from "./Validation.component";
 import {Observable} from "rxjs/Observable";
+
 @Component({
-  selector: 'title-creation',
-  template: require('./validation-field.htm')
+    selector: 'title-creation',
+    template: require('./validation-field.htm')
 })
 export class TitleCreationComponent extends ValidationComponent {
 
-  validateContent(content: string): Observable<boolean> {
-    return this.titleValidationService.isValid(content);
-  }
-  constructor(private titleValidationService: TitleValidationService, private ngZone: NgZone) {
-    super(ngZone);
-    this.placeHolder = "Enter Page Title";
-  }
+    constructor(private titleValidationService: TitleValidationService, private ngZone: NgZone) {
+        super(ngZone);
+        this.placeHolder = "Enter Page Title";
+    }
+
+    validateContent(content: string): Observable<boolean> {
+        return this.titleValidationService.isValid(content);
+    }
 
 }

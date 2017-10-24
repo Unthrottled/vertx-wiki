@@ -7,21 +7,22 @@ import {UserPrincipal} from "../auth/UserPrincipal.model";
 import "./create.button.template.htm";
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "../auth/auth.service";
+
 @Component({
-  selector: 'create-butt',
-  template: require('./create.button.template.htm')
+    selector: 'create-butt',
+    template: require('./create.button.template.htm')
 })
 export class CreateComponent implements OnInit {
-  constructor(public authService: AuthService) {
+    constructor(public authService: AuthService) {
 
-  }
+    }
 
-  ngOnInit(): void {
+    get cantCreate(): Observable<boolean> {
+        return this.authService.canCreate()
+            .map((canCreate: boolean) => !canCreate);
+    }
 
-  }
+    ngOnInit(): void {
 
-  get cantCreate(): Observable<boolean> {
-    return this.authService.canCreate()
-      .map((canCreate: boolean) => !canCreate);
-  }
+    }
 }

@@ -68,7 +68,7 @@ export class AuthService {
 
     cantCreate(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'create')
-            .map(b=>!b);
+            .map(b => !b);
     }
 
     canDelete(): Observable<boolean> {
@@ -77,7 +77,7 @@ export class AuthService {
 
     cantDelete(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'delete')
-            .map(b=>!b);
+            .map(b => !b);
     }
 
     canUpdate(): Observable<boolean> {
@@ -86,6 +86,6 @@ export class AuthService {
 
     cantUpdate(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'update')
-            .map(b=>!b);
+            .map(b => !b);
     }
 }

@@ -4,5 +4,5 @@
 
 
 export interface EditOptions {
-  hideDelete?: boolean;
+    hideDelete?: boolean;
 }

@@ -25,11 +25,11 @@ public class SimpleResponseHandler {
 
   public void handle(RoutingContext routingContext, JsonObject params, DeliveryOptions deliveryOptions) {
     vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-      params,
-      deliveryOptions,
-      connectionResult -> routingContext.response()
-        .putHeader("Content-Type", "application/json")
-        .end(getPayLoad(connectionResult, routingContext).encode()));
+        params,
+        deliveryOptions,
+        connectionResult -> routingContext.response()
+            .putHeader("Content-Type", "application/json")
+            .end(getPayLoad(connectionResult, routingContext).encode()));
   }
 
   private JsonObject getPayLoad(AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext) {
@@ -42,7 +42,7 @@ public class SimpleResponseHandler {
           .map(throwable -> (ReplyException) throwable)
           .map(ReplyException::failureCode)
           .orElse(500);
-      if(code != 400){
+      if (code != 400) {
         LOGGER.warn("Awwww Snap!", connectionResult.cause());
       }
       routingContext.response().setStatusCode(code);

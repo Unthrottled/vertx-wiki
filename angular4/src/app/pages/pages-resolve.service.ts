@@ -11,19 +11,19 @@ import {PagePayload} from "./PagePayload.model";
 
 @Injectable()
 export class PagesResolve implements Resolve<PagePayload> {
-  constructor(private permissons: Permissions, private pagesService: PagesService) {
+    constructor(private permissons: Permissions, private pagesService: PagesService) {
 
-  }
+    }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PagePayload> {
-    return this.permissons.canView
-      .flatMap(canView => {
-        if (canView) {
-          return this.pagesService.fetchAllMinPages(parseInt(route.params['pageNumber']));
-        } else {
-          return Observable.empty();
-        }
-      });
-  }
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PagePayload> {
+        return this.permissons.canView
+            .flatMap(canView => {
+                if (canView) {
+                    return this.pagesService.fetchAllMinPages(parseInt(route.params['pageNumber']));
+                } else {
+                    return Observable.empty();
+                }
+            });
+    }
 
 }

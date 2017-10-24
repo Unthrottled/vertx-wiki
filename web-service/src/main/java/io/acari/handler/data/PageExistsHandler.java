@@ -20,23 +20,23 @@ public class PageExistsHandler implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     ChainableOptional.ofNullable(message.body().getString("page"))
-      .ifPresent(pago -> mongoClient.find("pages", new JsonObject()
-        .put("name", pago), asyncResultHandler -> {
-        ChainableOptional.of(asyncResultHandler)
-          .filter(AsyncResult::succeeded)
-          .ifPresent(result -> {
-            message.reply(result.result()
-              .stream()
-              .findFirst()
-              .map(jsonArray -> new JsonObject()
-                .put("exists", true))
-              .orElse(new JsonObject()
-                .put("exists", false)));
-          })
-          .orElseDo(() -> {
-            LOGGER.warn("Ohhhhhh Sheeit", asyncResultHandler.cause().getMessage());
-            message.fail(500, asyncResultHandler.cause().getMessage());
-          });
-      })).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
+        .ifPresent(pago -> mongoClient.find("pages", new JsonObject()
+            .put("name", pago), asyncResultHandler -> {
+          ChainableOptional.of(asyncResultHandler)
+              .filter(AsyncResult::succeeded)
+              .ifPresent(result -> {
+                message.reply(result.result()
+                    .stream()
+                    .findFirst()
+                    .map(jsonArray -> new JsonObject()
+                        .put("exists", true))
+                    .orElse(new JsonObject()
+                        .put("exists", false)));
+              })
+              .orElseDo(() -> {
+                LOGGER.warn("Ohhhhhh Sheeit", asyncResultHandler.cause().getMessage());
+                message.fail(500, asyncResultHandler.cause().getMessage());
+              });
+        })).orElseDo(() -> message.fail(400, "No Path Provided, bruv."));
   }
 }

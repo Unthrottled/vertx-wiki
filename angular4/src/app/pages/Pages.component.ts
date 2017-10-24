@@ -10,37 +10,38 @@ import {PageMetaData} from "./metadata.model";
 import {AuthService} from "../auth/auth.service";
 import {Observable} from "rxjs/Observable";
 import {Pair} from "./hex/Pair.model";
+
 @Component({
-  selector: 'pages-list',
-  template: require('./pages.list.htm')
+    selector: 'pages-list',
+    template: require('./pages.list.htm')
 })
 export class PagesComponent implements OnInit {
-  pages: Pair<String, String>[] = [];
-  metaData: PageMetaData;
+    pages: Pair<String, String>[] = [];
+    metaData: PageMetaData;
 
-  constructor(private router: ActivatedRoute, private realRouter: Router, private authService: AuthService) {
-  }
+    constructor(private router: ActivatedRoute, private realRouter: Router, private authService: AuthService) {
+    }
 
-  ngOnInit(): void {
-    this.router.data.subscribe((data: { pages: PagePayload }) => {
-      this.pages = data.pages.pages.map(pageMin => new Pair<String, String>(pageMin.name, pageMin.name));
-      this.metaData = data.pages.metadata;
-    });
-  }
+    ngOnInit(): void {
+        this.router.data.subscribe((data: { pages: PagePayload }) => {
+            this.pages = data.pages.pages.map(pageMin => new Pair<String, String>(pageMin.name, pageMin.name));
+            this.metaData = data.pages.metadata;
+        });
+    }
 
-  reRoute(pageName: string): void {
-    this.realRouter.navigate(['/page/' + pageName]);
-  }
+    reRoute(pageName: string): void {
+        this.realRouter.navigate(['/page/' + pageName]);
+    }
 
-  reRouteMain(pageNumber: number): void {
-    this.realRouter.navigate(['/pages/' + pageNumber]);
-  }
+    reRouteMain(pageNumber: number): void {
+        this.realRouter.navigate(['/pages/' + pageNumber]);
+    }
 
-  hasPages(): boolean {
-    return this.pages.length > 0;
-  }
+    hasPages(): boolean {
+        return this.pages.length > 0;
+    }
 
-  canCreate(): Observable<boolean> {
-    return this.authService.canCreate();
-  }
+    canCreate(): Observable<boolean> {
+        return this.authService.canCreate();
+    }
 }

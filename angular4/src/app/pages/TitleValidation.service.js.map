@@ -1,1 +1,10 @@
-{"version":3,"file":"TitleValidation.service.js","sourceRoot":"","sources":["TitleValidation.service.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA;;GAEG;AACH,sCAAyC;AAEzC,2DAAuD;AAIvD,IAAa,sBAAsB;IAEjC,gCAAoB,cAA8B;QAA9B,mBAAc,GAAd,cAAc,CAAgB;IAElD,CAAC;IAED,wCAAO,GAAP,UAAQ,QAAgB;QACtB,MAAM,CAAC,IAAI,CAAC,cAAc;aACvB,UAAU,CAAC,QAAQ,CAAC;aACpB,GAAG,CAAC,UAAC,aAA4B,IAAK,OAAA,CAAC,aAAa,CAAC,MAAM,EAArB,CAAqB,CAAC,CAAC;IAClE,CAAC;IAEH,6BAAC;AAAD,CAAC,AAZD,IAYC;AAZY,sBAAsB;IADlC,iBAAU,EAAE;qCAGyB,gCAAc;GAFvC,sBAAsB,CAYlC;AAZY,wDAAsB"}
+{
+  "version": 3,
+  "file": "TitleValidation.service.js",
+  "sourceRoot": "",
+  "sources": [
+    "TitleValidation.service.ts"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;AAAA;;GAEG;AACH,sCAAyC;AAEzC,2DAAuD;AAIvD,IAAa,sBAAsB;IAEjC,gCAAoB,cAA8B;QAA9B,mBAAc,GAAd,cAAc,CAAgB;IAElD,CAAC;IAED,wCAAO,GAAP,UAAQ,QAAgB;QACtB,MAAM,CAAC,IAAI,CAAC,cAAc;aACvB,UAAU,CAAC,QAAQ,CAAC;aACpB,GAAG,CAAC,UAAC,aAA4B,IAAK,OAAA,CAAC,aAAa,CAAC,MAAM,EAArB,CAAqB,CAAC,CAAC;IAClE,CAAC;IAEH,6BAAC;AAAD,CAAC,AAZD,IAYC;AAZY,sBAAsB;IADlC,iBAAU,EAAE;qCAGyB,gCAAc;GAFvC,sBAAsB,CAYlC;AAZY,wDAAsB"
+}

@@ -11,7 +11,7 @@ public class APIRestoreArchiveHandler extends APIBaseArchiveHandler {
 
   @Inject
   public APIRestoreArchiveHandler(Vertx vertx) {
-    super(vertx, "canCreate","restore-page","_id");
+    super(vertx, "canCreate", "restore-page", "_id");
   }
 
 }

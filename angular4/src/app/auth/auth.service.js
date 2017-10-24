@@ -1,6 +1,7 @@
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
@@ -8,7 +9,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {value: true});
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
@@ -25,6 +26,7 @@ var AuthService = (function () {
         this.backendService = backendService;
         this._isLoggedIn = false;
     }
+
     Object.defineProperty(AuthService.prototype, "isLoggedIn", {
         get: function () {
             return this._isLoggedIn;
@@ -39,30 +41,34 @@ var AuthService = (function () {
         var self = this;
         return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
             .map(function (response) {
-            return response && response.json ?
-                response.json() : '';
-        })
+                return response && response.json ?
+                    response.json() : '';
+            })
             .map(function (json) {
-            self.userToken.newUserPrincipal(json);
-            return self.userToken;
-        })
+                self.userToken.newUserPrincipal(json);
+                return self.userToken;
+            })
             .map(function (prince) {
-            self.isLoggedIn = true;
-            return self.isLoggedIn;
-        });
+                self.isLoggedIn = true;
+                return self.isLoggedIn;
+            });
     };
     AuthService.prototype.createPrincipal = function (user) {
         var self = this;
         return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
             .map(function (response) {
-            return true;
-        });
+                return true;
+            });
     };
     AuthService.prototype.logout = function () {
         var _this = this;
         var observable = this.backendService.logoutUser()
-            .map(function (payload) { return payload.succeded; });
-        observable.subscribe(function (success) { return _this.isLoggedIn = false; });
+            .map(function (payload) {
+                return payload.succeded;
+            });
+        observable.subscribe(function (success) {
+            return _this.isLoggedIn = false;
+        });
         return observable;
     };
     AuthService.prototype.canCreate = function () {
@@ -70,21 +76,27 @@ var AuthService = (function () {
     };
     AuthService.prototype.cantCreate = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'create')
-            .map(function (b) { return !b; });
+            .map(function (b) {
+                return !b;
+            });
     };
     AuthService.prototype.canDelete = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'delete');
     };
     AuthService.prototype.cantDelete = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'delete')
-            .map(function (b) { return !b; });
+            .map(function (b) {
+                return !b;
+            });
     };
     AuthService.prototype.canUpdate = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'update');
     };
     AuthService.prototype.cantUpdate = function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'update')
-            .map(function (b) { return !b; });
+            .map(function (b) {
+                return !b;
+            });
     };
     return AuthService;
 }());

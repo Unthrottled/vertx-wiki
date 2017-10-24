@@ -9,23 +9,23 @@ import "./deletion.component.htm";
 
 
 @Component({
-  selector: 'deletion-component',
-  template: require('./deletion.component.htm'),
-  styleUrls: []
+    selector: 'deletion-component',
+    template: require('./deletion.component.htm'),
+    styleUrls: []
 })
 export class DeletionComponent {
-  @Output()
-  private onClick = new EventEmitter();
+    @Output()
+    private onClick = new EventEmitter();
 
-  constructor(private token: UserPrincipal) {
-  }
+    constructor(private token: UserPrincipal) {
+    }
 
-  get cantDelete(): Observable<boolean> {
-    return Permissions.canActivate(this.token, 'delete')
-      .map(canDo => !canDo);
-  }
+    get cantDelete(): Observable<boolean> {
+        return Permissions.canActivate(this.token, 'delete')
+            .map(canDo => !canDo);
+    }
 
-  clickyClick(value: any): void {
-    this.onClick.emit(value);
-  }
+    clickyClick(value: any): void {
+        this.onClick.emit(value);
+    }
 }

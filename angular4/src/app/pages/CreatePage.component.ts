@@ -9,69 +9,69 @@ import {NotificationsService} from "angular2-notifications";
 import {Observable} from "rxjs/Observable";
 import {BasePageComponent} from "./BasePage.component";
 import {Page} from "./Page.model";
+
 @Component({
-  selector: 'new-page',
-  template: require('./create.page.htm')
+    selector: 'new-page',
+    template: require('./create.page.htm')
 })
 export class CreatePageComponent extends BasePageComponent {
-  private _validTitle: boolean;
-
-  constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
-    super(router);
-    this.editMode = true;
-  }
-
-  ngOnInit(){
-    this.router.data.subscribe((data: { pages: Page }) => {
-      this.load(data.pages);
-    });
-  }
-
-  save(): Observable<boolean> {
-    let self = this;
-    if (self.validTitle) {
-      let returnGuy = this.pagesService
-        .createPage(this.title, this.content);
-      returnGuy.subscribe((success: boolean) => {
-        if (success) {
-          self.actualRouter.navigate(['/page/' + self.title]);
-        } else {
-          self.failure()
-        }
-      }, (error: any) => self.failure());
-      return
-    } else {
-      self.failure();
-      return Observable.of(false);
+    constructor(protected router: ActivatedRoute, private pagesService: PagesService, private notificationService: NotificationsService, private actualRouter: Router) {
+        super(router);
+        this.editMode = true;
     }
-  }
 
-  private failure() {
-    this.notificationService.error('Page NOT Saved!', ':( Try again.', {
-      timeOut: 3000,
-      showProgressBar: true,
-      clickToClose: true
-    })
-  }
+    private _validTitle: boolean;
 
-  reset(): void {
-    this.actualRouter.navigate(['/']);
-  }
+    get validTitle(): boolean {
+        return this._validTitle;
+    }
 
+    set validTitle(value: boolean) {
+        this._validTitle = value;
+    }
 
-  get validTitle(): boolean {
-    return this._validTitle;
-  }
+    ngOnInit() {
+        this.router.data.subscribe((data: { pages: Page }) => {
+            this.load(data.pages);
+        });
+    }
 
-  set validTitle(value: boolean) {
-    this._validTitle = value;
-  }
+    save(): Observable<boolean> {
+        let self = this;
+        if (self.validTitle) {
+            let returnGuy = this.pagesService
+                .createPage(this.title, this.content);
+            returnGuy.subscribe((success: boolean) => {
+                if (success) {
+                    self.actualRouter.navigate(['/page/' + self.title]);
+                } else {
+                    self.failure()
+                }
+            }, (error: any) => self.failure());
+            return
+        } else {
+            self.failure();
+            return Observable.of(false);
+        }
+    }
 
-  titleValidationChange(delta: boolean): void {
-    this.validTitle = delta;
-  }
+    reset(): void {
+        this.actualRouter.navigate(['/']);
+    }
 
-  titleChange(delta: string): void {
-    this.title = delta;
-  }
+    titleValidationChange(delta: boolean): void {
+        this.validTitle = delta;
+    }
+
+    titleChange(delta: string): void {
+        this.title = delta;
+    }
+
+    private failure() {
+        this.notificationService.error('Page NOT Saved!', ':( Try again.', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        })
+    }
 }

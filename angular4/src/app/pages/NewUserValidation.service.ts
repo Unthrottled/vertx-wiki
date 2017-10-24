@@ -9,15 +9,15 @@ import {ExistsPayload} from "./ExistsPayload.model";
 @Injectable()
 export class NewUserValidationService {
 
-  constructor(private backendService: BackendService) {
+    constructor(private backendService: BackendService) {
 
-  }
+    }
 
-  isValid(pageName: string): Observable<boolean> {
-    return pageName.length < 1 ? Observable.create(false) :
-      this.backendService
-      .userExists(pageName)
-      .map((statusPayload: ExistsPayload) => !statusPayload.exists);
-  }
+    isValid(pageName: string): Observable<boolean> {
+        return pageName.length < 1 ? Observable.create(false) :
+            this.backendService
+                .userExists(pageName)
+                .map((statusPayload: ExistsPayload) => !statusPayload.exists);
+    }
 
 }

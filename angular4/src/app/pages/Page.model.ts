@@ -3,26 +3,27 @@
  */
 
 export class Page {
-  private _id: string;
-  private _name: string;
-  private _markdown: string;
+    constructor(pageFull: any) {
+        this._id = pageFull._id;
+        this._name = pageFull.name;
+        this._markdown = pageFull.markdown;
+    }
 
-  constructor(pageFull: any) {
-    this._id = pageFull._id;
-    this._name = pageFull.name;
-    this._markdown = pageFull.markdown;
-  }
+    private _id: string;
 
-  get id(): string {
-    return this._id;
-  }
+    get id(): string {
+        return this._id;
+    }
 
-  get name(): string {
-    return this._name;
-  }
+    private _name: string;
 
+    get name(): string {
+        return this._name;
+    }
 
-  get markdown(): string {
-    return this._markdown;
-  }
+    private _markdown: string;
+
+    get markdown(): string {
+        return this._markdown;
+    }
 }

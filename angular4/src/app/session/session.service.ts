@@ -12,21 +12,21 @@ import {ReplaySubject} from "rxjs/ReplaySubject";
 
 @Injectable()
 export class SessionService {
-  private sessionIdo = new ReplaySubject(1);
+    private sessionIdo = new ReplaySubject(1);
 
-  constructor(private http: Http, private hostService: HostService) {
-  }
-
-  fetchSessionId(): Observable<String> {
-    if (!this.sessionIdo.observers.length) {
-      this.http.get(this.hostService.fetchUrl() + '')
-        .lift((response: Response) => {
-          return response && response.json ?
-            response.json() : ''
-        })
-        .subscribe(sessionId => this.sessionIdo.next(sessionId));
+    constructor(private http: Http, private hostService: HostService) {
     }
 
-    return this.sessionIdo;
-  }
+    fetchSessionId(): Observable<String> {
+        if (!this.sessionIdo.observers.length) {
+            this.http.get(this.hostService.fetchUrl() + '')
+                .lift((response: Response) => {
+                    return response && response.json ?
+                        response.json() : ''
+                })
+                .subscribe(sessionId => this.sessionIdo.next(sessionId));
+        }
+
+        return this.sessionIdo;
+    }
 }

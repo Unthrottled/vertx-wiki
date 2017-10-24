@@ -33,7 +33,7 @@ export class UserAdjustmentComponent {
         let self = this;
         this.backendService.updateUser(this.role, this.model.password)
             .subscribe(Subscriber.create((response: Response) => {
-                if (new StatusPayload(response.json()).succeded){
+                if (new StatusPayload(response.json()).succeded) {
                     self.userPrinc.newUserPrincipal(response.json());
                     self.notifService.success("User Permissions Updated!",
                         "Good Job!", {

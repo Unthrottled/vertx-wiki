@@ -5,59 +5,63 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class UserPrincipal {
-  private _canView: boolean;
-  private _canDelete: boolean;
-  private _canCreate: boolean;
-  private _canUpdate: boolean;
-  private _token: String;
-  private _role: String;
-  private _username: String;
+    constructor() {
 
-  constructor() {
+    }
 
-  }
+    private _canView: boolean;
 
-  newUserPrincipal(principal: any) {
-    this.setFields(principal);
-  }
+    get canView(): boolean {
+        return this._canView;
+    }
 
-  private setFields(principal: any) {
-    this._canView = principal.principal.canView;
-    this._canCreate = principal.principal.canCreate;
-    this._canUpdate = principal.principal.canUpdate;
-    this._canDelete = principal.principal.canDelete;
-    this._token = principal.token;
-    this._role = principal.principal.role;
-    this._username = principal.principal.username;
-  }
+    private _canDelete: boolean;
 
-  get canView(): boolean {
-    return this._canView;
-  }
+    get canDelete(): boolean {
+        return this._canDelete;
+    }
 
-  get canCreate(): boolean {
-    return this._canCreate;
-  }
+    private _canCreate: boolean;
 
-  get canDelete(): boolean {
-    return this._canDelete;
-  }
+    get canCreate(): boolean {
+        return this._canCreate;
+    }
 
-  get canUpdate(): boolean {
-    return this._canUpdate;
-  }
+    private _canUpdate: boolean;
 
-  get token(): String {
-    return this._token
-  }
+    get canUpdate(): boolean {
+        return this._canUpdate;
+    }
 
+    private _token: String;
+
+    get token(): String {
+        return this._token
+    }
+
+    private _role: String;
 
     get role(): String {
         return this._role;
     }
 
+    private _username: String;
 
     get username(): String {
         return this._username;
+    }
+
+    newUserPrincipal(principal: any) {
+        this.setFields(principal);
+    }
+
+    private setFields(principal: any) {
+        this._canView = principal.principal.canView;
+        this._canCreate = principal.principal.canCreate;
+        this._canUpdate = principal.principal.canUpdate;
+        this._canDelete = principal.principal.canDelete;
+        this._token = principal.token;
+        this._role = principal.principal.role;
+        this._username = principal.principal.username;
     }
 }

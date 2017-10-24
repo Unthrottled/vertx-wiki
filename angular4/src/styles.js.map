@@ -1,1 +1,10 @@
-{"version":3,"file":"styles.js","sourceRoot":"","sources":["styles.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,2CAAyC;AACzC,qBAAmB;AACnB,wCAAsC"}
+{
+  "version": 3,
+  "file": "styles.js",
+  "sourceRoot": "",
+  "sources": [
+    "styles.ts"
+  ],
+  "names": [],
+  "mappings": ";;AAAA;;GAEG;AACH,2CAAyC;AACzC,qBAAmB;AACnB,wCAAsC"
+}

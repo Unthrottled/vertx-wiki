@@ -10,58 +10,58 @@ import {TitleValidationService} from "../TitleValidation.service";
 import {Permissions} from "../../auth/Permissions.component";
 import {UserPrincipal} from "../../auth/UserPrincipal.model";
 import {AuthService} from "../../auth/auth.service";
+
 @Component({
-  selector: 'page-search',
-  template: require('./search.htm')
+    selector: 'page-search',
+    template: require('./search.htm')
 })
 export class SearchComponent {
-  private _model: any = {};
+    constructor(private pagesService: TitleValidationService,
+                private notificationService: NotificationsService,
+                private actualRouter: Router,
+                private userToken: UserPrincipal,
+                private authService: AuthService) {
+    }
 
-  constructor(private pagesService: TitleValidationService,
-              private notificationService: NotificationsService,
-              private actualRouter: Router,
-              private userToken: UserPrincipal,
-              private authService: AuthService) {
-  }
+    private _model: any = {};
 
-  search(searchedTitle: string) {
-    let self = this;
-    this.cantSearch
-      .map((cantCreate: boolean) => !cantCreate)
-      .subscribe((canCreate: boolean) => {
-        if (searchedTitle) {
-          this.pagesService.isValid(searchedTitle)
-            .map((doesNotExist: boolean) => !doesNotExist)
-            .subscribe((success: boolean) => {
-              if (success) {
-                self.actualRouter.navigate(['/page/' + searchedTitle]);
-              } else {
-                self.failure()
-              }
-            }, (error: any) => self.failure());
-        }
-      });
-  }
+    get model(): any {
+        return this._model;
+    }
 
-  private failure() {
-    this.notificationService.warn('Page not found!', 'Create one, maybe?', {
-      timeOut: 3000,
-      showProgressBar: true,
-      clickToClose: true
-    })
-  }
+    set model(value: any) {
+        this._model = value;
+    }
 
+    get cantSearch(): Observable<boolean> {
+        return Permissions.canActivate(this.userToken, 'view')
+            .map((canCreate: boolean) => !(canCreate && this.authService.isLoggedIn));
+    }
 
-  get model(): any {
-    return this._model;
-  }
+    search(searchedTitle: string) {
+        let self = this;
+        this.cantSearch
+            .map((cantCreate: boolean) => !cantCreate)
+            .subscribe((canCreate: boolean) => {
+                if (searchedTitle) {
+                    this.pagesService.isValid(searchedTitle)
+                        .map((doesNotExist: boolean) => !doesNotExist)
+                        .subscribe((success: boolean) => {
+                            if (success) {
+                                self.actualRouter.navigate(['/page/' + searchedTitle]);
+                            } else {
+                                self.failure()
+                            }
+                        }, (error: any) => self.failure());
+                }
+            });
+    }
 
-  set model(value: any) {
-    this._model = value;
-  }
-
-  get cantSearch(): Observable<boolean> {
-    return Permissions.canActivate(this.userToken, 'view')
-      .map((canCreate: boolean) => !(canCreate && this.authService.isLoggedIn));
-  }
+    private failure() {
+        this.notificationService.warn('Page not found!', 'Create one, maybe?', {
+            timeOut: 3000,
+            showProgressBar: true,
+            clickToClose: true
+        })
+    }
 }

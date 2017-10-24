@@ -4,13 +4,13 @@
 
 
 export class StatusPayload {
-  private _succeded: boolean = false;
+    constructor(payload: any) {
+        this._succeded = payload.success;
+    }
 
-  constructor(payload: any) {
-    this._succeded = payload.success;
-  }
+    private _succeded: boolean = false;
 
-  get succeded(): boolean {
-    return this._succeded;
-  }
+    get succeded(): boolean {
+        return this._succeded;
+    }
 }

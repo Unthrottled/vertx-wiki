@@ -7,11 +7,11 @@
                 <div class="jumbotron">
                     <h1>Are you Unhappy?</h1>
                     <p class="lead">Do you feel the need to make a change?
-                    Are you not satisfied with the current state of your account?
-                    Well look no further! Feel free to adjust your account with the fields provided!</p>
+                        Are you not satisfied with the current state of your account?
+                        Well look no further! Feel free to adjust your account with the fields provided!</p>
                 </div>
                 <roles-input [selectedRole]="currentRole"
-                        (role)="role = $event"></roles-input>
+                             (role)="role = $event"></roles-input>
                 <div class="form-group"
                      [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                     <label for="password" class="sr-only">Password</label>

@@ -4,7 +4,7 @@
 
 export class NewUser {
 
-  constructor(private login: string, private password: string, private role: string) {
+    constructor(private login: string, private password: string, private role: string) {
 
-  }
+    }
 }

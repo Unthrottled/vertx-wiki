@@ -17,15 +17,15 @@ public class UserExistsHandler extends BaseAPIPageHandler {
   @Inject
   public UserExistsHandler(Vertx vertx) {
     super(vertx,
-      "user-exists",
-      (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
-        JsonObject message = connectionResult.result().body();
-        routingContext.response().setStatusCode(200);
-        return new JsonObject()
-          .put("success", true)
-          .put("exists", message.getBoolean("exists"))
-          .put("name", pageName);
+        "user-exists",
+        (AsyncResult<Message<JsonObject>> connectionResult, RoutingContext routingContext, String pageName) -> {
+          JsonObject message = connectionResult.result().body();
+          routingContext.response().setStatusCode(200);
+          return new JsonObject()
+              .put("success", true)
+              .put("exists", message.getBoolean("exists"))
+              .put("name", pageName);
 
-      });
+        });
   }
 }

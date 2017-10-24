@@ -5,15 +5,14 @@ import {LastModified} from "./LastModfied.model";
 import {Page} from "./Page.model";
 
 export class PageFull extends Page {
-  private _lastModified: LastModified;
+    constructor(pageFull: any) {
+        super(pageFull);
+        this._lastModified = new LastModified(pageFull.lastModified);
+    }
 
-  constructor(pageFull: any) {
-    super(pageFull);
-    this._lastModified = new LastModified(pageFull.lastModified);
-  }
+    private _lastModified: LastModified;
 
-
-  get lastModified(): LastModified {
-    return this._lastModified;
-  }
+    get lastModified(): LastModified {
+        return this._lastModified;
+    }
 }

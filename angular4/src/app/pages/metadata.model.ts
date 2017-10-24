@@ -4,7 +4,7 @@
 
 
 export interface PageMetaData {
-  itemsPerPage: number;
-  currentPageNumber: number;
-  totalItems: number;
+    itemsPerPage: number;
+    currentPageNumber: number;
+    totalItems: number;
 }

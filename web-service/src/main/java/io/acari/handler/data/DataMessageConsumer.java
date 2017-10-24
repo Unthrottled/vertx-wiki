@@ -54,52 +54,52 @@ public class DataMessageConsumer implements Handler<Message<JsonObject>> {
   @Override
   public void handle(Message<JsonObject> message) {
     ChainableOptional.ofNullable(message.headers().get("action"))
-      .ifPresent(action -> {
-        switch (Action.of(action)) {
-          case UNKNOWN:
-          default:
-            message.fail(ErrorCodes.BAD_ACTION.ordinal(), "Bad Action: " + action);
-          case GET_PAGE:
-            pageHandler.handle(message);
-            break;
-          case GET_PAGE_ARCHIVE:
-            archivePageHandler.handle(message);
-            break;
-          case PAGE_EXISTS:
-            pageExistsHandler.handle(message);
-            break;
-          case USER_EXISTS:
-            userExistsHandler.handle(message);
-            break;
-          case USER_UPDATE:
-            userUpdateHandler.handle(message);
-            break;
-          case ALL_PAGES:
-            allPageHandler.handle(message);
-            break;
-          case ALL_PAGES_ARCHIVE:
-            allArchiveHandler.handle(message);
-            break;
-          case ALL_PAGES_DATA:
-            allPageDataHandler.handle(message);
-            break;
-          case SAVE_PAGE:
-            saveHandler.handle(message);
-            break;
-          case CREATE_PAGE:
-            creationHandler.handle(message);
-            break;
-          case ARCHIVE_PAGE:
-            archiveHandler.handle(message);
-            break;
-          case RESTORE_ARCHIVE:
-            archiveRestorationHandler.handle(message);
-            break;
-        }
-      })
-      .orElseDo(() -> {
-        LOGGER.error("Dummy set no action headers -> {},\n so I do not know what to do.");
-        message.fail(ErrorCodes.NO_ACTION_SPECIFIED.ordinal(), "No Action Header Provided");
-      });
+        .ifPresent(action -> {
+          switch (Action.of(action)) {
+            case UNKNOWN:
+            default:
+              message.fail(ErrorCodes.BAD_ACTION.ordinal(), "Bad Action: " + action);
+            case GET_PAGE:
+              pageHandler.handle(message);
+              break;
+            case GET_PAGE_ARCHIVE:
+              archivePageHandler.handle(message);
+              break;
+            case PAGE_EXISTS:
+              pageExistsHandler.handle(message);
+              break;
+            case USER_EXISTS:
+              userExistsHandler.handle(message);
+              break;
+            case USER_UPDATE:
+              userUpdateHandler.handle(message);
+              break;
+            case ALL_PAGES:
+              allPageHandler.handle(message);
+              break;
+            case ALL_PAGES_ARCHIVE:
+              allArchiveHandler.handle(message);
+              break;
+            case ALL_PAGES_DATA:
+              allPageDataHandler.handle(message);
+              break;
+            case SAVE_PAGE:
+              saveHandler.handle(message);
+              break;
+            case CREATE_PAGE:
+              creationHandler.handle(message);
+              break;
+            case ARCHIVE_PAGE:
+              archiveHandler.handle(message);
+              break;
+            case RESTORE_ARCHIVE:
+              archiveRestorationHandler.handle(message);
+              break;
+          }
+        })
+        .orElseDo(() -> {
+          LOGGER.error("Dummy set no action headers -> {},\n so I do not know what to do.");
+          message.fail(ErrorCodes.NO_ACTION_SPECIFIED.ordinal(), "No Action Header Provided");
+        });
   }
 }

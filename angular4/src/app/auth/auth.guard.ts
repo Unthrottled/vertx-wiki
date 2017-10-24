@@ -11,16 +11,16 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService, private userToken: UserPrincipal) {
-  }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if (this.authService.isLoggedIn) {
-      return Permissions.canActivate(this.userToken, route.routeConfig.path);
+    constructor(private router: Router, private authService: AuthService, private userToken: UserPrincipal) {
     }
 
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login']);
-    return Observable.of(false);
-  }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        if (this.authService.isLoggedIn) {
+            return Permissions.canActivate(this.userToken, route.routeConfig.path);
+        }
+
+        // not logged in so redirect to login page with the return url
+        this.router.navigate(['/login']);
+        return Observable.of(false);
+    }
 }

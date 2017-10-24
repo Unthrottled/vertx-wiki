@@ -24,30 +24,30 @@ public class SaveHandler implements Handler<Message<JsonObject>> {
   public void handle(Message<JsonObject> message) {
     JsonObject request = message.body();
     ChainableOptional.ofNullable(request.getString("name"))
-      .ifPresent(id -> ChainableOptional.ofNullable(request.getString("username"))
-        .ifPresent(userName -> ChainableOptional.ofNullable(request.getString("content"))
-          .ifPresent(content -> {
-            JsonObject query = new JsonObject().put("name", id);
-            JsonObject update = new JsonObject().put("$set", new JsonObject()
-              .put("content", content)
-              .put("lastModified", new JsonObject()
-                .put("userName", userName)
-                .put("timeStamp", Instant.now().toEpochMilli())));
-            mongoClient.updateCollection("pages", query, update, aConn -> {
-              ChainableOptional.of(aConn)
-                .filter(AsyncResult::succeeded)
-                .ifPresent(conRes -> {
-                  message.reply(new JsonObject().put("status", "gewd"));
-                })
-                .orElseDo(() -> {
-                  LOGGER.warn("Ohh shit", aConn.cause().getMessage());
-                  message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
-                });
-            });
-          }))
-        .orElseDo(() -> fourHundred(message, "No User name Provided, Bruv."))
-        .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
-      ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
+        .ifPresent(id -> ChainableOptional.ofNullable(request.getString("username"))
+            .ifPresent(userName -> ChainableOptional.ofNullable(request.getString("content"))
+                .ifPresent(content -> {
+                  JsonObject query = new JsonObject().put("name", id);
+                  JsonObject update = new JsonObject().put("$set", new JsonObject()
+                      .put("content", content)
+                      .put("lastModified", new JsonObject()
+                          .put("userName", userName)
+                          .put("timeStamp", Instant.now().toEpochMilli())));
+                  mongoClient.updateCollection("pages", query, update, aConn -> {
+                    ChainableOptional.of(aConn)
+                        .filter(AsyncResult::succeeded)
+                        .ifPresent(conRes -> {
+                          message.reply(new JsonObject().put("status", "gewd"));
+                        })
+                        .orElseDo(() -> {
+                          LOGGER.warn("Ohh shit", aConn.cause().getMessage());
+                          message.fail(ErrorCodes.DB_ERROR.ordinal(), aConn.cause().getMessage());
+                        });
+                  });
+                }))
+            .orElseDo(() -> fourHundred(message, "No User name Provided, Bruv."))
+            .orElseDo(() -> fourHundred(message, "No Title Provided, Bruv."))
+        ).orElseDo(() -> fourHundred(message, "No Id Provided, Bruv."));
   }
 
   private void fourHundred(Message routingContext, String errorMessage) {
