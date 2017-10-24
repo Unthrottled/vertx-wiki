@@ -44,7 +44,7 @@ var NewUserCreationComponent = (function (_super) {
 NewUserCreationComponent = __decorate([
     core_1.Component({
         selector: 'user-name-creation',
-        template: require('../common/validation-field.htm')
+        template: require('../../common/validation-field.htm')
     }),
     __metadata("design:paramtypes", [NewUserValidation_service_1.NewUserValidationService, core_1.NgZone])
 ], NewUserCreationComponent);

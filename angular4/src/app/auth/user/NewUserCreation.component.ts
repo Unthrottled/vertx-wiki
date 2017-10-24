@@ -9,7 +9,7 @@ import {NewUserValidationService} from "./NewUserValidation.service";
 
 @Component({
     selector: 'user-name-creation',
-    template: require('../common/validation-field.htm')
+    template: require('../../common/validation-field.htm')
 })
 export class NewUserCreationComponent extends ValidationComponent {
 
