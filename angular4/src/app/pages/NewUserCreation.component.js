@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./validation-field.htm");
-var Validation_component_1 = require("./Validation.component");
+var Validation_component_1 = require("../common/Validation.component");
 var NewUserValidation_service_1 = require("./NewUserValidation.service");
 var NewUserCreationComponent = (function (_super) {
     __extends(NewUserCreationComponent, _super);

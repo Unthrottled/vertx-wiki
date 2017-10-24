@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./validation-field.htm");
 var TitleValidation_service_1 = require("./TitleValidation.service");
-var Validation_component_1 = require("./Validation.component");
+var Validation_component_1 = require("../common/Validation.component");
 var TitleCreationComponent = (function (_super) {
     __extends(TitleCreationComponent, _super);
     function TitleCreationComponent(titleValidationService, ngZone) {

@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by alex on 9/20/17.
  */
 var core_1 = require("@angular/core");
-require("./validation-field.htm");
+require("../pages/validation-field.htm");
 var ValidationComponent = (function () {
     function ValidationComponent(zone) {
         this.zone = zone;

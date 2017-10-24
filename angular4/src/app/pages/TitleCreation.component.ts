@@ -4,7 +4,7 @@
 import {Component, EventEmitter, Input, NgZone, Output} from "@angular/core";
 import "./validation-field.htm";
 import {TitleValidationService} from "./TitleValidation.service";
-import {ValidationComponent} from "./Validation.component";
+import {ValidationComponent} from "../common/Validation.component";
 import {Observable} from "rxjs/Observable";
 
 @Component({
