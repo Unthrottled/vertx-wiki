@@ -149,7 +149,9 @@ module.exports = {
             dry: false,
             exclude: ['shared.js']
         }),
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin({
+            filename: 'styles.[contenthash].css'
+        }),
         new BrowserSyncPlugin({
             // browse to http://localhost:3000/ during development,
             // ./dist directory is being served
