@@ -47,7 +47,7 @@ export class ArchivePageComponent extends BasePageComponent {
                 self.failure('): try again.')
             }
         }, (error: any) => {
-            if (error.status == 500) {//TODO: SHOULD REALLY BE A 400 BAD REQUEST
+            if (error.status == 400) {
                 self.failure('Page already exists!')
             } else {
                 self.failure('): try again.')

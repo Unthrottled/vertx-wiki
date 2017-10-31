@@ -62,7 +62,7 @@ var ArchivePageComponent = (function (_super) {
                 self.failure('): try again.');
             }
         }, function (error) {
-            if (error.status == 500) {
+            if (error.status == 400) {
                 self.failure('Page already exists!');
             }
             else {
