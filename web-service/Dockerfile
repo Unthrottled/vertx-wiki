@@ -24,7 +24,7 @@ WORKDIR /app
 
 COPY --from=packager /app/build/libs /app
 
-ENTRYPOINT ["java", "-jar", "wiki-1.0.2.jar"]
+ENTRYPOINT ["java", "-jar", "wiki-1.0.3.jar"]
 
 
 
