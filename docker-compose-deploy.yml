@@ -6,11 +6,11 @@ services:
       context: ./angular4
     image: alexsimons/nodeinstall
     volumes:
-          - ./:/app
-        entrypoint:
-          - /bin/bash
-        command:
-          - -c
-          - "cd angular4; npm run build"
+      - ./:/app
+    entrypoint:
+      - /bin/bash
+    command:
+      - -c
+      - "cd angular4; npm run build"
 
 #runs the node build task
