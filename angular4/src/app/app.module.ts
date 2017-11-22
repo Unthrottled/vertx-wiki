@@ -8,11 +8,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppComponent} from "./app.component";
 import {HttpModule} from "@angular/http";
 import {UiSwitchModule} from "angular2-ui-switch";
-import {MessageComponent} from "./messages/message.component";
 import {SwitchComponent} from "./switch/switch.component";
-import {HostService} from "./session/host.service";
-import {SessionService} from "./session/session.service";
-import {MessageService} from "./messages/message.service";
 import {WindowRef} from "./util/window";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth.guard";
@@ -69,7 +65,6 @@ const appRoutes = [
         resolve: {pages: ArchiveResolve}
     },
     {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},
-    {path: 'butt', component: MessageComponent, canActivate: [AuthGuard]},
     {path: 'user/adjustment', component: UserAdjustmentComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
@@ -95,7 +90,6 @@ const appRoutes = [
     ],
     declarations: [
         AppComponent,
-        MessageComponent,
         SwitchComponent,
         BaseComponent,
         LoginComponent,
@@ -122,9 +116,7 @@ const appRoutes = [
         EditComponent
     ],
     bootstrap: [AppComponent],
-    providers: [HostService,
-        SessionService,
-        MessageService,
+    providers: [
         WindowRef,
         AuthService,
         AuthGuard,
