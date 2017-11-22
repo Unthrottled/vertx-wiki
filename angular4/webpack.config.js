@@ -18,15 +18,16 @@ var proxyPeel = proxy('/api', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
-    secure:false,
+    secure: false,
     agent: keepAliveAgent
 });
 
 
 var proxyPeel2 = proxy('/user', {
-    target: 'http://web-service:8989',
+    target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
+    secure: false,
     agent: keepAliveAgent
 });
 
@@ -158,7 +159,7 @@ module.exports = {
             // ./dist directory is being served
             host: 'localhost',
             port: 3000,
-            https:true,
+            https: true,
             server: {baseDir: ['dist']},
             middleware: [proxyPeel, proxyPeel2]
         })
