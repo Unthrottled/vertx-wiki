@@ -13,14 +13,12 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
-var host_service_1 = require("../session/host.service");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var Permissions_component_1 = require("./Permissions.component");
 var backend_service_1 = require("../util/backend.service");
 var AuthService = (function () {
-    function AuthService(http, hostService, userToken, backendService) {
+    function AuthService(http, userToken, backendService) {
         this.http = http;
-        this.hostService = hostService;
         this.userToken = userToken;
         this.backendService = backendService;
         this._isLoggedIn = false;
@@ -37,7 +35,7 @@ var AuthService = (function () {
     });
     AuthService.prototype.login = function (user) {
         var self = this;
-        return this.http.post(this.hostService.fetchUrl() + 'api/token', user)
+        return this.http.post('./api/token', user)
             .map(function (response) {
             return response && response.json ?
                 response.json() : '';
@@ -53,7 +51,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.createPrincipal = function (user) {
         var self = this;
-        return this.http.post(this.hostService.fetchUrl() + 'user/create', user)
+        return this.http.post('./user/create', user)
             .map(function (response) {
             return true;
         });
@@ -91,7 +89,6 @@ var AuthService = (function () {
 AuthService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http,
-        host_service_1.HostService,
         UserPrincipal_model_1.UserPrincipal,
         backend_service_1.BackendService])
 ], AuthService);

@@ -16,7 +16,7 @@ public class AuthConfigs {
   }
 
   public enum Configs {
-    PASSWORD("password"), TYPE("type"), KEYSTORE("keystore");
+    PASSWORD("password"), SSL_PASSWORD("ssl_keystore_password"), TYPE("type"), KEYSTORE("keystore"), SSL_KEYSTORE("ssl_keystore");
 
     private final String value;
 

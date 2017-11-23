@@ -15,11 +15,7 @@ var animations_1 = require("@angular/platform-browser/animations");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
 var angular2_ui_switch_1 = require("angular2-ui-switch");
-var message_component_1 = require("./messages/message.component");
 var switch_component_1 = require("./switch/switch.component");
-var host_service_1 = require("./session/host.service");
-var session_service_1 = require("./session/session.service");
-var message_service_1 = require("./messages/message.service");
 var window_1 = require("./util/window");
 var auth_service_1 = require("./auth/auth.service");
 var auth_guard_1 = require("./auth/auth.guard");
@@ -75,7 +71,6 @@ var appRoutes = [
         resolve: { pages: archive_resolve_service_1.ArchiveResolve }
     },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
-    { path: 'butt', component: message_component_1.MessageComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'user/adjustment', component: UserAdjustment_component_1.UserAdjustmentComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'register', component: register_component_1.RegisterComponent },
@@ -103,7 +98,6 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            message_component_1.MessageComponent,
             switch_component_1.SwitchComponent,
             base_component_1.BaseComponent,
             login_component_1.LoginComponent,
@@ -130,9 +124,7 @@ AppModule = __decorate([
             Edit_component_1.EditComponent
         ],
         bootstrap: [app_component_1.AppComponent],
-        providers: [host_service_1.HostService,
-            session_service_1.SessionService,
-            message_service_1.MessageService,
+        providers: [
             window_1.WindowRef,
             auth_service_1.AuthService,
             auth_guard_1.AuthGuard,
@@ -146,7 +138,8 @@ AppModule = __decorate([
             archive_resolve_service_1.ArchiveResolve,
             TitleValidation_service_1.TitleValidationService,
             NewUserValidation_service_1.NewUserValidationService,
-            backend_service_1.BackendService,]
+            backend_service_1.BackendService,
+        ]
     })
 ], AppModule);
 exports.AppModule = AppModule;

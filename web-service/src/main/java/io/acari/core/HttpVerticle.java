@@ -7,7 +7,9 @@ import io.acari.handler.http.api.*;
 import io.acari.handler.http.auth.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.net.JksOptions;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.mongo.MongoClient;
@@ -125,7 +127,11 @@ public class HttpVerticle extends AbstractVerticle {
     router.get("/*").handler(requestHandler).failureHandler(routingContext -> routingContext.reroute("/"));
 
     int portNumber = config().getInteger(CONFIG_HTTP_SERVER_PORT, CONFIG_HTTP_SERVER_PORT_NUMBER);
-    vertx.createHttpServer()
+    vertx.createHttpServer(new HttpServerOptions()
+        .setSsl(true)
+        .setKeyStoreOptions(new JksOptions()
+            .setPassword(AuthConfigs.Configs.SSL_PASSWORD.getValue())
+            .setPath(AuthConfigs.Configs.SSL_KEYSTORE.getValue())))
         .requestHandler(router::accept)
         .listen(portNumber, httpServerAsyncResult -> {
           io.vertx.core.http.HttpServer result = httpServerAsyncResult.result();
