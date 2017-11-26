@@ -26,24 +26,18 @@ public class BaseAllPageDataHandler implements Handler<RoutingContext>, Configur
   }
 
   public void handle(RoutingContext routingContext) {
-    ChainableOptional.of(routingContext.user().principal().getBoolean("canView", false))
-        .filter(b -> b)
-        .ifPresent(canView ->
-            ChainableOptional.ofNullable(routingContext.getBodyAsJson().getInteger("pageNumber"))
-                .ifPresent(pageNumber -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
-                    new JsonObject()
-                        .put("pageNumber", pageNumber),
-                    Config.createDeliveryOptions(action), ar -> {
-                      JsonObject responseGuy = new JsonObject();
-                      getRoutingContext(responseGuy, routingContext, ar)
-                          .putHeader("Cache-Control", "no-store, no-cache")
-                          .putHeader("Content-Type", "application/json")
-                          .end(responseGuy.encode());
-                    }))
-                .orElseDo(() -> fourHundred(routingContext, "pageNumber")))
-        .orElseDo(() -> routingContext.response()
-            .setStatusCode(401)
-            .end());
+    ChainableOptional.ofNullable(routingContext.getBodyAsJson().getInteger("pageNumber"))
+        .ifPresent(pageNumber -> vertx.eventBus().<JsonObject>send(config.getDbQueueName(),
+            new JsonObject()
+                .put("pageNumber", pageNumber),
+            Config.createDeliveryOptions(action), ar -> {
+              JsonObject responseGuy = new JsonObject();
+              getRoutingContext(responseGuy, routingContext, ar)
+                  .putHeader("Cache-Control", "no-store, no-cache")
+                  .putHeader("Content-Type", "application/json")
+                  .end(responseGuy.encode());
+            }))
+        .orElseDo(() -> fourHundred(routingContext, "pageNumber"));
   }
 
   private HttpServerResponse getRoutingContext(JsonObject responseGuy, RoutingContext routingContext, AsyncResult<Message<JsonObject>> ar) {
