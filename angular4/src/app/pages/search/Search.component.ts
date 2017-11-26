@@ -19,8 +19,7 @@ export class SearchComponent {
     constructor(private pagesService: TitleValidationService,
                 private notificationService: NotificationsService,
                 private actualRouter: Router,
-                private userToken: UserPrincipal,
-                private authService: AuthService) {
+                private userToken: UserPrincipal) {
     }
 
     private _model: any = {};
@@ -35,7 +34,7 @@ export class SearchComponent {
 
     get cantSearch(): Observable<boolean> {
         return Permissions.canActivate(this.userToken, 'view')
-            .map((canCreate: boolean) => !(canCreate && this.authService.isLoggedIn));
+            .map((canView: boolean) => !canView);
     }
 
     search(searchedTitle: string) {

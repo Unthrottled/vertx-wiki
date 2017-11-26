@@ -50,18 +50,18 @@ import {ArchiveResolve} from "./pages/archive/archive-resolve.service";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
-    {path: 'pages/:pageNumber', component: BaseComponent, canActivate: [AuthGuard], resolve: {pages: PagesResolve}},
+    {path: '*', redirectTo: 'pages/1'},
+    {path: 'pages/:pageNumber', component: BaseComponent, resolve: {pages: PagesResolve}},
     {
         path: 'archives/:pageNumber',
         component: ArchivesComponent,
         canActivate: [AuthGuard],
         resolve: {pages: ArchivesResolve}
     },
-    {path: 'page/:name', component: EditPageComponent, canActivate: [AuthGuard], resolve: {pages: PageResolve}},
+    {path: 'page/:name', component: EditPageComponent, resolve: {pages: PageResolve}},
     {
         path: 'archive/:name',
         component: ArchivePageComponent,
-        canActivate: [AuthGuard],
         resolve: {pages: ArchiveResolve}
     },
     {path: 'create', component: CreatePageComponent, canActivate: [AuthGuard], resolve: {pages: NewPageResolve}},

@@ -56,18 +56,18 @@ var archives_resolve_service_1 = require("./pages/archive/archives-resolve.servi
 var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
-    { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
+    { path: '*', redirectTo: 'pages/1' },
+    { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, resolve: { pages: pages_resolve_service_1.PagesResolve } },
     {
         path: 'archives/:pageNumber',
         component: Archives_component_1.ArchivesComponent,
         canActivate: [auth_guard_1.AuthGuard],
         resolve: { pages: archives_resolve_service_1.ArchivesResolve }
     },
-    { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
+    { path: 'page/:name', component: EditPage_component_1.EditPageComponent, resolve: { pages: page_resolve_service_1.PageResolve } },
     {
         path: 'archive/:name',
         component: ArchivePage_component_1.ArchivePageComponent,
-        canActivate: [auth_guard_1.AuthGuard],
         resolve: { pages: archive_resolve_service_1.ArchiveResolve }
     },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },

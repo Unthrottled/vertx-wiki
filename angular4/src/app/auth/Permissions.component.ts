@@ -30,7 +30,7 @@ export class Permissions {
             case 'update':
                 return userToken.canUpdate;
             default:
-                return userToken.canView;
+                return true;
         }
     }
 }
