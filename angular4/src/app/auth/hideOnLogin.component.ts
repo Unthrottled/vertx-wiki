@@ -3,7 +3,7 @@
  */
 import {Component} from "@angular/core";
 import {AuthService} from "./auth.service";
-import "./logoutHider.template.htm";
+import "./loginHider.template.htm";
 
 @Component({
     selector: 'login-hider',
