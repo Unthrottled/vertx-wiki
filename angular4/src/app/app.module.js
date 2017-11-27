@@ -54,20 +54,21 @@ var ArchivePage_component_1 = require("./pages/archive/ArchivePage.component");
 var Archives_component_1 = require("./pages/archive/Archives.component");
 var archives_resolve_service_1 = require("./pages/archive/archives-resolve.service");
 var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service");
+var hideOnLogin_component_1 = require("./auth/hideOnLogin.component");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
-    { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: pages_resolve_service_1.PagesResolve } },
+    { path: '*', redirectTo: 'pages/1' },
+    { path: 'pages/:pageNumber', component: base_component_1.BaseComponent, resolve: { pages: pages_resolve_service_1.PagesResolve } },
     {
         path: 'archives/:pageNumber',
         component: Archives_component_1.ArchivesComponent,
         canActivate: [auth_guard_1.AuthGuard],
         resolve: { pages: archives_resolve_service_1.ArchivesResolve }
     },
-    { path: 'page/:name', component: EditPage_component_1.EditPageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: page_resolve_service_1.PageResolve } },
+    { path: 'page/:name', component: EditPage_component_1.EditPageComponent, resolve: { pages: page_resolve_service_1.PageResolve } },
     {
         path: 'archive/:name',
         component: ArchivePage_component_1.ArchivePageComponent,
-        canActivate: [auth_guard_1.AuthGuard],
         resolve: { pages: archive_resolve_service_1.ArchiveResolve }
     },
     { path: 'create', component: CreatePage_component_1.CreatePageComponent, canActivate: [auth_guard_1.AuthGuard], resolve: { pages: new_page_resolve_service_1.NewPageResolve } },
@@ -101,6 +102,7 @@ AppModule = __decorate([
             switch_component_1.SwitchComponent,
             base_component_1.BaseComponent,
             login_component_1.LoginComponent,
+            hideOnLogin_component_1.LoginHiderComponent,
             register_component_1.RegisterComponent,
             logout_component_1.LogoutComponent,
             Pages_component_1.PagesComponent,

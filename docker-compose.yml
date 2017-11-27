@@ -7,6 +7,8 @@ services:
     image: alexsimons/vertx-web-service:1.0.4
   mongo:
     image: mongo:latest
+    volumes:
+      - "./dataDump/:/data/db"
 
 #Use this compose file to run both the vertx web server and the
 #Mongo database used for data persistence.

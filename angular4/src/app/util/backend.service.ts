@@ -23,22 +23,22 @@ export class BackendService {
     }
 
     fetchAllPages(pageNumber: number): Observable<PagePayload> {
-        return this.httpPost("./api/pages", {pageNumber: pageNumber})
+        return this.httpPost("./base/pages", {pageNumber: pageNumber})
             .map((response: Response) => new PagePayload(response.json()));
     }
 
     fetchAllArchives(pageNumber: number): Observable<ArchivesPayload> {
-        return this.httpPost("./api/archives", {pageNumber: pageNumber})
+        return this.httpPost("./base/archives", {pageNumber: pageNumber})
             .map((response: Response) => new ArchivesPayload(response.json()));
     }
 
     fetchPage(pageName: String): Observable<FullPagePayload> {
-        return this.httpGet("./api/pages/" + pageName)
+        return this.httpGet("./base/pages/" + pageName)
             .map((response: Response) => new FullPagePayload(response.json()));
     }
 
     fetchArchivedPage(pageId: String): Observable<FullPagePayload> {
-        return this.httpPost("./api/archive", {_id: pageId})
+        return this.httpPost("./base/archive", {_id: pageId})
             .map((response: Response) => new FullPagePayload(response.json()));
     }
 
@@ -58,7 +58,7 @@ export class BackendService {
     }
 
     pageExists(pageName: String): Observable<ExistsPayload> {
-        return this.httpGet("./api/exists/" + pageName)
+        return this.httpGet("./base/exists/" + pageName)
             .map((response: Response) => new ExistsPayload(response.json()));
     }
 

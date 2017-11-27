@@ -38,7 +38,7 @@ var Permissions = Permissions_1 = (function () {
             case 'update':
                 return userToken.canUpdate;
             default:
-                return userToken.canView;
+                return true;
         }
     };
     return Permissions;

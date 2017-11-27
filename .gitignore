@@ -8,6 +8,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+#MONGO DB VOLUME
+dataDump
 
 .idea/
 *.iml

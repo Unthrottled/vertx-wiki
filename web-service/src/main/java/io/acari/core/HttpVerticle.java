@@ -91,6 +91,14 @@ public class HttpVerticle extends AbstractVerticle {
     //also this needs to be outside the realm of auth checks
     router.post("/user/exists/:page").handler(userExistsHandler.applyConfiguration(config));
 
+    //this also needs to be outside the realm of auth checks
+    Router baseRoute = Router.router(vertx);
+    baseRoute.post("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
+    baseRoute.post("/archives").handler(apiAllArchiveDataHandler.applyConfiguration(config));
+    baseRoute.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
+    baseRoute.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
+    router.mountSubRouter("/base", baseRoute);
+
     Router apiRouter = Router.router(vertx);
 
     AuthHandler authHandler = RedirectAuthHandler.create(mongoAuth, "/");
@@ -108,11 +116,7 @@ public class HttpVerticle extends AbstractVerticle {
         .applyConfiguration(jwtAuth)
         .applyConfiguration(mongoAuth));
 
-    apiRouter.post("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
-    apiRouter.post("/archives").handler(apiAllArchiveDataHandler.applyConfiguration(config));
     apiRouter.post("/archive").handler(apiGetArchivePageHandler.applyConfiguration(config));
-    apiRouter.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
-    apiRouter.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
     apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/archive/restore/:page").handler(apiRestoreArchiveHandler.applyConfiguration(config));
