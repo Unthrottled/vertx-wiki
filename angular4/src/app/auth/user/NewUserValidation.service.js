@@ -20,7 +20,7 @@ var NewUserValidationService = (function () {
         this.backendService = backendService;
     }
     NewUserValidationService.prototype.isValid = function (pageName) {
-        return pageName.length < 1 ? Observable_1.Observable.create(false) :
+        return pageName.length < 1 ? Observable_1.Observable.of(false) :
             this.backendService
                 .userExists(pageName)
                 .map(function (statusPayload) { return !statusPayload.exists; });
