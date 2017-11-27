@@ -91,6 +91,7 @@ public class HttpVerticle extends AbstractVerticle {
     //also this needs to be outside the realm of auth checks
     router.post("/user/exists/:page").handler(userExistsHandler.applyConfiguration(config));
 
+    //this also needs to be outside the realm of auth checks
     Router baseRoute = Router.router(vertx);
     baseRoute.post("/pages").handler(APIAllPageDataHandler.applyConfiguration(config));
     baseRoute.post("/archives").handler(apiAllArchiveDataHandler.applyConfiguration(config));
