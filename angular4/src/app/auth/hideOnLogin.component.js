@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var auth_service_1 = require("./auth.service");
-require("./logoutHider.template.htm");
+require("./loginHider.template.htm");
 var LoginHiderComponent = (function () {
     function LoginHiderComponent(authService) {
         this.authService = authService;

@@ -56,7 +56,6 @@ const appRoutes = [
     {
         path: 'archives/:pageNumber',
         component: ArchivesComponent,
-        canActivate: [AuthGuard],
         resolve: {pages: ArchivesResolve}
     },
     {path: 'page/:name', component: EditPageComponent, resolve: {pages: PageResolve}},

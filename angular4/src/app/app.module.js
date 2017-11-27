@@ -62,7 +62,6 @@ var appRoutes = [
     {
         path: 'archives/:pageNumber',
         component: Archives_component_1.ArchivesComponent,
-        canActivate: [auth_guard_1.AuthGuard],
         resolve: { pages: archives_resolve_service_1.ArchivesResolve }
     },
     { path: 'page/:name', component: EditPage_component_1.EditPageComponent, resolve: { pages: page_resolve_service_1.PageResolve } },
