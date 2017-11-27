@@ -16,6 +16,8 @@ services:
       - "8989:8989"
   mongo:
     image: mongo:latest
+    volumes:
+          - "./dataDump/:/data/db"
 
 #Use this compose file to run both the vertx web server and
 #Take advantage having a browersync server to watch and automagically
