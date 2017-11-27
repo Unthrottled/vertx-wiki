@@ -54,4 +54,8 @@ export class BaseComponent implements OnInit {
     firstPage(): boolean {
         return this.pageNumber.localeCompare("1") == 0;
     }
+
+    get loggedIn(): boolean {
+        return this.authService.isLoggedIn;
+    }
 }

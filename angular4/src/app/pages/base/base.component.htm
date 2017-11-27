@@ -5,7 +5,10 @@
             <div class="jumbotron">
               <h1>Wiki Pages</h1>
               <div *ngIf="firstPage()">
-                <p class="lead">Hey {{userName}}! Good news, if you are reading this then you have the proper permissions to view/read pages on this site!</p>
+                <p class="lead">
+                  <span *ngIf="loggedIn" >Hey {{userName}}!</span>
+                Good news, if you are reading this then you have the proper permissions to view/read pages on this site!
+                </p>
                 <div>
                   <p *ngIf="canCreate | async">
                     You are also an esteemed writer who has the powers to forge interesting wiki pages from the hot fires of Valhalla.
@@ -32,6 +35,9 @@
                     Where they lie outside of the realm of active pages.
                     Hoping that one day they, may be restored and see the light.
                   </p>
+                  <p *ngIf="!loggedIn" class="small">
+                    Psst..... You should probably <a routerLink="/login" class="btn-sm btn btn-primary">login</a> or <a class="btn-success btn-sm btn" routerLink="/register">register</a>!
+                </p>
                 </div>
               </div>
             </div>

@@ -79,6 +79,13 @@ var BaseComponent = (function () {
     BaseComponent.prototype.firstPage = function () {
         return this.pageNumber.localeCompare("1") == 0;
     };
+    Object.defineProperty(BaseComponent.prototype, "loggedIn", {
+        get: function () {
+            return this.authService.isLoggedIn;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return BaseComponent;
 }());
 BaseComponent = __decorate([
