@@ -11,7 +11,7 @@ services:
       - ./angular4:/app
   web-service:
     build: ./web-service
-    image: alexsimons/vertx-web-service:1.0.4
+    image: alexsimons/vertx-web-service:1.1.0
     ports:
       - "8989:8989"
   mongo:
