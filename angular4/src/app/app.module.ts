@@ -47,6 +47,7 @@ import {ArchivePageComponent} from "./pages/archive/ArchivePage.component";
 import {ArchivesComponent} from "./pages/archive/Archives.component";
 import {ArchivesResolve} from "./pages/archive/archives-resolve.service";
 import {ArchiveResolve} from "./pages/archive/archive-resolve.service";
+import {LoginHiderComponent} from "./auth/hideOnLogin.component";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -93,6 +94,7 @@ const appRoutes = [
         SwitchComponent,
         BaseComponent,
         LoginComponent,
+        LoginHiderComponent,
         RegisterComponent,
         LogoutComponent,
         PagesComponent,

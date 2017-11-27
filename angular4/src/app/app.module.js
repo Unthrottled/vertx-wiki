@@ -54,6 +54,7 @@ var ArchivePage_component_1 = require("./pages/archive/ArchivePage.component");
 var Archives_component_1 = require("./pages/archive/Archives.component");
 var archives_resolve_service_1 = require("./pages/archive/archives-resolve.service");
 var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service");
+var hideOnLogin_component_1 = require("./auth/hideOnLogin.component");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: '*', redirectTo: 'pages/1' },
@@ -101,6 +102,7 @@ AppModule = __decorate([
             switch_component_1.SwitchComponent,
             base_component_1.BaseComponent,
             login_component_1.LoginComponent,
+            hideOnLogin_component_1.LoginHiderComponent,
             register_component_1.RegisterComponent,
             logout_component_1.LogoutComponent,
             Pages_component_1.PagesComponent,
