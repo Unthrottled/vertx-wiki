@@ -26,19 +26,19 @@ var BackendService = (function () {
         this.userToken = userToken;
     }
     BackendService.prototype.fetchAllPages = function (pageNumber) {
-        return this.httpPost("./api/pages", { pageNumber: pageNumber })
+        return this.httpPost("./base/pages", { pageNumber: pageNumber })
             .map(function (response) { return new PagePayload_model_1.PagePayload(response.json()); });
     };
     BackendService.prototype.fetchAllArchives = function (pageNumber) {
-        return this.httpPost("./api/archives", { pageNumber: pageNumber })
+        return this.httpPost("./base/archives", { pageNumber: pageNumber })
             .map(function (response) { return new ArchivesPayload_model_1.ArchivesPayload(response.json()); });
     };
     BackendService.prototype.fetchPage = function (pageName) {
-        return this.httpGet("./api/pages/" + pageName)
+        return this.httpGet("./base/pages/" + pageName)
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.fetchArchivedPage = function (pageId) {
-        return this.httpPost("./api/archive", { _id: pageId })
+        return this.httpPost("./base/archive", { _id: pageId })
             .map(function (response) { return new PageFullPayload_model_1.FullPagePayload(response.json()); });
     };
     BackendService.prototype.deletePage = function (pageName) {
@@ -54,7 +54,7 @@ var BackendService = (function () {
             .map(function (response) { return new StatusPayload_model_1.StatusPayload(response.json()); });
     };
     BackendService.prototype.pageExists = function (pageName) {
-        return this.httpGet("./api/exists/" + pageName)
+        return this.httpGet("./base/exists/" + pageName)
             .map(function (response) { return new ExistsPayload_model_1.ExistsPayload(response.json()); });
     };
     BackendService.prototype.userExists = function (userName) {
