@@ -2,7 +2,7 @@
 ----
 ## Using Vert.x!
 
-#### Live Demo! [http://wiki.acari.io](http://wiki.acari.io)
+#### Live Demo! [https://wiki.acari.io](https://wiki.acari.io)
 
 #### Bare Minimum, to run the sample you will need:
  - Internet Connection (At least the first time it is run)
@@ -19,9 +19,9 @@ When you see something like
      web-service_1  | 2017-10-12 20:48:20 INFO  HttpVerticle:112 - Server listening on port 8989
      web-service_1  | 2017-10-12 20:48:20 INFO  VertxLauncher:30 - STARTED
 
-Point your browser at http://localhost
+Point your browser at https://localhost
 
-Now you should be able to add a user!
+Now you should be able to add a user whenever!
 Provided your user has the proper permissions, you should be able to create a page!
 
 
@@ -59,18 +59,18 @@ Once you see this scroll by
         web-content_1  | [Browsersync] Serving files from: dist
         web-content_1  | [Browsersync] Couldn't open browser (if you are using BrowserSync in a headless environment, you might want to set the open option to false)
 
-Point your browser at http://localhost:3000 and enjoy developing with live code changes!
+Point your browser at https://localhost:3000 and enjoy developing with live code changes!
 
 As a side note, any changes in typscript files will _not_ re-trigger the recompliation of the code for some reason.
 So any typscript changes will require a re-complilation.
 
 This can be achieved by running `npm run compile` in the angular4 directory. 
-If you want to do it the docker way, you can just run the build image (created from the build step) with 
+If you want to do it the docker way, you can just run the build image (created from the build step `docker-compose -f docker-compose-build.yml up`) with 
 the entry point as `npm` and the command options as `run compile`
 
 ex `docker run --rm -v /path/to/repo/vertx-wiki/angluar4/:/app --entrypoint=npm alexsimons/nodebuild run compile`
 
-There is also a `deploy` node task that will compile all of the typescript, make webpack bundle all of the dependincies and then the artifacts into the 
+There is also a `deploy` node task that will transpile all of the typescript, make webpack bundle all of the dependincies and then the artifacts into the 
 webroot directory in the resources directory of the web-service project (eg vertx-wiki/web-service/src/main/resources/webroot).
 
 Which will allow for the Vertx HTTP verticle to serve static web content and also provide a REST API.
