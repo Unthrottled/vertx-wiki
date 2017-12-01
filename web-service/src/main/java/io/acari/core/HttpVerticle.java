@@ -79,10 +79,7 @@ public class HttpVerticle extends AbstractVerticle {
 
     Router router = Router.router(vertx);
 
-    router.route().handler(CookieHandler.create());
     router.route().handler(BodyHandler.create());
-    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-    router.route().handler(UserSessionHandler.create(mongoAuth));
     router.post().handler(BodyHandler.create());
     router.post("/user/create").handler(new UserCreationHandler(mongoAuth));
     router.post("/user/logout").handler(userLogoutHandler);
