@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project xmlns:con="http://eviware.com/soapui/config" id="322fed34-0388-460d-ace4-74244329db30" activeEnvironment="Default"
-                    name="Wiki-REST-API" resourceRoot="" soapui-version="5.3.0" abortOnError="false"
-                    runType="SEQUENTIAL">
+<con:soapui-project id="322fed34-0388-460d-ace4-74244329db30" activeEnvironment="Default" name="Wiki-REST-API" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
     <con:settings/>
-    <con:interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="con:RestService"
-                   id="553b4675-c120-4b03-a280-0b7823743aba" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://sandwich:8989"
-                   type="rest">
+    <con:interface xsi:type="con:RestService" id="553b4675-c120-4b03-a280-0b7823743aba" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://sandwich:8989" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <con:settings/>
 
-        <con:definitionCache type="TEXT" rootPart=""/>
-        <con:endpoints>
-            <con:endpoint>http://localhost:8989</con:endpoint>
+        
+        <con:definitionCache type="TEXT" rootPart=""/><con:endpoints>
+            <con:endpoint>https://localhost</con:endpoint>
         </con:endpoints>
         <con:resource name="" path="" id="32c181de-8aee-4761-9f52-308fe5fa08a5">
             <con:settings/>
@@ -79,12 +75,11 @@
                                 <con:params/>
                                 <con:element xmlns:pag="http://sandwich/api/pages">pag:Fault</con:element>
                             </con:representation>
-                            <con:request name="Request 1" id="c7b2f23b-d253-4e83-9cfb-9edd1fca6088"
-                                         mediaType="application/json" postQueryString="false">
+                            <con:request name="Request 1" id="c7b2f23b-d253-4e83-9cfb-9edd1fca6088" mediaType="application/json" postQueryString="false">
                                 <con:settings>
                                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                                 </con:settings>
-                                <con:endpoint>http://localhost:8989</con:endpoint>
+                                <con:endpoint>https://localhost</con:endpoint>
                                 <con:request>{
                                     "name": "STEVE",
                                     "markdown":
@@ -93,7 +88,7 @@
                                 </con:request>
                                 <con:originalUri>http://localhost/api/pages/create</con:originalUri>
                                 <con:credentials>
-                                    <con:authType>No Authorization</con:authType>
+                                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                                 </con:credentials>
                                 <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                                 <con:jmsPropertyConfig/>
@@ -107,13 +102,12 @@
                         <con:method name="Method 1" id="4db48a94-0864-4105-9825-41ab64db0a29" method="GET">
                             <con:settings/>
                             <con:parameters/>
-                            <con:request name="Request 1" id="8c7d240d-d699-4bc2-a155-0e0f7c689ba5"
-                                         mediaType="application/json">
+                            <con:representation type="RESPONSE"><con:mediaType>text/html;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="8c7d240d-d699-4bc2-a155-0e0f7c689ba5" mediaType="application/json">
                                 <con:settings/>
-                                <con:endpoint>http://localhost:8989</con:endpoint>
+                                <con:endpoint>https://localhost</con:endpoint>
                                 <con:request/>
                                 <con:credentials>
-                                    <con:authType>No Authorization</con:authType>
+                                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                                 </con:credentials>
                                 <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                                 <con:jmsPropertyConfig/>
@@ -200,12 +194,11 @@
                             <con:params/>
                             <con:element>html</con:element>
                         </con:representation>
-                        <con:request name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "name": "STEVE",
                                 "markdown":
@@ -453,12 +446,11 @@
                             <con:params/>
                             <con:element>data</con:element>
                         </con:representation>
-                        <con:request name="FETCH ALL" id="857d6247-2e34-49a0-921d-5a8c18257e55"
-                                     mediaType="application/json">
+                        <con:request name="FETCH ALL" id="857d6247-2e34-49a0-921d-5a8c18257e55" mediaType="application/json">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request/>
                             <con:originalUri>http://sandwich/api/pages</con:originalUri>
                             <con:credentials>
@@ -611,13 +603,12 @@
                             <con:params/>
                             <con:element>data</con:element>
                         </con:representation>
-                        <con:request name="UPDATE PAGE" id="ed55bf0d-0da2-401d-b50f-268ef5544db5"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="UPDATE PAGE" id="ed55bf0d-0da2-401d-b50f-268ef5544db5" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
                                 </con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "id": "8",
                                 "markdown":
@@ -679,13 +670,12 @@
                             <con:params/>
                             <con:element>html</con:element>
                         </con:representation>
-                        <con:request name="DELETE" id="cbb46877-3bab-4e7a-9124-9f0229de57d5"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="DELETE" id="cbb46877-3bab-4e7a-9124-9f0229de57d5" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
                                 </con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "id": "7"
                                 }
@@ -977,13 +967,12 @@
                             <con:params/>
                             <con:element>data</con:element>
                         </con:representation>
-                        <con:request name="Request 1" id="94161d65-e98c-4ed5-b099-af1c1ea547fe"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="Request 1" id="94161d65-e98c-4ed5-b099-af1c1ea547fe" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
                                 </con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "login":"root",
                                 "password":"l33t"
@@ -1099,19 +1088,18 @@
                             <con:params/>
                             <con:element>data</con:element>
                         </con:representation>
-                        <con:request name="Request 1" id="94fd935e-5418-4c04-a341-60231aabe540"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="Request 1" id="94fd935e-5418-4c04-a341-60231aabe540" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "role": "editor"
                                 }
                             </con:request>
                             <con:originalUri>http://localhost/api/user</con:originalUri>
                             <con:credentials>
-                                <con:authType>No Authorization</con:authType>
+                                <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                             </con:credentials>
                             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                             <con:jmsPropertyConfig/>
@@ -1128,15 +1116,14 @@
                         <con:method name="Delete" id="eeb60b1f-b191-4f03-bd92-ec107effeee5" method="DELETE">
                             <con:settings/>
                             <con:parameters/>
-                            <con:request name="Request 1" id="0c91efa1-bd65-402e-af22-4090267fe380"
-                                         mediaType="application/json" postQueryString="false">
+                            <con:request name="Request 1" id="0c91efa1-bd65-402e-af22-4090267fe380" mediaType="application/json" postQueryString="false">
                                 <con:settings>
                                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                                 </con:settings>
-                                <con:endpoint>http://localhost:8989</con:endpoint>
+                                <con:endpoint>https://localhost</con:endpoint>
                                 <con:request/>
                                 <con:credentials>
-                                    <con:authType>No Authorization</con:authType>
+                                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                                 </con:credentials>
                                 <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                                 <con:jmsPropertyConfig/>
@@ -1146,13 +1133,12 @@
                         <con:method name="GET" id="b8b50270-77aa-4b42-a9f9-7ad44207fddc" method="GET">
                             <con:settings/>
                             <con:parameters/>
-                            <con:request name="Request 1" id="c4b71855-24fe-4051-8a0d-f204b91bba3a"
-                                         mediaType="application/json">
+                            <con:request name="Request 1" id="c4b71855-24fe-4051-8a0d-f204b91bba3a" mediaType="application/json">
                                 <con:settings/>
-                                <con:endpoint>http://localhost:8989</con:endpoint>
+                                <con:endpoint>https://localhost</con:endpoint>
                                 <con:request/>
                                 <con:credentials>
-                                    <con:authType>No Authorization</con:authType>
+                                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                                 </con:credentials>
                                 <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                                 <con:jmsPropertyConfig/>
@@ -1189,18 +1175,17 @@
                             <con:params/>
                             <con:element xmlns:pag="http://sandwich/api/pages">pag:Response</con:element>
                         </con:representation>
-                        <con:request name="Request 1" id="305731a1-ebc2-48d2-8fa5-142da6d01081"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="Request 1" id="305731a1-ebc2-48d2-8fa5-142da6d01081" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "pageNumber": 1
                                 }
                             </con:request>
                             <con:credentials>
-                                <con:authType>No Authorization</con:authType>
+                                <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                             </con:credentials>
                             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                             <con:jmsPropertyConfig/>
@@ -1214,18 +1199,17 @@
                     <con:method name="Method 1" id="5948e9b6-87e0-4b4e-a7a6-3750776fab1c" method="POST">
                         <con:settings/>
                         <con:parameters/>
-                        <con:request name="Request 1" id="05a20f5c-d989-4e12-8407-382357e4a527"
-                                     mediaType="application/json" postQueryString="false">
+                        <con:request name="Request 1" id="05a20f5c-d989-4e12-8407-382357e4a527" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "_id": "59e4ff9cb286fd72fa9e408c"
                                 }
                             </con:request>
                             <con:credentials>
-                                <con:authType>No Authorization</con:authType>
+                                <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                             </con:credentials>
                             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                             <con:jmsPropertyConfig/>
@@ -1361,12 +1345,11 @@
                             <con:params/>
                             <con:element>data</con:element>
                         </con:representation>
-                        <con:request name="post" id="4f2ce1dd-9dba-4e35-9866-5c8808f26671" mediaType="application/json"
-                                     postQueryString="false">
+                        <con:request name="post" id="4f2ce1dd-9dba-4e35-9866-5c8808f26671" mediaType="application/json" postQueryString="false">
                             <con:settings>
                                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                             </con:settings>
-                            <con:endpoint>http://localhost:8989</con:endpoint>
+                            <con:endpoint>https://localhost</con:endpoint>
                             <con:request>{
                                 "login":"jerry",
                                 "password": "butts",
@@ -1375,7 +1358,7 @@
                             </con:request>
                             <con:originalUri>http://localhost/user/create</con:originalUri>
                             <con:credentials>
-                                <con:authType>No Authorization</con:authType>
+                                <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>No Authorization</con:authType>
                             </con:credentials>
                             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                             <con:jmsPropertyConfig/>
@@ -1404,7 +1387,7 @@
                         <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
                         </con:setting>
                     </con:settings>
-                    <con:endpoint>http://localhost:8989</con:endpoint>
+                    <con:endpoint>https://localhost</con:endpoint>
                     <con:request/>
                     <con:originalUri>http://sandwich/</con:originalUri>
                     <con:credentials>
@@ -1423,27 +1406,23 @@
     <con:testSuite id="f0705a8d-f8f9-4e3f-96c6-1a4cfe305b5e" name="WIKI-API">
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase id="67750bb4-1360-41e1-a8c7-cf64f7daf5ac" failOnError="true" failTestCaseOnErrors="true"
-                      keepSession="false" maxResults="0" name="GET AUTH" searchProperties="true">
+        <con:testCase id="67750bb4-1360-41e1-a8c7-cf64f7daf5ac" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GET AUTH" searchProperties="true">
             <con:settings/>
             <con:testStep type="restrequest" name="AUTH" id="2d0f9f0e-a63e-4694-9051-b1306a6a71da">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/token"
-                            methodName="Method 1" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="AUTH" id="94161d65-e98c-4ed5-b099-af1c1ea547fe" mediaType="application/json"
-                                     postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/token" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="AUTH" id="94161d65-e98c-4ed5-b099-af1c1ea547fe" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
-                            "login":"jerry",
-                            "password":"butts"
+                            "login":"reader",
+                            "password":"reader"
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/token</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="a543b48a-f741-4c89-b535-394536ed436c"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="a543b48a-f741-4c89-b535-394536ed436c" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200
                                 </codes>
@@ -1466,21 +1445,15 @@
             </con:testStep>
             <con:testStep type="restrequest" name="GET" id="5ba9b73f-5af1-48d7-bb3c-cadd472aeabd">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages/STEVE"
-                            methodName="Method 1" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="GET" id="857d6247-2e34-49a0-921d-5a8c18257e55" mediaType="application/json"
-                                     postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/pages/STEVE" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="GET" id="857d6247-2e34-49a0-921d-5a8c18257e55" mediaType="application/json" postQueryString="false">
                         <con:settings>
-                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
-                                key="Authorization" value="Bearer ${AUTH#Response#$.token}"
-                                xmlns="http://eviware.com/soapui/config"/>
-                            </con:setting>
+                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request/>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="93e927c0-39d2-433a-ba86-05e07751884f"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="93e927c0-39d2-433a-ba86-05e07751884f" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
                             </con:configuration>
@@ -1500,17 +1473,12 @@
             </con:testStep>
             <con:testStep type="restrequest" name="DELETE" id="d6594828-f576-4c21-897a-9ac66cf7570e">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages"
-                            methodName="DELETE" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="DELETE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/page/STEVE" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="DELETE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
-                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
-                                key="Authorization" value="Bearer ${AUTH#Response#$.token}"
-                                xmlns="http://eviware.com/soapui/config"/>
-                            </con:setting>
+                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Bearer ${AUTH#Response#$.token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "name": "STEVE",
                             "markdown":
@@ -1518,8 +1486,7 @@
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200
                                 </codes>
@@ -1539,17 +1506,15 @@
             </con:testStep>
             <con:testStep type="restrequest" name="CREATE" id="e9481498-bc09-4c27-a943-058e5c83d8a1">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages/create"
-                            methodName="create" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/pages/create" methodName="create" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "name": "STEVE${#TestSuite#pageNumber}",
                             "markdown":
@@ -1557,8 +1522,7 @@
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>201
 
@@ -1579,17 +1543,15 @@
             </con:testStep>
             <con:testStep type="restrequest" name="UPDATE" id="6fad0bcc-052f-461d-b2c8-2b4184628871">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages"
-                            methodName="PUT" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="UPDATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/pages" methodName="PUT" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="UPDATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "name": "STEVE",
                             "markdown":
@@ -1597,8 +1559,7 @@
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200
                                 </codes>
@@ -1618,25 +1579,22 @@
             </con:testStep>
             <con:testStep type="restrequest" name="UPDATE USER" id="329fd47c-8e91-4224-9769-13b6089e44c0">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/user"
-                            methodName="UPDATE" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="UPDATE USER" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/user" methodName="UPDATE" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="UPDATE USER" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "role":"editor",
                             "password":"butts"
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>201
                                 </codes>
@@ -1656,24 +1614,21 @@
             </con:testStep>
             <con:testStep type="restrequest" name="GET-PAGE" id="5cc936c5-5bb2-4d21-b3e0-14de0cbda75a">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages"
-                            methodName="POST" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="GET-PAGE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/pages" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="GET-PAGE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "pageNumber": 1
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
                             </con:configuration>
@@ -1692,24 +1647,21 @@
             </con:testStep>
             <con:testStep type="restrequest" name="DELETE-STEVE" id="12122716-acef-442c-9524-008ee2524c10">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/page/STEVE"
-                            methodName="Delete" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="DELETE-STEVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/page/STEVE" methodName="Delete" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="DELETE-STEVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "pageNumber": 1
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
                             </con:configuration>
@@ -1728,24 +1680,21 @@
             </con:testStep>
             <con:testStep type="restrequest" name="GET-ARCHIVE" id="47edf4fb-46a3-4ba8-9dd9-3291858dabd1">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/archives"
-                            methodName="POST" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="GET-ARCHIVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/archives" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="GET-ARCHIVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "pageNumber": 1
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
                             </con:configuration>
@@ -1764,24 +1713,21 @@
             </con:testStep>
             <con:testStep type="restrequest" name="GET-PAGE-ARCHIVE" id="aaab6956-14ea-427d-b0a3-76c6f747913d">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/archive"
-                            methodName="Method 1" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="GET-PAGE-ARCHIVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/archive" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="GET-PAGE-ARCHIVE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${AUTH#Response#$.token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "_id": "59e4ff9cb286fd72fa9e408c"
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
                             </con:configuration>
@@ -1805,8 +1751,7 @@
                 </con:property>
             </con:properties>
         </con:testCase>
-        <con:testCase id="d6d126d2-c710-49cf-8527-239398c79ca7" failOnError="true" failTestCaseOnErrors="true"
-                      keepSession="false" maxResults="0" name="MASS-PAGE-GEN" searchProperties="true">
+        <con:testCase id="d6d126d2-c710-49cf-8527-239398c79ca7" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="MASS-PAGE-GEN" searchProperties="true">
             <con:settings/>
             <con:testStep type="groovy" name="RUNNER" id="59a08c58-5660-4889-8642-5cff1adb657f">
                 <con:settings/>
@@ -1831,27 +1776,23 @@
             </con:testStep>
             <con:properties/>
         </con:testCase>
-        <con:testCase id="7bd56f19-32c2-4174-942a-cf3ec80ad4f8" failOnError="true" failTestCaseOnErrors="true"
-                      keepSession="false" maxResults="0" name="AUTH SEED" searchProperties="true">
+        <con:testCase id="7bd56f19-32c2-4174-942a-cf3ec80ad4f8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AUTH SEED" searchProperties="true">
             <con:settings/>
             <con:testStep type="restrequest" name="AUTH" id="2d42738a-9d5f-45fe-bc9a-cc108fc73759">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/token"
-                            methodName="Method 1" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="AUTH" id="94161d65-e98c-4ed5-b099-af1c1ea547fe" mediaType="application/json"
-                                     postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/token" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="AUTH" id="94161d65-e98c-4ed5-b099-af1c1ea547fe" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "login":"jerry",
                             "password":"butts"
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/token</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="a543b48a-f741-4c89-b535-394536ed436c"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="a543b48a-f741-4c89-b535-394536ed436c" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200
                                 </codes>
@@ -1882,22 +1823,19 @@
             </con:testStep>
             <con:properties/>
         </con:testCase>
-        <con:testCase id="e2dbf87c-79b4-4eaa-ba8b-4789f9bbb7b5" failOnError="true" failTestCaseOnErrors="true"
-                      keepSession="false" maxResults="0" name="CREATE PAGE" searchProperties="true">
+        <con:testCase id="e2dbf87c-79b4-4eaa-ba8b-4789f9bbb7b5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CREATE PAGE" searchProperties="true">
             <con:settings/>
             <con:testStep type="restrequest" name="CREATE" id="d3e4b4f8-72b4-4213-9587-11a7e7e31b3b">
                 <con:settings/>
-                <con:config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="http://sandwich:8989" resourcePath="/api/pages/create"
-                            methodName="create" xsi:type="con:RestRequestStep">
-                    <con:restRequest name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438"
-                                     mediaType="application/json" postQueryString="false">
+                <con:config service="http://sandwich:8989" resourcePath="/api/pages/create" methodName="create" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:restRequest name="CREATE" id="60cf1e4e-7783-47cc-ae14-29bed6153438" mediaType="application/json" postQueryString="false">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry
                                 key="Authorization" value="Bearer ${#TestSuite#token}"
                                 xmlns="http://eviware.com/soapui/config"/>
                             </con:setting>
                         </con:settings>
-                        <con:endpoint>http://localhost:8989</con:endpoint>
+                        <con:endpoint>https://localhost</con:endpoint>
                         <con:request>{
                             "name": "STEVE${#TestSuite#pageNumber}",
                             "markdown":
@@ -1905,8 +1843,7 @@
                             }
                         </con:request>
                         <con:originalUri>http://sandwich/api/pages</con:originalUri>
-                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708"
-                                       name="Valid HTTP Status Codes">
+                        <con:assertion type="Valid HTTP Status Codes" id="ab7ff56a-dedd-4bd8-bddf-946137a02708" name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>201
 
