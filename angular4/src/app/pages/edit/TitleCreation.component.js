@@ -26,7 +26,7 @@ var core_1 = require("@angular/core");
 require("../../common/validation-field.htm");
 var TitleValidation_service_1 = require("./TitleValidation.service");
 var Validation_component_1 = require("../../common/Validation.component");
-var TitleCreationComponent = (function (_super) {
+var TitleCreationComponent = /** @class */ (function (_super) {
     __extends(TitleCreationComponent, _super);
     function TitleCreationComponent(titleValidationService, ngZone) {
         var _this = _super.call(this, ngZone) || this;
@@ -38,14 +38,14 @@ var TitleCreationComponent = (function (_super) {
     TitleCreationComponent.prototype.validateContent = function (content) {
         return this.titleValidationService.isValid(content);
     };
+    TitleCreationComponent = __decorate([
+        core_1.Component({
+            selector: 'title-creation',
+            template: require('../../common/validation-field.htm')
+        }),
+        __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, core_1.NgZone])
+    ], TitleCreationComponent);
     return TitleCreationComponent;
 }(Validation_component_1.ValidationComponent));
-TitleCreationComponent = __decorate([
-    core_1.Component({
-        selector: 'title-creation',
-        template: require('../../common/validation-field.htm')
-    }),
-    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService, core_1.NgZone])
-], TitleCreationComponent);
 exports.TitleCreationComponent = TitleCreationComponent;
 //# sourceMappingURL=TitleCreation.component.js.map

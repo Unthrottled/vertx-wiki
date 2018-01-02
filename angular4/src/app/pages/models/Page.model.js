@@ -1,9 +1,9 @@
+"use strict";
 /**
  * Created by alex on 9/17/17.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Page = (function () {
+var Page = /** @class */ (function () {
     function Page(pageFull) {
         this._id = pageFull._id;
         this._name = pageFull.name;

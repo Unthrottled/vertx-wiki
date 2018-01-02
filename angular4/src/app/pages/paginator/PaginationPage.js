@@ -1,9 +1,9 @@
+"use strict";
 /**
  * Created by alex on 10/8/17.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PaginationPage = (function () {
+var PaginationPage = /** @class */ (function () {
     function PaginationPage(_pageId) {
         this._pageId = _pageId;
     }

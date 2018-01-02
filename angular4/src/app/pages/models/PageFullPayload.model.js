@@ -15,7 +15,7 @@ var StatusPayload_model_1 = require("./StatusPayload.model");
 /**
  * Created by alex on 9/17/17.
  */
-var FullPagePayload = (function (_super) {
+var FullPagePayload = /** @class */ (function (_super) {
     __extends(FullPagePayload, _super);
     function FullPagePayload(payload) {
         var _this = _super.call(this, payload) || this;

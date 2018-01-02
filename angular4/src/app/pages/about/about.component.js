@@ -11,16 +11,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./about.htm");
-var AboutComponent = (function () {
+var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
     }
+    AboutComponent = __decorate([
+        core_1.Component({
+            selector: 'about-view',
+            template: require('./about.htm')
+        })
+    ], AboutComponent);
     return AboutComponent;
 }());
-AboutComponent = __decorate([
-    core_1.Component({
-        selector: 'about-view',
-        template: require('./about.htm')
-    })
-], AboutComponent);
 exports.AboutComponent = AboutComponent;
 //# sourceMappingURL=about.component.js.map

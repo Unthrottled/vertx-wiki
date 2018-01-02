@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var LastModfied_model_1 = require("./LastModfied.model");
 var Page_model_1 = require("./Page.model");
-var PageFull = (function (_super) {
+var PageFull = /** @class */ (function (_super) {
     __extends(PageFull, _super);
     function PageFull(pageFull) {
         var _this = _super.call(this, pageFull) || this;

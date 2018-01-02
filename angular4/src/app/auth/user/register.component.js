@@ -20,7 +20,7 @@ require("./register.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var NewUser_model_1 = require("./NewUser.model");
 var dist_1 = require("angular2-notifications/dist");
-var RegisterComponent = (function () {
+var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(authService, router, notifService) {
         this.authService = authService;
         this.router = router;
@@ -90,14 +90,14 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.failure = function () {
         this.notifService.error("Unable to create user!", "Please try another username.", { timeOut: 3000 });
     };
+    RegisterComponent = __decorate([
+        core_1.Component({
+            selector: 'register-form-guy',
+            template: require('./register.template.htm')
+        }),
+        __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, dist_1.NotificationsService])
+    ], RegisterComponent);
     return RegisterComponent;
 }());
-RegisterComponent = __decorate([
-    core_1.Component({
-        selector: 'register-form-guy',
-        template: require('./register.template.htm')
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router, dist_1.NotificationsService])
-], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map

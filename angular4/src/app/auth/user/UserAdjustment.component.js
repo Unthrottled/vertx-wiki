@@ -19,7 +19,7 @@ var dist_1 = require("angular2-notifications/dist");
 var backend_service_1 = require("../../util/backend.service");
 var StatusPayload_model_1 = require("../../pages/models/StatusPayload.model");
 var UserPrincipal_model_1 = require("../UserPrincipal.model");
-var UserAdjustmentComponent = (function () {
+var UserAdjustmentComponent = /** @class */ (function () {
     function UserAdjustmentComponent(backendService, notifService, userPrinc) {
         this.backendService = backendService;
         this.notifService = notifService;
@@ -59,16 +59,16 @@ var UserAdjustmentComponent = (function () {
         this.success = false;
         this.notifService.error("Unable to update user!", "Please try again, or not.", { timeOut: 3000 });
     };
+    UserAdjustmentComponent = __decorate([
+        core_1.Component({
+            selector: 'user-adjustment-guy',
+            template: require('./userAdjustment.template.htm')
+        }),
+        __metadata("design:paramtypes", [backend_service_1.BackendService,
+            dist_1.NotificationsService,
+            UserPrincipal_model_1.UserPrincipal])
+    ], UserAdjustmentComponent);
     return UserAdjustmentComponent;
 }());
-UserAdjustmentComponent = __decorate([
-    core_1.Component({
-        selector: 'user-adjustment-guy',
-        template: require('./userAdjustment.template.htm')
-    }),
-    __metadata("design:paramtypes", [backend_service_1.BackendService,
-        dist_1.NotificationsService,
-        UserPrincipal_model_1.UserPrincipal])
-], UserAdjustmentComponent);
 exports.UserAdjustmentComponent = UserAdjustmentComponent;
 //# sourceMappingURL=UserAdjustment.component.js.map

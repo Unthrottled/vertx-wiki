@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./hex.htm");
-var HexComponent = (function () {
+var HexComponent = /** @class */ (function () {
     function HexComponent() {
         this.onClick = new core_1.EventEmitter();
     }
@@ -58,37 +58,37 @@ var HexComponent = (function () {
     HexComponent.prototype.clicked = function (name) {
         this.onClick.emit(name);
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], HexComponent.prototype, "onClick", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], HexComponent.prototype, "width", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], HexComponent.prototype, "height", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], HexComponent.prototype, "name", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], HexComponent.prototype, "value", null);
+    HexComponent = __decorate([
+        core_1.Component({
+            selector: 'hex',
+            template: require('./hex.htm')
+        })
+    ], HexComponent);
     return HexComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], HexComponent.prototype, "onClick", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], HexComponent.prototype, "width", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], HexComponent.prototype, "height", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], HexComponent.prototype, "name", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], HexComponent.prototype, "value", null);
-HexComponent = __decorate([
-    core_1.Component({
-        selector: 'hex',
-        template: require('./hex.htm')
-    })
-], HexComponent);
 exports.HexComponent = HexComponent;
 //# sourceMappingURL=HexComponent.js.map

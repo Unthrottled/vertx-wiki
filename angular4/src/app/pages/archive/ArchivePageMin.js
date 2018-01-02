@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Page_min_model_1 = require("../models/Page.min.model");
-var ArchivePageMin = (function (_super) {
+var ArchivePageMin = /** @class */ (function (_super) {
     __extends(ArchivePageMin, _super);
     function ArchivePageMin(pageMin) {
         var _this = _super.call(this, pageMin.name) || this;

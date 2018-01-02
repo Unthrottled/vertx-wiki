@@ -18,7 +18,7 @@ var auth_service_1 = require("./auth.service");
 var Permissions_component_1 = require("./Permissions.component");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var Observable_1 = require("rxjs/Observable");
-var AuthGuard = (function () {
+var AuthGuard = /** @class */ (function () {
     function AuthGuard(router, authService, userToken) {
         this.router = router;
         this.authService = authService;
@@ -32,11 +32,11 @@ var AuthGuard = (function () {
         this.router.navigate(['/login']);
         return Observable_1.Observable.of(false);
     };
+    AuthGuard = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService, UserPrincipal_model_1.UserPrincipal])
+    ], AuthGuard);
     return AuthGuard;
 }());
-AuthGuard = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [router_1.Router, auth_service_1.AuthService, UserPrincipal_model_1.UserPrincipal])
-], AuthGuard);
 exports.AuthGuard = AuthGuard;
 //# sourceMappingURL=auth.guard.js.map
