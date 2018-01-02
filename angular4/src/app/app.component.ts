@@ -22,20 +22,32 @@ export class AppComponent {
         router.events
             .filter(event => event instanceof NavigationEnd)
             .subscribe(()=>{
-                this.loading.next(false);
-                this.loadEnd.next(true);
+                this.stopLoading();
 
             });
 
         router.events
             .filter(event => event instanceof NavigationStart)
             .subscribe(()=>{
-                 this.loading.next(true);
-                 this.loadStart.next(true);
+                this.startLoading();
             });
     }
 
-    searchActivated(){
+    private stopLoading() {
+        this.loading.next(false);
+        this.loadEnd.next(true);
+    }
+
+    private startLoading() {
+        this.loading.next(true);
         this.loadStart.next(true);
+    }
+
+    searchActivated(): void {
+        this.startLoading();
+    }
+
+    searchFailed(): void {
+        this.stopLoading();
     }
 }

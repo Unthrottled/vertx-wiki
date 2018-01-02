@@ -24,14 +24,12 @@ var AppComponent = /** @class */ (function () {
         router.events
             .filter(function (event) { return event instanceof router_1.NavigationEnd; })
             .subscribe(function () {
-            _this.loading.next(false);
-            _this.loadEnd.next(true);
+            _this.stopLoading();
         });
         router.events
             .filter(function (event) { return event instanceof router_1.NavigationStart; })
             .subscribe(function () {
-            _this.loading.next(true);
-            _this.loadStart.next(true);
+            _this.startLoading();
         });
     }
     Object.defineProperty(AppComponent.prototype, "notLoading", {
@@ -41,8 +39,19 @@ var AppComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    AppComponent.prototype.searchActivated = function () {
+    AppComponent.prototype.stopLoading = function () {
+        this.loading.next(false);
+        this.loadEnd.next(true);
+    };
+    AppComponent.prototype.startLoading = function () {
+        this.loading.next(true);
         this.loadStart.next(true);
+    };
+    AppComponent.prototype.searchActivated = function () {
+        this.startLoading();
+    };
+    AppComponent.prototype.searchFailed = function () {
+        this.stopLoading();
     };
     AppComponent = __decorate([
         core_1.Component({
