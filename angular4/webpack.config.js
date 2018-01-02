@@ -6,15 +6,15 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const proxy = require('http-proxy-middleware');
 const htmlLoader = require('raw-loader');
-const http = require('https');
-const keepAliveAgent = new http.Agent({keepAlive: true});
+const https = require('https');
+const keepAliveAgent = new https.Agent({keepAlive: true});
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
 
-const proxyPeel = proxy('/api', {
+const apiProxy = proxy('/api', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -23,7 +23,7 @@ const proxyPeel = proxy('/api', {
 });
 
 
-const proxyPeel2 = proxy('/user', {
+const userProxy = proxy('/user', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -31,7 +31,7 @@ const proxyPeel2 = proxy('/user', {
     agent: keepAliveAgent
 });
 
-const proxyPeel3 = proxy('/base', {
+const baseProxy = proxy('/base', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -172,7 +172,7 @@ module.exports = {
             port: 3000,
             https: true,
             server: {baseDir: ['dist']},
-            middleware: [proxyPeel, proxyPeel2, proxyPeel3]
+            middleware: [apiProxy, userProxy, baseProxy]
         })
     ]
 };
