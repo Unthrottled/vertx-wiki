@@ -10,7 +10,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
     template: require('./app.component.htm')
 })
 export class AppComponent {
-    versionNumber: string = "v1.1.1";
+    versionNumber: string = "v1.1.2";
     loadEnd: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     loadStart: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
