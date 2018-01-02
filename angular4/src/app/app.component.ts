@@ -11,6 +11,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 })
 export class AppComponent {
     loadEnd: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+    loadStart: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     get notLoading(): Observable<boolean> {
@@ -21,8 +22,8 @@ export class AppComponent {
         router.events
             .filter(event => event instanceof NavigationEnd)
             .subscribe(()=>{
-                this.loadEnd.next(true);
                 this.loading.next(false);
+                this.loadEnd.next(true);
 
             });
 
@@ -30,6 +31,7 @@ export class AppComponent {
             .filter(event => event instanceof NavigationStart)
             .subscribe(()=>{
                  this.loading.next(true);
+                 this.loadStart.next(true);
             });
     }
 }

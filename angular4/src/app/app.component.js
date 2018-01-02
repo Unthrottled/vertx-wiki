@@ -19,17 +19,19 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.router = router;
         this.loadEnd = new ReplaySubject_1.ReplaySubject(1);
+        this.loadStart = new ReplaySubject_1.ReplaySubject(1);
         this.loading = new BehaviorSubject_1.BehaviorSubject(false);
         router.events
             .filter(function (event) { return event instanceof router_1.NavigationEnd; })
             .subscribe(function () {
-            _this.loadEnd.next(true);
             _this.loading.next(false);
+            _this.loadEnd.next(true);
         });
         router.events
             .filter(function (event) { return event instanceof router_1.NavigationStart; })
             .subscribe(function () {
             _this.loading.next(true);
+            _this.loadStart.next(true);
         });
     }
     Object.defineProperty(AppComponent.prototype, "notLoading", {

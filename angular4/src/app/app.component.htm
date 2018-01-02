@@ -34,6 +34,9 @@
     </div>
 </nav>
 <div [hidden]="notLoading | async" class="loading-container">
-    <loading-indicator [doneLoading]="loadEnd"></loading-indicator>
+    <loading-indicator
+            [doneLoading]="loadEnd"
+            [startLoading]="loadStart"
+    ></loading-indicator>
 </div>
 <router-outlet></router-outlet>
