@@ -41,6 +41,9 @@ var AppComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    AppComponent.prototype.searchActivated = function () {
+        this.loadStart.next(true);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'angular-application',

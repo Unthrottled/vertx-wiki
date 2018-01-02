@@ -34,4 +34,8 @@ export class AppComponent {
                  this.loadStart.next(true);
             });
     }
+
+    searchActivated(){
+        this.loadStart.next(true);
+    }
 }

@@ -30,7 +30,7 @@
                 <logout-butt></logout-butt>
             </li>
         </ul>
-        <page-search></page-search>
+        <page-search (onSearch)="searchActivated()"></page-search>
     </div>
 </nav>
 <div [hidden]="notLoading | async" class="overlord-loading-container">
