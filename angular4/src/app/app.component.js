@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 require("./app.component.htm");
 var AppComponent = (function () {
     function AppComponent() {
+        this.versionNumber = "v1.1.1";
     }
     return AppComponent;
 }());

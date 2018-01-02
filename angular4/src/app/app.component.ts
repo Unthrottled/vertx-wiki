@@ -6,5 +6,5 @@ import "./app.component.htm";
     template: require('./app.component.htm')
 })
 export class AppComponent {
-
+    versionNumber: string = "v1.1.1";
 }
