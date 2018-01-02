@@ -13,17 +13,32 @@ var core_1 = require("@angular/core");
 require("./app.component.htm");
 var router_1 = require("@angular/router");
 var ReplaySubject_1 = require("rxjs/ReplaySubject");
+var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var AppComponent = /** @class */ (function () {
     function AppComponent(router) {
         var _this = this;
         this.router = router;
         this.loadEnd = new ReplaySubject_1.ReplaySubject(1);
+        this.loading = new BehaviorSubject_1.BehaviorSubject(false);
         router.events
             .filter(function (event) { return event instanceof router_1.NavigationEnd; })
-            .subscribe(function (end) {
+            .subscribe(function () {
             _this.loadEnd.next(true);
+            _this.loading.next(false);
+        });
+        router.events
+            .filter(function (event) { return event instanceof router_1.NavigationStart; })
+            .subscribe(function () {
+            _this.loading.next(true);
         });
     }
+    Object.defineProperty(AppComponent.prototype, "notLoading", {
+        get: function () {
+            return this.loading.map(function (b) { return !b; });
+        },
+        enumerable: true,
+        configurable: true
+    });
     AppComponent = __decorate([
         core_1.Component({
             selector: 'angular-application',
