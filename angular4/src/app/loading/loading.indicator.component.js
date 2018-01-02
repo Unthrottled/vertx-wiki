@@ -15,6 +15,7 @@ var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var LoadingIndicatorComponent = /** @class */ (function () {
     function LoadingIndicatorComponent() {
         this._doneLoading = Observable_1.Observable.empty();
+        this._startLoading = Observable_1.Observable.empty();
         this.completed = new BehaviorSubject_1.BehaviorSubject(false);
     }
     Object.defineProperty(LoadingIndicatorComponent.prototype, "doneLoading", {
@@ -26,6 +27,19 @@ var LoadingIndicatorComponent = /** @class */ (function () {
             this._doneLoading = value;
             var emissionHandler = function () { _this.completed.next(true); };
             this.doneLoading.subscribe(emissionHandler, emissionHandler, emissionHandler);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LoadingIndicatorComponent.prototype, "startLoading", {
+        get: function () {
+            return this._startLoading;
+        },
+        set: function (value) {
+            var _this = this;
+            this._startLoading = value;
+            var emissionHandler = function () { _this.completed.next(false); };
+            this.startLoading.subscribe(emissionHandler, emissionHandler, emissionHandler);
         },
         enumerable: true,
         configurable: true
@@ -42,6 +56,11 @@ var LoadingIndicatorComponent = /** @class */ (function () {
         __metadata("design:type", Observable_1.Observable),
         __metadata("design:paramtypes", [Observable_1.Observable])
     ], LoadingIndicatorComponent.prototype, "doneLoading", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Observable_1.Observable),
+        __metadata("design:paramtypes", [Observable_1.Observable])
+    ], LoadingIndicatorComponent.prototype, "startLoading", null);
     LoadingIndicatorComponent = __decorate([
         core_1.Component({
             selector: 'loading-indicator',

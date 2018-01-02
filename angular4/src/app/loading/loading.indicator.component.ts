@@ -12,7 +12,8 @@ export class LoadingIndicatorComponent {
     }
 
     private _doneLoading: Observable<void> = Observable.empty();
-    private completed: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    private _startLoading: Observable<void> = Observable.empty();
+    private completed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     @Input()
     get doneLoading(): Observable<void> {
@@ -23,6 +24,18 @@ export class LoadingIndicatorComponent {
         this._doneLoading = value;
         let emissionHandler = ()=>{this.completed.next(true);};
         this.doneLoading.subscribe(emissionHandler, emissionHandler, emissionHandler)
+
+    }
+
+    @Input()
+    get startLoading(): Observable<void> {
+        return this._startLoading;
+    }
+
+    set startLoading(value: Observable<void>) {
+        this._startLoading = value;
+        let emissionHandler = ()=>{this.completed.next(false);};
+        this.startLoading.subscribe(emissionHandler, emissionHandler, emissionHandler)
 
     }
 
