@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./edit.htm");
-var EditComponent = (function () {
+var EditComponent = /** @class */ (function () {
     function EditComponent(router) {
         this.router = router;
         this.contentChange = new core_1.EventEmitter();
@@ -76,50 +76,50 @@ var EditComponent = (function () {
     EditComponent.prototype.deleted = function () {
         this.onDelete.emit(true);
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], EditComponent.prototype, "contentChange", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], EditComponent.prototype, "onReset", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], EditComponent.prototype, "onSave", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], EditComponent.prototype, "onDelete", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], EditComponent.prototype, "enabled", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], EditComponent.prototype, "id", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], EditComponent.prototype, "content", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], EditComponent.prototype, "options", null);
+    EditComponent = __decorate([
+        core_1.Component({
+            selector: 'edit-page',
+            template: require('./edit.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.Router])
+    ], EditComponent);
     return EditComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], EditComponent.prototype, "contentChange", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], EditComponent.prototype, "onReset", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], EditComponent.prototype, "onSave", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], EditComponent.prototype, "onDelete", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], EditComponent.prototype, "enabled", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], EditComponent.prototype, "id", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], EditComponent.prototype, "content", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], EditComponent.prototype, "options", null);
-EditComponent = __decorate([
-    core_1.Component({
-        selector: 'edit-page',
-        template: require('./edit.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.Router])
-], EditComponent);
 exports.EditComponent = EditComponent;
 //# sourceMappingURL=Edit.component.js.map

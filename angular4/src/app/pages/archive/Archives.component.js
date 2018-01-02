@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 require("./archive.list.htm");
 var Pair_model_1 = require("../hex/Pair.model");
-var ArchivesComponent = (function () {
+var ArchivesComponent = /** @class */ (function () {
     function ArchivesComponent(activatedRoute, router) {
         this.activatedRoute = activatedRoute;
         this.router = router;
@@ -38,14 +38,14 @@ var ArchivesComponent = (function () {
     ArchivesComponent.prototype.hasPages = function () {
         return this.pages.length > 0;
     };
+    ArchivesComponent = __decorate([
+        core_1.Component({
+            selector: 'pages-list-archive',
+            template: require('./archive.list.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
+    ], ArchivesComponent);
     return ArchivesComponent;
 }());
-ArchivesComponent = __decorate([
-    core_1.Component({
-        selector: 'pages-list-archive',
-        template: require('./archive.list.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
-], ArchivesComponent);
 exports.ArchivesComponent = ArchivesComponent;
 //# sourceMappingURL=Archives.component.js.map

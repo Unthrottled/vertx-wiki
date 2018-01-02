@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var backend_service_1 = require("../../util/backend.service");
 var Page_model_1 = require("../models/Page.model");
-var PagesService = (function () {
+var PagesService = /** @class */ (function () {
     function PagesService(backendService) {
         this.backendService = backendService;
     }
@@ -57,11 +57,11 @@ var PagesService = (function () {
                 "Feel-free to write in Markdown!\n",
         }));
     };
+    PagesService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [backend_service_1.BackendService])
+    ], PagesService);
     return PagesService;
 }());
-PagesService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [backend_service_1.BackendService])
-], PagesService);
 exports.PagesService = PagesService;
 //# sourceMappingURL=Pages.service.js.map

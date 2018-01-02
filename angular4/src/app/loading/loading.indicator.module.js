@@ -11,7 +11,6 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var animations_1 = require("@angular/platform-browser/animations");
 var http_1 = require("@angular/http");
-var http_2 = require("@angular/common/http");
 var common_1 = require("@angular/common");
 var loading_indicator_component_1 = require("./loading.indicator.component");
 var LoadingIndicatorModule = /** @class */ (function () {
@@ -23,7 +22,6 @@ var LoadingIndicatorModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                http_2.HttpClientModule,
                 animations_1.BrowserAnimationsModule,
                 common_1.CommonModule,
             ],

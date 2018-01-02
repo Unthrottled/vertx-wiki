@@ -19,7 +19,7 @@ var angular2_notifications_1 = require("angular2-notifications");
 var TitleValidation_service_1 = require("../edit/TitleValidation.service");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
-var SearchComponent = (function () {
+var SearchComponent = /** @class */ (function () {
     function SearchComponent(pagesService, notificationService, actualRouter, userToken) {
         this.pagesService = pagesService;
         this.notificationService = notificationService;
@@ -72,17 +72,17 @@ var SearchComponent = (function () {
             clickToClose: true
         });
     };
+    SearchComponent = __decorate([
+        core_1.Component({
+            selector: 'page-search',
+            template: require('./search.htm')
+        }),
+        __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService,
+            angular2_notifications_1.NotificationsService,
+            router_1.Router,
+            UserPrincipal_model_1.UserPrincipal])
+    ], SearchComponent);
     return SearchComponent;
 }());
-SearchComponent = __decorate([
-    core_1.Component({
-        selector: 'page-search',
-        template: require('./search.htm')
-    }),
-    __metadata("design:paramtypes", [TitleValidation_service_1.TitleValidationService,
-        angular2_notifications_1.NotificationsService,
-        router_1.Router,
-        UserPrincipal_model_1.UserPrincipal])
-], SearchComponent);
 exports.SearchComponent = SearchComponent;
 //# sourceMappingURL=Search.component.js.map

@@ -17,7 +17,7 @@ var router_1 = require("@angular/router");
 require("./pages.list.htm");
 var auth_service_1 = require("../auth/auth.service");
 var Pair_model_1 = require("./hex/Pair.model");
-var PagesComponent = (function () {
+var PagesComponent = /** @class */ (function () {
     function PagesComponent(router, realRouter, authService) {
         this.router = router;
         this.realRouter = realRouter;
@@ -43,14 +43,14 @@ var PagesComponent = (function () {
     PagesComponent.prototype.canCreate = function () {
         return this.authService.canCreate();
     };
+    PagesComponent = __decorate([
+        core_1.Component({
+            selector: 'pages-list',
+            template: require('./pages.list.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, auth_service_1.AuthService])
+    ], PagesComponent);
     return PagesComponent;
 }());
-PagesComponent = __decorate([
-    core_1.Component({
-        selector: 'pages-list',
-        template: require('./pages.list.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, auth_service_1.AuthService])
-], PagesComponent);
 exports.PagesComponent = PagesComponent;
 //# sourceMappingURL=Pages.component.js.map

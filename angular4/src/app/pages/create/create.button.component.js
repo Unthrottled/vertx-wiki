@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./create.button.template.htm");
 var auth_service_1 = require("../../auth/auth.service");
-var CreateComponent = (function () {
+var CreateComponent = /** @class */ (function () {
     function CreateComponent(authService) {
         this.authService = authService;
     }
@@ -29,14 +29,14 @@ var CreateComponent = (function () {
     });
     CreateComponent.prototype.ngOnInit = function () {
     };
+    CreateComponent = __decorate([
+        core_1.Component({
+            selector: 'create-butt',
+            template: require('./create.button.template.htm')
+        }),
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
+    ], CreateComponent);
     return CreateComponent;
 }());
-CreateComponent = __decorate([
-    core_1.Component({
-        selector: 'create-butt',
-        template: require('./create.button.template.htm')
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
-], CreateComponent);
 exports.CreateComponent = CreateComponent;
 //# sourceMappingURL=create.button.component.js.map
