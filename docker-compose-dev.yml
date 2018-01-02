@@ -4,7 +4,7 @@ services:
     build:
       dockerfile: Dockerfile-dev
       context: ./angular4
-    image: alexsimons/vertx-web-content
+    image: alexsimons/vertx-web-content:1.1.1
     ports:
       - "3000:3000"
     volumes:
