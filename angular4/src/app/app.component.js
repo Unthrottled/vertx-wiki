@@ -18,7 +18,7 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(router) {
         var _this = this;
         this.router = router;
-        this.versionNumber = "v1.1.1";
+        this.versionNumber = "v1.1.2";
         this.loadEnd = new ReplaySubject_1.ReplaySubject(1);
         this.loadStart = new ReplaySubject_1.ReplaySubject(1);
         this.loading = new BehaviorSubject_1.BehaviorSubject(false);
