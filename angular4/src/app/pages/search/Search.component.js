@@ -27,6 +27,7 @@ var SearchComponent = /** @class */ (function () {
         this.userToken = userToken;
         this._model = {};
         this.onSearch = new core_1.EventEmitter();
+        this.onSearchFail = new core_1.EventEmitter();
     }
     Object.defineProperty(SearchComponent.prototype, "model", {
         get: function () {
@@ -62,6 +63,7 @@ var SearchComponent = /** @class */ (function () {
                     }
                     else {
                         self.failure();
+                        _this.onSearchFail.next(true);
                     }
                 }, function (error) { return self.failure(); });
             }
@@ -78,6 +80,10 @@ var SearchComponent = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], SearchComponent.prototype, "onSearch", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], SearchComponent.prototype, "onSearchFail", void 0);
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'page-search',

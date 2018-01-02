@@ -27,6 +27,9 @@ export class SearchComponent {
     @Output()
     private onSearch = new EventEmitter<boolean>();
 
+    @Output()
+    private onSearchFail = new EventEmitter<boolean>();
+
     get model(): any {
         return this._model;
     }
@@ -53,7 +56,8 @@ export class SearchComponent {
                             if (success) {
                                 self.actualRouter.navigate(['/page/' + searchedTitle]);
                             } else {
-                                self.failure()
+                                self.failure();
+                                this.onSearchFail.next(true);
                             }
                         }, (error: any) => self.failure());
                 }
