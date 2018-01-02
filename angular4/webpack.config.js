@@ -41,6 +41,7 @@ const proxyPeel3 = proxy('/base', {
 
 module.exports = {
     entry: {
+        'stylez': './src/app/assets/css/sassy.sass',
         'app': './src/main.ts',
         'vendor': './src/vendor.ts',
         'polyfills': './src/polyfills.ts'
@@ -91,20 +92,21 @@ module.exports = {
                 test: /\.css$/,
                 exclude: [/build/, /dist/, /gradle/],
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader?modules&importLoaders=1&localIdentName=[local]'
+                    use: [{
+                        loader: "css-loader"
+                    }],
+                    fallback: "style-loader"
                 })
             },
             {
                 test: /\.s[ac]ss$/,
                 exclude: [/build/, /dist/, /gradle/],
-                use: extractSass.extract({
+                use: ExtractTextPlugin.extract({
                     use: [{
                         loader: "css-loader"
                     }, {
                         loader: "sass-loader"
                     }],
-                    // use style-loader in development
                     fallback: "style-loader"
                 })
             }
@@ -160,7 +162,8 @@ module.exports = {
             exclude: ['shared.js']
         }),
         new ExtractTextPlugin({
-            filename: 'styles.[contenthash].css'
+            filename: 'style.[contenthash].css',
+            allChunks: true
         }),
         new BrowserSyncPlugin({
             // browse to http://localhost:3000/ during development,
