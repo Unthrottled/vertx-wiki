@@ -31,7 +31,15 @@
                 <logout-butt></logout-butt>
             </li>
         </ul>
-        <page-search></page-search>
+        <page-search (onSearch)="searchActivated()"
+                     (onSearchFail)="searchFailed()"
+        ></page-search>
     </div>
 </nav>
+<div [hidden]="notLoading | async" class="overlord-loading-container">
+    <loading-indicator
+            [doneLoading]="loadEnd"
+            [startLoading]="loadStart"
+    ></loading-indicator>
+</div>
 <router-outlet></router-outlet>

@@ -14,13 +14,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./hex-row.htm");
-var HexRowComponent = HexRowComponent_1 = (function () {
+var HexRowComponent = /** @class */ (function () {
     function HexRowComponent() {
         this.onClick = new core_1.EventEmitter();
         this._keyValues = [];
         this._hexWidth = 104;
         this._hexHeight = HexRowComponent_1.goldenRatio * this._hexWidth;
     }
+    HexRowComponent_1 = HexRowComponent;
     Object.defineProperty(HexRowComponent.prototype, "keyValues", {
         get: function () {
             return this._keyValues;
@@ -71,30 +72,30 @@ var HexRowComponent = HexRowComponent_1 = (function () {
     HexRowComponent.prototype.hexClicked = function (name) {
         this.onClick.emit(name);
     };
+    HexRowComponent.goldenRatio = 0.576923077;
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], HexRowComponent.prototype, "onClick", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], HexRowComponent.prototype, "keyValues", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], HexRowComponent.prototype, "config", null);
+    HexRowComponent = HexRowComponent_1 = __decorate([
+        core_1.Component({
+            selector: 'hex-row',
+            template: require('./hex-row.htm')
+        }),
+        __metadata("design:paramtypes", [])
+    ], HexRowComponent);
     return HexRowComponent;
+    var HexRowComponent_1;
 }());
-HexRowComponent.goldenRatio = 0.576923077;
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], HexRowComponent.prototype, "onClick", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], HexRowComponent.prototype, "keyValues", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], HexRowComponent.prototype, "config", null);
-HexRowComponent = HexRowComponent_1 = __decorate([
-    core_1.Component({
-        selector: 'hex-row',
-        template: require('./hex-row.htm')
-    }),
-    __metadata("design:paramtypes", [])
-], HexRowComponent);
 exports.HexRowComponent = HexRowComponent;
-var HexRowComponent_1;
 //# sourceMappingURL=hex-row.component.js.map

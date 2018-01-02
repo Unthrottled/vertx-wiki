@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./hex-list.htm");
 var HexRow_model_1 = require("./HexRow.model");
-var HexListComponent = (function () {
+var HexListComponent = /** @class */ (function () {
     function HexListComponent(disElement, ngZone) {
         this.disElement = disElement;
         this.ngZone = ngZone;
@@ -106,28 +106,28 @@ var HexListComponent = (function () {
     HexListComponent.prototype.getSpacing = function () {
         return 5;
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], HexListComponent.prototype, "onClick", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], HexListComponent.prototype, "keyValues", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], HexListComponent.prototype, "config", null);
+    HexListComponent = __decorate([
+        core_1.Component({
+            selector: 'hex-list',
+            template: require('./hex-list.htm')
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef, core_1.NgZone])
+    ], HexListComponent);
     return HexListComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], HexListComponent.prototype, "onClick", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array),
-    __metadata("design:paramtypes", [Array])
-], HexListComponent.prototype, "keyValues", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], HexListComponent.prototype, "config", null);
-HexListComponent = __decorate([
-    core_1.Component({
-        selector: 'hex-list',
-        template: require('./hex-list.htm')
-    }),
-    __metadata("design:paramtypes", [core_1.ElementRef, core_1.NgZone])
-], HexListComponent);
 exports.HexListComponent = HexListComponent;
 //# sourceMappingURL=HexList.component.js.map

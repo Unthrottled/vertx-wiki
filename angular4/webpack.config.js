@@ -1,20 +1,20 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-var proxy = require('http-proxy-middleware');
-var htmlLoader = require('raw-loader');
-var http = require('https');
-var keepAliveAgent = new http.Agent({keepAlive: true});
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const proxy = require('http-proxy-middleware');
+const htmlLoader = require('raw-loader');
+const https = require('https');
+const keepAliveAgent = new https.Agent({keepAlive: true});
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
 
-var proxyPeel = proxy('/api', {
+const apiProxy = proxy('/api', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -23,7 +23,7 @@ var proxyPeel = proxy('/api', {
 });
 
 
-var proxyPeel2 = proxy('/user', {
+const userProxy = proxy('/user', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -31,7 +31,7 @@ var proxyPeel2 = proxy('/user', {
     agent: keepAliveAgent
 });
 
-var proxyPeel3 = proxy('/base', {
+const baseProxy = proxy('/base', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -41,6 +41,7 @@ var proxyPeel3 = proxy('/base', {
 
 module.exports = {
     entry: {
+        'stylez': './src/app/assets/css/sassy.sass',
         'app': './src/main.ts',
         'vendor': './src/vendor.ts',
         'polyfills': './src/polyfills.ts'
@@ -91,20 +92,21 @@ module.exports = {
                 test: /\.css$/,
                 exclude: [/build/, /dist/, /gradle/],
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader?modules&importLoaders=1&localIdentName=[local]'
+                    use: [{
+                        loader: "css-loader"
+                    }],
+                    fallback: "style-loader"
                 })
             },
             {
                 test: /\.s[ac]ss$/,
                 exclude: [/build/, /dist/, /gradle/],
-                use: extractSass.extract({
+                use: ExtractTextPlugin.extract({
                     use: [{
                         loader: "css-loader"
                     }, {
                         loader: "sass-loader"
                     }],
-                    // use style-loader in development
                     fallback: "style-loader"
                 })
             }
@@ -160,7 +162,8 @@ module.exports = {
             exclude: ['shared.js']
         }),
         new ExtractTextPlugin({
-            filename: 'styles.[contenthash].css'
+            filename: 'style.[contenthash].css',
+            allChunks: true
         }),
         new BrowserSyncPlugin({
             // browse to http://localhost:3000/ during development,
@@ -169,7 +172,7 @@ module.exports = {
             port: 3000,
             https: true,
             server: {baseDir: ['dist']},
-            middleware: [proxyPeel, proxyPeel2, proxyPeel3]
+            middleware: [apiProxy, userProxy, baseProxy]
         })
     ]
 };

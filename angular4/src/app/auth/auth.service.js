@@ -16,7 +16,7 @@ require("rxjs/add/operator/catch");
 var UserPrincipal_model_1 = require("./UserPrincipal.model");
 var Permissions_component_1 = require("./Permissions.component");
 var backend_service_1 = require("../util/backend.service");
-var AuthService = (function () {
+var AuthService = /** @class */ (function () {
     function AuthService(http, userToken, backendService) {
         this.http = http;
         this.userToken = userToken;
@@ -84,13 +84,13 @@ var AuthService = (function () {
         return Permissions_component_1.Permissions.canActivate(this.userToken, 'update')
             .map(function (b) { return !b; });
     };
+    AuthService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http,
+            UserPrincipal_model_1.UserPrincipal,
+            backend_service_1.BackendService])
+    ], AuthService);
     return AuthService;
 }());
-AuthService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http,
-        UserPrincipal_model_1.UserPrincipal,
-        backend_service_1.BackendService])
-], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

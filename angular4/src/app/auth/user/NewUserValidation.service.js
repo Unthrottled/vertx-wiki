@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var backend_service_1 = require("../../util/backend.service");
-var NewUserValidationService = (function () {
+var NewUserValidationService = /** @class */ (function () {
     function NewUserValidationService(backendService) {
         this.backendService = backendService;
     }
@@ -25,11 +25,11 @@ var NewUserValidationService = (function () {
                 .userExists(pageName)
                 .map(function (statusPayload) { return !statusPayload.exists; });
     };
+    NewUserValidationService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [backend_service_1.BackendService])
+    ], NewUserValidationService);
     return NewUserValidationService;
 }());
-NewUserValidationService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [backend_service_1.BackendService])
-], NewUserValidationService);
 exports.NewUserValidationService = NewUserValidationService;
 //# sourceMappingURL=NewUserValidation.service.js.map

@@ -1,9 +1,9 @@
+"use strict";
 /**
  * Created by alex on 9/17/17.
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var StatusPayload = (function () {
+var StatusPayload = /** @class */ (function () {
     function StatusPayload(payload) {
         this._succeded = false;
         this._succeded = payload.success;

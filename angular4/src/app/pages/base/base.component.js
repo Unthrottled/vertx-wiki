@@ -17,7 +17,7 @@ require("./base.component.htm");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
 var auth_service_1 = require("../../auth/auth.service");
 var router_1 = require("@angular/router");
-var BaseComponent = (function () {
+var BaseComponent = /** @class */ (function () {
     function BaseComponent(userPrince, authService, activatedRoute) {
         this.userPrince = userPrince;
         this.authService = authService;
@@ -86,14 +86,14 @@ var BaseComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    BaseComponent = __decorate([
+        core_1.Component({
+            selector: 'base-view',
+            template: require('./base.component.htm')
+        }),
+        __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService, router_1.ActivatedRoute])
+    ], BaseComponent);
     return BaseComponent;
 }());
-BaseComponent = __decorate([
-    core_1.Component({
-        selector: 'base-view',
-        template: require('./base.component.htm')
-    }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal, auth_service_1.AuthService, router_1.ActivatedRoute])
-], BaseComponent);
 exports.BaseComponent = BaseComponent;
 //# sourceMappingURL=base.component.js.map

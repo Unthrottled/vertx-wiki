@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./roles.template.htm");
-var RolesComponent = (function () {
+var RolesComponent = /** @class */ (function () {
     function RolesComponent() {
         this.roles = ["admin", "editor", "writer", "reader"];
         this.model = {
@@ -37,22 +37,22 @@ var RolesComponent = (function () {
         this.selectedRole = role;
         this.ngOnInit();
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], RolesComponent.prototype, "role", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], RolesComponent.prototype, "selectedRole", null);
+    RolesComponent = __decorate([
+        core_1.Component({
+            selector: 'roles-input',
+            template: require('./roles.template.htm')
+        })
+    ], RolesComponent);
     return RolesComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], RolesComponent.prototype, "role", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], RolesComponent.prototype, "selectedRole", null);
-RolesComponent = __decorate([
-    core_1.Component({
-        selector: 'roles-input',
-        template: require('./roles.template.htm')
-    })
-], RolesComponent);
 exports.RolesComponent = RolesComponent;
 //# sourceMappingURL=Roles.component.js.map

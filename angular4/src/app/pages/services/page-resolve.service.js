@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var Pages_service_1 = require("./Pages.service");
-var PageResolve = (function () {
+var PageResolve = /** @class */ (function () {
     function PageResolve(permissons, pagesService) {
         this.permissons = permissons;
         this.pagesService = pagesService;
@@ -33,11 +33,11 @@ var PageResolve = (function () {
             }
         });
     };
+    PageResolve = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [Permissions_component_1.Permissions, Pages_service_1.PagesService])
+    ], PageResolve);
     return PageResolve;
 }());
-PageResolve = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [Permissions_component_1.Permissions, Pages_service_1.PagesService])
-], PageResolve);
 exports.PageResolve = PageResolve;
 //# sourceMappingURL=page-resolve.service.js.map

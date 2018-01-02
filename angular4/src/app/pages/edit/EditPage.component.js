@@ -28,7 +28,7 @@ require("../page.htm");
 var Pages_service_1 = require("../services/Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var BasePage_component_1 = require("../BasePage.component");
-var EditPageComponent = (function (_super) {
+var EditPageComponent = /** @class */ (function (_super) {
     __extends(EditPageComponent, _super);
     function EditPageComponent(router, pagesService, notificationService, actualRouter) {
         var _this = _super.call(this, router) || this;
@@ -103,14 +103,14 @@ var EditPageComponent = (function (_super) {
             clickToClose: true
         });
     };
+    EditPageComponent = __decorate([
+        core_1.Component({
+            selector: 'edit-wiki-page',
+            template: require('../page.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
+    ], EditPageComponent);
     return EditPageComponent;
 }(BasePage_component_1.BasePageComponent));
-EditPageComponent = __decorate([
-    core_1.Component({
-        selector: 'edit-wiki-page',
-        template: require('../page.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
-], EditPageComponent);
 exports.EditPageComponent = EditPageComponent;
 //# sourceMappingURL=EditPage.component.js.map

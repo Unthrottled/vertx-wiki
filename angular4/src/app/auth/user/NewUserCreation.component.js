@@ -26,7 +26,7 @@ var core_1 = require("@angular/core");
 require("../../common/validation-field.htm");
 var Validation_component_1 = require("../../common/Validation.component");
 var NewUserValidation_service_1 = require("./NewUserValidation.service");
-var NewUserCreationComponent = (function (_super) {
+var NewUserCreationComponent = /** @class */ (function (_super) {
     __extends(NewUserCreationComponent, _super);
     function NewUserCreationComponent(newUserValidationService, ngZone) {
         var _this = _super.call(this, ngZone) || this;
@@ -39,14 +39,14 @@ var NewUserCreationComponent = (function (_super) {
     NewUserCreationComponent.prototype.validateContent = function (content) {
         return this.newUserValidationService.isValid(content);
     };
+    NewUserCreationComponent = __decorate([
+        core_1.Component({
+            selector: 'user-name-creation',
+            template: require('../../common/validation-field.htm')
+        }),
+        __metadata("design:paramtypes", [NewUserValidation_service_1.NewUserValidationService, core_1.NgZone])
+    ], NewUserCreationComponent);
     return NewUserCreationComponent;
 }(Validation_component_1.ValidationComponent));
-NewUserCreationComponent = __decorate([
-    core_1.Component({
-        selector: 'user-name-creation',
-        template: require('../../common/validation-field.htm')
-    }),
-    __metadata("design:paramtypes", [NewUserValidation_service_1.NewUserValidationService, core_1.NgZone])
-], NewUserCreationComponent);
 exports.NewUserCreationComponent = NewUserCreationComponent;
 //# sourceMappingURL=NewUserCreation.component.js.map

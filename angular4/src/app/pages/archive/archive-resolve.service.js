@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 var Pages_service_1 = require("../services/Pages.service");
-var ArchiveResolve = (function () {
+var ArchiveResolve = /** @class */ (function () {
     function ArchiveResolve(permissons, pagesService) {
         this.permissons = permissons;
         this.pagesService = pagesService;
@@ -33,11 +33,11 @@ var ArchiveResolve = (function () {
             }
         });
     };
+    ArchiveResolve = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [Permissions_component_1.Permissions, Pages_service_1.PagesService])
+    ], ArchiveResolve);
     return ArchiveResolve;
 }());
-ArchiveResolve = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [Permissions_component_1.Permissions, Pages_service_1.PagesService])
-], ArchiveResolve);
 exports.ArchiveResolve = ArchiveResolve;
 //# sourceMappingURL=archive-resolve.service.js.map

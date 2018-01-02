@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var backend_service_1 = require("../../util/backend.service");
-var TitleValidationService = (function () {
+var TitleValidationService = /** @class */ (function () {
     function TitleValidationService(backendService) {
         this.backendService = backendService;
     }
@@ -23,11 +23,11 @@ var TitleValidationService = (function () {
             .pageExists(pageName)
             .map(function (statusPayload) { return !statusPayload.exists; });
     };
+    TitleValidationService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [backend_service_1.BackendService])
+    ], TitleValidationService);
     return TitleValidationService;
 }());
-TitleValidationService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [backend_service_1.BackendService])
-], TitleValidationService);
 exports.TitleValidationService = TitleValidationService;
 //# sourceMappingURL=TitleValidation.service.js.map

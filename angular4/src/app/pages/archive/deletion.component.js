@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var UserPrincipal_model_1 = require("../../auth/UserPrincipal.model");
 var Permissions_component_1 = require("../../auth/Permissions.component");
 require("./deletion.component.htm");
-var DeletionComponent = (function () {
+var DeletionComponent = /** @class */ (function () {
     function DeletionComponent(token) {
         this.token = token;
         this.onClick = new core_1.EventEmitter();
@@ -32,19 +32,19 @@ var DeletionComponent = (function () {
     DeletionComponent.prototype.clickyClick = function (value) {
         this.onClick.emit(value);
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], DeletionComponent.prototype, "onClick", void 0);
+    DeletionComponent = __decorate([
+        core_1.Component({
+            selector: 'deletion-component',
+            template: require('./deletion.component.htm'),
+            styleUrls: []
+        }),
+        __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
+    ], DeletionComponent);
     return DeletionComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], DeletionComponent.prototype, "onClick", void 0);
-DeletionComponent = __decorate([
-    core_1.Component({
-        selector: 'deletion-component',
-        template: require('./deletion.component.htm'),
-        styleUrls: []
-    }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
-], DeletionComponent);
 exports.DeletionComponent = DeletionComponent;
 //# sourceMappingURL=deletion.component.js.map

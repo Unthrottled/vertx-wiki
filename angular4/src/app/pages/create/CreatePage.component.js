@@ -29,7 +29,7 @@ var Pages_service_1 = require("../services/Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var Observable_1 = require("rxjs/Observable");
 var BasePage_component_1 = require("../BasePage.component");
-var CreatePageComponent = (function (_super) {
+var CreatePageComponent = /** @class */ (function (_super) {
     __extends(CreatePageComponent, _super);
     function CreatePageComponent(router, pagesService, notificationService, actualRouter) {
         var _this = _super.call(this, router) || this;
@@ -92,14 +92,14 @@ var CreatePageComponent = (function (_super) {
             clickToClose: true
         });
     };
+    CreatePageComponent = __decorate([
+        core_1.Component({
+            selector: 'new-page',
+            template: require('./create.page.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
+    ], CreatePageComponent);
     return CreatePageComponent;
 }(BasePage_component_1.BasePageComponent));
-CreatePageComponent = __decorate([
-    core_1.Component({
-        selector: 'new-page',
-        template: require('./create.page.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, Pages_service_1.PagesService, angular2_notifications_1.NotificationsService, router_1.Router])
-], CreatePageComponent);
 exports.CreatePageComponent = CreatePageComponent;
 //# sourceMappingURL=CreatePage.component.js.map

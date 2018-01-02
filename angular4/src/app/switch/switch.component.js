@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 require("./switch.component.htm");
 var UserPrincipal_model_1 = require("../auth/UserPrincipal.model");
 var Permissions_component_1 = require("../auth/Permissions.component");
-var SwitchComponent = (function () {
+var SwitchComponent = /** @class */ (function () {
     function SwitchComponent(token) {
         this.token = token;
         this.livenessChange = new core_1.EventEmitter();
@@ -45,24 +45,24 @@ var SwitchComponent = (function () {
     };
     SwitchComponent.prototype.change = function (value) {
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], SwitchComponent.prototype, "livenessChange", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], SwitchComponent.prototype, "liveness", null);
+    SwitchComponent = __decorate([
+        core_1.Component({
+            selector: 'dead-mans-switch',
+            template: require('./switch.component.htm'),
+            styleUrls: []
+        }),
+        __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
+    ], SwitchComponent);
     return SwitchComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], SwitchComponent.prototype, "livenessChange", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], SwitchComponent.prototype, "liveness", null);
-SwitchComponent = __decorate([
-    core_1.Component({
-        selector: 'dead-mans-switch',
-        template: require('./switch.component.htm'),
-        styleUrls: []
-    }),
-    __metadata("design:paramtypes", [UserPrincipal_model_1.UserPrincipal])
-], SwitchComponent);
 exports.SwitchComponent = SwitchComponent;
 //# sourceMappingURL=switch.component.js.map

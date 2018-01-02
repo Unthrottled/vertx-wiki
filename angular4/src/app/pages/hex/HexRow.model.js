@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by alex on 9/27/17.
  */
-var HexRowModel = (function () {
+var HexRowModel = /** @class */ (function () {
     function HexRowModel(keyValues, hexRowInput) {
         this._keyValues = [];
         this._keyValues = keyValues;
