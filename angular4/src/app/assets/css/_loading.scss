@@ -54,7 +54,7 @@
       transform: scale3D(0, 0, 1);
     }
   20%, 60% {
-    background-color: gold
+    background-color: $hexColor
   }
 }
 
@@ -67,6 +67,6 @@
       transform: scale3D(0, 0, 1);
     }
   20%, 60% {
-    background-color: gold
+    background-color: $hexColor
   }
 }
