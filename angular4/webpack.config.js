@@ -1,20 +1,20 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-var proxy = require('http-proxy-middleware');
-var htmlLoader = require('raw-loader');
-var http = require('https');
-var keepAliveAgent = new http.Agent({keepAlive: true});
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const proxy = require('http-proxy-middleware');
+const htmlLoader = require('raw-loader');
+const http = require('https');
+const keepAliveAgent = new http.Agent({keepAlive: true});
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
 
-var proxyPeel = proxy('/api', {
+const proxyPeel = proxy('/api', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -23,7 +23,7 @@ var proxyPeel = proxy('/api', {
 });
 
 
-var proxyPeel2 = proxy('/user', {
+const proxyPeel2 = proxy('/user', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
@@ -31,7 +31,7 @@ var proxyPeel2 = proxy('/user', {
     agent: keepAliveAgent
 });
 
-var proxyPeel3 = proxy('/base', {
+const proxyPeel3 = proxy('/base', {
     target: 'https://web-service:8989',
     changeOrigin: true,               // needed for virtual hosted sites
     ws: true,
