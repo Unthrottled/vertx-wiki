@@ -26,6 +26,7 @@ var SearchComponent = /** @class */ (function () {
         this.actualRouter = actualRouter;
         this.userToken = userToken;
         this._model = {};
+        this.onSearch = new core_1.EventEmitter();
     }
     Object.defineProperty(SearchComponent.prototype, "model", {
         get: function () {
@@ -52,6 +53,7 @@ var SearchComponent = /** @class */ (function () {
             .map(function (cantCreate) { return !cantCreate; })
             .subscribe(function (canCreate) {
             if (searchedTitle) {
+                _this.onSearch.emit(true);
                 _this.pagesService.isValid(searchedTitle)
                     .map(function (doesNotExist) { return !doesNotExist; })
                     .subscribe(function (success) {
@@ -72,6 +74,10 @@ var SearchComponent = /** @class */ (function () {
             clickToClose: true
         });
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], SearchComponent.prototype, "onSearch", void 0);
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'page-search',

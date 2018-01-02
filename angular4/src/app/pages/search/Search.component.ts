@@ -1,7 +1,7 @@
 /**
  * Created by alex on 9/17/17.
  */
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {Router} from "@angular/router";
 import "./search.htm";
 import {NotificationsService} from "angular2-notifications";
@@ -24,6 +24,9 @@ export class SearchComponent {
 
     private _model: any = {};
 
+    @Output()
+    private onSearch = new EventEmitter<boolean>();
+
     get model(): any {
         return this._model;
     }
@@ -43,6 +46,7 @@ export class SearchComponent {
             .map((cantCreate: boolean) => !cantCreate)
             .subscribe((canCreate: boolean) => {
                 if (searchedTitle) {
+                    this.onSearch.emit(true);
                     this.pagesService.isValid(searchedTitle)
                         .map((doesNotExist: boolean) => !doesNotExist)
                         .subscribe((success: boolean) => {
