@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./paginator.htm");
 var PaginationPage_1 = require("./PaginationPage");
-var PaginatorComponent = (function () {
+var PaginatorComponent = /** @class */ (function () {
     function PaginatorComponent() {
         this.onPageChanged = new core_1.EventEmitter();
         this._currentPageNumber = 1;
@@ -144,33 +144,33 @@ var PaginatorComponent = (function () {
             this.currentPage : new PaginationPage_1.PaginationPage(currentPagePlusOne);
         this.endPage = new PaginationPage_1.PaginationPage(totalPages);
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], PaginatorComponent.prototype, "onPageChanged", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], PaginatorComponent.prototype, "currentPageNumber", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], PaginatorComponent.prototype, "totalItems", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number),
+        __metadata("design:paramtypes", [Number])
+    ], PaginatorComponent.prototype, "itemsPerPage", null);
+    PaginatorComponent = __decorate([
+        core_1.Component({
+            selector: 'paginator',
+            template: require('./paginator.htm')
+        }),
+        __metadata("design:paramtypes", [])
+    ], PaginatorComponent);
     return PaginatorComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], PaginatorComponent.prototype, "onPageChanged", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], PaginatorComponent.prototype, "currentPageNumber", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], PaginatorComponent.prototype, "totalItems", null);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], PaginatorComponent.prototype, "itemsPerPage", null);
-PaginatorComponent = __decorate([
-    core_1.Component({
-        selector: 'paginator',
-        template: require('./paginator.htm')
-    }),
-    __metadata("design:paramtypes", [])
-], PaginatorComponent);
 exports.PaginatorComponent = PaginatorComponent;
 //# sourceMappingURL=Pagination.component.js.map

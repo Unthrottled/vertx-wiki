@@ -48,6 +48,7 @@ import {ArchivesComponent} from "./pages/archive/Archives.component";
 import {ArchivesResolve} from "./pages/archive/archives-resolve.service";
 import {ArchiveResolve} from "./pages/archive/archive-resolve.service";
 import {LoginHiderComponent} from "./auth/hideOnLogin.component";
+import {LoadingIndicatorModule} from "./loading/loading.indicator.module";
 
 const appRoutes = [
     {path: '', redirectTo: 'pages/1', pathMatch: 'full'},
@@ -81,6 +82,7 @@ const appRoutes = [
         MarkdownModule.forRoot(),
         SimpleNotificationsModule.forRoot(),
         BrowserAnimationsModule,
+        LoadingIndicatorModule,
         RouterModule.forRoot(
             appRoutes
         )

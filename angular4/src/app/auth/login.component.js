@@ -19,7 +19,7 @@ var user_model_1 = require("./user/user.model");
 require("./login.template.htm");
 var Subscriber_1 = require("rxjs/Subscriber");
 var dist_1 = require("angular2-notifications/dist");
-var LoginComponent = (function () {
+var LoginComponent = /** @class */ (function () {
     function LoginComponent(authService, router, notifService) {
         this.authService = authService;
         this.router = router;
@@ -54,16 +54,16 @@ var LoginComponent = (function () {
     LoginComponent.prototype.logout = function () {
         this.authService.logout();
     };
+    LoginComponent = __decorate([
+        core_1.Component({
+            selector: 'login-form-guy',
+            template: require('./login.template.htm')
+        }),
+        __metadata("design:paramtypes", [auth_service_1.AuthService,
+            router_1.Router,
+            dist_1.NotificationsService])
+    ], LoginComponent);
     return LoginComponent;
 }());
-LoginComponent = __decorate([
-    core_1.Component({
-        selector: 'login-form-guy',
-        template: require('./login.template.htm')
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService,
-        router_1.Router,
-        dist_1.NotificationsService])
-], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

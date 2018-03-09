@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 require("./validation-field.htm");
-var ValidationComponent = (function () {
+var ValidationComponent = /** @class */ (function () {
     function ValidationComponent(zone) {
         this.zone = zone;
         this.onValidate = new core_1.EventEmitter();
@@ -69,20 +69,20 @@ var ValidationComponent = (function () {
         this.validateContent(title)
             .subscribe(function (valid) { return self.zone.run(function () { return self.validTitle = valid; }); }, function (error) { return console.warn('OOHHHHH SHIT ' + error); });
     };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ValidationComponent.prototype, "onValidate", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ValidationComponent.prototype, "onChange", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], ValidationComponent.prototype, "content", null);
     return ValidationComponent;
 }());
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], ValidationComponent.prototype, "onValidate", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], ValidationComponent.prototype, "onChange", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], ValidationComponent.prototype, "content", null);
 exports.ValidationComponent = ValidationComponent;
 //# sourceMappingURL=Validation.component.js.map

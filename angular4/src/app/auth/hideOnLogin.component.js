@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var auth_service_1 = require("./auth.service");
 require("./loginHider.template.htm");
-var LoginHiderComponent = (function () {
+var LoginHiderComponent = /** @class */ (function () {
     function LoginHiderComponent(authService) {
         this.authService = authService;
     }
@@ -26,14 +26,14 @@ var LoginHiderComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    LoginHiderComponent = __decorate([
+        core_1.Component({
+            selector: 'login-hider',
+            template: require('./loginHider.template.htm')
+        }),
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
+    ], LoginHiderComponent);
     return LoginHiderComponent;
 }());
-LoginHiderComponent = __decorate([
-    core_1.Component({
-        selector: 'login-hider',
-        template: require('./loginHider.template.htm')
-    }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
-], LoginHiderComponent);
 exports.LoginHiderComponent = LoginHiderComponent;
 //# sourceMappingURL=hideOnLogin.component.js.map

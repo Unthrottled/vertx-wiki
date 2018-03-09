@@ -1,3 +1,4 @@
+<div class="project-version-number">{{versionNumber}}</div>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" routerLink="/">Home</a>
     <a class="navbar-text" routerLink="/about">About</a>
@@ -30,7 +31,15 @@
                 <logout-butt></logout-butt>
             </li>
         </ul>
-        <page-search></page-search>
+        <page-search (onSearch)="searchActivated()"
+                     (onSearchFail)="searchFailed()"
+        ></page-search>
     </div>
 </nav>
+<div [hidden]="notLoading | async" class="overlord-loading-container">
+    <loading-indicator
+            [doneLoading]="loadEnd"
+            [startLoading]="loadStart"
+    ></loading-indicator>
+</div>
 <router-outlet></router-outlet>

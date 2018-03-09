@@ -94,6 +94,7 @@ public class HttpVerticle extends AbstractVerticle {
     baseRoute.post("/archives").handler(apiAllArchiveDataHandler.applyConfiguration(config));
     baseRoute.get("/pages/:page").handler(apiPageHandler.applyConfiguration(config));
     baseRoute.get("/exists/:page").handler(apiPageExistsHandler.applyConfiguration(config));
+    baseRoute.post("/archive").handler(apiGetArchivePageHandler.applyConfiguration(config));
     router.mountSubRouter("/base", baseRoute);
 
     Router apiRouter = Router.router(vertx);
@@ -113,7 +114,6 @@ public class HttpVerticle extends AbstractVerticle {
         .applyConfiguration(jwtAuth)
         .applyConfiguration(mongoAuth));
 
-    apiRouter.post("/archive").handler(apiGetArchivePageHandler.applyConfiguration(config));
     apiRouter.post("/pages/create").handler(apiCreationHandler.applyConfiguration(config));
     apiRouter.put().handler(BodyHandler.create());
     apiRouter.put("/archive/restore/:page").handler(apiRestoreArchiveHandler.applyConfiguration(config));

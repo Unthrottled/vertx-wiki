@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Created by alex on 9/17/17.
  */
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,7 +20,7 @@ var PageFullPayload_model_1 = require("../pages/models/PageFullPayload.model");
 var StatusPayload_model_1 = require("../pages/models/StatusPayload.model");
 var ExistsPayload_model_1 = require("../pages/models/ExistsPayload.model");
 var ArchivesPayload_model_1 = require("../pages/archive/ArchivesPayload.model");
-var BackendService = (function () {
+var BackendService = /** @class */ (function () {
     function BackendService(http, userToken) {
         this.http = http;
         this.userToken = userToken;
@@ -90,12 +90,12 @@ var BackendService = (function () {
         var returnVal = { headers: headers };
         return returnVal;
     };
+    BackendService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http,
+            UserPrincipal_model_1.UserPrincipal])
+    ], BackendService);
     return BackendService;
 }());
-BackendService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http,
-        UserPrincipal_model_1.UserPrincipal])
-], BackendService);
 exports.BackendService = BackendService;
 //# sourceMappingURL=backend.service.js.map

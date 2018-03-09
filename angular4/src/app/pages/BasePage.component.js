@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("./page.htm");
 var Observable_1 = require("rxjs/Observable");
-var BasePageComponent = (function () {
+var BasePageComponent = /** @class */ (function () {
     function BasePageComponent(router) {
         this.router = router;
         this._editMode = false;
@@ -89,12 +89,12 @@ var BasePageComponent = (function () {
         this.page = page;
         return Observable_1.Observable.of(true);
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
+    ], BasePageComponent.prototype, "editMode", null);
     return BasePageComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean),
-    __metadata("design:paramtypes", [Boolean])
-], BasePageComponent.prototype, "editMode", null);
 exports.BasePageComponent = BasePageComponent;
 //# sourceMappingURL=BasePage.component.js.map

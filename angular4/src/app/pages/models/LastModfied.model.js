@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var LastModified = (function () {
+var LastModified = /** @class */ (function () {
     function LastModified(response) {
         this._userName = response.userName;
         this._timeStamp = new Date(response.timeStamp);

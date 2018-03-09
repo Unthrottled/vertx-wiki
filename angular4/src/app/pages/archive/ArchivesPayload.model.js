@@ -15,7 +15,7 @@ var ArchivePageMin_1 = require("./ArchivePageMin");
 /**
  * Created by alex on 9/17/17.
  */
-var ArchivesPayload = (function (_super) {
+var ArchivesPayload = /** @class */ (function (_super) {
     __extends(ArchivesPayload, _super);
     function ArchivesPayload(payload) {
         var _this = _super.call(this, payload) || this;

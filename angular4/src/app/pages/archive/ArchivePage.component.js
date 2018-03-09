@@ -29,7 +29,7 @@ var Pages_service_1 = require("../services/Pages.service");
 var angular2_notifications_1 = require("angular2-notifications");
 var BasePage_component_1 = require("../BasePage.component");
 var auth_service_1 = require("../../auth/auth.service");
-var ArchivePageComponent = (function (_super) {
+var ArchivePageComponent = /** @class */ (function (_super) {
     __extends(ArchivePageComponent, _super);
     function ArchivePageComponent(router, pagesService, notificationService, authService, actualRouter) {
         var _this = _super.call(this, router) || this;
@@ -83,18 +83,18 @@ var ArchivePageComponent = (function (_super) {
             clickToClose: true
         });
     };
+    ArchivePageComponent = __decorate([
+        core_1.Component({
+            selector: 'wiki-page-archive',
+            template: require('./archived-page.htm')
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            Pages_service_1.PagesService,
+            angular2_notifications_1.NotificationsService,
+            auth_service_1.AuthService,
+            router_1.Router])
+    ], ArchivePageComponent);
     return ArchivePageComponent;
 }(BasePage_component_1.BasePageComponent));
-ArchivePageComponent = __decorate([
-    core_1.Component({
-        selector: 'wiki-page-archive',
-        template: require('./archived-page.htm')
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        Pages_service_1.PagesService,
-        angular2_notifications_1.NotificationsService,
-        auth_service_1.AuthService,
-        router_1.Router])
-], ArchivePageComponent);
 exports.ArchivePageComponent = ArchivePageComponent;
 //# sourceMappingURL=ArchivePage.component.js.map

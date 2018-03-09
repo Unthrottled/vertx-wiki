@@ -55,6 +55,7 @@ var Archives_component_1 = require("./pages/archive/Archives.component");
 var archives_resolve_service_1 = require("./pages/archive/archives-resolve.service");
 var archive_resolve_service_1 = require("./pages/archive/archive-resolve.service");
 var hideOnLogin_component_1 = require("./auth/hideOnLogin.component");
+var loading_indicator_module_1 = require("./loading/loading.indicator.module");
 var appRoutes = [
     { path: '', redirectTo: 'pages/1', pathMatch: 'full' },
     { path: '*', redirectTo: 'pages/1' },
@@ -76,72 +77,73 @@ var appRoutes = [
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'about', component: about_component_1.AboutComponent }
 ];
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                angular2_ui_switch_1.UiSwitchModule,
+                angular2_markdown_1.MarkdownModule.forRoot(),
+                angular2_notifications_1.SimpleNotificationsModule.forRoot(),
+                animations_1.BrowserAnimationsModule,
+                loading_indicator_module_1.LoadingIndicatorModule,
+                router_1.RouterModule.forRoot(appRoutes)
+            ],
+            exports: [
+                router_1.RouterModule
+            ],
+            declarations: [
+                app_component_1.AppComponent,
+                switch_component_1.SwitchComponent,
+                base_component_1.BaseComponent,
+                login_component_1.LoginComponent,
+                hideOnLogin_component_1.LoginHiderComponent,
+                register_component_1.RegisterComponent,
+                logout_component_1.LogoutComponent,
+                Pages_component_1.PagesComponent,
+                EditPage_component_1.EditPageComponent,
+                TitleCreation_component_1.TitleCreationComponent,
+                NewUserCreation_component_1.NewUserCreationComponent,
+                CreatePage_component_1.CreatePageComponent,
+                deletion_component_1.DeletionComponent,
+                create_button_component_1.CreateComponent,
+                hex_row_component_1.HexRowComponent,
+                HexList_component_1.HexListComponent,
+                HexComponent_1.HexComponent,
+                Pagination_component_1.PaginatorComponent,
+                Search_component_1.SearchComponent,
+                Roles_component_1.RolesComponent,
+                hideOnLogout_component_1.LogoutHiderComponent,
+                UserAdjustment_component_1.UserAdjustmentComponent,
+                ArchivePage_component_1.ArchivePageComponent,
+                Archives_component_1.ArchivesComponent,
+                about_component_1.AboutComponent,
+                Edit_component_1.EditComponent
+            ],
+            bootstrap: [app_component_1.AppComponent],
+            providers: [
+                window_1.WindowRef,
+                auth_service_1.AuthService,
+                auth_guard_1.AuthGuard,
+                UserPrincipal_model_1.UserPrincipal,
+                Permissions_component_1.Permissions,
+                pages_resolve_service_1.PagesResolve,
+                page_resolve_service_1.PageResolve,
+                Pages_service_1.PagesService,
+                new_page_resolve_service_1.NewPageResolve,
+                archives_resolve_service_1.ArchivesResolve,
+                archive_resolve_service_1.ArchiveResolve,
+                TitleValidation_service_1.TitleValidationService,
+                NewUserValidation_service_1.NewUserValidationService,
+                backend_service_1.BackendService,
+            ]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            angular2_ui_switch_1.UiSwitchModule,
-            angular2_markdown_1.MarkdownModule.forRoot(),
-            angular2_notifications_1.SimpleNotificationsModule.forRoot(),
-            animations_1.BrowserAnimationsModule,
-            router_1.RouterModule.forRoot(appRoutes)
-        ],
-        exports: [
-            router_1.RouterModule
-        ],
-        declarations: [
-            app_component_1.AppComponent,
-            switch_component_1.SwitchComponent,
-            base_component_1.BaseComponent,
-            login_component_1.LoginComponent,
-            hideOnLogin_component_1.LoginHiderComponent,
-            register_component_1.RegisterComponent,
-            logout_component_1.LogoutComponent,
-            Pages_component_1.PagesComponent,
-            EditPage_component_1.EditPageComponent,
-            TitleCreation_component_1.TitleCreationComponent,
-            NewUserCreation_component_1.NewUserCreationComponent,
-            CreatePage_component_1.CreatePageComponent,
-            deletion_component_1.DeletionComponent,
-            create_button_component_1.CreateComponent,
-            hex_row_component_1.HexRowComponent,
-            HexList_component_1.HexListComponent,
-            HexComponent_1.HexComponent,
-            Pagination_component_1.PaginatorComponent,
-            Search_component_1.SearchComponent,
-            Roles_component_1.RolesComponent,
-            hideOnLogout_component_1.LogoutHiderComponent,
-            UserAdjustment_component_1.UserAdjustmentComponent,
-            ArchivePage_component_1.ArchivePageComponent,
-            Archives_component_1.ArchivesComponent,
-            about_component_1.AboutComponent,
-            Edit_component_1.EditComponent
-        ],
-        bootstrap: [app_component_1.AppComponent],
-        providers: [
-            window_1.WindowRef,
-            auth_service_1.AuthService,
-            auth_guard_1.AuthGuard,
-            UserPrincipal_model_1.UserPrincipal,
-            Permissions_component_1.Permissions,
-            pages_resolve_service_1.PagesResolve,
-            page_resolve_service_1.PageResolve,
-            Pages_service_1.PagesService,
-            new_page_resolve_service_1.NewPageResolve,
-            archives_resolve_service_1.ArchivesResolve,
-            archive_resolve_service_1.ArchiveResolve,
-            TitleValidation_service_1.TitleValidationService,
-            NewUserValidation_service_1.NewUserValidationService,
-            backend_service_1.BackendService,
-        ]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map
