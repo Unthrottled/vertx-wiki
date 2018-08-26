@@ -14,7 +14,7 @@ public class HttpVerticalFactory implements VerticleFactory {
 
   @Override
   public String prefix() {
-    return "HttpVerticle";
+    return "HttpVerticle";///
   }
 
   @Override

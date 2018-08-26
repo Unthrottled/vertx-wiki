@@ -14,8 +14,8 @@ public class VertxLauncher {
   private static final Logger LOGGER = LoggerFactory.getLogger(VertxLauncher.class);
 
   public static void main(String... args) {
-    Injector injector = Guice.createInjector(new VertxModule());
-    Vertx vertx = injector.getInstance(Vertx.class);
+    Injector injector = Guice.createInjector(new VertxModule());///
+    Vertx vertx = injector.getInstance(Vertx.class);///
     vertx.registerVerticleFactory(new HttpVerticalFactory(injector));
     Future<String> dbDeploy = Future.future();
     vertx.deployVerticle(injector.getInstance(DatabaseVerticle.class), dbDeploy.completer());
