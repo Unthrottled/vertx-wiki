@@ -9,6 +9,7 @@ const htmlLoader = require('raw-loader');
 const https = require('https');
 const keepAliveAgent = new https.Agent({keepAlive: true});
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const apiFallback = require('connect-history-api-fallback');
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
@@ -172,7 +173,7 @@ module.exports = {
             port: 3000,
             https: true,
             server: {baseDir: ['dist']},
-            middleware: [apiProxy, userProxy, baseProxy]
+            middleware: [apiProxy, userProxy, baseProxy, apiFallback()]
         })
     ]
 };
